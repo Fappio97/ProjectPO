@@ -22,6 +22,8 @@ along with Progetto.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <QMainWindow>
 
+#include "gestore.h"
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -33,6 +35,43 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+
+private:
+    Gestore gestore;
+
+    QList<Afferenza> aff;
+
+    QList<Persona*> organizzatori;
+
+private slots:
+
+    void on_Home_clicked();
+
+    void on_VaiPaginaAutori_clicked();
+
+    void on_AggiungiAutore_clicked();
+
+    void on_VisualizzaAutori_clicked();
+
+    void on_CreaAfferenza_clicked();
+
+    void on_AggiungiAfferenza_clicked();
+
+    bool AfferenzaInLista(const Afferenza&);        // levala
+
+    void on_SvuotaAutori_clicked();
+
+    void on_VaiPaginaConferenze_clicked();
+
+    void on_AggiungiConferenza_clicked();
+
+    void on_SvuotaConferenze_clicked();
+
+    void on_CreaOrganizzatore_clicked();
+
+    void on_AggiungiOrganizzatore_clicked();
+
+    void on_VisualizzaConferenze_clicked();
 
 private:
     Ui::MainWindow *ui;
