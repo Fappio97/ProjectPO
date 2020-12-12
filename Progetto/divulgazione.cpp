@@ -49,25 +49,12 @@ void Divulgazione::setData(const QString &value)
     data = value;
 }
 
-Articolo *Divulgazione::getArticolo() const
-{
-    return articolo;
-}
-
-void Divulgazione::setArticolo(Articolo *value)
-{
-    articolo = value;
-}
-
 Divulgazione::Divulgazione()
 {
     
 }
 
-Divulgazione::Divulgazione(const QString& _nome, const QString& _acronimo, const QString& _data, Articolo* _articolo): nome(_nome), acronimo(_acronimo), data(_data), articolo(_articolo) {
+Divulgazione::Divulgazione(const QString& _nome, const QString& _acronimo, const QString& _data): nome(_nome), acronimo(_acronimo), data(_data) {
 
 }
 
-std::ostream& operator<<(std::ostream& out, const Divulgazione& a) {
-    return a.stampa(out);
-}

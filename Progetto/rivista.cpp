@@ -19,10 +19,20 @@ along with Progetto.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "rivista.h"
 
+QString Rivista::getEditore() const
+{
+    return editore;
+}
+
+void Rivista::setEditore(const QString &value)
+{
+    editore = value;
+}
+
 Rivista::Rivista() {
 }
 
-Rivista::Rivista(const QString& _nome, const QString& _acronimo, Articolo* _articolo, const QString& _data, int _volume): Divulgazione(_nome, _acronimo, _data, _articolo), volume(_volume)  {
+Rivista::Rivista(const QString& _nome, const QString& _acronimo, const QString& _editore, const QString& _data, int _volume): Divulgazione(_nome, _acronimo, _data), editore(_editore), volume(_volume)  {
 }
 
 Rivista::~Rivista() {
@@ -72,8 +82,7 @@ Rivista* Rivista::clone() {
     return new Rivista(*this);
 }
 
-std::ostream& operator<<(std::ostream& out, const Rivista& a) {
-    out << "Rivista ";
-    a.stampa(out);
-    return out << " volume " << a.volume;
+QString Rivista::stampa() const {
+    QString a = "-RIVISTA-    NOME:" + nome + ", ACRONIMO:" + acronimo + ", DATA:" + data + " EDITORE:" + editore + " VOLUME:" + QString::number(volume) + '\n';
+    return a;
 }

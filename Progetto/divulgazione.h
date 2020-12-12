@@ -22,8 +22,6 @@ along with Progetto.  If not, see <http://www.gnu.org/licenses/>.
 
 #include<QString>
 
-#include "articolo.h"
-
 class Divulgazione
 {
 
@@ -32,26 +30,16 @@ protected:
     QString nome;
     QString acronimo;
     QString data;
-    Articolo* articolo;
-
-    Divulgazione();
-    Divulgazione(const QString&, const QString&, const QString&, Articolo*);
-
-    std::ostream& stampa(std::ostream& out) const {
-        out << nome.toStdString() << ", " << acronimo.toStdString() << ", in data " << data.toStdString();
-        if(articolo != nullptr) {
-            std::cout << std::endl << "Articolo di riferimento ";
-            articolo->stampa();
-        }
-        return out;
-    }
 
 public:
 
-    friend std::ostream& operator<<(std::ostream&, const Divulgazione&);
+    Divulgazione();     // altrimenti non posso chiamarli in articoli
+    Divulgazione(const QString&, const QString&, const QString&);
+
+    virtual QString stampa() const { return nullptr; }
 
     virtual bool operator==(const Divulgazione& a) {
-        return nome == a.nome && acronimo == a.acronimo && data == a.data && articolo == a.articolo;
+        return nome == a.nome && acronimo == a.acronimo && data == a.data;
     }
 
     virtual ~Divulgazione() {}
@@ -64,8 +52,6 @@ public:
     void setAcronimo(const QString &value);
     QString getData() const;
     void setData(const QString &value);
-    Articolo *getArticolo() const;
-    void setArticolo(Articolo *value);
 };
 
 #endif // DIVULGAZIONE_H

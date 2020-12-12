@@ -27,12 +27,13 @@ class Rivista : public Divulgazione
 
 private:
 
+    QString editore;
     int volume;
 
 public:
 
     Rivista();
-    Rivista(const QString&, const QString&, Articolo*, const QString&, int);
+    Rivista(const QString&, const QString&, const QString&, const QString&, int);
     ~Rivista();
 
     QString getNome() const;
@@ -49,8 +50,10 @@ public:
 
     Rivista* clone();
 
-    friend std::ostream& operator<<(std::ostream&, const Rivista&);
+    QString stampa() const;
 
+    QString getEditore() const;
+    void setEditore(const QString &value);
 };
 
 #endif // RIVISTA_H

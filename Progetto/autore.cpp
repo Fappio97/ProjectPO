@@ -54,10 +54,16 @@ bool Autore::operator==(const Autore& a) const {
 }
 
 QString Autore::stampa() const {
-    QString a = "- ID: " + identificativo + ", NOME: " + nome + ", COGNOME: " + cognome + '\n' + "    LISTA AFFERENZE:";
-    for(auto i = afferenze.begin(); i != afferenze.end(); i++) {
-        a += (" " + (*i).getNome());
+    QString a = "- ID: " + identificativo + ", NOME: " + nome + ", COGNOME: " + cognome + '\n';
+    if(!afferenze.empty()) {
+        a += "      LISTA AFFERENZE:";
+        for(auto i = afferenze.begin(); i != afferenze.end(); i++) {
+            if(i == afferenze.begin())
+                a += (" " + (*i).getNome());
+            else
+                a += (", " + (*i).getNome());
+        }
+        a += '\n';
     }
-    a += '\n';
     return a += '\n';
 }

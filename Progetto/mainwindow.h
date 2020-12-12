@@ -23,6 +23,7 @@ along with Progetto.  If not, see <http://www.gnu.org/licenses/>.
 #include <QMainWindow>
 
 #include "gestore.h"
+#include<vector>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -43,6 +44,12 @@ private:
 
     QList<Persona*> organizzatori;
 
+    QList<Autore *> autori;
+
+    QList<QString> keywords;
+
+    QList<Articolo *> articoli;
+
 private slots:
 
     void on_Home_clicked();
@@ -57,21 +64,41 @@ private slots:
 
     void on_AggiungiAfferenza_clicked();
 
-    bool AfferenzaInLista(const Afferenza&);        // levala
-
     void on_SvuotaAutori_clicked();
 
     void on_VaiPaginaConferenze_clicked();
 
     void on_AggiungiConferenza_clicked();
 
-    void on_SvuotaConferenze_clicked();
-
     void on_CreaOrganizzatore_clicked();
 
     void on_AggiungiOrganizzatore_clicked();
 
-    void on_VisualizzaConferenze_clicked();
+    void on_AggiungiRivista_clicked();
+
+    void on_VaiPaginaRiviste_clicked();
+
+    void on_VisualizzaDivulgazioni_clicked();
+
+    void on_SvuotaDivulgazioni_clicked();
+
+    void on_VaiPaginaDivulgazioni();
+
+    void on_VaiPaginaArticoli_clicked();
+
+    void on_AddAutore_clicked();
+
+    void on_VisualizzaArticoli_clicked();
+
+    void on_SvuotaArticoli_clicked();
+
+    void on_CreaKeyword_clicked();
+
+    void on_AggiungiKeyword_clicked();
+
+    void on_AggiungiArticolo_clicked();
+
+    void on_AddArticolo_clicked();
 
 private:
     Ui::MainWindow *ui;

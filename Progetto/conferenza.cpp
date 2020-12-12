@@ -24,13 +24,13 @@ Conferenza::Conferenza()
 
 }
 
-Conferenza::Conferenza(const QString & _nome, const QString & _acronimo, const QString & _luogo, const QString & _data, QList<Persona*> _organizzatori, int _partecipanti, Articolo* _articolo): Divulgazione(_nome, _acronimo, _data, _articolo), luogo(_luogo), partecipanti(_partecipanti) {
+Conferenza::Conferenza(const QString & _nome, const QString & _acronimo, const QString & _luogo, const QString & _data, QList<Persona*> _organizzatori, int _partecipanti): Divulgazione(_nome, _acronimo, _data), luogo(_luogo), partecipanti(_partecipanti) {
     for(auto i = _organizzatori.begin(); i != _organizzatori.end(); i++) {
         organizzatori.push_back( (*i) );
     }
 }
 
-Conferenza::Conferenza(const Conferenza& a): Divulgazione(a.nome, a.acronimo, a.data, a.articolo), luogo(a.luogo), partecipanti(a.partecipanti) {
+Conferenza::Conferenza(const Conferenza& a): Divulgazione(a.nome, a.acronimo, a.data), luogo(a.luogo), partecipanti(a.partecipanti) {
     for(auto i = a.organizzatori.begin(); i != a.organizzatori.end(); i++) {
         organizzatori.push_back( (*i) );
     }
@@ -126,12 +126,13 @@ Conferenza* Conferenza::clone() {
     return new Conferenza(*this);
 }
 
-std::ostream& operator<<(std::ostream& out, const Conferenza& a) {
-    out << "Conferenza ";
-    a.stampa(out);
-    out << " organizzata nel luogo " << a.luogo.toStdString() << " con " << a.partecipanti << " partecipanti ed aventi i seguenti organizzatori:";
-    for(auto i = a.organizzatori.begin(); i != a.organizzatori.end(); i++ ) {
-        out << " " << (*i);
+QString Conferenza::stampa() const {
+    QString a = "-CONFERENZA-     NOME:" + nome + ", ACRONIMO:" + acronimo + ", DATA:" + data + ", LUOGO:" + luogo + ", PARTECIPANTI:" + QString::number(partecipanti) + '\n' + "  ORGANIZZATORI:";
+    for(auto i = organizzatori.begin(); i != organizzatori.end(); i++ ) {
+        if( i == organizzatori.begin() )
+            a += " " + (**i).getNome() + " " + (**i).getCognome() ;
+        else
+            a += ", " + (**i).getNome() + " " + (**i).getCognome() ;
     }
-    return out << std::endl;
+    return a += '\n';
 }

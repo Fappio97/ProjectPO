@@ -91,14 +91,22 @@ bool Gestore::personaEsistente(const QString& nome, const QString& cognome) {
 
 
 
+Autore* Gestore::restituisciAutore(const QString& _identificativo) {  //non faccio il controllo se esiste l'autore perché sono sicuro che c'è in quanto nel box autori ci finiscono solo autori creati
+    for(auto i = autori.begin(); i != autori.end(); i++) {
+        if( (*i)->getIdentificativo() == _identificativo  )
+            return (*i);
+    }
+    return nullptr;
+}
+
 void Gestore::aggiungiAutore(const QString& _identificativo, const QString& _nome, const QString& _cognome, QList<Afferenza> _afferenze) {
     autori.push_back(new Autore(_identificativo, _nome, _cognome, _afferenze));
 }
 
-bool Gestore::autoreEsistente(const QString& _identificativo, const QString& _nome, const QString& _cognome) const {
+bool Gestore::autoreEsistente(const QString& _identificativo) const {
     for(auto i = autori.begin(); i != autori.end(); i++) {
-        if( (*i)->getNome() == _nome && (**i).getCognome() == _cognome && (*i)->getIdentificativo() == _identificativo  )
-                        return true;
+        if( (*i)->getIdentificativo() == _identificativo  )
+            return true;
     }
     return false;
 }
@@ -121,24 +129,35 @@ QString Gestore::stampaAutori() const {
 
 
 
-
-void Gestore::aggiungiConferenza(const QString & _nome, const QString & _acronimo, const QString & _luogo, const QString & _data, QList<Persona*> _organizzatori, int _partecipanti, Articolo* _articolo) {
-    divulgazioni.push_back(new Conferenza(_nome, _acronimo, _luogo, _data, _organizzatori, _partecipanti, _articolo));
+Divulgazione* Gestore::restituisciDivulgazione(const QString & _acronimo) {  //non faccio il controllo se esiste l'autore perché sono sicuro che c'è in quanto nel box autori ci finiscono solo autori creati
+    for(auto i = divulgazioni.begin(); i != divulgazioni.end(); i++) {
+        if( (*i)->getAcronimo() == _acronimo )
+            return (*i);
+    }
+    return nullptr;
 }
 
-bool Gestore::divulgazioneEsistente(const QString & _nome, const QString & _acronimo, const QString & _data) {
+void Gestore::aggiungiConferenza(const QString & _nome, const QString & _acronimo, const QString & _luogo, const QString & _data, QList<Persona*> _organizzatori, int _partecipanti) {
+    divulgazioni.push_back(new Conferenza(_nome, _acronimo, _luogo, _data, _organizzatori, _partecipanti));
+}
+
+bool Gestore::divulgazioneEsistente(const QString & _acronimo) const {
     for(auto i = divulgazioni.begin(); i != divulgazioni.end(); i++) {
-        if( (**i).getNome() == _nome && (*i)->getAcronimo() == _acronimo && (**i).getData() == _data ) {
+        if( (*i)->getAcronimo() == _acronimo ) {
             return true;
         }
     }
     return false;
 }
 
-void Gestore::aggiungiRivista(const QString& _nome, const QString& _acronimo, const QString& _data, int _volume, Articolo* _articolo) {
-    if(!divulgazioneEsistente(_nome, _acronimo, _data)) {
-        divulgazioni.push_back(new Rivista(_nome, _acronimo, _articolo, _data, _volume));
-    }
+void Gestore::aggiungiRivista(const QString& _nome, const QString& _acronimo, const QString& _editore, const QString& _data, int _volume) {
+        divulgazioni.push_back(new Rivista(_nome, _acronimo, _editore, _data, _volume));
+}
+
+bool Gestore::divulgazioniVuote() const {
+    if(divulgazioni.empty())
+        return true;
+    return false;
 }
 
 void Gestore::svuotaDivulgazioni() {
@@ -150,44 +169,32 @@ void Gestore::svuotaDivulgazioni() {
 
 QString Gestore::stampaDivulgazioni() const {
     QString a = nullptr;
-    for(auto i = autori.begin(); i != autori.end(); i++) {
-          a += (**i).stampa();
+    for(auto i = divulgazioni.begin(); i != divulgazioni.end(); i++) {
+          a += (**i).stampa() + '\n';
     }
     return a;
 }
 
-Articolo* Gestore::trovaArticolo(const QString& identificativo) {
-     for(auto i = articoli.begin(); i != articoli.end(); i++) {
-         if( (*i)->getIdentificativo() == identificativo )
-             return (*i);
-     }
-     return nullptr;
+
+
+Articolo* Gestore::restituisciArticolo(const QString& _identificativo) {  //non faccio il controllo se esiste l'autore perché sono sicuro che c'è in quanto nel box autori ci finiscono solo autori creati
+    for(auto i = articoli.begin(); i != articoli.end(); i++) {
+        if( (*i)->getIdentificativo() == _identificativo  )
+            return (*i);
+    }
+    return nullptr;
 }
 
-
-
-
-
-bool Gestore::articoloPresente(const QString& _identificativo, const QString& _titolo) {
+bool Gestore::articoloPresente(const QString& _identificativo) {
     for(auto i = articoli.begin(); i != articoli.end(); i++) {
-        if( (*i)->getIdentificativo() == _identificativo && (**i).getIdentificativo() == _titolo )
+        if( (*i)->getIdentificativo() == _identificativo )
             return true;
     }
     return false;
 }
 
-void Gestore::aggiungiArticolo(const QString& _identificativo, const QString& _titolo, int _pagine, QList<Autore *> _autori, QList<QString  *> _keyword, int _prezzo, QList<Articolo *> _correlati) {
-    if(!articoloPresente(_identificativo, _titolo)) {
-        articoli.push_back( new Articolo(_identificativo, _titolo, _pagine, _autori, _keyword, _prezzo, _correlati));
-    }
-}
-
-void Gestore::rimuoviArticolo(const QString& _identificativo, const QString& _titolo) {
-    for(auto i = articoli.begin(); i != articoli.end(); i++) {
-        if( (*i)->getIdentificativo() == _identificativo && (**i).getIdentificativo() == _titolo ) {
-            i = articoli.erase( (i) );
-        }
-    }
+void Gestore::aggiungiArticolo(const QString& _identificativo, const QString& _titolo, int _pagine, QList<Autore *> _autori, QList<QString> _keyword, double _prezzo, QList<Articolo *> _correlati, Divulgazione * _pubblicazione) {
+        articoli.push_back(new Articolo(_identificativo, _titolo, _pagine, _autori, _keyword, _prezzo, _correlati, _pubblicazione));
 }
 
 void Gestore::svuotaArticoli() {
@@ -197,8 +204,10 @@ void Gestore::svuotaArticoli() {
     articoli.clear();
 }
 
-void Gestore::stampaArticoli() const {
+QString Gestore::stampaArticoli() const {
+    QString a;
     for(auto i = articoli.begin(); i != articoli.end(); i++) {
-        std::cout << (**i);
+          a += (**i).stampa();
     }
+    return a;
 }

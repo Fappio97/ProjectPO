@@ -37,7 +37,7 @@ private:
 public:
 
     Conferenza();
-    Conferenza(const QString &, const QString &, const QString &, const QString &, QList<Persona*> _organizzatori, int, Articolo*);
+    Conferenza(const QString &, const QString &, const QString &, const QString &, QList<Persona*> _organizzatori, int);
     Conferenza(const Conferenza&);
     ~Conferenza();
 
@@ -58,7 +58,7 @@ public:
 
     Conferenza* clone();
 
-    friend std::ostream& operator<<(std::ostream&, const Conferenza&);
+    QString stampa() const;
 
 };
 

@@ -23,6 +23,7 @@ along with Progetto.  If not, see <http://www.gnu.org/licenses/>.
 #include "autore.h"
 #include "conferenza.h"
 #include "rivista.h"
+#include "articolo.h"
 
 class Gestore
 {
@@ -59,10 +60,13 @@ public:
 
 
 
+    Autore* restituisciAutore(const QString&);
 
     void aggiungiAutore(const QString&, const QString&, const QString&, QList<Afferenza>);
 
-    bool autoreEsistente(const QString&, const QString&, const QString&) const;
+    bool divulgazioniVuote() const;
+
+    bool autoreEsistente(const QString&) const;
 
     void svuotaAutori();
 
@@ -70,30 +74,28 @@ public:
 
 
 
+    Divulgazione* restituisciDivulgazione(const QString&);
 
-    bool divulgazioneEsistente(const QString &, const QString &, const QString &);
+    bool divulgazioneEsistente(const QString &) const;
 
-    void aggiungiConferenza(const QString &, const QString &, const QString &, const QString &, QList<Persona*> _organizzatori, int, Articolo*);
+    void aggiungiConferenza(const QString &, const QString &, const QString &, const QString &, QList<Persona*> _organizzatori, int);
 
-    void aggiungiRivista(const QString&, const QString&, const QString&, int, Articolo*);
-
-    Articolo* trovaArticolo(const QString&);
+    void aggiungiRivista(const QString&, const QString&, const QString&, const QString&, int);
 
     void svuotaDivulgazioni();
 
     QString stampaDivulgazioni() const;
 
 
+    Articolo* restituisciArticolo(const QString&);
 
-    bool articoloPresente(const QString&, const QString&);
+    bool articoloPresente(const QString&);
 
-    void aggiungiArticolo(const QString&, const QString&, int, QList<Autore *>, QList<QString  *>, int, QList<Articolo *>);
-
-    void rimuoviArticolo(const QString &, const QString &);
+    void aggiungiArticolo(const QString&, const QString&, int, QList<Autore *>, QList<QString>, double, QList<Articolo *>, Divulgazione *);
 
     void svuotaArticoli();
 
-    void stampaArticoli() const;
+    QString stampaArticoli() const;
 
 };
 
