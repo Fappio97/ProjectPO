@@ -127,7 +127,9 @@ Conferenza* Conferenza::clone() {
 }
 
 QString Conferenza::stampa() const {
-    QString a = "-CONFERENZA-     NOME:" + nome + ", ACRONIMO:" + acronimo + ", DATA:" + data + ", LUOGO:" + luogo + ", PARTECIPANTI:" + QString::number(partecipanti) + '\n' + "  ORGANIZZATORI:";
+    QString a = "-CONFERENZA-";
+    a += '\n';
+    a += "       NOME: " + nome + ", ACRONIMO: " + acronimo + ", DATA: " + data + ", LUOGO: " + luogo + ", PARTECIPANTI: " + QString::number(partecipanti) + '\n' + "        ORGANIZZATORI:";
     for(auto i = organizzatori.begin(); i != organizzatori.end(); i++ ) {
         if( i == organizzatori.begin() )
             a += " " + (**i).getNome() + " " + (**i).getCognome() ;

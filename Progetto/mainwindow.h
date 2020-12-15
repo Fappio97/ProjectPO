@@ -100,6 +100,22 @@ private slots:
 
     void on_AddArticolo_clicked();
 
+    void on_VisualizzaArticoliAutore_clicked();
+
+    void on_VisualizzaArticoliConferenza_clicked();
+
+    void on_VisualizzaArticoliStruttura_clicked();
+
+    void on_VaiPaginaVisualizzaArticoli_clicked();
+
+    void on_SvuotaFinestra_clicked();
+
+    void on_PrezziGuadagni_clicked();
+
+    void on_SvuotaFinestra_2_clicked();
+
+    void on_ArticoliCostosiAutore_clicked();
+
 private:
     Ui::MainWindow *ui;
 };

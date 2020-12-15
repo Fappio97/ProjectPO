@@ -19,6 +19,8 @@ along with Progetto.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "gestore.h"
 
+
+
 Gestore::Gestore()
 {
 
@@ -63,7 +65,7 @@ void Gestore::aggiungiAfferenza(const QString& _afferenza) {
     afferenze.push_back(_afferenza);
 }
 
-bool Gestore::afferenzaEsistente(const QString& _afferenza) {
+bool Gestore::afferenzaEsistente(const QString& _afferenza) const {
     for(auto i = afferenze.begin(); i != afferenze.end(); i++) {
         if( (*i) == _afferenza )
             return true;
@@ -79,7 +81,7 @@ void Gestore::aggiungiPersona(const QString& nome, const QString& cognome) {
     persone.push_back(Persona(nome, cognome));
 }
 
-bool Gestore::personaEsistente(const QString& nome, const QString& cognome) {
+bool Gestore::personaEsistente(const QString& nome, const QString& cognome) const {
     for(auto i = persone.begin(); i != persone.end(); i++) {
         if( (*i).getNome() == nome && (*i).getCognome() == cognome )
                 return true;
@@ -97,6 +99,14 @@ Autore* Gestore::restituisciAutore(const QString& _identificativo) {  //non facc
             return (*i);
     }
     return nullptr;
+}
+
+void Gestore::restituisciAutoreConnessoStruttura(const Afferenza& _afferenza, std::vector<Autore*>& autore ) {
+    for(auto i = autori.begin(); i != autori.end(); i++ ) {
+        if( (*i)->autoreConnessoStruttura(_afferenza) )
+            autore.push_back( (*i) );
+    }
+    return;
 }
 
 void Gestore::aggiungiAutore(const QString& _identificativo, const QString& _nome, const QString& _cognome, QList<Afferenza> _afferenze) {
@@ -185,7 +195,7 @@ Articolo* Gestore::restituisciArticolo(const QString& _identificativo) {  //non 
     return nullptr;
 }
 
-bool Gestore::articoloPresente(const QString& _identificativo) {
+bool Gestore::articoloPresente(const QString& _identificativo) const {
     for(auto i = articoli.begin(); i != articoli.end(); i++) {
         if( (*i)->getIdentificativo() == _identificativo )
             return true;
@@ -209,5 +219,50 @@ QString Gestore::stampaArticoli() const {
     for(auto i = articoli.begin(); i != articoli.end(); i++) {
           a += (**i).stampa();
     }
+    return a;
+}
+
+QString Gestore::stampaArticoliAutore(const Autore& autore) const {
+    QString a = nullptr;
+    for(auto i = articoli.begin(); i != articoli.end(); i++) {
+          if( (*i)->autoreHaScrittoArticolo( autore )  ) {
+                a += (**i).stampa();
+          }
+    }
+    return a;
+}
+
+QString Gestore::stampaArticoliConferenza(const Divulgazione& divulgazione) const {
+    QString a = nullptr;
+    for(auto i = articoli.begin(); i != articoli.end(); i++) {
+          if( (*i)->pubblicataInConferenza ( divulgazione )  ) {
+                a += (**i).stampa();
+          }
+    }
+    return a;
+}
+
+void azzeraVectorInt(std::vector<int>& numero, int size) {
+    numero.clear();
+    for(int i = 0; i < size; i++) {
+        numero.push_back(0);
+    }
+}
+
+QString Gestore::stampaArticoliStruttura(std::vector<Autore *> autore) const {
+    QString a = nullptr;
+    std::vector<int> numero;
+    azzeraVectorInt(numero, articoli.size());
+    int cont;
+    for(unsigned long j = 0; j < autore.size(); j++) {
+        cont = 0;
+        for(auto i = articoli.begin(); i != articoli.end(); i++, cont++) {
+              if( (**i).autoreHaScrittoArticolo( (*autore[j])) && numero[cont] == 0 ) {
+                    numero[cont]++;
+                    a += (**i).stampa();
+              }
+        }
+    }
+    numero.clear();
     return a;
 }

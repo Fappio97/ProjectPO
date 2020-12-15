@@ -45,7 +45,7 @@ public:
     int getVolume() const;
     void setVolume(int value);
 
-    bool operator==(const Rivista&);
+    bool operator==(const Rivista&) const;
     void svuota();
 
     Rivista* clone();

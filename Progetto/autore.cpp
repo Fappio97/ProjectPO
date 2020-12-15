@@ -40,6 +40,14 @@ QString Autore::getIdentificativo() const
     identificativo = value;
 }*/
 
+bool Autore::autoreConnessoStruttura(const Afferenza& afferenza) const {
+    for(auto i = afferenze.begin(); i != afferenze.end(); i++) {
+        if( (*i) == afferenza )
+            return true;
+    }
+    return false;
+}
+
 bool Autore::operator==(const Autore& a) const {
     if(identificativo != a.identificativo && Persona::nome != a.Persona::nome && Persona::cognome != a.Persona::cognome)
         return false;

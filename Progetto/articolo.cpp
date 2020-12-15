@@ -99,11 +99,13 @@ void Articolo::eliminaArticolo() {
 }
 
 QString Articolo::stampa() const {
-    QString a = "-ARTICOLO-   IDENTIFICATIVO:" + identificativo + ", TITOLO: " + titolo + ", PAGINE: " + QString::number(pagine) + ", PREZZO: " + QString::number(prezzo) + '\n';
+    QString a = "-ARTICOLO-";
+    a += '\n';
+    a += "      IDENTIFICATIVO: " + identificativo + ", TITOLO: " + titolo + ", PAGINE: " + QString::number(pagine) + ", PREZZO: " + QString::number(prezzo) + '\n';
     if(!autori.empty()) {
         a += "      LISTA AUTORI CHE HANNO REALIZZATO L'ARTICOLO:";
         for(auto i = autori.begin(); i != autori.end(); i++) {
-            a += " " + (**i).getNome() + " " + (**i).getCognome();
+            a += " [" + (**i).getNome() + " " + (**i).getCognome() + "]";
         }
         a += '\n';
     }
@@ -115,13 +117,13 @@ QString Articolo::stampa() const {
         a += '\n';
     }
     if(!correlati.empty()) {
-        a += "      LISTA TITOLI CORRELATI:";
+        a += "      LISTA TITOLI CORRELATI: ";
         for(auto i = correlati.begin(); i != correlati.end(); i++) {
-            a += " " + (**i).getTitolo();
+            a += " [" + (**i).getTitolo() + "]";
         }
         a += '\n';
     }
-    return a += "       PUBBLICATO IN " + pubblicazione->getNome() + " " + pubblicazione->getAcronimo() + '\n' + '\n';
+    return a += "      PUBBLICATO IN: " + pubblicazione->getNome() + " " + pubblicazione->getAcronimo() + '\n' + '\n';
 }
 
 Articolo& Articolo::operator=(const Articolo& a) {
@@ -143,4 +145,16 @@ Articolo& Articolo::operator=(const Articolo& a) {
         }
     }
     return *this;
+}
+
+bool Articolo::autoreHaScrittoArticolo(const Autore& autore) const {
+    for(auto i = autori.begin(); i != autori.end(); i++) {
+        if( autore == (**i) )
+            return true;
+    }
+    return false;
+}
+
+bool Articolo::pubblicataInConferenza (const Divulgazione& conferenza) const {
+   return (*pubblicazione) == conferenza;
 }

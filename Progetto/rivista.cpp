@@ -74,7 +74,7 @@ void Rivista::setVolume(int value)
     volume = value;
 }
 
-bool Rivista::operator==(const Rivista& a) {
+bool Rivista::operator==(const Rivista& a) const {
     return nome == a.nome && acronimo == a.acronimo && data == a.data && volume == a.volume;
 }
 
@@ -83,6 +83,8 @@ Rivista* Rivista::clone() {
 }
 
 QString Rivista::stampa() const {
-    QString a = "-RIVISTA-    NOME:" + nome + ", ACRONIMO:" + acronimo + ", DATA:" + data + " EDITORE:" + editore + " VOLUME:" + QString::number(volume) + '\n';
+    QString a = "-RIVISTA-";
+    a += '\n';
+    a += "      NOME: " + nome + ", ACRONIMO: " + acronimo + ", DATA: " + data + " EDITORE: " + editore + " VOLUME: " + QString::number(volume) + '\n';
     return a;
 }

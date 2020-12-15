@@ -38,7 +38,7 @@ public:
 
     virtual QString stampa() const { return nullptr; }
 
-    virtual bool operator==(const Divulgazione& a) {
+    virtual bool operator==(const Divulgazione& a) const {
         return nome == a.nome && acronimo == a.acronimo && data == a.data;
     }
 

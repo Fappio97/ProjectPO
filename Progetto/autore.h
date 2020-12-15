@@ -38,6 +38,8 @@ public:
     Autore();
     Autore(const QString &, const QString &, const QString &, QList<Afferenza>);
 
+    bool autoreConnessoStruttura(const Afferenza&) const;
+
     QString getIdentificativo() const;
 //    void setIdentificativo(const QString &value);
 

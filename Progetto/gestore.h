@@ -25,6 +25,8 @@ along with Progetto.  If not, see <http://www.gnu.org/licenses/>.
 #include "rivista.h"
 #include "articolo.h"
 
+#include<vector>
+
 class Gestore
 {
 
@@ -32,7 +34,7 @@ private:
 
    QList<Autore *> autori;
 
-   QList<Divulgazione* > divulgazioni;
+   QList<Divulgazione *> divulgazioni;
 
    QList<Articolo *> articoli;
 
@@ -49,18 +51,19 @@ public:
 
     void aggiungiAfferenza(const QString&);
 
-    bool afferenzaEsistente(const QString&);
-
+    bool afferenzaEsistente(const QString&) const;
 
 
 
     void aggiungiPersona(const QString&, const QString&);
 
-    bool personaEsistente(const QString&, const QString&);
+    bool personaEsistente(const QString&, const QString&) const;
 
 
 
     Autore* restituisciAutore(const QString&);
+
+    void restituisciAutoreConnessoStruttura(const Afferenza&, std::vector<Autore*>&);
 
     void aggiungiAutore(const QString&, const QString&, const QString&, QList<Afferenza>);
 
@@ -87,15 +90,22 @@ public:
     QString stampaDivulgazioni() const;
 
 
+
     Articolo* restituisciArticolo(const QString&);
 
-    bool articoloPresente(const QString&);
+    bool articoloPresente(const QString&) const;
 
     void aggiungiArticolo(const QString&, const QString&, int, QList<Autore *>, QList<QString>, double, QList<Articolo *>, Divulgazione *);
 
     void svuotaArticoli();
 
     QString stampaArticoli() const;
+
+    QString stampaArticoliAutore(const Autore&) const;
+
+    QString stampaArticoliConferenza(const Divulgazione& divulgazione) const;
+
+    QString stampaArticoliStruttura(std::vector<Autore *>) const;
 
 };
 

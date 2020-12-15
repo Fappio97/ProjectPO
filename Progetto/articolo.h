@@ -47,18 +47,21 @@ public:
 
     Articolo& operator=(const Articolo&);
 
-    ~Articolo();
+    ~Articolo();        //controllare ma serve per la memoria dinamica
 
-    QString getIdentificativo() const;
+    QString getIdentificativo() const;      //ti serve?
     void setIdentificativo(const QString &value);
     QString getTitolo() const;
     void setTitolo(const QString &value);
     int getPagine() const;
     void setPagine(int value);
     double getPrezzo() const;
-    void setPrezzo(double value);
+    void setPrezzo(double value);       //ti serve?
 
-    void eliminaArticolo();
+    bool autoreHaScrittoArticolo(const Autore&) const;
+    bool pubblicataInConferenza (const Divulgazione& ) const;
+
+    void eliminaArticolo(); //controllare
     QString stampa() const;
 
 };

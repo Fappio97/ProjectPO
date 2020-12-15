@@ -38,7 +38,7 @@ public:
 
     bool operator==(const Persona&) const;
 
-    friend std::ostream& operator<<(std::ostream&, const Persona&);
+    friend std::ostream& operator<<(std::ostream&, const Persona&); //serve sul serio?
 
     QString getNome() const;        // QUESTI METODI MI SERVONO PERCHÉ NEL MAIN CREO UNA LISTA DI PERSONE, OVVERO GLI ORGANIZZATORI NELLA CLASSE CONFERENZA;
     void setNome(const QString &value);
