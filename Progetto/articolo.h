@@ -34,7 +34,7 @@ private:
     QString titolo;
     int pagine;
     QList<Autore *> autori;
-    QList<QString> keyword;
+    QList<QString *> keyword;
     double prezzo;
     QList<Articolo *> correlati;
     Divulgazione * pubblicazione;
@@ -42,7 +42,7 @@ private:
 public:
 
     Articolo();
-    Articolo(const QString&, const QString&, int, QList<Autore *>, QList<QString>, double, QList<Articolo *>, Divulgazione *);
+    Articolo(const QString&, const QString&, int, QList<Autore *>, QList<QString *>, double, QList<Articolo *>, Divulgazione *);
     Articolo(const Articolo&);
 
     Articolo& operator=(const Articolo&);
@@ -65,7 +65,8 @@ public:
     QString stampa() const;
 
     Divulgazione *getPubblicazione() const;
-    QList<QString> getKeyword() const;
+
+    QList<QString *> getKeyword() const;
 };
 
 #endif // ARTICOLO_H

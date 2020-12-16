@@ -38,7 +38,9 @@ private:
 
    QList<Afferenza *> afferenze;
 
-   QList<Persona> persone;
+   QList<Persona *> persone;
+
+   QList<QString *> keywords;
 
 public:
     Gestore();
@@ -47,7 +49,20 @@ public:
     Gestore& operator=(const Gestore&);
 
 
-    Afferenza* restituisciAfferenza(const QString&);
+
+    QString* restituisciKeywords(const QString&) const;
+
+    void aggiungiKeywords(const QString&);
+
+    bool keywordEsistente(const QString&) const;
+
+    void svuotaKeywords();
+
+    bool keywordsVuota() const;
+
+
+
+    Afferenza* restituisciAfferenza(const QString&) const;
 
     void aggiungiAfferenza(const QString&);
 
@@ -56,14 +71,16 @@ public:
     void svuotaAfferenze();
 
 
+    Persona* restituisciPersona(const QString&) const;
 
     void aggiungiPersona(const QString&, const QString&);
 
     bool personaEsistente(const QString&, const QString&) const;
 
+    void svuotaPersone();
 
 
-    Autore* restituisciAutore(const QString&);
+    Autore* restituisciAutore(const QString&) const;
 
     void restituisciAutoreConnessoStruttura(const Afferenza&, QVector<Autore*>&);
 
@@ -79,7 +96,7 @@ public:
 
 
 
-    Divulgazione* restituisciDivulgazione(const QString&);
+    Divulgazione* restituisciDivulgazione(const QString&) const;
 
     bool divulgazioneEsistente(const QString &) const;
 
@@ -93,11 +110,11 @@ public:
 
 
 
-    Articolo* restituisciArticolo(const QString&);
+    Articolo* restituisciArticolo(const QString&) const;
 
     bool articoloPresente(const QString&) const;
 
-    void aggiungiArticolo(const QString&, const QString&, int, QList<Autore *>, QList<QString>, double, QList<Articolo *>, Divulgazione *);
+    void aggiungiArticolo(const QString&, const QString&, int, QList<Autore *>, QList<QString *>, double, QList<Articolo *>, Divulgazione *);
 
     void svuotaArticoli();
 

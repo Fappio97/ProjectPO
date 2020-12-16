@@ -24,8 +24,7 @@ Divulgazione *Articolo::getPubblicazione() const
     return pubblicazione;
 }
 
-
-QList<QString> Articolo::getKeyword() const
+QList<QString *> Articolo::getKeyword() const
 {
     return keyword;
 }
@@ -33,7 +32,7 @@ QList<QString> Articolo::getKeyword() const
 Articolo::Articolo() {
 }
 
-Articolo::Articolo(const QString& _identificativo, const QString& _titolo, int _pagine, QList<Autore *> _autori, QList<QString> _keyword,  double _prezzo, QList<Articolo *> _correlati, Divulgazione * _pubblicazione): identificativo(_identificativo), titolo(_titolo), pagine(_pagine), prezzo(_prezzo) {
+Articolo::Articolo(const QString& _identificativo, const QString& _titolo, int _pagine, QList<Autore *> _autori, QList<QString *> _keyword,  double _prezzo, QList<Articolo *> _correlati, Divulgazione * _pubblicazione): identificativo(_identificativo), titolo(_titolo), pagine(_pagine), prezzo(_prezzo) {
     pubblicazione = _pubblicazione;
     for(auto i = _autori.begin(); i != _autori.end(); i++) {
         autori.push_back( (*i) );
@@ -123,7 +122,7 @@ QString Articolo::stampa() const {
     if(!keyword.empty()) {
         a += "      LISTA KEYWORDS:";
         for(auto i = keyword.begin(); i != keyword.end(); i++) {
-            a += " '" + (*i) + "'";
+            a += " '" + (**i) + "'";
         }
         a += '\n';
     }
@@ -134,7 +133,8 @@ QString Articolo::stampa() const {
         }
         a += '\n';
     }
-    return a += "      PUBBLICATO IN: " + pubblicazione->getNome() + " " + pubblicazione->getAcronimo() + '\n' + '\n';
+    a += "      PUBBLICATO IN: " + pubblicazione->getNome() + " " + pubblicazione->getAcronimo() + '\n' + '\n';
+    return a;
 }
 
 Articolo& Articolo::operator=(const Articolo& a) {

@@ -31,11 +31,9 @@ MainWindow::MainWindow(QWidget *parent)
     ui->AggiungiAutore->setToolTip("Inserisci un autore");
     ui->VisualizzaAutori->setToolTip("Visualizza tutti gli autori");
     ui->CreaAfferenza->setToolTip("Crea una nuova afferenza");
-    ui->AggiungiAfferenza->setToolTip("Metti l'afferenza in una lista");
     ui->SvuotaAutori->setToolTip("Elimina tutti gli autori");
     ui->AggiungiConferenza->setToolTip("Inserisci una conferenza");
     ui->VaiPaginaConferenze->setToolTip("Inserisci una conferenza");
-    ui->AggiungiOrganizzatore->setToolTip("Metti l'organizzatore in una lista");
     ui->AggiungiRivista->setToolTip("Inserisci una rivista");
     ui->VaiPaginaRiviste->setToolTip("Inserisci una rivista");
     ui->SvuotaDivulgazioni->setToolTip("Elimina tutte le conferenze e le riviste");
@@ -45,7 +43,6 @@ MainWindow::MainWindow(QWidget *parent)
     ui->VaiPaginaArticoli->setToolTip("Inserisci oppure visualizza gli articoli");
     ui->VisualizzaArticoli->setToolTip("Visualizza tutti gli articoli");
     ui->SvuotaArticoli->setToolTip("Elimina tutti gli articoli");
-    ui->AggiungiKeyword->setToolTip("Aggiungi la keyword in una lista da aggiungere all'articolo");
     ui->VisualizzaArticoliAutore->setToolTip("Visualizza tutti gli articoli scritti da un autore");
     ui->VisualizzaArticoliStruttura->setToolTip("Visualizza tutti gli articoli scritti da autori che condividono la stessa afferenza");
     ui->VisualizzaArticoliConferenza->setToolTip("Visualizza tutti gli articoli pubblicati in una conferenza");
@@ -93,15 +90,6 @@ QStringList leggiLista(QList<QListWidgetItem*> a){
     return lista;
 }
 
-/*    //questa parte implementata nel tasto
-    QStringList lista = leggiLista( *( ui->AfferenzeLista ) );
-    QList<Afferenza> aff;
-    for(auto i = lista.begin(); i != lista.end(); i++) {
-        gestore.aggiungiAfferenza( (*i) );
-        aff.push_back( (*i) );
-    }
-}*/
-
 void MainWindow::on_AggiungiAutore_clicked()
 {
     QString ID = ui->IDinput->text();
@@ -125,18 +113,18 @@ void MainWindow::on_AggiungiAutore_clicked()
     }
 
 
-    QStringList a = leggiLista( ui->ListaAfferenze->selectedItems() );  // eliminare questo se non va più e mettere in auore.h ed autore.cpp QList<Afferenze>
+    QStringList a = leggiLista( ui->ListaAfferenze->selectedItems() );
     QList<Afferenza *> afferenze;
     for(auto i = a.begin(); i < a.end(); i++) {
         afferenze.push_back( gestore.restituisciAfferenza( (*i) ) );
     }
 
-    gestore.aggiungiAutore(ID, nome, cognome, afferenze);           //fino a qui
-//    aff.clear();
+    gestore.aggiungiAutore(ID, nome, cognome, afferenze);
     ui->CognomeInput->clear();
     ui->NomeInput->clear();
     ui->IDinput->clear();
-    ui->AutoriBox->addItem(ID + " " + nome + " " + cognome);
+
+    ui->ListaAutori->addItem(ID + " " + nome + " " + cognome);
     ui->AutoreBox->addItem(ID + " " + nome + " " + cognome);
     ui->AutoreBox_2->addItem(ID + " " + nome + " " + cognome);
 }
@@ -159,24 +147,8 @@ void MainWindow::on_CreaAfferenza_clicked()
     }
     gestore.aggiungiAfferenza(afferenza);
     ui->ListaAfferenze->addItem(afferenza);
-    ui->AfferenzeBox->addItem(afferenza);
     ui->AfferenzaInput->clear();
     ui->StrutturaBox->addItem(afferenza);
-}
-
-void MainWindow::on_AggiungiAfferenza_clicked()
-{
-    if( ui->AfferenzeBox->currentText().isEmpty() ) {
-        messaggioAttenzione("Afferenza non valida", this);
-        return;
-    }
-    for(auto i = aff.begin(); i != aff.end(); i++) {
-        if( (*i) == ui->AfferenzeBox->currentText() ) {
-            messaggioErrore("Hai già aggiunto questa afferenza", this);
-            return;
-        }
-    }
-    aff.push_back(ui->AfferenzeBox->currentText());
 }
 
 void MainWindow::on_SvuotaAutori_clicked()
@@ -207,6 +179,13 @@ void MainWindow::on_AggiungiConferenza_clicked()
         messaggioAttenzione("Non puoi lasciare il campo 'Luogo' vuoto", this);
         return;
     }
+
+    QStringList a = leggiLista( ui->ListaOrganizzatori->selectedItems() );
+    QList<Persona *> organizzatori;
+    for(auto i = a.begin(); i < a.end(); i++) {
+        organizzatori.push_back( gestore.restituisciPersona( (*i) ) );
+    }
+
     if(organizzatori.size() == 0) {
         messaggioAttenzione("Non puoi creare una conferenza senza organizzatori", this);
         return;
@@ -219,7 +198,6 @@ void MainWindow::on_AggiungiConferenza_clicked()
         return;
     }
     gestore.aggiungiConferenza(nome, acronimo, luogo, data, organizzatori, ui->numPartecipanti->value());
-    organizzatori.clear();
     ui->NomeInput_2->clear();
     ui->AcronimoInput->clear();
     ui->LuogoInput->clear();
@@ -249,24 +227,6 @@ void MainWindow::on_CreaOrganizzatore_clicked()
     ui->ListaOrganizzatori->addItem(nome + " " + cognome);
     ui->NomePersona->clear();
     ui->CognomePersona->clear();
-}
-
-void MainWindow::on_AggiungiOrganizzatore_clicked()
-{
-    if(ui->ListaOrganizzatori->currentItem() == nullptr) {
-        messaggioAttenzione("Non hai selezionato alcun organizzatore", this);
-        return;
-    }
-    QString organizzatore = ui->ListaOrganizzatori->currentItem()->text();
-    for(auto i = organizzatori.begin(); i != organizzatori.end(); i++) {
-        QString a = ( (*i)->getNome() + " " + (*i)->getCognome() );
-        if( organizzatore == a ){
-            messaggioErrore("Organizzatore già aggiunto in lista", this);
-            return;
-        }
-    }
-    QStringList input =organizzatore.split(" ");
-    organizzatori.push_back(new Persona(input[0], input[1]));
 }
 
 void MainWindow::on_AggiungiRivista_clicked()
@@ -326,23 +286,6 @@ void MainWindow::on_VaiPaginaArticoli_clicked()
     ui->stackedWidget->setCurrentWidget(ui->PaginaArticoli);
 }
 
-void MainWindow::on_AddAutore_clicked()
-{
-    if( ui->AutoriBox->currentText().isEmpty() ){
-        messaggioErrore("Non hai selezionato alcun autore", this);
-        return;
-    }
-    QStringList input = ui->AutoriBox->currentText().split(" ");
-    for(auto i = autori.begin(); i != autori.end(); i++) {
-        if( (**i).getIdentificativo() == input[0] ) {
-            messaggioErrore("Autore già aggiunto", this);
-            return;
-        }
-    }
-    Autore* c = gestore.restituisciAutore(input[0]);
-    autori.push_back( c );
-}
-
 void MainWindow::on_VisualizzaArticoli_clicked()
 {
     ui->StampaArticoli->setPlainText( gestore.stampaArticoli() );
@@ -361,30 +304,13 @@ void MainWindow::on_CreaKeyword_clicked()
         messaggioAttenzione("Inserire un keyword", this);
         return;
     }
-    for(auto i = keywords.begin(); i != keywords.end(); i++) {
-        if( (*i) == keyword ) {
+    if( gestore.keywordEsistente( keyword ) ) {
             messaggioErrore("Keyword già inserita", this);
             return;
-        }
     }
     ui->KeywordInput->clear();
     ui->ListaKeyword->addItem(keyword);
-}
-
-void MainWindow::on_AggiungiKeyword_clicked()
-{
-    if(ui->ListaKeyword->currentItem() == nullptr) {
-        messaggioAttenzione("Non hai selezionato alcuna keyword", this);
-        return;
-    }
-    QString keyword = ui->ListaKeyword->currentItem()->text();
-    for(auto i = keywords.begin(); i != keywords.end(); i++) {
-        if( keyword == (*i) ){
-            messaggioErrore("Keyword già aggiunta", this);
-            return;
-        }
-    }
-    keywords.push_back(keyword);
+    gestore.aggiungiKeywords( keyword );
 }
 
 void MainWindow::on_AggiungiArticolo_clicked()
@@ -399,7 +325,7 @@ void MainWindow::on_AggiungiArticolo_clicked()
         messaggioAttenzione("Non hai inserito il codice identificativo dell'articolo", this);
         return;
     }
-    if(keywords.empty()) {
+    if(ui->ListaKeyword->selectedItems().isEmpty()) {
         int ret=QMessageBox::question(this,"Attenzione", "Non hai inserito alcuna kewyword.\nVuoi continuare lo stesso?");  //fare la domanda come metodo?
         if(ret==QMessageBox::No) {
             ui->TitoloInput->clear();
@@ -412,42 +338,53 @@ void MainWindow::on_AggiungiArticolo_clicked()
         messaggioAttenzione("Non hai inserito alcuna pubblicazione", this);
         return;
     }
-    if(autori.size() == 0) {
-        messaggioAttenzione("Non hai inserito alcun autore", this);
+    if(ui->ListaAutori->selectedItems().isEmpty()) {
+        messaggioAttenzione("Non hai selezionato alcun autore", this);
         return;
     }
     QStringList c = pubblicazione.split(" ");
     Divulgazione* a = gestore.restituisciDivulgazione(c[2]);
+
     if(gestore.articoloPresente(identificativo)) {
         messaggioAttenzione("Articolo con questo codice identificativo già presente", this);
         return;
     }
+
+    QStringList b = leggiLista( ui->ListaKeyword->selectedItems() );
+    QList<QString *> keywords;
+    for(auto i = b.begin(); i < b.end(); i++) {
+        keywords.push_back( gestore.restituisciKeywords( (*i) ) );
+    }
+    b.clear();
+
+    b = leggiLista( ui->ListaAutori->selectedItems() );
+    QList<Autore *> autori;
+    QStringList d;
+    for(auto i = b.begin(); i < b.end(); i++) {
+        QString f = (*i);
+        d = f.split(" ");
+        autori.push_back( gestore.restituisciAutore (d[0]));
+        d.clear();
+    }
+    b.clear();
+
+    b = leggiLista( ui->ListaArticoli->selectedItems() );
+    QList<Articolo *> articoli;
+    for(auto i = b.begin(); i < b.end(); i++) {
+        QString f = (*i);
+        d = f.split(" ");
+        articoli.push_back( gestore.restituisciArticolo(d[1]));
+        d.clear();
+    }
+    b.clear();
+
     gestore.aggiungiArticolo(identificativo, titolo, ui->PagineInput->value(), autori, keywords, ui->PrezzoInput->value(), articoli, a);
     ui->TitoloInput->clear();
     ui->IdentificativoInput->clear();
-    ui->ArticoliBox->addItem(titolo + " " + identificativo);
-    keywords.clear();
+    ui->ListaArticoli->addItem(titolo + " " + identificativo);
     autori.clear();
     articoli.clear();
     pubblicazione.clear();
-}
-
-void MainWindow::on_AddArticolo_clicked()
-{
-    QString a = ui->ArticoliBox->currentText();
-    if( ui->ArticoliBox->currentText().isEmpty() ) {
-        a = nullptr;
-        return;
-    }
-    QStringList input = a.split(" ");
-    for(auto i = articoli.begin(); i != articoli.end(); i++) {
-        if( (**i).getIdentificativo() == input[1] ) {
-            messaggioErrore("Articolo già aggiunto", this);
-            return;
-        }
-    }
-    Articolo* c = gestore.restituisciArticolo(input[1]);
-    articoli.push_back( c );
 }
 
 void MainWindow::on_VisualizzaArticoliAutore_clicked()
@@ -570,3 +507,4 @@ void MainWindow::on_KeywordMaggiorGuadagno_clicked()
 
     ui->VisualizzaArticoliPrezzi->setPlainText( output );
 }
+

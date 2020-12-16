@@ -46,7 +46,7 @@ Gestore::~Gestore() {       // devi eliminare gli oggetti puntati
     svuotaAfferenze();
 }
 
-Gestore& Gestore::operator=(const Gestore& a) {     // da aggiornare
+Gestore& Gestore::operator=(const Gestore& a) {     // da aggiornare    ho messo tante cose dinamiche
     if(this != &a) {
         for(auto i = a.autori.begin(); i != a.autori.end(); i++) {
             autori.push_back( (*i) );
@@ -62,7 +62,35 @@ Gestore& Gestore::operator=(const Gestore& a) {     // da aggiornare
 }
 
 
-Afferenza* Gestore::restituisciAfferenza(const QString& a) {
+QString* Gestore::restituisciKeywords(const QString& a) const {
+    for(auto i = keywords.begin(); i < keywords.end(); i++) {
+        if( (**i) == a )
+            return (*i);
+    }
+    return nullptr;
+}
+
+void Gestore::aggiungiKeywords(const QString& a) {
+    keywords.push_back(new QString(a));
+}
+
+bool Gestore::keywordEsistente(const QString& a) const {
+    for(auto i = keywords.begin(); i < keywords.end(); i++) {
+        if( (**i) == a )
+            return true;
+    }
+    return false;
+}
+
+void Gestore::svuotaKeywords() {
+    for(auto i = keywords.begin(); i < keywords.end(); i++) {
+        delete (*i);
+    }
+    keywords.clear();
+}
+
+
+Afferenza* Gestore::restituisciAfferenza(const QString& a) const {
     for(auto i = afferenze.begin(); i < afferenze.end(); i++) {
         if( (**i).getNome() == a )
             return (*i);
@@ -91,25 +119,38 @@ void Gestore::svuotaAfferenze() {
 
 
 
-
+Persona* Gestore::restituisciPersona(const QString& a) const {
+    for(auto i = persone.begin(); i != persone.end(); i++) {
+        QString b = (**i).getNome() + " " + (**i).getCognome();
+        if( b == a )
+            return (*i);
+    }
+    return nullptr;
+}
 
 void Gestore::aggiungiPersona(const QString& nome, const QString& cognome) {
-    persone.push_back(Persona(nome, cognome));
+    persone.push_back(new Persona(nome, cognome));
 }
 
 bool Gestore::personaEsistente(const QString& nome, const QString& cognome) const {
     for(auto i = persone.begin(); i != persone.end(); i++) {
-        if( (*i).getNome() == nome && (*i).getCognome() == cognome )
+        if( (**i).getNome() == nome && (**i).getCognome() == cognome )
                 return true;
     }
     return false;
 }
 
+void Gestore::svuotaPersone() {
+    for(auto i = persone.begin(); i != persone.end(); i++) {
+        delete (*i);
+    }
+    persone.clear();
+}
 
 
 
 
-Autore* Gestore::restituisciAutore(const QString& _identificativo) {  //non faccio il controllo se esiste l'autore perché sono sicuro che c'è in quanto nel box autori ci finiscono solo autori creati
+Autore* Gestore::restituisciAutore(const QString& _identificativo) const {  //non faccio il controllo se esiste l'autore perché sono sicuro che c'è in quanto nel box autori ci finiscono solo autori creati
     for(auto i = autori.begin(); i != autori.end(); i++) {
         if( (*i)->getIdentificativo() == _identificativo  )
             return (*i);
@@ -155,7 +196,7 @@ QString Gestore::stampaAutori() const {
 
 
 
-Divulgazione* Gestore::restituisciDivulgazione(const QString & _acronimo) {  //non faccio il controllo se esiste l'autore perché sono sicuro che c'è in quanto nel box autori ci finiscono solo autori creati
+Divulgazione* Gestore::restituisciDivulgazione(const QString & _acronimo) const {  //non faccio il controllo se esiste l'autore perché sono sicuro che c'è in quanto nel box autori ci finiscono solo autori creati
     for(auto i = divulgazioni.begin(); i != divulgazioni.end(); i++) {
         if( (*i)->getAcronimo() == _acronimo )
             return (*i);
@@ -203,7 +244,7 @@ QString Gestore::stampaDivulgazioni() const {
 
 
 
-Articolo* Gestore::restituisciArticolo(const QString& _identificativo) {  //non faccio il controllo se esiste l'autore perché sono sicuro che c'è in quanto nel box autori ci finiscono solo autori creati
+Articolo* Gestore::restituisciArticolo(const QString& _identificativo) const {  //non faccio il controllo se esiste l'autore perché sono sicuro che c'è in quanto nel box autori ci finiscono solo autori creati
     for(auto i = articoli.begin(); i != articoli.end(); i++) {
         if( (*i)->getIdentificativo() == _identificativo  )
             return (*i);
@@ -219,7 +260,7 @@ bool Gestore::articoloPresente(const QString& _identificativo) const {
     return false;
 }
 
-void Gestore::aggiungiArticolo(const QString& _identificativo, const QString& _titolo, int _pagine, QList<Autore *> _autori, QList<QString> _keyword, double _prezzo, QList<Articolo *> _correlati, Divulgazione * _pubblicazione) {
+void Gestore::aggiungiArticolo(const QString& _identificativo, const QString& _titolo, int _pagine, QList<Autore *> _autori, QList<QString *> _keyword, double _prezzo, QList<Articolo *> _correlati, Divulgazione * _pubblicazione) {
         articoli.push_back(new Articolo(_identificativo, _titolo, _pagine, _autori, _keyword, _prezzo, _correlati, _pubblicazione));
 }
 
@@ -310,9 +351,8 @@ int Gestore::guadagnoDivulgazione(const Divulgazione& a, const QString& data) co
 }
 
 bool keywordPresente(const QString& key, const Articolo& a) {
-    QList<QString> lista = a.getKeyword();
-    for(int i = 0; i < lista.size(); i++) {
-        if(lista[i] == key)
+    for(int i = 0; i < a.getKeyword().size(); i++) {
+        if(a.getKeyword()[i] == key)
                return true;
     }
     return false;

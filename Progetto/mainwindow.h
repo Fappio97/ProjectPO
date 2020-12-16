@@ -38,21 +38,10 @@ public:
     ~MainWindow();
 
 private:
+
     Gestore gestore;
 
-    QList<Afferenza> aff;
-
-    QList<Persona*> organizzatori;
-
-    QList<Autore *> autori;
-
-    QList<QString> keywords;
-
-    QList<Articolo *> articoli;
-
 private slots:
-
-//    QStringList leggiLista(const QListWidget &);  // da fare assolutamente?
 
     void on_Home_clicked();
 
@@ -64,8 +53,6 @@ private slots:
 
     void on_CreaAfferenza_clicked();
 
-    void on_AggiungiAfferenza_clicked();
-
     void on_SvuotaAutori_clicked();
 
     void on_VaiPaginaConferenze_clicked();
@@ -73,8 +60,6 @@ private slots:
     void on_AggiungiConferenza_clicked();
 
     void on_CreaOrganizzatore_clicked();
-
-    void on_AggiungiOrganizzatore_clicked();
 
     void on_AggiungiRivista_clicked();
 
@@ -88,19 +73,13 @@ private slots:
 
     void on_VaiPaginaArticoli_clicked();
 
-    void on_AddAutore_clicked();
-
     void on_VisualizzaArticoli_clicked();
 
     void on_SvuotaArticoli_clicked();
 
     void on_CreaKeyword_clicked();
 
-    void on_AggiungiKeyword_clicked();
-
     void on_AggiungiArticolo_clicked();
-
-    void on_AddArticolo_clicked();
 
     void on_VisualizzaArticoliAutore_clicked();
 

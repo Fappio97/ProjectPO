@@ -57,10 +57,8 @@ public:
     QLineEdit *CognomeInput;
     QLineEdit *AfferenzaInput;
     QLabel *TITLE_2;
-    QComboBox *AfferenzeBox;
     QLabel *SpiegazioneAfferenze;
     QPushButton *CreaAfferenza;
-    QPushButton *AggiungiAfferenza;
     QLabel *label;
     QPushButton *SvuotaAutori;
     QListWidget *ListaAfferenze;
@@ -82,11 +80,11 @@ public:
     QLabel *label_3;
     QLabel *label_4;
     QListWidget *ListaOrganizzatori;
-    QPushButton *AggiungiOrganizzatore;
     QLabel *TITLE_3;
     QLabel *label_5;
     QLabel *label_2;
     QPushButton *VisualizzaConferenze;
+    QLabel *label_13;
     QWidget *PaginaRiviste;
     QSpinBox *VolumeInput;
     QPushButton *AggiungiRivista;
@@ -117,9 +115,7 @@ public:
     QDoubleSpinBox *PrezzoInput;
     QLabel *TITLE_6;
     QLabel *Autori;
-    QComboBox *AutoriBox;
     QLabel *Articoli;
-    QComboBox *ArticoliBox;
     QLabel *ConferenzeRiviste;
     QComboBox *ConferenzeRivisteBox;
     QPushButton *VisualizzaArticoli;
@@ -129,13 +125,13 @@ public:
     QLineEdit *KeywordInput;
     QPushButton *CreaKeyword;
     QListWidget *ListaKeyword;
-    QPushButton *AggiungiKeyword;
     QPushButton *AggiungiArticolo;
-    QPushButton *AddAutore;
-    QPushButton *AddArticolo;
     QLabel *label_7;
     QLabel *label_8;
     QLabel *label_9;
+    QLabel *label_14;
+    QListWidget *ListaAutori;
+    QListWidget *ListaArticoli;
     QWidget *PaginaVisualizzaArticoli;
     QLabel *TITLE_7;
     QPushButton *VisualizzaArticoliAutore;
@@ -259,7 +255,7 @@ public:
         TITLE->setFont(font2);
         Afferenze = new QLabel(PaginaAutori);
         Afferenze->setObjectName(QString::fromUtf8("Afferenze"));
-        Afferenze->setGeometry(QRect(270, 88, 71, 25));
+        Afferenze->setGeometry(QRect(270, 80, 71, 25));
         AggiungiAutore = new QPushButton(PaginaAutori);
         AggiungiAutore->setObjectName(QString::fromUtf8("AggiungiAutore"));
         AggiungiAutore->setGeometry(QRect(70, 200, 91, 25));
@@ -295,9 +291,6 @@ public:
         font3.setItalic(true);
         font3.setWeight(50);
         TITLE_2->setFont(font3);
-        AfferenzeBox = new QComboBox(PaginaAutori);
-        AfferenzeBox->setObjectName(QString::fromUtf8("AfferenzeBox"));
-        AfferenzeBox->setGeometry(QRect(350, 88, 191, 25));
         SpiegazioneAfferenze = new QLabel(PaginaAutori);
         SpiegazioneAfferenze->setObjectName(QString::fromUtf8("SpiegazioneAfferenze"));
         SpiegazioneAfferenze->setGeometry(QRect(580, 64, 261, 121));
@@ -312,20 +305,14 @@ public:
         CreaAfferenza->setObjectName(QString::fromUtf8("CreaAfferenza"));
         CreaAfferenza->setGeometry(QRect(580, 224, 141, 17));
         CreaAfferenza->setFont(font1);
-        AggiungiAfferenza = new QPushButton(PaginaAutori);
-        AggiungiAfferenza->setObjectName(QString::fromUtf8("AggiungiAfferenza"));
-        AggiungiAfferenza->setGeometry(QRect(310, 160, 161, 33));
-        QFont font5;
-        font5.setPointSize(10);
-        AggiungiAfferenza->setFont(font5);
         label = new QLabel(PaginaAutori);
         label->setObjectName(QString::fromUtf8("label"));
-        label->setGeometry(QRect(330, 104, 161, 57));
-        QFont font6;
-        font6.setPointSize(8);
-        font6.setItalic(true);
-        font6.setStyleStrategy(QFont::PreferDefault);
-        label->setFont(font6);
+        label->setGeometry(QRect(270, 104, 61, 73));
+        QFont font5;
+        font5.setPointSize(8);
+        font5.setItalic(true);
+        font5.setStyleStrategy(QFont::PreferDefault);
+        label->setFont(font5);
         label->setFrameShape(QFrame::NoFrame);
         label->setFrameShadow(QFrame::Plain);
         SvuotaAutori = new QPushButton(PaginaAutori);
@@ -333,7 +320,7 @@ public:
         SvuotaAutori->setGeometry(QRect(20, 235, 201, 16));
         ListaAfferenze = new QListWidget(PaginaAutori);
         ListaAfferenze->setObjectName(QString::fromUtf8("ListaAfferenze"));
-        ListaAfferenze->setGeometry(QRect(380, 8, 161, 73));
+        ListaAfferenze->setGeometry(QRect(350, 72, 191, 105));
         ListaAfferenze->setSelectionMode(QAbstractItemView::MultiSelection);
         stackedWidget->addWidget(PaginaAutori);
         PaginaConferenze = new QWidget();
@@ -386,11 +373,11 @@ public:
         Organizzatori = new QLabel(PaginaConferenze);
         Organizzatori->setObjectName(QString::fromUtf8("Organizzatori"));
         Organizzatori->setGeometry(QRect(560, 96, 151, 33));
-        QFont font7;
-        font7.setBold(true);
-        font7.setItalic(false);
-        font7.setWeight(75);
-        Organizzatori->setFont(font7);
+        QFont font6;
+        font6.setBold(true);
+        font6.setItalic(false);
+        font6.setWeight(75);
+        Organizzatori->setFont(font6);
         AggiungiConferenza = new QPushButton(PaginaConferenze);
         AggiungiConferenza->setObjectName(QString::fromUtf8("AggiungiConferenza"));
         AggiungiConferenza->setGeometry(QRect(190, 512, 181, 41));
@@ -408,19 +395,20 @@ public:
         label_3 = new QLabel(PaginaConferenze);
         label_3->setObjectName(QString::fromUtf8("label_3"));
         label_3->setGeometry(QRect(540, 200, 31, 19));
-        QFont font8;
-        font8.setPointSize(8);
-        label_3->setFont(font8);
+        QFont font7;
+        font7.setPointSize(8);
+        label_3->setFont(font7);
         label_4 = new QLabel(PaginaConferenze);
         label_4->setObjectName(QString::fromUtf8("label_4"));
         label_4->setGeometry(QRect(680, 200, 51, 19));
-        label_4->setFont(font8);
+        label_4->setFont(font7);
         ListaOrganizzatori = new QListWidget(PaginaConferenze);
         ListaOrganizzatori->setObjectName(QString::fromUtf8("ListaOrganizzatori"));
-        ListaOrganizzatori->setGeometry(QRect(500, 296, 261, 153));
-        AggiungiOrganizzatore = new QPushButton(PaginaConferenze);
-        AggiungiOrganizzatore->setObjectName(QString::fromUtf8("AggiungiOrganizzatore"));
-        AggiungiOrganizzatore->setGeometry(QRect(560, 464, 161, 25));
+        ListaOrganizzatori->setGeometry(QRect(500, 312, 261, 161));
+        QFont font8;
+        font8.setPointSize(10);
+        ListaOrganizzatori->setFont(font8);
+        ListaOrganizzatori->setSelectionMode(QAbstractItemView::MultiSelection);
         TITLE_3 = new QLabel(PaginaConferenze);
         TITLE_3->setObjectName(QString::fromUtf8("TITLE_3"));
         TITLE_3->setGeometry(QRect(120, 8, 271, 81));
@@ -443,6 +431,12 @@ public:
         VisualizzaConferenze = new QPushButton(PaginaConferenze);
         VisualizzaConferenze->setObjectName(QString::fromUtf8("VisualizzaConferenze"));
         VisualizzaConferenze->setGeometry(QRect(410, 512, 181, 41));
+        label_13 = new QLabel(PaginaConferenze);
+        label_13->setObjectName(QString::fromUtf8("label_13"));
+        label_13->setGeometry(QRect(530, 296, 221, 16));
+        label_13->setFont(font5);
+        label_13->setFrameShape(QFrame::NoFrame);
+        label_13->setFrameShadow(QFrame::Plain);
         stackedWidget->addWidget(PaginaConferenze);
         PaginaRiviste = new QWidget();
         PaginaRiviste->setObjectName(QString::fromUtf8("PaginaRiviste"));
@@ -555,21 +549,14 @@ public:
         TITLE_6->setFont(font2);
         Autori = new QLabel(PaginaArticoli);
         Autori->setObjectName(QString::fromUtf8("Autori"));
-        Autori->setGeometry(QRect(500, 80, 51, 19));
-        AutoriBox = new QComboBox(PaginaArticoli);
-        AutoriBox->setObjectName(QString::fromUtf8("AutoriBox"));
-        AutoriBox->setGeometry(QRect(580, 80, 201, 27));
+        Autori->setGeometry(QRect(500, 56, 51, 19));
         Articoli = new QLabel(PaginaArticoli);
         Articoli->setObjectName(QString::fromUtf8("Articoli"));
         Articoli->setGeometry(QRect(500, 160, 51, 19));
-        ArticoliBox = new QComboBox(PaginaArticoli);
-        ArticoliBox->addItem(QString());
-        ArticoliBox->setObjectName(QString::fromUtf8("ArticoliBox"));
-        ArticoliBox->setGeometry(QRect(580, 160, 201, 27));
         ConferenzeRiviste = new QLabel(PaginaArticoli);
         ConferenzeRiviste->setObjectName(QString::fromUtf8("ConferenzeRiviste"));
         ConferenzeRiviste->setGeometry(QRect(500, 232, 81, 41));
-        ConferenzeRiviste->setFont(font5);
+        ConferenzeRiviste->setFont(font8);
         ConferenzeRivisteBox = new QComboBox(PaginaArticoli);
         ConferenzeRivisteBox->setObjectName(QString::fromUtf8("ConferenzeRivisteBox"));
         ConferenzeRivisteBox->setGeometry(QRect(580, 240, 201, 27));
@@ -596,40 +583,42 @@ public:
         CreaKeyword->setGeometry(QRect(300, 112, 121, 16));
         ListaKeyword = new QListWidget(PaginaArticoli);
         ListaKeyword->setObjectName(QString::fromUtf8("ListaKeyword"));
-        ListaKeyword->setGeometry(QRect(260, 136, 201, 65));
-        ListaKeyword->setSelectionMode(QAbstractItemView::SingleSelection);
-        AggiungiKeyword = new QPushButton(PaginaArticoli);
-        AggiungiKeyword->setObjectName(QString::fromUtf8("AggiungiKeyword"));
-        AggiungiKeyword->setGeometry(QRect(300, 208, 121, 41));
-        QFont font11;
-        font11.setPointSize(9);
-        AggiungiKeyword->setFont(font11);
+        ListaKeyword->setGeometry(QRect(260, 160, 201, 97));
+        ListaKeyword->setSelectionMode(QAbstractItemView::MultiSelection);
         AggiungiArticolo = new QPushButton(PaginaArticoli);
         AggiungiArticolo->setObjectName(QString::fromUtf8("AggiungiArticolo"));
         AggiungiArticolo->setGeometry(QRect(60, 240, 91, 25));
         AggiungiArticolo->setStyleSheet(QString::fromUtf8("background-color: rgb(46, 52, 54);\n"
 "color: rgb(255, 255, 255);"));
-        AddAutore = new QPushButton(PaginaArticoli);
-        AddAutore->setObjectName(QString::fromUtf8("AddAutore"));
-        AddAutore->setGeometry(QRect(670, 128, 121, 16));
-        AddArticolo = new QPushButton(PaginaArticoli);
-        AddArticolo->setObjectName(QString::fromUtf8("AddArticolo"));
-        AddArticolo->setGeometry(QRect(670, 208, 121, 16));
         label_7 = new QLabel(PaginaArticoli);
         label_7->setObjectName(QString::fromUtf8("label_7"));
-        label_7->setGeometry(QRect(530, 192, 131, 33));
-        QFont font12;
-        font12.setPointSize(7);
-        font12.setItalic(true);
-        label_7->setFont(font12);
+        label_7->setGeometry(QRect(490, 184, 101, 33));
+        QFont font11;
+        font11.setPointSize(7);
+        font11.setItalic(true);
+        label_7->setFont(font11);
         label_8 = new QLabel(PaginaArticoli);
         label_8->setObjectName(QString::fromUtf8("label_8"));
-        label_8->setGeometry(QRect(530, 112, 131, 33));
-        label_8->setFont(font12);
+        label_8->setGeometry(QRect(490, 80, 121, 33));
+        label_8->setFont(font11);
         label_9 = new QLabel(PaginaArticoli);
         label_9->setObjectName(QString::fromUtf8("label_9"));
         label_9->setGeometry(QRect(540, 272, 241, 41));
-        label_9->setFont(font12);
+        label_9->setFont(font11);
+        label_14 = new QLabel(PaginaArticoli);
+        label_14->setObjectName(QString::fromUtf8("label_14"));
+        label_14->setGeometry(QRect(280, 144, 171, 16));
+        label_14->setFont(font5);
+        label_14->setFrameShape(QFrame::NoFrame);
+        label_14->setFrameShadow(QFrame::Plain);
+        ListaAutori = new QListWidget(PaginaArticoli);
+        ListaAutori->setObjectName(QString::fromUtf8("ListaAutori"));
+        ListaAutori->setGeometry(QRect(590, 48, 191, 81));
+        ListaAutori->setSelectionMode(QAbstractItemView::MultiSelection);
+        ListaArticoli = new QListWidget(PaginaArticoli);
+        ListaArticoli->setObjectName(QString::fromUtf8("ListaArticoli"));
+        ListaArticoli->setGeometry(QRect(590, 144, 191, 81));
+        ListaArticoli->setSelectionMode(QAbstractItemView::MultiSelection);
         stackedWidget->addWidget(PaginaArticoli);
         PaginaVisualizzaArticoli = new QWidget();
         PaginaVisualizzaArticoli->setObjectName(QString::fromUtf8("PaginaVisualizzaArticoli"));
@@ -771,11 +760,10 @@ public:
 "dove potrai associarla\n"
 "ad un autore.", nullptr));
         CreaAfferenza->setText(QCoreApplication::translate("MainWindow", "Crea afferenza", nullptr));
-        AggiungiAfferenza->setText(QCoreApplication::translate("MainWindow", "Aggiungi afferenza\n"
+        label->setText(QCoreApplication::translate("MainWindow", "Seleziona le\n"
+"afferenze da\n"
+" aggiungere\n"
 "all'autore", nullptr));
-        label->setText(QCoreApplication::translate("MainWindow", "Salvi le afferenze che hai\n"
-"creato ma poi devi aggiungerle\n"
-"all'autore.", nullptr));
         SvuotaAutori->setText(QCoreApplication::translate("MainWindow", "Svuota Autori", nullptr));
         Nome_2->setText(QCoreApplication::translate("MainWindow", "Nome", nullptr));
         Acronimo->setText(QCoreApplication::translate("MainWindow", "Acronimo", nullptr));
@@ -786,7 +774,6 @@ public:
         CreaOrganizzatore->setText(QCoreApplication::translate("MainWindow", "Crea Organizzatore", nullptr));
         label_3->setText(QCoreApplication::translate("MainWindow", "Nome ", nullptr));
         label_4->setText(QCoreApplication::translate("MainWindow", "Cognome", nullptr));
-        AggiungiOrganizzatore->setText(QCoreApplication::translate("MainWindow", "Aggiungi Organizzatore", nullptr));
         TITLE_3->setText(QCoreApplication::translate("MainWindow", "AGGIUNGI CONFERENZA", nullptr));
         label_5->setText(QCoreApplication::translate("MainWindow", "Per creare una conferenza:\n"
 " - Inserire un nome;\n"
@@ -799,6 +786,7 @@ public:
 "e poi aggiungilo alla conferenza\n"
 "che stai creando.", nullptr));
         VisualizzaConferenze->setText(QCoreApplication::translate("MainWindow", "Visualizza Conferenze", nullptr));
+        label_13->setText(QCoreApplication::translate("MainWindow", "Seleziona l'organizzatore o gli organizzatori", nullptr));
         AggiungiRivista->setText(QCoreApplication::translate("MainWindow", "Aggiungi Rivista", nullptr));
         Volume->setText(QCoreApplication::translate("MainWindow", "Volume", nullptr));
         Editore->setText(QCoreApplication::translate("MainWindow", "Editore", nullptr));
@@ -823,26 +811,22 @@ public:
         TITLE_6->setText(QCoreApplication::translate("MainWindow", "AGGIUNGI ARTICOLI", nullptr));
         Autori->setText(QCoreApplication::translate("MainWindow", "Autori", nullptr));
         Articoli->setText(QCoreApplication::translate("MainWindow", "Articoli", nullptr));
-        ArticoliBox->setItemText(0, QString());
-
         ConferenzeRiviste->setText(QCoreApplication::translate("MainWindow", "Conferenze\n"
 "Riviste", nullptr));
         VisualizzaArticoli->setText(QCoreApplication::translate("MainWindow", "Visualizza Articoli", nullptr));
         SvuotaArticoli->setText(QCoreApplication::translate("MainWindow", "Svuota Articoli", nullptr));
         keyword->setText(QCoreApplication::translate("MainWindow", "Keywords", nullptr));
         CreaKeyword->setText(QCoreApplication::translate("MainWindow", "Crea keyword", nullptr));
-        AggiungiKeyword->setText(QCoreApplication::translate("MainWindow", "Aggiungi keyword\n"
-"all'articolo che\n"
-" creerai", nullptr));
         AggiungiArticolo->setText(QCoreApplication::translate("MainWindow", "Aggiungi", nullptr));
-        AddAutore->setText(QCoreApplication::translate("MainWindow", "Aggiungi Autore", nullptr));
-        AddArticolo->setText(QCoreApplication::translate("MainWindow", "Aggiungi Articolo", nullptr));
         label_7->setText(QCoreApplication::translate("MainWindow", "Seleziona gli articoli\n"
-"da aggiungere all'articolo . . .", nullptr));
+"da aggiungere\n"
+"all'articolo . . .", nullptr));
         label_8->setText(QCoreApplication::translate("MainWindow", "Seleziona gli autori\n"
-"da aggiungere all'articolo . . .", nullptr));
+"da aggiungere\n"
+"all'articolo . . .", nullptr));
         label_9->setText(QCoreApplication::translate("MainWindow", "Seleziona la conferenza oppure la rivista\n"
 "da aggiungere all'articolo.", nullptr));
+        label_14->setText(QCoreApplication::translate("MainWindow", "Seleziona la keyword o le keywords", nullptr));
         TITLE_7->setText(QCoreApplication::translate("MainWindow", "VISUALIZZA ARTICOLI DI...", nullptr));
         VisualizzaArticoliAutore->setText(QCoreApplication::translate("MainWindow", "Articoli autore", nullptr));
         SvuotaFinestra->setText(QCoreApplication::translate("MainWindow", "Svuota Finestra", nullptr));
