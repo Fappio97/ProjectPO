@@ -38,7 +38,7 @@ public:
 
     virtual QString stampa() const { return nullptr; }
 
-    virtual bool operator==(const Divulgazione& a) const {
+    virtual bool operator==(const Divulgazione& a) const {      //lo uso davvero?
         return nome == a.nome && acronimo == a.acronimo && data == a.data;
     }
 
@@ -52,6 +52,8 @@ public:
     void setAcronimo(const QString &value);
     QString getData() const;
     void setData(const QString &value);
+
+    QString getAnno() const;
 };
 
 #endif // DIVULGAZIONE_H

@@ -19,6 +19,11 @@ along with Progetto.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "articolo.h"
 
+Divulgazione *Articolo::getPubblicazione() const
+{
+    return pubblicazione;
+}
+
 Articolo::Articolo() {
 }
 

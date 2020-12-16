@@ -161,8 +161,8 @@ public:
     QPushButton *EntrateRivista;
     QComboBox *RivistaBox;
     QLabel *Autore;
-    QSpinBox *AnnoInput;
     QLabel *Anno;
+    QLineEdit *AnnoInput;
 
     void setupUi(QMainWindow *MainWindow)
     {
@@ -720,12 +720,12 @@ public:
         Autore = new QLabel(PaginaPrezzi);
         Autore->setObjectName(QString::fromUtf8("Autore"));
         Autore->setGeometry(QRect(20, 80, 61, 25));
-        AnnoInput = new QSpinBox(PaginaPrezzi);
-        AnnoInput->setObjectName(QString::fromUtf8("AnnoInput"));
-        AnnoInput->setGeometry(QRect(650, 88, 71, 28));
         Anno = new QLabel(PaginaPrezzi);
         Anno->setObjectName(QString::fromUtf8("Anno"));
-        Anno->setGeometry(QRect(580, 88, 51, 25));
+        Anno->setGeometry(QRect(550, 88, 51, 25));
+        AnnoInput = new QLineEdit(PaginaPrezzi);
+        AnnoInput->setObjectName(QString::fromUtf8("AnnoInput"));
+        AnnoInput->setGeometry(QRect(660, 88, 101, 27));
         stackedWidget->addWidget(PaginaPrezzi);
         MainWindow->setCentralWidget(centralwidget);
 

@@ -25,8 +25,6 @@ along with Progetto.  If not, see <http://www.gnu.org/licenses/>.
 #include "rivista.h"
 #include "articolo.h"
 
-#include<vector>
-
 class Gestore
 {
 
@@ -63,7 +61,7 @@ public:
 
     Autore* restituisciAutore(const QString&);
 
-    void restituisciAutoreConnessoStruttura(const Afferenza&, std::vector<Autore*>&);
+    void restituisciAutoreConnessoStruttura(const Afferenza&, QVector<Autore*>&);
 
     void aggiungiAutore(const QString&, const QString&, const QString&, QList<Afferenza>);
 
@@ -105,7 +103,11 @@ public:
 
     QString stampaArticoliConferenza(const Divulgazione& divulgazione) const;
 
-    QString stampaArticoliStruttura(std::vector<Autore *>) const;
+    QString stampaArticoliStruttura(QVector<Autore *>) const;
+
+    QString stampaArticoliAutoreCostosi(const Autore&) const;
+
+    int guadagnoDivulgazione(const Divulgazione&, const QString&) const;
 
 };
 

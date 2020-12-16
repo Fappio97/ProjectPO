@@ -2057,20 +2057,10 @@ alla maggior
        <string>2) Autore</string>
       </property>
      </widget>
-     <widget class="QSpinBox" name="AnnoInput">
-      <property name="geometry">
-       <rect>
-        <x>650</x>
-        <y>88</y>
-        <width>71</width>
-        <height>28</height>
-       </rect>
-      </property>
-     </widget>
      <widget class="QLabel" name="Anno">
       <property name="geometry">
        <rect>
-        <x>580</x>
+        <x>550</x>
         <y>88</y>
         <width>51</width>
         <height>25</height>
@@ -2078,6 +2068,16 @@ alla maggior
       </property>
       <property name="text">
        <string>Anno</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="AnnoInput">
+      <property name="geometry">
+       <rect>
+        <x>660</x>
+        <y>88</y>
+        <width>101</width>
+        <height>27</height>
+       </rect>
       </property>
      </widget>
     </widget>

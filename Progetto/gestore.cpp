@@ -101,7 +101,7 @@ Autore* Gestore::restituisciAutore(const QString& _identificativo) {  //non facc
     return nullptr;
 }
 
-void Gestore::restituisciAutoreConnessoStruttura(const Afferenza& _afferenza, std::vector<Autore*>& autore ) {
+void Gestore::restituisciAutoreConnessoStruttura(const Afferenza& _afferenza, QVector<Autore*>& autore ) {
     for(auto i = autori.begin(); i != autori.end(); i++ ) {
         if( (*i)->autoreConnessoStruttura(_afferenza) )
             autore.push_back( (*i) );
@@ -242,19 +242,19 @@ QString Gestore::stampaArticoliConferenza(const Divulgazione& divulgazione) cons
     return a;
 }
 
-void azzeraVectorInt(std::vector<int>& numero, int size) {
+void azzeraVectorInt(QVector<int>& numero, int size) {
     numero.clear();
     for(int i = 0; i < size; i++) {
         numero.push_back(0);
     }
 }
 
-QString Gestore::stampaArticoliStruttura(std::vector<Autore *> autore) const {
+QString Gestore::stampaArticoliStruttura(QVector<Autore *> autore) const {
     QString a = nullptr;
-    std::vector<int> numero;
+    QVector<int> numero;
     azzeraVectorInt(numero, articoli.size());
     int cont;
-    for(unsigned long j = 0; j < autore.size(); j++) {
+    for(int j = 0; j < autore.size(); j++) {
         cont = 0;
         for(auto i = articoli.begin(); i != articoli.end(); i++, cont++) {
               if( (**i).autoreHaScrittoArticolo( (*autore[j])) && numero[cont] == 0 ) {
@@ -265,4 +265,30 @@ QString Gestore::stampaArticoliStruttura(std::vector<Autore *> autore) const {
     }
     numero.clear();
     return a;
+}
+
+QString Gestore::stampaArticoliAutoreCostosi(const Autore& autore) const {
+    int max = INT_MIN;
+    QString a = nullptr;
+    for(auto i = articoli.begin(); i != articoli.end(); i++) {
+          if( (*i)->autoreHaScrittoArticolo( autore ) && (**i).getPrezzo() > max ) {
+                max = (**i).getPrezzo();
+          }
+    }
+    for(auto i = articoli.begin(); i != articoli.end(); i++) {
+          if( (*i)->autoreHaScrittoArticolo( autore ) && (**i).getPrezzo() == max ) {
+                a += (*i)->stampa();
+          }
+    }
+    return a;
+}
+
+int Gestore::guadagnoDivulgazione(const Divulgazione& a, const QString& data) const {  //facilmente fattibile anche il numero 4 della sezione C con questo metodo
+    int somma = 0;
+    for(auto i = articoli.begin(); i < articoli.end(); i++) {
+        if(  (*(**i).getPubblicazione() ) == a && data == (**i).getPubblicazione()->getAnno()) {
+            somma += (*i)->getPrezzo();
+        }
+    }
+    return somma;
 }

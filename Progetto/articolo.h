@@ -64,6 +64,7 @@ public:
     void eliminaArticolo(); //controllare
     QString stampa() const;
 
+    Divulgazione *getPubblicazione() const;
 };
 
 #endif // ARTICOLO_H

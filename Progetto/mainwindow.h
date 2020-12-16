@@ -116,6 +116,8 @@ private slots:
 
     void on_ArticoliCostosiAutore_clicked();
 
+    void on_EntrateRivista_clicked();
+
 private:
     Ui::MainWindow *ui;
 };

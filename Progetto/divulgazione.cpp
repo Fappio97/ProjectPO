@@ -49,6 +49,10 @@ void Divulgazione::setData(const QString &value)
     data = value;
 }
 
+QString Divulgazione::getAnno() const {
+    return data.left(4);
+}
+
 Divulgazione::Divulgazione()
 {
     
