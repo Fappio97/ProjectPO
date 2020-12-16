@@ -545,6 +545,19 @@ all'autore.</string>
        <string>Svuota Autori</string>
       </property>
      </widget>
+     <widget class="QListWidget" name="ListaAfferenze">
+      <property name="geometry">
+       <rect>
+        <x>380</x>
+        <y>8</y>
+        <width>161</width>
+        <height>73</height>
+       </rect>
+      </property>
+      <property name="selectionMode">
+       <enum>QAbstractItemView::MultiSelection</enum>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="PaginaConferenze">
      <widget class="QLineEdit" name="NomeInput_2">
@@ -1553,6 +1566,9 @@ color: rgb(255, 255, 255);</string>
         <height>65</height>
        </rect>
       </property>
+      <property name="selectionMode">
+       <enum>QAbstractItemView::SingleSelection</enum>
+      </property>
      </widget>
      <widget class="QPushButton" name="AggiungiKeyword">
       <property name="geometry">
@@ -1987,7 +2003,7 @@ color: rgb(255, 255, 255);</string>
        <string>Articoli costosi autore</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="KeywordMaggiorGuafdagno">
+     <widget class="QPushButton" name="KeywordMaggiorGuadagno">
       <property name="geometry">
        <rect>
         <x>310</x>

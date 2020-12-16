@@ -23,7 +23,7 @@ along with Progetto.  If not, see <http://www.gnu.org/licenses/>.
 #include <QMainWindow>
 
 #include "gestore.h"
-#include<vector>
+#include "QListWidget"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -51,6 +51,8 @@ private:
     QList<Articolo *> articoli;
 
 private slots:
+
+//    QStringList leggiLista(const QListWidget &);  // da fare assolutamente?
 
     void on_Home_clicked();
 
@@ -117,6 +119,8 @@ private slots:
     void on_ArticoliCostosiAutore_clicked();
 
     void on_EntrateRivista_clicked();
+
+    void on_KeywordMaggiorGuadagno_clicked();
 
 private:
     Ui::MainWindow *ui;

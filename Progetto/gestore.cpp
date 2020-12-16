@@ -39,10 +39,11 @@ Gestore::Gestore(const Gestore& a) {        //da aggiornare
     }
 }
 
-Gestore::~Gestore() {       // da aggiornare
+Gestore::~Gestore() {       // devi eliminare gli oggetti puntati
     svuotaAutori();
     svuotaDivulgazioni();
     svuotaArticoli();
+    svuotaAfferenze();
 }
 
 Gestore& Gestore::operator=(const Gestore& a) {     // da aggiornare
@@ -61,16 +62,31 @@ Gestore& Gestore::operator=(const Gestore& a) {     // da aggiornare
 }
 
 
+Afferenza* Gestore::restituisciAfferenza(const QString& a) {
+    for(auto i = afferenze.begin(); i < afferenze.end(); i++) {
+        if( (**i).getNome() == a )
+            return (*i);
+    }
+    return nullptr;
+}
+
 void Gestore::aggiungiAfferenza(const QString& _afferenza) {
-    afferenze.push_back(_afferenza);
+    afferenze.push_back(new Afferenza(_afferenza));
 }
 
 bool Gestore::afferenzaEsistente(const QString& _afferenza) const {
     for(auto i = afferenze.begin(); i != afferenze.end(); i++) {
-        if( (*i) == _afferenza )
+        if( (**i) == _afferenza )
             return true;
     }
     return false;
+}
+
+void Gestore::svuotaAfferenze() {
+    for(auto i = afferenze.begin(); i != afferenze.end(); i++) {
+        delete (*i);
+    }
+    afferenze.clear();
 }
 
 
@@ -109,7 +125,7 @@ void Gestore::restituisciAutoreConnessoStruttura(const Afferenza& _afferenza, QV
     return;
 }
 
-void Gestore::aggiungiAutore(const QString& _identificativo, const QString& _nome, const QString& _cognome, QList<Afferenza> _afferenze) {
+void Gestore::aggiungiAutore(const QString& _identificativo, const QString& _nome, const QString& _cognome, QList<Afferenza *> _afferenze) {
     autori.push_back(new Autore(_identificativo, _nome, _cognome, _afferenze));
 }
 
@@ -284,11 +300,53 @@ QString Gestore::stampaArticoliAutoreCostosi(const Autore& autore) const {
 }
 
 int Gestore::guadagnoDivulgazione(const Divulgazione& a, const QString& data) const {  //facilmente fattibile anche il numero 4 della sezione C con questo metodo
-    int somma = 0;
+    int somma = -1;
     for(auto i = articoli.begin(); i < articoli.end(); i++) {
         if(  (*(**i).getPubblicazione() ) == a && data == (**i).getPubblicazione()->getAnno()) {
             somma += (*i)->getPrezzo();
         }
     }
     return somma;
+}
+
+bool keywordPresente(const QString& key, const Articolo& a) {
+    QList<QString> lista = a.getKeyword();
+    for(int i = 0; i < lista.size(); i++) {
+        if(lista[i] == key)
+               return true;
+    }
+    return false;
+}
+
+void calcolaMassimoVectorInt(QVector<int>& numero, QVector<int>& indici) {
+    int max = INT_MIN;
+    for(int i = 0; i < numero.size(); i++) {
+        if(numero[i] == max)
+            indici.push_back(i);
+        if(numero[i] > max) {
+            indici.clear();
+            max = numero[i];
+            indici.push_back(i);
+        }
+    }
+}
+
+QStringList Gestore::keywordMigliorIncasso(const QStringList& keywords) const {
+    QVector<int> numero;
+    QVector<int> indici;
+    azzeraVectorInt(numero, keywords.size());   //pusho tanti zero nel vettore numero tante quante le keywords
+    for(int i = 0; i < keywords.size(); i++) {
+        for(auto j = articoli.begin(); j < articoli.end(); j++) {
+            if( keywordPresente(keywords[i], (**j)) ) {     //controllo se la keyword è presente in quell'articolo, dato che un articolo ha una lsita di keywords
+                numero[i] += (**j).getPrezzo();
+            }
+        }
+    }
+    calcolaMassimoVectorInt(numero, indici);        //trovo il massimo oppure i massimi valori ottenuti dalle keywords
+    numero.clear();
+    QStringList keywordMaggiori;
+    for(int i = 0; i < indici.size(); i++) {
+        keywordMaggiori.push_back( keywords[indici[i]] );
+    }
+    return keywordMaggiori;
 }

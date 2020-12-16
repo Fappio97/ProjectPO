@@ -65,6 +65,7 @@ public:
     QString stampa() const;
 
     Divulgazione *getPubblicazione() const;
+    QList<QString> getKeyword() const;
 };
 
 #endif // ARTICOLO_H

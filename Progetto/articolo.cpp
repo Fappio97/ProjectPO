@@ -24,6 +24,12 @@ Divulgazione *Articolo::getPubblicazione() const
     return pubblicazione;
 }
 
+
+QList<QString> Articolo::getKeyword() const
+{
+    return keyword;
+}
+
 Articolo::Articolo() {
 }
 

@@ -86,6 +86,22 @@ void messaggioInformativo(const QString& informazione, QWidget * parents) {
     mess.exec();
 }
 
+QStringList leggiLista(QList<QListWidgetItem*> a){
+    QStringList lista;
+    for(auto i = a.begin(); i != a.end(); i++)
+        lista.push_back( (*i)->text() );
+    return lista;
+}
+
+/*    //questa parte implementata nel tasto
+    QStringList lista = leggiLista( *( ui->AfferenzeLista ) );
+    QList<Afferenza> aff;
+    for(auto i = lista.begin(); i != lista.end(); i++) {
+        gestore.aggiungiAfferenza( (*i) );
+        aff.push_back( (*i) );
+    }
+}*/
+
 void MainWindow::on_AggiungiAutore_clicked()
 {
     QString ID = ui->IDinput->text();
@@ -107,8 +123,16 @@ void MainWindow::on_AggiungiAutore_clicked()
         messaggioErrore("Autore con stesso codice identificativo già presente", this);
         return;
     }
-    gestore.aggiungiAutore(ID, nome, cognome, aff);
-    aff.clear();
+
+
+    QStringList a = leggiLista( ui->ListaAfferenze->selectedItems() );  // eliminare questo se non va più e mettere in auore.h ed autore.cpp QList<Afferenze>
+    QList<Afferenza *> afferenze;
+    for(auto i = a.begin(); i < a.end(); i++) {
+        afferenze.push_back( gestore.restituisciAfferenza( (*i) ) );
+    }
+
+    gestore.aggiungiAutore(ID, nome, cognome, afferenze);           //fino a qui
+//    aff.clear();
     ui->CognomeInput->clear();
     ui->NomeInput->clear();
     ui->IDinput->clear();
@@ -134,6 +158,7 @@ void MainWindow::on_CreaAfferenza_clicked()
            return;
     }
     gestore.aggiungiAfferenza(afferenza);
+    ui->ListaAfferenze->addItem(afferenza);
     ui->AfferenzeBox->addItem(afferenza);
     ui->AfferenzaInput->clear();
     ui->StrutturaBox->addItem(afferenza);
@@ -519,6 +544,29 @@ void MainWindow::on_EntrateRivista_clicked()
     QStringList input = ui->RivistaBox->currentText().split(" ");
     Divulgazione* a = gestore.restituisciDivulgazione( input[2] );
     int output = gestore.guadagnoDivulgazione( *a, ui->AnnoInput->text());
-    QString out = "Guadagno della rivista " + ui->RivistaBox->currentText() + " nell'anno " + ui->AnnoInput->text() + ": " + QString::number(output);
+    QString out;
+    if(output == -1)
+        out = "La " + ui->RivistaBox->currentText() + " non ha articoli pubblicati" + '\n';
+    else
+        out = "Guadagno della rivista " + ui->RivistaBox->currentText() + " nell'anno " + ui->AnnoInput->text() + ": " + QString::number(output) + '\n';
     ui->VisualizzaArticoliPrezzi->setPlainText( out );
+}
+
+void MainWindow::on_KeywordMaggiorGuadagno_clicked()
+{
+    QStringList keywords;
+    int cont = ui->ListaKeyword->count();
+    for(int i = 0; i < cont; i++)
+        keywords += ui->ListaKeyword->item(i)->text();
+
+    QStringList a = gestore.keywordMigliorIncasso(keywords);
+
+    QString output = "Keyword";
+    if(a.size() > 1)
+        output += "s";
+    output += " con maggior guadagno:";
+    for(int i = 0; i < a.size(); i++)
+        output += " '" + a[i] + "'";
+
+    ui->VisualizzaArticoliPrezzi->setPlainText( output );
 }

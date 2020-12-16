@@ -24,9 +24,9 @@ Autore::Autore()
 
 }
 
-Autore::Autore(const QString & _identificativo, const QString & _nome, const QString & _cognome, QList<Afferenza> _afferenze): Persona(_nome, _cognome), identificativo(_identificativo) {
+Autore::Autore(const QString & _identificativo, const QString & _nome, const QString & _cognome, QList<Afferenza *> _afferenze): Persona(_nome, _cognome), identificativo(_identificativo) {
     for(auto i = _afferenze.begin(); i != _afferenze.end(); i++) {
-        afferenze.push_back( (*i) );
+        afferenze.push_back( (**i) );
     }
 }
 

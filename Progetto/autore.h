@@ -36,7 +36,7 @@ private:
 public:
 
     Autore();
-    Autore(const QString &, const QString &, const QString &, QList<Afferenza>);
+    Autore(const QString &, const QString &, const QString &, QList<Afferenza *>);
 
     bool autoreConnessoStruttura(const Afferenza&) const;
 

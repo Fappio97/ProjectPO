@@ -36,7 +36,7 @@ private:
 
    QList<Articolo *> articoli;
 
-   QList<Afferenza> afferenze;
+   QList<Afferenza *> afferenze;
 
    QList<Persona> persone;
 
@@ -47,9 +47,13 @@ public:
     Gestore& operator=(const Gestore&);
 
 
+    Afferenza* restituisciAfferenza(const QString&);
+
     void aggiungiAfferenza(const QString&);
 
     bool afferenzaEsistente(const QString&) const;
+
+    void svuotaAfferenze();
 
 
 
@@ -63,7 +67,7 @@ public:
 
     void restituisciAutoreConnessoStruttura(const Afferenza&, QVector<Autore*>&);
 
-    void aggiungiAutore(const QString&, const QString&, const QString&, QList<Afferenza>);
+    void aggiungiAutore(const QString&, const QString&, const QString&, QList<Afferenza *>);
 
     bool divulgazioniVuote() const;
 
@@ -99,15 +103,27 @@ public:
 
     QString stampaArticoli() const;
 
+                           //SEZIONE B
+
     QString stampaArticoliAutore(const Autore&) const;
 
     QString stampaArticoliConferenza(const Divulgazione& divulgazione) const;
 
     QString stampaArticoliStruttura(QVector<Autore *>) const;
 
+                           //SEZIONE C
+
     QString stampaArticoliAutoreCostosi(const Autore&) const;
 
     int guadagnoDivulgazione(const Divulgazione&, const QString&) const;
+
+    QStringList keywordMigliorIncasso(const QStringList& keywords) const;
+
+                           //SEZIONE D
+
+                           //SEZIONE E
+
+                           //SEZIONE F
 
 };
 

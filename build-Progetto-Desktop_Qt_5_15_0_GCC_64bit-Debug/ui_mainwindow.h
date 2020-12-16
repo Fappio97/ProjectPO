@@ -63,6 +63,7 @@ public:
     QPushButton *AggiungiAfferenza;
     QLabel *label;
     QPushButton *SvuotaAutori;
+    QListWidget *ListaAfferenze;
     QWidget *PaginaConferenze;
     QLineEdit *NomeInput_2;
     QLineEdit *AcronimoInput;
@@ -157,7 +158,7 @@ public:
     QComboBox *AutoreBox_2;
     QLabel *Rivista;
     QPushButton *ArticoliCostosiAutore;
-    QPushButton *KeywordMaggiorGuafdagno;
+    QPushButton *KeywordMaggiorGuadagno;
     QPushButton *EntrateRivista;
     QComboBox *RivistaBox;
     QLabel *Autore;
@@ -330,6 +331,10 @@ public:
         SvuotaAutori = new QPushButton(PaginaAutori);
         SvuotaAutori->setObjectName(QString::fromUtf8("SvuotaAutori"));
         SvuotaAutori->setGeometry(QRect(20, 235, 201, 16));
+        ListaAfferenze = new QListWidget(PaginaAutori);
+        ListaAfferenze->setObjectName(QString::fromUtf8("ListaAfferenze"));
+        ListaAfferenze->setGeometry(QRect(380, 8, 161, 73));
+        ListaAfferenze->setSelectionMode(QAbstractItemView::MultiSelection);
         stackedWidget->addWidget(PaginaAutori);
         PaginaConferenze = new QWidget();
         PaginaConferenze->setObjectName(QString::fromUtf8("PaginaConferenze"));
@@ -592,6 +597,7 @@ public:
         ListaKeyword = new QListWidget(PaginaArticoli);
         ListaKeyword->setObjectName(QString::fromUtf8("ListaKeyword"));
         ListaKeyword->setGeometry(QRect(260, 136, 201, 65));
+        ListaKeyword->setSelectionMode(QAbstractItemView::SingleSelection);
         AggiungiKeyword = new QPushButton(PaginaArticoli);
         AggiungiKeyword->setObjectName(QString::fromUtf8("AggiungiKeyword"));
         AggiungiKeyword->setGeometry(QRect(300, 208, 121, 41));
@@ -704,11 +710,11 @@ public:
         ArticoliCostosiAutore->setFont(font);
         ArticoliCostosiAutore->setStyleSheet(QString::fromUtf8("background-color: rgb(46, 52, 54);\n"
 "color: rgb(255, 255, 255);"));
-        KeywordMaggiorGuafdagno = new QPushButton(PaginaPrezzi);
-        KeywordMaggiorGuafdagno->setObjectName(QString::fromUtf8("KeywordMaggiorGuafdagno"));
-        KeywordMaggiorGuafdagno->setGeometry(QRect(310, 80, 151, 73));
-        KeywordMaggiorGuafdagno->setFont(font);
-        KeywordMaggiorGuafdagno->setStyleSheet(QString::fromUtf8(""));
+        KeywordMaggiorGuadagno = new QPushButton(PaginaPrezzi);
+        KeywordMaggiorGuadagno->setObjectName(QString::fromUtf8("KeywordMaggiorGuadagno"));
+        KeywordMaggiorGuadagno->setGeometry(QRect(310, 80, 151, 73));
+        KeywordMaggiorGuadagno->setFont(font);
+        KeywordMaggiorGuadagno->setStyleSheet(QString::fromUtf8(""));
         EntrateRivista = new QPushButton(PaginaPrezzi);
         EntrateRivista->setObjectName(QString::fromUtf8("EntrateRivista"));
         EntrateRivista->setGeometry(QRect(570, 128, 161, 25));
@@ -851,7 +857,7 @@ public:
         SEZIONEC->setText(QCoreApplication::translate("MainWindow", "SEZIONE C", nullptr));
         Rivista->setText(QCoreApplication::translate("MainWindow", "5) Rivista", nullptr));
         ArticoliCostosiAutore->setText(QCoreApplication::translate("MainWindow", "Articoli costosi autore", nullptr));
-        KeywordMaggiorGuafdagno->setText(QCoreApplication::translate("MainWindow", "Keyword\n"
+        KeywordMaggiorGuadagno->setText(QCoreApplication::translate("MainWindow", "Keyword\n"
 "associata\n"
 "alla maggior\n"
 " entrata", nullptr));
