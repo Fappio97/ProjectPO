@@ -19,6 +19,15 @@ along with Progetto.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "gestore.h"
 
+/*#include <QVariant>               //interessante
+
+QString stampa(QList<QVariant> a) {
+    QString stampa;
+    for(auto i = a.begin(); i != a.end(); i++) {
+        stampa += a;
+    }
+}*/
+
 
 
 Gestore::Gestore()
@@ -389,4 +398,56 @@ QStringList Gestore::keywordMigliorIncasso(const QStringList& keywords) const {
         keywordMaggiori.push_back( keywords[indici[i]] );
     }
     return keywordMaggiori;
+}
+
+bool compara(const Articolo* a, const Articolo* b) {
+    return a->getPrezzo() < b->getPrezzo();
+}
+
+QString Gestore::stampaArticoliConferenzaOrdinatiPrezzo(const Divulgazione& conferenza) const {
+    QList<Articolo *> art;
+    for(auto i = articoli.begin(); i != articoli.end(); i++) {
+        if( (*(*i)->getPubblicazione()) == conferenza ) {
+            art.push_back( (*i) );
+        }
+    }
+    std::sort( art.begin(), art.end(), compara);
+
+    QString stampa;
+    for(auto i = art.begin(); i != art.end(); i++) {
+        stampa += (*i)->stampa();
+    }
+    return stampa;
+}
+
+bool compare(const Articolo* a, const Articolo* b) {
+    if( a->getPubblicazione()->getAnno() > b->getPubblicazione()->getAnno() )
+        return true;
+    if( a->getPubblicazione()->getAnno() < b->getPubblicazione()->getAnno() )
+        return false;
+    if( a->getPrezzo() < b->getPrezzo() )
+        return true;
+    if( a->getPrezzo() > b->getPrezzo() )
+        return false;
+    return a->cognomePrimoAutore() < b->cognomePrimoAutore();
+}
+
+QString Gestore::stampaArticoliKeywordOrdinati(const QString& keyword) const {
+    QList<Articolo *> art;
+    for(auto i = articoli.begin(); i != articoli.end(); i++) {
+        QList<QString *> a = (*i)->getKeyword();
+        for(auto j = a.begin(); j != a.end(); i++) {
+            if( (*j) == keyword ) {
+                art.push_back( (*i) );
+                break;
+            }
+        }
+    }
+    std::sort(art.begin(), art.end(), compare);
+
+    QString stampa;
+    for(auto i = art.begin(); i != art.end(); i++) {
+        stampa += (*i)->stampa();
+    }
+    return stampa;
 }

@@ -39,7 +39,7 @@ public:
 
 private:
 
-    Gestore gestore;
+    Gestore* gestore;
 
 private slots:
 
@@ -100,6 +100,14 @@ private slots:
     void on_EntrateRivista_clicked();
 
     void on_KeywordMaggiorGuadagno_clicked();
+
+    void on_VisualizzaArticoliOridnati_clicked();
+
+    void on_OrdinaConferenze_clicked();
+
+    void on_OrdinaKeyword_clicked();
+
+    void on_SvuotaFinestra_3_clicked();
 
 private:
     Ui::MainWindow *ui;

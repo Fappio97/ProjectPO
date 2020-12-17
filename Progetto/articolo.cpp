@@ -169,3 +169,8 @@ bool Articolo::autoreHaScrittoArticolo(const Autore& autore) const {
 bool Articolo::pubblicataInConferenza (const Divulgazione& conferenza) const {
    return (*pubblicazione) == conferenza;
 }
+
+
+QString Articolo::cognomePrimoAutore() const {
+    return autori.front()->getCognome();
+}

@@ -138,6 +138,10 @@ public:
 
                            //SEZIONE D
 
+    QString stampaArticoliConferenzaOrdinatiPrezzo(const Divulgazione&) const;
+
+    QString stampaArticoliKeywordOrdinati(const QString&) const;
+
                            //SEZIONE E
 
                            //SEZIONE F

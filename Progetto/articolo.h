@@ -64,6 +64,8 @@ public:
     void eliminaArticolo(); //controllare
     QString stampa() const;
 
+    QString cognomePrimoAutore() const;
+
     Divulgazione *getPubblicazione() const;
 
     QList<QString *> getKeyword() const;
