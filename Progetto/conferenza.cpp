@@ -24,7 +24,7 @@ Conferenza::Conferenza()
 
 }
 
-Conferenza::Conferenza(const QString & _nome, const QString & _acronimo, const QString & _luogo, const QString & _data, QList<Persona*> _organizzatori, int _partecipanti): Divulgazione(_nome, _acronimo, _data), luogo(_luogo), partecipanti(_partecipanti) {
+Conferenza::Conferenza(const QString & _nome, const QString & _acronimo, const QString & _luogo, const QString & _data, QList<Persona> _organizzatori, int _partecipanti): Divulgazione(_nome, _acronimo, _data), luogo(_luogo), partecipanti(_partecipanti) {
     for(auto i = _organizzatori.begin(); i != _organizzatori.end(); i++) {
         organizzatori.push_back( (*i) );
     }
@@ -92,16 +92,7 @@ void Conferenza::setPartecipanti(int value)
 
 
 bool Conferenza::operator==(const Conferenza& a) const {
-    if(nome != a.nome || acronimo != a.acronimo || luogo != a.luogo || data != a.data || partecipanti != a.partecipanti)
-        return false;
-    if(organizzatori.size() != a.organizzatori.size())
-        return false;
-    auto j = a.organizzatori.begin();
-    for(auto i = organizzatori.begin(); i != organizzatori.end(); i++, j++) {
-        if( (*i) != (*j) )
-            return false;
-    }
-    return true;
+    return nome == a.nome && acronimo == a.acronimo && luogo == a.luogo && data == a.data && partecipanti == a.partecipanti;
 }
 
 Conferenza& Conferenza::operator=(const Conferenza& a) {
@@ -117,24 +108,17 @@ Conferenza& Conferenza::operator=(const Conferenza& a) {
 }
 
 void Conferenza::svuota() {
-    for(auto i = organizzatori.begin(); i != organizzatori.end(); i++) {
-        delete (*i);
-    }
+    organizzatori.clear();
 }
 
-Conferenza* Conferenza::clone() {
-    return new Conferenza(*this);
-}
 
-QString Conferenza::stampa() const {
-    QString a = "-CONFERENZA-";
-    a += '\n';
-    a += "       NOME: " + nome + ", ACRONIMO: " + acronimo + ", DATA: " + data + ", LUOGO: " + luogo + ", PARTECIPANTI: " + QString::number(partecipanti) + '\n' + "        ORGANIZZATORI:";
-    for(auto i = organizzatori.begin(); i != organizzatori.end(); i++ ) {
-        if( i == organizzatori.begin() )
-            a += " " + (**i).getNome() + " " + (**i).getCognome() ;
+std::ostream& operator<<(std::ostream& out, const Conferenza& a){
+    out << "-CONFERENZA-" << std::endl << "       NOME: " << a.nome.toStdString() << ", ACRONIMO: " << a.acronimo.toStdString() << ", DATA: " << a.data.toStdString() << ", LUOGO: " << a.luogo.toStdString() << ", PARTECIPANTI: " << a.partecipanti << std::endl << "        ORGANIZZATORI:";
+    for(auto i = a.organizzatori.begin(); i != a.organizzatori.end(); i++ ) {
+        if( (*i) == a.organizzatori.front() )
+            out << " " << (*i).getNome().toStdString() << " " << (*i).getCognome().toStdString() ;
         else
-            a += ", " + (**i).getNome() + " " + (**i).getCognome() ;
+            out << ", " << (*i).getNome().toStdString() + " " << (*i).getCognome().toStdString() ;
     }
-    return a += '\n';
+    return out << std::endl;
 }

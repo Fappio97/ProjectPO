@@ -36,15 +36,9 @@ public:
     Divulgazione();     // altrimenti non posso chiamarli in articoli
     Divulgazione(const QString&, const QString&, const QString&);
 
-    virtual QString stampa() const { return nullptr; }
-
-    virtual bool operator==(const Divulgazione& a) const {      //lo uso davvero?
-        return nome == a.nome && acronimo == a.acronimo && data == a.data;
-    }
+    bool operator==(const Divulgazione&) const;
 
     virtual ~Divulgazione() {}
-
-    virtual Divulgazione* clone() { return new Divulgazione(*this); }
 
     QString getNome() const;
     void setNome(const QString &value);

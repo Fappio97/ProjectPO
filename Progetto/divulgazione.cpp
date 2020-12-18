@@ -62,3 +62,7 @@ Divulgazione::Divulgazione(const QString& _nome, const QString& _acronimo, const
 
 }
 
+bool Divulgazione::operator==(const Divulgazione & a) const {
+    return nome == a.nome && acronimo == a.acronimo && data == a.data;
+}
+

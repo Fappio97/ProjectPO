@@ -78,13 +78,6 @@ bool Rivista::operator==(const Rivista& a) const {
     return nome == a.nome && acronimo == a.acronimo && data == a.data && volume == a.volume;
 }
 
-Rivista* Rivista::clone() {
-    return new Rivista(*this);
-}
-
-QString Rivista::stampa() const {
-    QString a = "-RIVISTA-";
-    a += '\n';
-    a += "      NOME: " + nome + ", ACRONIMO: " + acronimo + ", DATA: " + data + " EDITORE: " + editore + " VOLUME: " + QString::number(volume) + '\n';
-    return a;
+std::ostream& operator<<(std::ostream& out, const Rivista& a) {
+    return out << "-RIVISTA-" << std::endl << "      NOME: " << a.nome.toStdString() << ", ACRONIMO: " << a.acronimo.toStdString() << ", DATA: " << a.data.toStdString() << " EDITORE: " << a.editore.toStdString() << " VOLUME: " << a.volume << std::endl;
 }

@@ -19,6 +19,8 @@ along with Progetto.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "gestore.h"
 
+#include<sstream>
+
 /*#include <QVariant>               //interessante
 
 QString stampa(QList<QVariant> a) {
@@ -29,47 +31,76 @@ QString stampa(QList<QVariant> a) {
 }*/
 
 
-
 Gestore::Gestore()
 {
 
 }
 
-
-Gestore::Gestore(const Gestore& a) {        //da aggiornare
+Gestore::Gestore(const Gestore& a) {
     for(auto i = a.autori.begin(); i != a.autori.end(); i++) {
         autori.push_back( (*i) );
     }
     for(auto i = a.divulgazioni.begin(); i != divulgazioni.end(); i++) {
-        divulgazioni.push_back( (**i).clone() );
+  //      divulgazioni.push_back( (*i).clone() );       // ho tolto il clone per trattarlo nell'altro modo
     }
     for(auto i = a.articoli.begin(); i != a.articoli.end(); i++) {
         articoli.push_back( (*i) );
     }
+    for(auto i = a.afferenze.begin(); i != a.afferenze.end(); i++) {
+        afferenze.push_back( (*i) );
+    }
+    for(auto i = a.persone.begin(); i != a.persone.end(); i++) {
+        persone.push_back( (*i) );
+    }
+    for(auto i = a.keywords.begin(); i != a.keywords.end(); i++) {
+        keywords.push_back( (*i) );
+    }
 }
 
-Gestore::~Gestore() {       // devi eliminare gli oggetti puntati
+Gestore::~Gestore() {
     svuotaAutori();
     svuotaDivulgazioni();
     svuotaArticoli();
     svuotaAfferenze();
+    svuotaPersone();
+    svuotaKeywords();
 }
 
-Gestore& Gestore::operator=(const Gestore& a) {     // da aggiornare    ho messo tante cose dinamiche
+Gestore& Gestore::operator=(const Gestore& a) {
     if(this != &a) {
+        svuotaAutori();
+        svuotaDivulgazioni();
+        svuotaArticoli();
+        svuotaAfferenze();
+        svuotaPersone();
+        svuotaKeywords();
         for(auto i = a.autori.begin(); i != a.autori.end(); i++) {
             autori.push_back( (*i) );
         }
-        for(auto i = a.divulgazioni.begin(); i != a.divulgazioni.end(); i++) {
-            divulgazioni.push_back( (**i).clone() );
+        for(auto i = a.divulgazioni.begin(); i != divulgazioni.end(); i++) {
+//            divulgazioni.push_back( (**i).clone() );      //tolto il clone, leggi sopra
         }
         for(auto i = a.articoli.begin(); i != a.articoli.end(); i++) {
             articoli.push_back( (*i) );
+        }
+        for(auto i = a.afferenze.begin(); i != a.afferenze.end(); i++) {
+            afferenze.push_back( (*i) );
+        }
+        for(auto i = a.persone.begin(); i != a.persone.end(); i++) {
+            persone.push_back( (*i) );
+        }
+        for(auto i = a.keywords.begin(); i != a.keywords.end(); i++) {
+            keywords.push_back( (*i) );
         }
     }
     return (*this);
 }
 
+
+
+
+
+                           //GESTIONE KEYWORDS
 
 QString* Gestore::restituisciKeywords(const QString& a) const {
     for(auto i = keywords.begin(); i < keywords.end(); i++) {
@@ -99,6 +130,11 @@ void Gestore::svuotaKeywords() {
 }
 
 
+
+
+
+                           //GESTIONE AFFERENZE
+
 Afferenza* Gestore::restituisciAfferenza(const QString& a) const {
     for(auto i = afferenze.begin(); i < afferenze.end(); i++) {
         if( (**i).getNome() == a )
@@ -127,6 +163,10 @@ void Gestore::svuotaAfferenze() {
 }
 
 
+
+
+
+                           //GESTIONE PERSONE
 
 Persona* Gestore::restituisciPersona(const QString& a) const {
     for(auto i = persone.begin(); i != persone.end(); i++) {
@@ -158,6 +198,9 @@ void Gestore::svuotaPersone() {
 
 
 
+
+
+                           //GESTIONE AUTORI
 
 Autore* Gestore::restituisciAutore(const QString& _identificativo) const {  //non faccio il controllo se esiste l'autore perché sono sicuro che c'è in quanto nel box autori ci finiscono solo autori creati
     for(auto i = autori.begin(); i != autori.end(); i++) {
@@ -195,31 +238,35 @@ void Gestore::svuotaAutori() {
 }
 
 QString Gestore::stampaAutori() const {
-    QString a = nullptr;
+    std::stringstream s;
     for(auto i = autori.begin(); i != autori.end(); i++) {
-          a += (**i).stampa();
+          s << (**i);
     }
-    return a;
+    return QString::fromStdString(s.str());
 }
 
 
 
 
-Divulgazione* Gestore::restituisciDivulgazione(const QString & _acronimo) const {  //non faccio il controllo se esiste l'autore perché sono sicuro che c'è in quanto nel box autori ci finiscono solo autori creati
+
+                           //GESTIONE DIVULGAZIONI
+
+Divulgazione* Gestore::restituisciDivulgazione(const QString& nome, const QString& data) const {
     for(auto i = divulgazioni.begin(); i != divulgazioni.end(); i++) {
-        if( (*i)->getAcronimo() == _acronimo )
+        if( (*i)->getData() == data && (*i)->getNome() == nome) {
             return (*i);
+        }
     }
     return nullptr;
 }
 
-void Gestore::aggiungiConferenza(const QString & _nome, const QString & _acronimo, const QString & _luogo, const QString & _data, QList<Persona*> _organizzatori, int _partecipanti) {
+void Gestore::aggiungiConferenza(const QString & _nome, const QString & _acronimo, const QString & _luogo, const QString & _data, QList<Persona> _organizzatori, int _partecipanti) {
     divulgazioni.push_back(new Conferenza(_nome, _acronimo, _luogo, _data, _organizzatori, _partecipanti));
 }
 
-bool Gestore::divulgazioneEsistente(const QString & _acronimo) const {
+bool Gestore::divulgazioneEsistente(const QString& nome, const QString& data) const {
     for(auto i = divulgazioni.begin(); i != divulgazioni.end(); i++) {
-        if( (*i)->getAcronimo() == _acronimo ) {
+        if( (*i)->getData() == data && (*i)->getNome() == nome) {
             return true;
         }
     }
@@ -243,15 +290,19 @@ void Gestore::svuotaDivulgazioni() {
     divulgazioni.clear();
 }
 
-QString Gestore::stampaDivulgazioni() const {
-    QString a = nullptr;
+QString Gestore::stampaDivulgazioni() const {       //MODIFICARE
+    std::stringstream s;
     for(auto i = divulgazioni.begin(); i != divulgazioni.end(); i++) {
-          a += (**i).stampa() + '\n';
+//          s << (**i) << std::endl;
     }
-    return a;
+    return QString::fromStdString(s.str());
 }
 
 
+
+
+
+                           //GESTIONE ARTICOLI
 
 Articolo* Gestore::restituisciArticolo(const QString& _identificativo) const {  //non faccio il controllo se esiste l'autore perché sono sicuro che c'è in quanto nel box autori ci finiscono solo autori creati
     for(auto i = articoli.begin(); i != articoli.end(); i++) {
@@ -269,7 +320,7 @@ bool Gestore::articoloPresente(const QString& _identificativo) const {
     return false;
 }
 
-void Gestore::aggiungiArticolo(const QString& _identificativo, const QString& _titolo, int _pagine, QList<Autore *> _autori, QList<QString *> _keyword, double _prezzo, QList<Articolo *> _correlati, Divulgazione * _pubblicazione) {
+void Gestore::aggiungiArticolo(const QString& _identificativo, const QString& _titolo, int _pagine, QList<Autore> _autori, QList<QString> _keyword, double _prezzo, QList<Articolo> _correlati, Divulgazione _pubblicazione) {
         articoli.push_back(new Articolo(_identificativo, _titolo, _pagine, _autori, _keyword, _prezzo, _correlati, _pubblicazione));
 }
 
@@ -281,31 +332,37 @@ void Gestore::svuotaArticoli() {
 }
 
 QString Gestore::stampaArticoli() const {
-    QString a;
+    std::stringstream s;
     for(auto i = articoli.begin(); i != articoli.end(); i++) {
-          a += (**i).stampa();
+          s << (**i);
     }
-    return a;
+    return QString::fromStdString(s.str());
 }
 
+
+
+
+
+                           //SEZIONE B
+
 QString Gestore::stampaArticoliAutore(const Autore& autore) const {
-    QString a = nullptr;
+    std::stringstream s;
     for(auto i = articoli.begin(); i != articoli.end(); i++) {
           if( (*i)->autoreHaScrittoArticolo( autore )  ) {
-                a += (**i).stampa();
+                s << (**i);
           }
     }
-    return a;
+    return QString::fromStdString(s.str());
 }
 
 QString Gestore::stampaArticoliConferenza(const Divulgazione& divulgazione) const {
-    QString a = nullptr;
+    std::stringstream s;
     for(auto i = articoli.begin(); i != articoli.end(); i++) {
-          if( (*i)->pubblicataInConferenza ( divulgazione )  ) {
-                a += (**i).stampa();
+          if( (*i)->pubblicataInQuestoArticolo( divulgazione )  ) {
+                s << (**i);
           }
     }
-    return a;
+    return QString::fromStdString(s.str());
 }
 
 void azzeraVectorInt(QVector<int>& numero, int size) {
@@ -316,8 +373,8 @@ void azzeraVectorInt(QVector<int>& numero, int size) {
 }
 
 QString Gestore::stampaArticoliStruttura(QVector<Autore *> autore) const {
-    QString a = nullptr;
     QVector<int> numero;
+    std::stringstream s;
     azzeraVectorInt(numero, articoli.size());
     int cont;
     for(int j = 0; j < autore.size(); j++) {
@@ -325,17 +382,23 @@ QString Gestore::stampaArticoliStruttura(QVector<Autore *> autore) const {
         for(auto i = articoli.begin(); i != articoli.end(); i++, cont++) {
               if( (**i).autoreHaScrittoArticolo( (*autore[j])) && numero[cont] == 0 ) {
                     numero[cont]++;
-                    a += (**i).stampa();
+                    s << (**i);
               }
         }
     }
     numero.clear();
-    return a;
+    return QString::fromStdString(s.str());
 }
 
+
+
+
+
+                           //SEZIONE C
+
 QString Gestore::stampaArticoliAutoreCostosi(const Autore& autore) const {
+    std::stringstream s;
     int max = INT_MIN;
-    QString a = nullptr;
     for(auto i = articoli.begin(); i != articoli.end(); i++) {
           if( (*i)->autoreHaScrittoArticolo( autore ) && (**i).getPrezzo() > max ) {
                 max = (**i).getPrezzo();
@@ -343,16 +406,16 @@ QString Gestore::stampaArticoliAutoreCostosi(const Autore& autore) const {
     }
     for(auto i = articoli.begin(); i != articoli.end(); i++) {
           if( (*i)->autoreHaScrittoArticolo( autore ) && (**i).getPrezzo() == max ) {
-                a += (*i)->stampa();
+                    s << (**i);
           }
     }
-    return a;
+    return QString::fromStdString(s.str());
 }
 
 int Gestore::guadagnoDivulgazione(const Divulgazione& a, const QString& data) const {  //facilmente fattibile anche il numero 4 della sezione C con questo metodo
     int somma = -1;
     for(auto i = articoli.begin(); i < articoli.end(); i++) {
-        if(  (*(**i).getPubblicazione() ) == a && data == (**i).getPubblicazione()->getAnno()) {
+        if(  (**i).getPubblicazione().getNome() == a.getNome() && (**i).getPubblicazione().getAcronimo() == a.getAcronimo() && data == (**i).getPubblicazione().getAnno()) {     //qui praticamente
             somma += (*i)->getPrezzo();
         }
     }
@@ -400,42 +463,50 @@ QStringList Gestore::keywordMigliorIncasso(const QStringList& keywords) const {
     return keywordMaggiori;
 }
 
-bool compara(const Articolo* a, const Articolo* b) {
+
+
+
+
+                           //SEZIONE D
+
+bool comparaDivulgazioni(const Articolo* a, const Articolo* b) {
     return a->getPrezzo() < b->getPrezzo();
 }
 
-QString Gestore::stampaArticoliConferenzaOrdinatiPrezzo(const Divulgazione& conferenza) const {
+QString Gestore::stampaArticoliDivulgazioneOrdinatiPrezzo(const Divulgazione& conferenza) const {
     QList<Articolo *> art;
+    std::stringstream s;
     for(auto i = articoli.begin(); i != articoli.end(); i++) {
-        if( (*(*i)->getPubblicazione()) == conferenza ) {
+        if( (*i)->getPubblicazione() == conferenza ) {
             art.push_back( (*i) );
         }
     }
-    std::sort( art.begin(), art.end(), compara);
+    std::sort( art.begin(), art.end(), comparaDivulgazioni);
 
     QString stampa;
     for(auto i = art.begin(); i != art.end(); i++) {
-        stampa += (*i)->stampa();
+        s << (**i);
     }
-    return stampa;
+    return QString::fromStdString(s.str());
 }
 
-bool compare(const Articolo* a, const Articolo* b) {
-    if( a->getPubblicazione()->getAnno() > b->getPubblicazione()->getAnno() )
+bool comparaKeyword(const Articolo& a, const Articolo& b) {
+    if( a.getPubblicazione().getAnno() > b.getPubblicazione().getAnno() )
         return true;
-    if( a->getPubblicazione()->getAnno() < b->getPubblicazione()->getAnno() )
+    if( a.getPubblicazione().getAnno() < b.getPubblicazione().getAnno() )
         return false;
-    if( a->getPrezzo() < b->getPrezzo() )
+    if( a.getPrezzo() < b.getPrezzo() )
         return true;
-    if( a->getPrezzo() > b->getPrezzo() )
+    if( a.getPrezzo() > b.getPrezzo() )
         return false;
-    return a->cognomePrimoAutore() < b->cognomePrimoAutore();
+    return a.cognomePrimoAutore() < b.cognomePrimoAutore();
 }
 
 QString Gestore::stampaArticoliKeywordOrdinati(const QString& keyword) const {
     QList<Articolo *> art;
+    std::stringstream s;
     for(auto i = articoli.begin(); i != articoli.end(); i++) {
-        QList<QString *> a = (*i)->getKeyword();
+        QList<QString> a = (*i)->getKeyword();
         for(auto j = a.begin(); j != a.end(); i++) {
             if( (*j) == keyword ) {
                 art.push_back( (*i) );
@@ -443,11 +514,32 @@ QString Gestore::stampaArticoliKeywordOrdinati(const QString& keyword) const {
             }
         }
     }
-    std::sort(art.begin(), art.end(), compare);
+    std::sort(art.begin(), art.end(), comparaKeyword);
 
-    QString stampa;
     for(auto i = art.begin(); i != art.end(); i++) {
-        stampa += (*i)->stampa();
+        s << (**i);
     }
-    return stampa;
+    return QString::fromStdString(s.str());
+}
+
+
+
+                           //SEZIONE E
+
+
+
+
+                           //SEZIONE F
+
+bool comparaCorrelati(const Articolo& a, const Articolo& b) {
+    if( a.getAutori().size() < b.getAutori().size() )
+        return false;
+    if( a.getAutori().size() > b.getAutori().size() )
+        return true;
+    return a.getTitolo() < b.getTitolo();
+}
+
+
+void Gestore::ordinaArticoliDagliArticoliCorrelati() const {
+    std::sort(articoli.begin(), articoli.end(), comparaCorrelati);
 }

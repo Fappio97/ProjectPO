@@ -19,7 +19,8 @@ along with Progetto.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "QMessageBox"
+
+#include <QMessageBox>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -64,6 +65,11 @@ MainWindow::~MainWindow()
 }
 
 
+
+
+
+                           //PULSANTI PER ANDARE AD UNA DETERMINATA PAGINA
+
 void MainWindow::on_Home_clicked()
 {
     ui->stackedWidget->setCurrentWidget(ui->PaginaPrincipale);
@@ -73,6 +79,46 @@ void MainWindow::on_VaiPaginaAutori_clicked()
 {
     ui->stackedWidget->setCurrentWidget(ui->PaginaAutori);
 }
+
+void MainWindow::on_VaiPaginaConferenze_clicked()       //IN QUESTA PAGINA CREO CONFERENZE
+{
+    ui->stackedWidget->setCurrentWidget(ui->PaginaConferenze);
+}
+
+void MainWindow::on_VaiPaginaRiviste_clicked()          //IN QUESTA PAGINA CREO RIVISTE
+{
+    ui->stackedWidget->setCurrentWidget(ui->PaginaRiviste);
+}
+
+void MainWindow::on_VaiPaginaDivulgazioni() {           //IN QUESTA PAGINA VISUALIZZO LE CONFERENZE E RIVISTE CREATE
+    ui->stackedWidget->setCurrentWidget(ui->PaginaDivulgazioni);
+}
+
+void MainWindow::on_VaiPaginaArticoli_clicked()
+{
+    ui->stackedWidget->setCurrentWidget(ui->PaginaArticoli);
+}
+
+void MainWindow::on_VaiPaginaVisualizzaArticoli_clicked()
+{
+    ui->stackedWidget->setCurrentWidget(ui->PaginaVisualizzaArticoli);
+}
+
+void MainWindow::on_PrezziGuadagni_clicked()
+{
+    ui->stackedWidget->setCurrentWidget(ui->PaginaPrezzi);
+}
+
+void MainWindow::on_VisualizzaArticoliOridnati_clicked()
+{
+    ui->stackedWidget->setCurrentWidget(ui->PaginaArticoliOrdinati);
+}
+
+
+
+
+
+                           //FUNZIONI AUSILIARIE CHE MI SERVONO PER GESTIRE ALCUNI METODI
 
 void messaggioErrore(const QString& errore, QWidget * parents) {                    //funzione che richiama un messaggio di errore, se ne potrebbe fare una unica, insieme a quella informativa e quella di attenzione. Riprovare a passare l'icona.
     QMessageBox mess (QMessageBox::Critical,"Errore", errore ,QMessageBox::Ok, parents);
@@ -93,6 +139,12 @@ void leggiLista(QList<QListWidgetItem*> a, QStringList& lista){                 
     for(auto i = a.begin(); i != a.end(); i++)
         lista.push_back( (*i)->text() );
 }
+
+
+
+
+
+                           //GESTIONE AUTORE
 
 void MainWindow::on_AggiungiAutore_clicked()
 {
@@ -167,10 +219,11 @@ void MainWindow::on_SvuotaAutori_clicked()
    gestore->svuotaAutori();
 }
 
-void MainWindow::on_VaiPaginaConferenze_clicked()
-{
-    ui->stackedWidget->setCurrentWidget(ui->PaginaConferenze);
-}
+
+
+
+
+                           //GESTIONE CONFERENZA
 
 void MainWindow::on_AggiungiConferenza_clicked()
 {
@@ -192,9 +245,9 @@ void MainWindow::on_AggiungiConferenza_clicked()
 
     QStringList a;
     leggiLista( ui->ListaOrganizzatori->selectedItems(), a );
-    QList<Persona *> organizzatori;
+    QList<Persona> organizzatori;
     for(auto i = a.begin(); i < a.end(); i++) {
-        organizzatori.push_back( gestore->restituisciPersona( (*i) ) );
+        organizzatori.push_back( *gestore->restituisciPersona( (*i) ) );
     }
 
     if(organizzatori.size() == 0) {
@@ -205,8 +258,8 @@ void MainWindow::on_AggiungiConferenza_clicked()
     QDate date = ui->CalendarioConferenza->selectedDate();
     QString data = QString::number(date.year()) + "-" + QString::number(date.month()) + "-" + QString::number(date.day());
 
-    if(gestore->divulgazioneEsistente(acronimo)) {
-        QMessageBox mess (QMessageBox::Critical,"Errore","Conferenza con stesso acronimo già presente",QMessageBox::Ok,this);
+    if(gestore->divulgazioneEsistente(nome, data)) {
+        QMessageBox mess (QMessageBox::Critical,"Errore","Conferenza già presente",QMessageBox::Ok,this);
         mess.exec();
         return;
     }
@@ -217,13 +270,13 @@ void MainWindow::on_AggiungiConferenza_clicked()
     ui->AcronimoInput->clear();
     ui->LuogoInput->clear();
 
-    ui->ConferenzeRivisteBox->addItem("Conferenza: " + acronimo + " " + nome);
-    ui->ConferenzeBox->addItem("Conferenza: " + acronimo + " " + nome);
-    ui->RivistaBox->addItem("Conferenza: " + acronimo + " " + nome);
-    ui->ConferenzeBox_2->addItem("Conferenza: " + acronimo + " " + nome);
+    ui->ConferenzeRivisteBox->addItem("Conferenza: " + nome + ", " + data);
+    ui->ConferenzeBox->addItem("Conferenza: " + nome + ", " + data);
+    ui->RivistaBox->addItem("Conferenza: " + nome + ", " + data);
+    ui->ConferenzeBox_2->addItem("Conferenza: " + nome + ", " + data);
 }
 
-void MainWindow::on_CreaOrganizzatore_clicked()
+void MainWindow::on_CreaOrganizzatore_clicked()     //CREO UNA PERSONA ORGANIZZATRICE
 {
     QString nome = ui->NomePersona->text();
     if(nome.isEmpty()) {
@@ -271,8 +324,8 @@ void MainWindow::on_AggiungiRivista_clicked()
 
     QDate date = ui->CalendarioRivista->selectedDate();
     QString data = QString::number(date.year()) + "-" + QString::number(date.month()) + "-" + QString::number(date.day());
-    if(gestore->divulgazioneEsistente(acronimo)) {
-        messaggioErrore("Rivista con tale acronimo già presente", this);
+    if(gestore->divulgazioneEsistente(nome, data)) {
+        messaggioErrore("Rivista già presente", this);
         return;
     }
     gestore->aggiungiRivista(nome, acronimo, editore, data, ui->VolumeInput->value());
@@ -281,13 +334,9 @@ void MainWindow::on_AggiungiRivista_clicked()
     ui->AcronimoInput_2->clear();
     ui->EditoreInput->clear();
 
-    ui->ConferenzeRivisteBox->addItem("Rivista: " + acronimo + " " + nome);
-    ui->RivistaBox->addItem("Rivista: " + acronimo + " " + nome);
-}
-
-void MainWindow::on_VaiPaginaRiviste_clicked()
-{
-    ui->stackedWidget->setCurrentWidget(ui->PaginaRiviste);
+    ui->ConferenzeRivisteBox->addItem("Rivista: " + nome + ", " + data);
+    ui->RivistaBox->addItem("Rivista: " + nome + ", " + data);
+    ui->RivisteBox->addItem("Rivista: " + nome + ", " + data);
 }
 
 void MainWindow::on_VisualizzaDivulgazioni_clicked()
@@ -308,14 +357,12 @@ void MainWindow::on_SvuotaDivulgazioni_clicked()
     gestore->svuotaDivulgazioni();
 }
 
-void MainWindow::on_VaiPaginaDivulgazioni() {
-    ui->stackedWidget->setCurrentWidget(ui->PaginaDivulgazioni);
-}
 
-void MainWindow::on_VaiPaginaArticoli_clicked()
-{
-    ui->stackedWidget->setCurrentWidget(ui->PaginaArticoli);
-}
+
+
+
+
+                           //GESTIONE ARTICOLI
 
 void MainWindow::on_VisualizzaArticoli_clicked()
 {
@@ -384,8 +431,10 @@ void MainWindow::on_AggiungiArticolo_clicked()
         return;
     }
 
-    QStringList c = pubblicazione.split(" ");
-    Divulgazione* a = gestore->restituisciDivulgazione(c[1]);
+    QStringList c = pubblicazione.split(": ");      //divido prima la lista quando trovo la string ": "
+    c = c[1].split(", ");   //divido la seconda parte della stringa, quella priva della stringa Conferenza oppure Rivista, quando trovo la string ", "
+
+    Divulgazione a = *gestore->restituisciDivulgazione(c[0], c[1]);
 
     if(gestore->articoloPresente(identificativo)) {
         messaggioAttenzione("Articolo con questo codice identificativo già presente", this);
@@ -394,29 +443,29 @@ void MainWindow::on_AggiungiArticolo_clicked()
 
     QStringList b;
     leggiLista( ui->ListaKeyword->selectedItems(), b );     //prendo le keyword che soo state selezionate
-    QList<QString *> keywords;
+    QList<QString> keywords;
     for(auto i = b.begin(); i < b.end(); i++) {
-        keywords.push_back( gestore->restituisciKeywords( (*i) ) );     //le trovo nelle keyword create e le punto per poi creare l'articolo
+        keywords.push_back( *gestore->restituisciKeywords( (*i) ) );     //le trovo nelle keyword create e le punto per poi creare l'articolo
     }
     b.clear();
 
     leggiLista( ui->ListaAutori->selectedItems(), b );
-    QList<Autore *> autori;
+    QList<Autore> autori;
     QStringList d;
     for(auto i = b.begin(); i < b.end(); i++) {     // non posso fare una funzione anche se i pezzi di codice sono identici, ma dovrei passare una QList<Autore *> e poi una QList<Articoli *>
         QString f = (*i);
         d = f.split(" ");
-        autori.push_back( gestore->restituisciAutore (d[0]));
+        autori.push_back( *gestore->restituisciAutore (d[0]));
         d.clear();
     }
     b.clear();
 
     leggiLista( ui->ListaArticoli->selectedItems(), b );
-    QList<Articolo *> articoli;
+    QList<Articolo> articoli;
     for(auto i = b.begin(); i < b.end(); i++) {
         QString f = (*i);
         d = f.split(" ");
-        articoli.push_back( gestore->restituisciArticolo(d[1]));
+        articoli.push_back( *gestore->restituisciArticolo(d[1]));
         d.clear();
     }
     b.clear();
@@ -430,6 +479,12 @@ void MainWindow::on_AggiungiArticolo_clicked()
     pubblicazione.clear();
 }
 
+
+
+
+
+                           //SEZIONE B
+
 void MainWindow::on_VisualizzaArticoliAutore_clicked()
 {
     if( ui->AutoreBox->currentText().isEmpty() ) {
@@ -442,15 +497,25 @@ void MainWindow::on_VisualizzaArticoliAutore_clicked()
     ui->VisualizzaArticoliDi->setPlainText( "Articoli pubblicati dall' autore " + ui->AutoreBox->currentText()  + '\n' + gestore->stampaArticoliAutore( (*autore) ) );
 }
 
+void leggiDivulgazioniComboBox(QStringList& lista, const QString& stringa) {
+    lista.clear();
+    lista = stringa.split(": ");        //divido prima la lista quando trovo la string ": "
+    lista = lista[1].split(", ");       //divido la seconda parte della stringa, quella priva della stringa Conferenza oppure Rivista, quando trovo la string ", "
+}
+
 void MainWindow::on_VisualizzaArticoliConferenza_clicked()
 {
     if( ui->ConferenzeBox->currentText().isEmpty() ) {
         messaggioErrore("Non hai selezionato alcuna conferenza", this);
         return;
     }
-    QStringList input = ui->ConferenzeBox->currentText().split(" ");
-    Divulgazione* conferenza = gestore->restituisciDivulgazione( input[1] );
+
+    QStringList lista;
+    leggiDivulgazioniComboBox(lista, ui->ConferenzeBox->currentText());
+
+    Divulgazione* conferenza = gestore->restituisciDivulgazione( lista[0], lista[1] );
     ui->VisualizzaArticoliDi->setPlainText( "Articoli pubblicati per la conferenza [" + ui->ConferenzeBox->currentText() + "]" + '\n' + gestore->stampaArticoliConferenza (*conferenza) );
+
 }
 
 void MainWindow::on_VisualizzaArticoliStruttura_clicked()
@@ -467,20 +532,16 @@ void MainWindow::on_VisualizzaArticoliStruttura_clicked()
     autore.clear();
 }
 
-void MainWindow::on_VaiPaginaVisualizzaArticoli_clicked()
-{
-    ui->stackedWidget->setCurrentWidget(ui->PaginaVisualizzaArticoli);
-}
-
 void MainWindow::on_SvuotaFinestra_clicked()
 {
     ui->VisualizzaArticoliPrezzi->clear();
 }
 
-void MainWindow::on_PrezziGuadagni_clicked()
-{
-    ui->stackedWidget->setCurrentWidget(ui->PaginaPrezzi);
-}
+
+
+
+
+                           //SEZIONE C
 
 void MainWindow::on_SvuotaFinestra_2_clicked()
 {
@@ -493,8 +554,8 @@ void MainWindow::on_ArticoliCostosiAutore_clicked()
         messaggioErrore("Non hai selezionato alcun autore", this);
         return;
     }
-    QStringList input = ui->AutoreBox_2->currentText().split(" ");
-    Autore* autore = gestore->restituisciAutore( input[0] );
+    QStringList input = ui->AutoreBox_2->currentText().split(" ");      //PRENDO L'IDENTIFICATIVO DELL'AUTORE
+    Autore* autore = gestore->restituisciAutore( input[0] );        //LO CERCO E MI FACCIO RESTITUIRE UN PUNTATORE
     QString output = gestore->stampaArticoliAutoreCostosi( (*autore) );
     if(output != nullptr)
         ui->VisualizzaArticoliPrezzi->setPlainText("Articoli più costoso/i pubblicati dall' autore " + ui->AutoreBox->currentText()  + '\n' + output);
@@ -502,7 +563,7 @@ void MainWindow::on_ArticoliCostosiAutore_clicked()
        ui->VisualizzaArticoliPrezzi->setPlainText("Non sono presenti articoli di [" + ui->AutoreBox_2->currentText() + "]");
 }
 
-bool isNumber(const QString& data) {
+bool isNumber(const QString& data) {        //FUNZIONE CHE MI DICE SE QUELLA STRINGA CONTIENE SOLTANTO NUMERI, MI SERVE QUANDO DO LA POSSIBILITÀ DI INSERIRRE UN ANNO
     for(int i = 0; i < data.size(); i++) {
         if(data[i] < '0' || data[i] > '9' )
             return false;
@@ -520,8 +581,12 @@ void MainWindow::on_EntrateRivista_clicked()
         messaggioErrore("Data non valida", this);
         return;
     }
-    QStringList input = ui->RivistaBox->currentText().split(" ");
-    Divulgazione* a = gestore->restituisciDivulgazione( input[1] );
+
+    QStringList input;
+    leggiDivulgazioniComboBox(input, ui->RivistaBox->currentText());
+
+    Divulgazione* a = gestore->restituisciDivulgazione( input[0], input[1] );
+
     int output = gestore->guadagnoDivulgazione( *a, ui->AnnoInput->text());
     QString out;
     if(output == -1)
@@ -550,17 +615,20 @@ void MainWindow::on_KeywordMaggiorGuadagno_clicked()
     ui->VisualizzaArticoliPrezzi->setPlainText( output );
 }
 
-void MainWindow::on_VisualizzaArticoliOridnati_clicked()
-{
-    ui->stackedWidget->setCurrentWidget(ui->PaginaArticoliOrdinati);
-}
+
+
+
+
+                           //SEZIONE D
 
 void MainWindow::on_OrdinaConferenze_clicked()
 {
-    QStringList a = ui->ConferenzeBox_2->currentText().split(" ");
-    Divulgazione* conferenza = gestore->restituisciDivulgazione(a[1]);
+    QStringList a;
+    leggiDivulgazioniComboBox(a, ui->ConferenzeBox_2->currentText());
 
-    ui->VisualizzaArticoliOdirnati->setPlainText(gestore->stampaArticoliConferenzaOrdinatiPrezzo(*conferenza));
+    Divulgazione* conferenza = gestore->restituisciDivulgazione(a[0], a[1]);
+
+    ui->VisualizzaArticoliOdirnati->setPlainText(gestore->stampaArticoliDivulgazioneOrdinatiPrezzo(*conferenza));
 }
 
 void MainWindow::on_OrdinaKeyword_clicked()
@@ -573,4 +641,23 @@ void MainWindow::on_OrdinaKeyword_clicked()
 void MainWindow::on_SvuotaFinestra_3_clicked()
 {
     ui->VisualizzaArticoliOdirnati->clear();
+}
+
+
+
+
+
+                           //SEZIONE E
+
+void MainWindow::on_SvuotaFinestra_4_clicked()
+{
+     ui->VisualizzaRivisteSpecialistiche->clear();
+}
+
+void MainWindow::on_TastoRivisteSpecilistiche_clicked()
+{
+    QStringList lista;
+    leggiDivulgazioniComboBox(lista, ui->RivisteBox->currentText());
+
+
 }

@@ -48,9 +48,7 @@ public:
     bool operator==(const Rivista&) const;
     void svuota();
 
-    Rivista* clone();
-
-    QString stampa() const;
+    friend std::ostream& operator<<(std::ostream&, const Rivista&);
 
     QString getEditore() const;
     void setEditore(const QString &value);

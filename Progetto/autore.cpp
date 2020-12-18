@@ -35,10 +35,10 @@ QString Autore::getIdentificativo() const
     return identificativo;
 }
 
-/*void Autore::setIdentificativo(const QString &value)
+void Autore::setIdentificativo(const QString &value)
 {
     identificativo = value;
-}*/
+}
 
 bool Autore::autoreConnessoStruttura(const Afferenza& afferenza) const {
     for(auto i = afferenze.begin(); i != afferenze.end(); i++) {
@@ -61,17 +61,17 @@ bool Autore::operator==(const Autore& a) const {
     return true;
 }
 
-QString Autore::stampa() const {
-    QString a = "- ID: " + identificativo + ", NOME: " + nome + ", COGNOME: " + cognome + '\n';
-    if(!afferenze.empty()) {
-        a += "      LISTA AFFERENZE:";
-        for(auto i = afferenze.begin(); i != afferenze.end(); i++) {
-            if(i == afferenze.begin())
-                a += (" " + (*i).getNome());
+std::ostream& operator<<(std::ostream& out, const Autore& a) {
+    out << "- ID: " << a.identificativo.toStdString() << ", NOME: " << a.nome.toStdString() << ", COGNOME: " << a.cognome.toStdString() << std::endl;
+    if(!a.afferenze.empty()) {
+        out << "      LISTA AFFERENZE:";
+        for(auto i = a.afferenze.begin(); i != a.afferenze.end(); i++) {
+            if(i == a.afferenze.begin())
+                out << (" " + (*i).getNome()).toStdString();
             else
-                a += (", " + (*i).getNome());
+                out << (", " + (*i).getNome()).toStdString();
         }
-        a += '\n';
+        out << std::endl;
     }
-    return a += '\n';
+    return out << std::endl;
 }

@@ -19,20 +19,25 @@ along with Progetto.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "articolo.h"
 
-Divulgazione *Articolo::getPubblicazione() const
+QList<Autore> Articolo::getAutori() const
 {
-    return pubblicazione;
+    return autori;
 }
 
-QList<QString *> Articolo::getKeyword() const
+QList<QString> Articolo::getKeyword() const
 {
     return keyword;
+}
+
+Divulgazione Articolo::getPubblicazione() const
+{
+    return pubblicazione;
 }
 
 Articolo::Articolo() {
 }
 
-Articolo::Articolo(const QString& _identificativo, const QString& _titolo, int _pagine, QList<Autore *> _autori, QList<QString *> _keyword,  double _prezzo, QList<Articolo *> _correlati, Divulgazione * _pubblicazione): identificativo(_identificativo), titolo(_titolo), pagine(_pagine), prezzo(_prezzo) {
+Articolo::Articolo(const QString& _identificativo, const QString& _titolo, int _pagine, QList<Autore > _autori, QList<QString> _keyword,  double _prezzo, QList<Articolo> _correlati, Divulgazione _pubblicazione): identificativo(_identificativo), titolo(_titolo), pagine(_pagine), prezzo(_prezzo) {
     pubblicazione = _pubblicazione;
     for(auto i = _autori.begin(); i != _autori.end(); i++) {
         autori.push_back( (*i) );
@@ -108,33 +113,30 @@ void Articolo::eliminaArticolo() {
     correlati.clear();
 }
 
-QString Articolo::stampa() const {
-    QString a = "-ARTICOLO-";
-    a += '\n';
-    a += "      IDENTIFICATIVO: " + identificativo + ", TITOLO: " + titolo + ", PAGINE: " + QString::number(pagine) + ", PREZZO: " + QString::number(prezzo) + '\n';
-    if(!autori.empty()) {
-        a += "      LISTA AUTORI CHE HANNO REALIZZATO L'ARTICOLO:";
-        for(auto i = autori.begin(); i != autori.end(); i++) {
-            a += " [" + (**i).getNome() + " " + (**i).getCognome() + "]";
+std::ostream& operator<<(std::ostream& out, const Articolo& a) {
+    out << "-ARTICOLO-" << std::endl << "      IDENTIFICATIVO: " << a.identificativo.toStdString() << ", TITOLO: " << a.titolo.toStdString() << ", PAGINE: " << a.pagine << ", PREZZO: " << a.prezzo << std::endl;
+    if(!a.autori.empty()) {
+        out << "      LISTA AUTORI CHE HANNO REALIZZATO L'ARTICOLO:";
+        for(auto i = a.autori.begin(); i != a.autori.end(); i++) {
+            out << " [" << (*i).getNome().toStdString() << " " << (*i).getCognome().toStdString() << "]";
         }
-        a += '\n';
+        out << std::endl;
     }
-    if(!keyword.empty()) {
-        a += "      LISTA KEYWORDS:";
-        for(auto i = keyword.begin(); i != keyword.end(); i++) {
-            a += " '" + (**i) + "'";
+    if(!a.keyword.empty()) {
+        out << "      LISTA KEYWORDS:";
+        for(auto i = a.keyword.begin(); i != a.keyword.end(); i++) {
+            out << " '" << (*i).toStdString() << "'";
         }
-        a += '\n';
+        out << std::endl;
     }
-    if(!correlati.empty()) {
-        a += "      LISTA TITOLI CORRELATI: ";
-        for(auto i = correlati.begin(); i != correlati.end(); i++) {
-            a += " [" + (**i).getTitolo() + "]";
+    if(!a.correlati.empty()) {
+        out << "      LISTA TITOLI CORRELATI: ";
+        for(auto i = a.correlati.begin(); i != a.correlati.end(); i++) {
+            out << " [" << (*i).getTitolo().toStdString() << "]";
         }
-        a += '\n';
+        out << std::endl;
     }
-    a += "      PUBBLICATO IN: " + pubblicazione->getNome() + " " + pubblicazione->getAcronimo() + '\n' + '\n';
-    return a;
+    return out << "      PUBBLICATO IN: " << a.pubblicazione.getNome().toStdString() << " " << a.pubblicazione.getAcronimo().toStdString() << std::endl << std::endl;
 }
 
 Articolo& Articolo::operator=(const Articolo& a) {
@@ -160,17 +162,17 @@ Articolo& Articolo::operator=(const Articolo& a) {
 
 bool Articolo::autoreHaScrittoArticolo(const Autore& autore) const {
     for(auto i = autori.begin(); i != autori.end(); i++) {
-        if( autore == (**i) )
+        if( autore == (*i) )
             return true;
     }
     return false;
 }
 
-bool Articolo::pubblicataInConferenza (const Divulgazione& conferenza) const {
-   return (*pubblicazione) == conferenza;
+bool Articolo::pubblicataInQuestoArticolo (const Divulgazione& divulgazione) const {
+   return pubblicazione == divulgazione;
 }
 
 
 QString Articolo::cognomePrimoAutore() const {
-    return autori.front()->getCognome();
+    return autori.front().getCognome();
 }

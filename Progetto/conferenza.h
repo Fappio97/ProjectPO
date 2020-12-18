@@ -31,13 +31,13 @@ class Conferenza : public Divulgazione
 private:
 
     QString luogo;
-    QList<Persona*> organizzatori;
+    QList<Persona> organizzatori;
     int partecipanti;
 
 public:
 
     Conferenza();
-    Conferenza(const QString &, const QString &, const QString &, const QString &, QList<Persona*> _organizzatori, int);
+    Conferenza(const QString &, const QString &, const QString &, const QString &, QList<Persona> _organizzatori, int);
     Conferenza(const Conferenza&);
     ~Conferenza();
 
@@ -56,9 +56,7 @@ public:
     Conferenza& operator=(const Conferenza&);
     void svuota();
 
-    Conferenza* clone();
-
-    QString stampa() const;
+    friend std::ostream& operator<<(std::ostream&, const Conferenza&);
 
 };
 

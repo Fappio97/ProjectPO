@@ -109,7 +109,13 @@ private slots:
 
     void on_SvuotaFinestra_3_clicked();
 
+    void on_SvuotaFinestra_4_clicked();
+
+    void on_TastoRivisteSpecilistiche_clicked();
+
 private:
+
     Ui::MainWindow *ui;
+
 };
 #endif // MAINWINDOW_H

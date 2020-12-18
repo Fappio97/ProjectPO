@@ -43,12 +43,21 @@ private:
    QList<QString *> keywords;
 
 public:
+
+
     Gestore();
+
     Gestore(const Gestore&);
+
     ~Gestore();
+
     Gestore& operator=(const Gestore&);
 
 
+
+
+
+                           //GESTIONE KEYWORDS
 
     QString* restituisciKeywords(const QString&) const;
 
@@ -62,6 +71,10 @@ public:
 
 
 
+
+
+                           //GESTIONE AFFERENZE
+
     Afferenza* restituisciAfferenza(const QString&) const;
 
     void aggiungiAfferenza(const QString&);
@@ -70,6 +83,11 @@ public:
 
     void svuotaAfferenze();
 
+
+
+
+
+                           //GESTIONE PERSONA
 
     Persona* restituisciPersona(const QString&) const;
 
@@ -80,13 +98,16 @@ public:
     void svuotaPersone();
 
 
+
+
+
+                           //GESTIONE AUTORI
+
     Autore* restituisciAutore(const QString&) const;
 
     void restituisciAutoreConnessoStruttura(const Afferenza&, QVector<Autore*>&);
 
     void aggiungiAutore(const QString&, const QString&, const QString&, QList<Afferenza *>);
-
-    bool divulgazioniVuote() const;
 
     bool autoreEsistente(const QString&) const;
 
@@ -96,13 +117,17 @@ public:
 
 
 
-    Divulgazione* restituisciDivulgazione(const QString&) const;
+                           //GESTIONE DIVULGAZIONE (CONFERENZE E RIVISTE)
 
-    bool divulgazioneEsistente(const QString &) const;
+    Divulgazione* restituisciDivulgazione(const QString&, const QString&) const;
 
-    void aggiungiConferenza(const QString &, const QString &, const QString &, const QString &, QList<Persona*> _organizzatori, int);
+    bool divulgazioneEsistente(const QString &, const QString &) const;
+
+    void aggiungiConferenza(const QString &, const QString &, const QString &, const QString &, QList<Persona> _organizzatori, int);
 
     void aggiungiRivista(const QString&, const QString&, const QString&, const QString&, int);
+
+    bool divulgazioniVuote() const;
 
     void svuotaDivulgazioni();
 
@@ -110,15 +135,23 @@ public:
 
 
 
+
+
+                           //GESTIONE ARTICOLO
+
     Articolo* restituisciArticolo(const QString&) const;
 
     bool articoloPresente(const QString&) const;
 
-    void aggiungiArticolo(const QString&, const QString&, int, QList<Autore *>, QList<QString *>, double, QList<Articolo *>, Divulgazione *);
+    void aggiungiArticolo(const QString&, const QString&, int, QList<Autore>, QList<QString>, double, QList<Articolo>, Divulgazione);
 
     void svuotaArticoli();
 
     QString stampaArticoli() const;
+
+
+
+
 
                            //SEZIONE B
 
@@ -128,6 +161,10 @@ public:
 
     QString stampaArticoliStruttura(QVector<Autore *>) const;
 
+
+
+
+
                            //SEZIONE C
 
     QString stampaArticoliAutoreCostosi(const Autore&) const;
@@ -136,16 +173,30 @@ public:
 
     QStringList keywordMigliorIncasso(const QStringList& keywords) const;
 
+
+
+
+
                            //SEZIONE D
 
-    QString stampaArticoliConferenzaOrdinatiPrezzo(const Divulgazione&) const;
+    QString stampaArticoliDivulgazioneOrdinatiPrezzo(const Divulgazione&) const;
 
     QString stampaArticoliKeywordOrdinati(const QString&) const;
 
+
+
+
+
                            //SEZIONE E
+
+
+
+
 
                            //SEZIONE F
 
+    void ordinaArticoliDagliArticoliCorrelati() const;
+
 };
 
-#endif // GESTORE_H
+#endif

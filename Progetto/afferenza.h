@@ -36,7 +36,7 @@ public:
     Afferenza(const QString&);
 
     QString getNome() const;
-//    void setNome(const QString &value);
+    void setNome(const QString &value);
 
     bool operator==(const Afferenza&) const;
 

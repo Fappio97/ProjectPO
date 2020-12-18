@@ -41,11 +41,11 @@ public:
     bool autoreConnessoStruttura(const Afferenza&) const;
 
     QString getIdentificativo() const;
-//    void setIdentificativo(const QString &value);
+    void setIdentificativo(const QString &value);
 
     bool operator==(const Autore&) const;
 
-    QString stampa() const;
+    friend std::ostream& operator<<(std::ostream&, const Autore&);
 
 };
 

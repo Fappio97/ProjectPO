@@ -69,2227 +69,298 @@
    <property name="styleSheet">
     <string notr="true"/>
    </property>
-   <layout class="QVBoxLayout" name="verticalLayout">
-    <item>
-     <widget class="QStackedWidget" name="stackedWidget">
-      <widget class="QWidget" name="PaginaPrincipale">
-       <widget class="QPushButton" name="VaiPaginaAutori">
-        <property name="geometry">
-         <rect>
-          <x>290</x>
-          <y>56</y>
-          <width>88</width>
-          <height>27</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Autori</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="VaiPaginaConferenze">
-        <property name="geometry">
-         <rect>
-          <x>410</x>
-          <y>56</y>
-          <width>88</width>
-          <height>27</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>11</pointsize>
-         </font>
-        </property>
-        <property name="text">
-         <string>Conferenza</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="VaiPaginaRiviste">
-        <property name="geometry">
-         <rect>
-          <x>530</x>
-          <y>56</y>
-          <width>88</width>
-          <height>27</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Rivista</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="VaiPaginaArticoli">
-        <property name="geometry">
-         <rect>
-          <x>650</x>
-          <y>56</y>
-          <width>88</width>
-          <height>27</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Articoli</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="label_10">
-        <property name="geometry">
-         <rect>
-          <x>70</x>
-          <y>64</y>
-          <width>101</width>
-          <height>16</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <weight>75</weight>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="text">
-         <string>Sezione A</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="label_11">
-        <property name="geometry">
-         <rect>
-          <x>650</x>
-          <y>128</y>
-          <width>71</width>
-          <height>16</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <weight>75</weight>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="text">
-         <string>Sezione B</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="VaiPaginaVisualizzaArticoli">
-        <property name="geometry">
-         <rect>
-          <x>337</x>
-          <y>120</y>
-          <width>161</width>
-          <height>27</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Visualizza articoli di</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="label_12">
-        <property name="geometry">
-         <rect>
-          <x>60</x>
-          <y>176</y>
-          <width>81</width>
-          <height>16</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <weight>75</weight>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="text">
-         <string>Sezione C</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="PrezziGuadagni">
-        <property name="geometry">
-         <rect>
-          <x>160</x>
-          <y>176</y>
-          <width>221</width>
-          <height>27</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Visualizza prezzi/guadagni...</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="label_15">
-        <property name="geometry">
-         <rect>
-          <x>650</x>
-          <y>240</y>
-          <width>71</width>
-          <height>16</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <weight>75</weight>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="text">
-         <string>Sezione D</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="VisualizzaArticoliOridnati">
-        <property name="geometry">
-         <rect>
-          <x>290</x>
-          <y>232</y>
-          <width>211</width>
-          <height>27</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Visualizza articoli ordinati</string>
-        </property>
-       </widget>
-      </widget>
-      <widget class="QWidget" name="PaginaAutori">
-       <widget class="QLabel" name="ID">
-        <property name="geometry">
-         <rect>
-          <x>16</x>
-          <y>96</y>
-          <width>91</width>
-          <height>17</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Identificativo</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="Nome">
-        <property name="geometry">
-         <rect>
-          <x>16</x>
-          <y>128</y>
-          <width>91</width>
-          <height>17</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Nome</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="Cognome">
-        <property name="geometry">
-         <rect>
-          <x>16</x>
-          <y>160</y>
-          <width>91</width>
-          <height>17</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Cognome</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="TITLE">
-        <property name="geometry">
-         <rect>
-          <x>170</x>
-          <y>32</y>
-          <width>184</width>
-          <height>25</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>15</pointsize>
-          <weight>75</weight>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="text">
-         <string>AGGIUNGI AUTORE</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="Afferenze">
-        <property name="geometry">
-         <rect>
-          <x>270</x>
-          <y>80</y>
-          <width>71</width>
-          <height>25</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Afferenze</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="AggiungiAutore">
-        <property name="geometry">
-         <rect>
-          <x>70</x>
-          <y>200</y>
-          <width>91</width>
-          <height>25</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">background-color: rgb(46, 52, 54);
-color: rgb(255, 255, 255);</string>
-        </property>
-        <property name="text">
-         <string>Aggiungi</string>
-        </property>
-       </widget>
-       <widget class="QPlainTextEdit" name="StampaAutori">
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>256</y>
-          <width>781</width>
-          <height>305</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="VisualizzaAutori">
-        <property name="geometry">
-         <rect>
-          <x>290</x>
-          <y>208</y>
-          <width>201</width>
-          <height>33</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <weight>75</weight>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">background-color: rgb(46, 52, 54);
-color: rgb(255, 255, 255);</string>
-        </property>
-        <property name="text">
-         <string>Visualizza Autori</string>
-        </property>
-       </widget>
-       <widget class="QLineEdit" name="NomeInput">
-        <property name="geometry">
-         <rect>
-          <x>121</x>
-          <y>123</y>
-          <width>125</width>
-          <height>27</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-       </widget>
-       <widget class="QLineEdit" name="IDinput">
-        <property name="geometry">
-         <rect>
-          <x>122</x>
-          <y>89</y>
-          <width>125</width>
-          <height>27</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-       </widget>
-       <widget class="QLineEdit" name="CognomeInput">
-        <property name="geometry">
-         <rect>
-          <x>121</x>
-          <y>156</y>
-          <width>125</width>
-          <height>27</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QLineEdit" name="AfferenzaInput">
-        <property name="geometry">
-         <rect>
-          <x>540</x>
-          <y>192</y>
-          <width>211</width>
-          <height>25</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-       </widget>
-       <widget class="QLabel" name="TITLE_2">
-        <property name="geometry">
-         <rect>
-          <x>560</x>
-          <y>48</y>
-          <width>191</width>
-          <height>25</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>15</pointsize>
-          <weight>50</weight>
-          <italic>true</italic>
-          <bold>false</bold>
-         </font>
-        </property>
-        <property name="text">
-         <string>CREA AFFERENZA</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="SpiegazioneAfferenze">
-        <property name="geometry">
-         <rect>
-          <x>580</x>
-          <y>64</y>
-          <width>261</width>
-          <height>121</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>10</pointsize>
-          <italic>true</italic>
-          <underline>false</underline>
-          <strikeout>false</strikeout>
-          <stylestrategy>NoAntialias</stylestrategy>
-         </font>
-        </property>
-        <property name="text">
-         <string>L'afferenza che creerai
-dev'essere unica.
-Essa sarà aggiunta
-nel riquadro &quot;Afferenze&quot;
-dove potrai associarla
-ad un autore.</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="CreaAfferenza">
-        <property name="geometry">
-         <rect>
-          <x>580</x>
-          <y>224</y>
-          <width>141</width>
-          <height>17</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>11</pointsize>
-         </font>
-        </property>
-        <property name="text">
-         <string>Crea afferenza</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="label">
-        <property name="geometry">
-         <rect>
-          <x>270</x>
-          <y>104</y>
-          <width>61</width>
-          <height>73</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>8</pointsize>
-          <italic>true</italic>
-          <stylestrategy>PreferDefault</stylestrategy>
-         </font>
-        </property>
-        <property name="frameShape">
-         <enum>QFrame::NoFrame</enum>
-        </property>
-        <property name="frameShadow">
-         <enum>QFrame::Plain</enum>
-        </property>
-        <property name="text">
-         <string>Seleziona le
-afferenze da
- aggiungere
-all'autore</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="SvuotaAutori">
-        <property name="geometry">
-         <rect>
-          <x>20</x>
-          <y>235</y>
-          <width>201</width>
-          <height>16</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Svuota Autori</string>
-        </property>
-       </widget>
-       <widget class="QListWidget" name="ListaAfferenze">
-        <property name="geometry">
-         <rect>
-          <x>350</x>
-          <y>72</y>
-          <width>191</width>
-          <height>105</height>
-         </rect>
-        </property>
-        <property name="selectionMode">
-         <enum>QAbstractItemView::MultiSelection</enum>
-        </property>
-       </widget>
-      </widget>
-      <widget class="QWidget" name="PaginaConferenze">
-       <widget class="QLineEdit" name="NomeInput_2">
-        <property name="geometry">
-         <rect>
-          <x>121</x>
-          <y>121</y>
-          <width>125</width>
-          <height>27</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QLineEdit" name="AcronimoInput">
-        <property name="geometry">
-         <rect>
-          <x>121</x>
-          <y>154</y>
-          <width>125</width>
-          <height>27</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QLineEdit" name="LuogoInput">
-        <property name="geometry">
-         <rect>
-          <x>121</x>
-          <y>187</y>
-          <width>125</width>
-          <height>27</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QCalendarWidget" name="CalendarioConferenza">
-        <property name="geometry">
-         <rect>
-          <x>240</x>
-          <y>256</y>
-          <width>231</width>
-          <height>145</height>
-         </rect>
-        </property>
-        <property name="palette">
-         <palette>
-          <active>
-           <colorrole role="Highlight">
-            <brush brushstyle="SolidPattern">
-             <color alpha="255">
-              <red>46</red>
-              <green>52</green>
-              <blue>54</blue>
-             </color>
-            </brush>
-           </colorrole>
-           <colorrole role="AlternateBase">
-            <brush brushstyle="SolidPattern">
-             <color alpha="255">
-              <red>46</red>
-              <green>52</green>
-              <blue>54</blue>
-             </color>
-            </brush>
-           </colorrole>
-          </active>
-          <inactive>
-           <colorrole role="Highlight">
-            <brush brushstyle="SolidPattern">
-             <color alpha="255">
-              <red>46</red>
-              <green>52</green>
-              <blue>54</blue>
-             </color>
-            </brush>
-           </colorrole>
-           <colorrole role="AlternateBase">
-            <brush brushstyle="SolidPattern">
-             <color alpha="255">
-              <red>46</red>
-              <green>52</green>
-              <blue>54</blue>
-             </color>
-            </brush>
-           </colorrole>
-          </inactive>
-          <disabled>
-           <colorrole role="Highlight">
-            <brush brushstyle="SolidPattern">
-             <color alpha="255">
-              <red>145</red>
-              <green>145</green>
-              <blue>145</blue>
-             </color>
-            </brush>
-           </colorrole>
-           <colorrole role="AlternateBase">
-            <brush brushstyle="SolidPattern">
-             <color alpha="255">
-              <red>46</red>
-              <green>52</green>
-              <blue>54</blue>
-             </color>
-            </brush>
-           </colorrole>
-          </disabled>
-         </palette>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">alternate-background-color: rgb(46, 52, 54);</string>
-        </property>
-        <property name="gridVisible">
-         <bool>true</bool>
-        </property>
-        <property name="horizontalHeaderFormat">
-         <enum>QCalendarWidget::NoHorizontalHeader</enum>
-        </property>
-        <property name="verticalHeaderFormat">
-         <enum>QCalendarWidget::NoVerticalHeader</enum>
-        </property>
-        <property name="navigationBarVisible">
-         <bool>true</bool>
-        </property>
-        <property name="dateEditEnabled">
-         <bool>true</bool>
-        </property>
-       </widget>
-       <widget class="QSpinBox" name="numPartecipanti">
-        <property name="geometry">
-         <rect>
-          <x>430</x>
-          <y>120</y>
-          <width>45</width>
-          <height>28</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QLabel" name="Nome_2">
-        <property name="geometry">
-         <rect>
-          <x>30</x>
-          <y>128</y>
-          <width>42</width>
-          <height>19</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Nome</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="Acronimo">
-        <property name="geometry">
-         <rect>
-          <x>30</x>
-          <y>160</y>
-          <width>66</width>
-          <height>19</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Acronimo</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="Luogo">
-        <property name="geometry">
-         <rect>
-          <x>30</x>
-          <y>192</y>
-          <width>42</width>
-          <height>19</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Luogo</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="Partecipanti">
-        <property name="geometry">
-         <rect>
-          <x>260</x>
-          <y>128</y>
-          <width>91</width>
-          <height>17</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Partecipanti</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="Organizzatori">
-        <property name="geometry">
-         <rect>
-          <x>560</x>
-          <y>96</y>
-          <width>151</width>
-          <height>33</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <weight>75</weight>
-          <italic>false</italic>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="text">
-         <string>Inserisci organizzatori</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="AggiungiConferenza">
-        <property name="geometry">
-         <rect>
-          <x>190</x>
-          <y>512</y>
-          <width>181</width>
-          <height>41</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">background-color: rgb(46, 52, 54);
-color: rgb(255, 255, 255);</string>
-        </property>
-        <property name="text">
-         <string>Aggiungi Conferenza</string>
-        </property>
-       </widget>
-       <widget class="QLineEdit" name="NomePersona">
-        <property name="geometry">
-         <rect>
-          <x>500</x>
-          <y>224</y>
-          <width>111</width>
-          <height>25</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="CreaOrganizzatore">
-        <property name="geometry">
-         <rect>
-          <x>560</x>
-          <y>264</y>
-          <width>151</width>
-          <height>16</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Crea Organizzatore</string>
-        </property>
-       </widget>
-       <widget class="QLineEdit" name="CognomePersona">
-        <property name="geometry">
-         <rect>
-          <x>650</x>
-          <y>224</y>
-          <width>111</width>
-          <height>25</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QLabel" name="label_3">
-        <property name="geometry">
-         <rect>
-          <x>540</x>
-          <y>200</y>
-          <width>31</width>
-          <height>19</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>8</pointsize>
-         </font>
-        </property>
-        <property name="text">
-         <string>Nome </string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="label_4">
-        <property name="geometry">
-         <rect>
-          <x>680</x>
-          <y>200</y>
-          <width>51</width>
-          <height>19</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>8</pointsize>
-         </font>
-        </property>
-        <property name="text">
-         <string>Cognome</string>
-        </property>
-       </widget>
-       <widget class="QListWidget" name="ListaOrganizzatori">
-        <property name="geometry">
-         <rect>
-          <x>500</x>
-          <y>312</y>
-          <width>261</width>
-          <height>161</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>10</pointsize>
-         </font>
-        </property>
-        <property name="selectionMode">
-         <enum>QAbstractItemView::MultiSelection</enum>
-        </property>
-       </widget>
-       <widget class="QLabel" name="TITLE_3">
-        <property name="geometry">
-         <rect>
-          <x>120</x>
-          <y>8</y>
-          <width>271</width>
-          <height>81</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>16</pointsize>
-          <weight>75</weight>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="text">
-         <string>AGGIUNGI CONFERENZA</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="label_5">
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>328</y>
-          <width>191</width>
-          <height>153</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>9</pointsize>
-          <italic>true</italic>
-         </font>
-        </property>
-        <property name="text">
-         <string>Per creare una conferenza:
- - Inserire un nome;
- - Inserire un acronimo;
- -Inserire una data;
- - Inserire un luogo;
- - Inserire il numero di partecipanti;
- - Inserire almeno un organizzatore.</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="label_2">
-        <property name="geometry">
-         <rect>
-          <x>550</x>
-          <y>128</y>
-          <width>221</width>
-          <height>73</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>9</pointsize>
-          <italic>true</italic>
-         </font>
-        </property>
-        <property name="text">
-         <string>Crea prima un organizzatore
-e poi aggiungilo alla conferenza
-che stai creando.</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="VisualizzaConferenze">
-        <property name="geometry">
-         <rect>
-          <x>410</x>
-          <y>512</y>
-          <width>181</width>
-          <height>41</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Visualizza Conferenze</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="label_13">
-        <property name="geometry">
-         <rect>
-          <x>530</x>
-          <y>296</y>
-          <width>221</width>
-          <height>16</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>8</pointsize>
-          <italic>true</italic>
-          <stylestrategy>PreferDefault</stylestrategy>
-         </font>
-        </property>
-        <property name="frameShape">
-         <enum>QFrame::NoFrame</enum>
-        </property>
-        <property name="frameShadow">
-         <enum>QFrame::Plain</enum>
-        </property>
-        <property name="text">
-         <string>Seleziona l'organizzatore o gli organizzatori</string>
-        </property>
-       </widget>
-      </widget>
-      <widget class="QWidget" name="PaginaRiviste">
-       <widget class="QSpinBox" name="VolumeInput">
-        <property name="geometry">
-         <rect>
-          <x>270</x>
-          <y>280</y>
-          <width>45</width>
-          <height>28</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="AggiungiRivista">
-        <property name="geometry">
-         <rect>
-          <x>160</x>
-          <y>496</y>
-          <width>181</width>
-          <height>41</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">background-color: rgb(46, 52, 54);
-color: rgb(255, 255, 255);</string>
-        </property>
-        <property name="text">
-         <string>Aggiungi Rivista</string>
-        </property>
-       </widget>
-       <widget class="QLineEdit" name="EditoreInput">
-        <property name="geometry">
-         <rect>
-          <x>191</x>
-          <y>243</y>
-          <width>125</width>
-          <height>27</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QLabel" name="Volume">
-        <property name="geometry">
-         <rect>
-          <x>100</x>
-          <y>288</y>
-          <width>91</width>
-          <height>17</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Volume</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="Editore">
-        <property name="geometry">
-         <rect>
-          <x>100</x>
-          <y>248</y>
-          <width>51</width>
-          <height>19</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Editore</string>
-        </property>
-       </widget>
-       <widget class="QCalendarWidget" name="CalendarioRivista">
-        <property name="geometry">
-         <rect>
-          <x>490</x>
-          <y>112</y>
-          <width>231</width>
-          <height>145</height>
-         </rect>
-        </property>
-        <property name="palette">
-         <palette>
-          <active>
-           <colorrole role="Highlight">
-            <brush brushstyle="SolidPattern">
-             <color alpha="255">
-              <red>46</red>
-              <green>52</green>
-              <blue>54</blue>
-             </color>
-            </brush>
-           </colorrole>
-           <colorrole role="AlternateBase">
-            <brush brushstyle="SolidPattern">
-             <color alpha="255">
-              <red>46</red>
-              <green>52</green>
-              <blue>54</blue>
-             </color>
-            </brush>
-           </colorrole>
-          </active>
-          <inactive>
-           <colorrole role="Highlight">
-            <brush brushstyle="SolidPattern">
-             <color alpha="255">
-              <red>46</red>
-              <green>52</green>
-              <blue>54</blue>
-             </color>
-            </brush>
-           </colorrole>
-           <colorrole role="AlternateBase">
-            <brush brushstyle="SolidPattern">
-             <color alpha="255">
-              <red>46</red>
-              <green>52</green>
-              <blue>54</blue>
-             </color>
-            </brush>
-           </colorrole>
-          </inactive>
-          <disabled>
-           <colorrole role="Highlight">
-            <brush brushstyle="SolidPattern">
-             <color alpha="255">
-              <red>145</red>
-              <green>145</green>
-              <blue>145</blue>
-             </color>
-            </brush>
-           </colorrole>
-           <colorrole role="AlternateBase">
-            <brush brushstyle="SolidPattern">
-             <color alpha="255">
-              <red>46</red>
-              <green>52</green>
-              <blue>54</blue>
-             </color>
-            </brush>
-           </colorrole>
-          </disabled>
-         </palette>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">alternate-background-color: rgb(46, 52, 54);</string>
-        </property>
-        <property name="gridVisible">
-         <bool>true</bool>
-        </property>
-        <property name="horizontalHeaderFormat">
-         <enum>QCalendarWidget::NoHorizontalHeader</enum>
-        </property>
-        <property name="verticalHeaderFormat">
-         <enum>QCalendarWidget::NoVerticalHeader</enum>
-        </property>
-        <property name="navigationBarVisible">
-         <bool>true</bool>
-        </property>
-        <property name="dateEditEnabled">
-         <bool>true</bool>
-        </property>
-       </widget>
-       <widget class="QLabel" name="Nome_3">
-        <property name="geometry">
-         <rect>
-          <x>100</x>
-          <y>152</y>
-          <width>42</width>
-          <height>19</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Nome</string>
-        </property>
-       </widget>
-       <widget class="QLineEdit" name="NomeInput_3">
-        <property name="geometry">
-         <rect>
-          <x>191</x>
-          <y>145</y>
-          <width>125</width>
-          <height>27</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QLineEdit" name="AcronimoInput_2">
-        <property name="geometry">
-         <rect>
-          <x>191</x>
-          <y>178</y>
-          <width>125</width>
-          <height>27</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QLabel" name="Acronimo_2">
-        <property name="geometry">
-         <rect>
-          <x>100</x>
-          <y>184</y>
-          <width>66</width>
-          <height>19</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Acronimo</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="TITLE_4">
-        <property name="geometry">
-         <rect>
-          <x>290</x>
-          <y>16</y>
-          <width>191</width>
-          <height>81</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>16</pointsize>
-          <weight>75</weight>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="text">
-         <string>AGGIUNGI RIVISTA</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="label_6">
-        <property name="geometry">
-         <rect>
-          <x>140</x>
-          <y>336</y>
-          <width>181</width>
-          <height>137</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>9</pointsize>
-          <italic>true</italic>
-         </font>
-        </property>
-        <property name="text">
-         <string>Per creare una rivista:
- - Inserire un nome;
- - Inserire un acronimo;
- -Inserire una data;
- - Inserire la casa editrice;
- - Inserire il volume.
-</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="VisualizzaRiviste">
-        <property name="geometry">
-         <rect>
-          <x>430</x>
-          <y>496</y>
-          <width>181</width>
-          <height>41</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Visualizza Riviste</string>
-        </property>
-       </widget>
-      </widget>
-      <widget class="QWidget" name="PaginaDivulgazioni">
-       <widget class="QPlainTextEdit" name="StampaDivulgazioni">
-        <property name="geometry">
-         <rect>
-          <x>30</x>
-          <y>136</y>
-          <width>731</width>
-          <height>409</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="SvuotaDivulgazioni">
-        <property name="geometry">
-         <rect>
-          <x>70</x>
-          <y>88</y>
-          <width>241</width>
-          <height>33</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Svuota Conferenze e Riviste</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="VisualizzaDivulgazioni">
-        <property name="geometry">
-         <rect>
-          <x>470</x>
-          <y>88</y>
-          <width>241</width>
-          <height>33</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <weight>75</weight>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">background-color: rgb(46, 52, 54);
-color: rgb(255, 255, 255);</string>
-        </property>
-        <property name="text">
-         <string>Visualizza Conferenze e Riviste</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="TITLE_5">
-        <property name="geometry">
-         <rect>
-          <x>220</x>
-          <y>40</y>
-          <width>351</width>
-          <height>25</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>15</pointsize>
-          <weight>75</weight>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="text">
-         <string>VISUALIZZA CONFERENZE E RIVISTE</string>
-        </property>
-       </widget>
-      </widget>
-      <widget class="QWidget" name="PaginaArticoli">
-       <widget class="QLineEdit" name="TitoloInput">
-        <property name="geometry">
-         <rect>
-          <x>111</x>
-          <y>81</y>
-          <width>125</width>
-          <height>27</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QLineEdit" name="IdentificativoInput">
-        <property name="geometry">
-         <rect>
-          <x>111</x>
-          <y>114</y>
-          <width>125</width>
-          <height>27</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QLabel" name="Identificativo">
-        <property name="geometry">
-         <rect>
-          <x>20</x>
-          <y>120</y>
-          <width>91</width>
-          <height>19</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Identificativo</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="Pagine">
-        <property name="geometry">
-         <rect>
-          <x>20</x>
-          <y>152</y>
-          <width>46</width>
-          <height>28</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Pagine</string>
-        </property>
-       </widget>
-       <widget class="QSpinBox" name="PagineInput">
-        <property name="geometry">
-         <rect>
-          <x>80</x>
-          <y>152</y>
-          <width>67</width>
-          <height>28</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QLabel" name="Titolo">
-        <property name="geometry">
-         <rect>
-          <x>20</x>
-          <y>88</y>
-          <width>42</width>
-          <height>19</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Titolo</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="Prezzo">
-        <property name="geometry">
-         <rect>
-          <x>20</x>
-          <y>186</y>
-          <width>46</width>
-          <height>28</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Prezzo</string>
-        </property>
-       </widget>
-       <widget class="QDoubleSpinBox" name="PrezzoInput">
-        <property name="geometry">
-         <rect>
-          <x>80</x>
-          <y>186</y>
-          <width>67</width>
-          <height>28</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QLabel" name="TITLE_6">
-        <property name="geometry">
-         <rect>
-          <x>300</x>
-          <y>24</y>
-          <width>201</width>
-          <height>25</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>15</pointsize>
-          <weight>75</weight>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="text">
-         <string>AGGIUNGI ARTICOLI</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="Autori">
-        <property name="geometry">
-         <rect>
-          <x>500</x>
-          <y>56</y>
-          <width>51</width>
-          <height>19</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Autori</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="Articoli">
-        <property name="geometry">
-         <rect>
-          <x>500</x>
-          <y>160</y>
-          <width>51</width>
-          <height>19</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Articoli</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="ConferenzeRiviste">
-        <property name="geometry">
-         <rect>
-          <x>500</x>
-          <y>232</y>
-          <width>81</width>
-          <height>41</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>10</pointsize>
-         </font>
-        </property>
-        <property name="text">
-         <string>Conferenze
-Riviste</string>
-        </property>
-       </widget>
-       <widget class="QComboBox" name="ConferenzeRivisteBox">
-        <property name="geometry">
-         <rect>
-          <x>580</x>
-          <y>240</y>
-          <width>201</width>
-          <height>27</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="VisualizzaArticoli">
-        <property name="geometry">
-         <rect>
-          <x>270</x>
-          <y>280</y>
-          <width>201</width>
-          <height>33</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <weight>75</weight>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">background-color: rgb(46, 52, 54);
-color: rgb(255, 255, 255);</string>
-        </property>
-        <property name="text">
-         <string>Visualizza Articoli</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="SvuotaArticoli">
-        <property name="geometry">
-         <rect>
-          <x>20</x>
-          <y>299</y>
-          <width>201</width>
-          <height>16</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Svuota Articoli</string>
-        </property>
-       </widget>
-       <widget class="QPlainTextEdit" name="StampaArticoli">
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>320</y>
-          <width>781</width>
-          <height>241</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QLabel" name="keyword">
-        <property name="geometry">
-         <rect>
-          <x>260</x>
-          <y>80</y>
-          <width>71</width>
-          <height>19</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Keywords</string>
-        </property>
-       </widget>
-       <widget class="QLineEdit" name="KeywordInput">
-        <property name="geometry">
-         <rect>
-          <x>350</x>
-          <y>80</y>
-          <width>111</width>
-          <height>27</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="CreaKeyword">
-        <property name="geometry">
-         <rect>
-          <x>300</x>
-          <y>112</y>
-          <width>121</width>
-          <height>16</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Crea keyword</string>
-        </property>
-       </widget>
-       <widget class="QListWidget" name="ListaKeyword">
-        <property name="geometry">
-         <rect>
-          <x>260</x>
-          <y>160</y>
-          <width>201</width>
-          <height>97</height>
-         </rect>
-        </property>
-        <property name="selectionMode">
-         <enum>QAbstractItemView::MultiSelection</enum>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="AggiungiArticolo">
-        <property name="geometry">
-         <rect>
-          <x>60</x>
-          <y>240</y>
-          <width>91</width>
-          <height>25</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">background-color: rgb(46, 52, 54);
-color: rgb(255, 255, 255);</string>
-        </property>
-        <property name="text">
-         <string>Aggiungi</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="label_7">
-        <property name="geometry">
-         <rect>
-          <x>490</x>
-          <y>184</y>
-          <width>101</width>
-          <height>33</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>7</pointsize>
-          <italic>true</italic>
-         </font>
-        </property>
-        <property name="text">
-         <string>Seleziona gli articoli
-da aggiungere
-all'articolo . . .</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="label_8">
-        <property name="geometry">
-         <rect>
-          <x>490</x>
-          <y>80</y>
-          <width>121</width>
-          <height>33</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>7</pointsize>
-          <italic>true</italic>
-         </font>
-        </property>
-        <property name="text">
-         <string>Seleziona gli autori
-da aggiungere
-all'articolo . . .</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="label_9">
-        <property name="geometry">
-         <rect>
-          <x>540</x>
-          <y>272</y>
-          <width>241</width>
-          <height>41</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>7</pointsize>
-          <italic>true</italic>
-         </font>
-        </property>
-        <property name="text">
-         <string>Seleziona la conferenza oppure la rivista
-da aggiungere all'articolo.</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="label_14">
-        <property name="geometry">
-         <rect>
-          <x>280</x>
-          <y>144</y>
-          <width>171</width>
-          <height>16</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>8</pointsize>
-          <italic>true</italic>
-          <stylestrategy>PreferDefault</stylestrategy>
-         </font>
-        </property>
-        <property name="frameShape">
-         <enum>QFrame::NoFrame</enum>
-        </property>
-        <property name="frameShadow">
-         <enum>QFrame::Plain</enum>
-        </property>
-        <property name="text">
-         <string>Seleziona la keyword o le keywords</string>
-        </property>
-       </widget>
-       <widget class="QListWidget" name="ListaAutori">
-        <property name="geometry">
-         <rect>
-          <x>590</x>
-          <y>48</y>
-          <width>191</width>
-          <height>81</height>
-         </rect>
-        </property>
-        <property name="selectionMode">
-         <enum>QAbstractItemView::MultiSelection</enum>
-        </property>
-       </widget>
-       <widget class="QListWidget" name="ListaArticoli">
-        <property name="geometry">
-         <rect>
-          <x>590</x>
-          <y>144</y>
-          <width>191</width>
-          <height>81</height>
-         </rect>
-        </property>
-        <property name="selectionMode">
-         <enum>QAbstractItemView::MultiSelection</enum>
-        </property>
-       </widget>
-      </widget>
-      <widget class="QWidget" name="PaginaVisualizzaArticoli">
-       <widget class="QLabel" name="TITLE_7">
-        <property name="geometry">
-         <rect>
-          <x>260</x>
-          <y>32</y>
-          <width>271</width>
-          <height>25</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>15</pointsize>
-          <weight>75</weight>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="text">
-         <string>VISUALIZZA ARTICOLI DI...</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="VisualizzaArticoliAutore">
-        <property name="geometry">
-         <rect>
-          <x>50</x>
-          <y>128</y>
-          <width>151</width>
-          <height>25</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <weight>75</weight>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="styleSheet">
-         <string notr="true"/>
-        </property>
-        <property name="text">
-         <string>Articoli autore</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="SvuotaFinestra">
-        <property name="geometry">
-         <rect>
-          <x>320</x>
-          <y>184</y>
-          <width>131</width>
-          <height>16</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Svuota Finestra</string>
-        </property>
-       </widget>
-       <widget class="QComboBox" name="StrutturaBox">
-        <property name="geometry">
-         <rect>
-          <x>350</x>
-          <y>80</y>
-          <width>141</width>
-          <height>25</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QLabel" name="Struttura">
-        <property name="geometry">
-         <rect>
-          <x>260</x>
-          <y>80</y>
-          <width>81</width>
-          <height>25</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>3) Struttura</string>
-        </property>
-       </widget>
-       <widget class="QComboBox" name="ConferenzeBox">
-        <property name="geometry">
-         <rect>
-          <x>620</x>
-          <y>80</y>
-          <width>141</width>
-          <height>25</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QLabel" name="Conferenza">
-        <property name="geometry">
-         <rect>
-          <x>510</x>
-          <y>80</y>
-          <width>101</width>
-          <height>25</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>4) Conferenza</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="VisualizzaArticoliStruttura">
-        <property name="geometry">
-         <rect>
-          <x>290</x>
-          <y>128</y>
-          <width>151</width>
-          <height>25</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <weight>75</weight>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">background-color: rgb(46, 52, 54);
-color: rgb(255, 255, 255);</string>
-        </property>
-        <property name="text">
-         <string>Articoli struttura</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="VisualizzaArticoliConferenza">
-        <property name="geometry">
-         <rect>
-          <x>550</x>
-          <y>128</y>
-          <width>151</width>
-          <height>25</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <weight>75</weight>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="styleSheet">
-         <string notr="true"/>
-        </property>
-        <property name="text">
-         <string>Articoli Conferenza</string>
-        </property>
-       </widget>
-       <widget class="QPlainTextEdit" name="VisualizzaArticoliDi">
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>200</y>
-          <width>781</width>
-          <height>353</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QLabel" name="SEZIONEB">
-        <property name="geometry">
-         <rect>
-          <x>40</x>
-          <y>24</y>
-          <width>81</width>
-          <height>19</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>9</pointsize>
-          <italic>true</italic>
-         </font>
-        </property>
-        <property name="text">
-         <string>SEZIONE B</string>
-        </property>
-       </widget>
-       <widget class="QComboBox" name="AutoreBox">
-        <property name="geometry">
-         <rect>
-          <x>90</x>
-          <y>80</y>
-          <width>141</width>
-          <height>25</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QLabel" name="Struttura_2">
-        <property name="geometry">
-         <rect>
-          <x>20</x>
-          <y>80</y>
-          <width>61</width>
-          <height>25</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>1) Autore</string>
-        </property>
-       </widget>
-      </widget>
-      <widget class="QWidget" name="PaginaPrezzi">
-       <widget class="QLabel" name="TITLE_8">
-        <property name="geometry">
-         <rect>
-          <x>280</x>
-          <y>24</y>
-          <width>221</width>
-          <height>25</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>15</pointsize>
-          <weight>75</weight>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="text">
-         <string>PREZZI &lt;-&gt; GUADAGNI</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="SvuotaFinestra_2">
-        <property name="geometry">
-         <rect>
-          <x>320</x>
-          <y>184</y>
-          <width>131</width>
-          <height>16</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Svuota Finestra</string>
-        </property>
-       </widget>
-       <widget class="QPlainTextEdit" name="VisualizzaArticoliPrezzi">
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>200</y>
-          <width>781</width>
-          <height>353</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QLabel" name="SEZIONEC">
-        <property name="geometry">
-         <rect>
-          <x>40</x>
-          <y>24</y>
-          <width>81</width>
-          <height>19</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>9</pointsize>
-          <italic>true</italic>
-         </font>
-        </property>
-        <property name="text">
-         <string>SEZIONE C</string>
-        </property>
-       </widget>
-       <widget class="QComboBox" name="AutoreBox_2">
-        <property name="geometry">
-         <rect>
-          <x>90</x>
-          <y>80</y>
-          <width>141</width>
-          <height>25</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QLabel" name="Rivista">
-        <property name="geometry">
-         <rect>
-          <x>530</x>
-          <y>48</y>
-          <width>71</width>
-          <height>25</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>5) Rivista</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="ArticoliCostosiAutore">
-        <property name="geometry">
-         <rect>
-          <x>40</x>
-          <y>128</y>
-          <width>161</width>
-          <height>25</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <weight>75</weight>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">background-color: rgb(46, 52, 54);
-color: rgb(255, 255, 255);</string>
-        </property>
-        <property name="text">
-         <string>Articoli costosi autore</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="KeywordMaggiorGuadagno">
-        <property name="geometry">
-         <rect>
-          <x>310</x>
-          <y>80</y>
-          <width>151</width>
-          <height>73</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <weight>75</weight>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="styleSheet">
-         <string notr="true"/>
-        </property>
-        <property name="text">
-         <string>Keyword
-associata
-alla maggior
- entrata</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="EntrateRivista">
-        <property name="geometry">
-         <rect>
-          <x>570</x>
-          <y>128</y>
-          <width>161</width>
-          <height>25</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <weight>75</weight>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="styleSheet">
-         <string notr="true"/>
-        </property>
-        <property name="text">
-         <string>Entrata annuale rivista</string>
-        </property>
-       </widget>
-       <widget class="QComboBox" name="RivistaBox">
-        <property name="geometry">
-         <rect>
-          <x>620</x>
-          <y>48</y>
-          <width>141</width>
-          <height>25</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QLabel" name="Autore">
-        <property name="geometry">
-         <rect>
-          <x>20</x>
-          <y>80</y>
-          <width>61</width>
-          <height>25</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>2) Autore</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="Anno">
-        <property name="geometry">
-         <rect>
-          <x>550</x>
-          <y>88</y>
-          <width>51</width>
-          <height>25</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Anno</string>
-        </property>
-       </widget>
-       <widget class="QLineEdit" name="AnnoInput">
-        <property name="geometry">
-         <rect>
-          <x>660</x>
-          <y>88</y>
-          <width>101</width>
-          <height>27</height>
-         </rect>
-        </property>
-       </widget>
-      </widget>
-      <widget class="QWidget" name="PaginaArticoliOrdinati">
-       <widget class="QLabel" name="TITLE_9">
-        <property name="geometry">
-         <rect>
-          <x>290</x>
-          <y>32</y>
-          <width>191</width>
-          <height>25</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>15</pointsize>
-          <weight>75</weight>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="text">
-         <string>ARTICOLI ORDINATI</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="Rivista_2">
-        <property name="geometry">
-         <rect>
-          <x>60</x>
-          <y>72</y>
-          <width>16</width>
-          <height>25</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>9</pointsize>
-         </font>
-        </property>
-        <property name="text">
-         <string>3) </string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="OrdinaConferenze">
-        <property name="geometry">
-         <rect>
-          <x>90</x>
-          <y>160</y>
-          <width>141</width>
-          <height>25</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <weight>75</weight>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="styleSheet">
-         <string notr="true"/>
-        </property>
-        <property name="text">
-         <string>Ordina</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="SEZIONEC_2">
-        <property name="geometry">
-         <rect>
-          <x>40</x>
-          <y>32</y>
-          <width>81</width>
-          <height>19</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>9</pointsize>
-          <italic>true</italic>
-         </font>
-        </property>
-        <property name="text">
-         <string>SEZIONE D</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="label_16">
-        <property name="geometry">
-         <rect>
-          <x>90</x>
-          <y>56</y>
-          <width>151</width>
-          <height>65</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>9</pointsize>
-         </font>
-        </property>
-        <property name="text">
-         <string>    Ordina gli ariticoli di una
-conferenza in base al prezzo
-                 crescente</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="SvuotaFinestra_3">
-        <property name="geometry">
-         <rect>
-          <x>310</x>
-          <y>184</y>
-          <width>131</width>
-          <height>16</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Svuota Finestra</string>
-        </property>
-       </widget>
-       <widget class="QPlainTextEdit" name="VisualizzaArticoliOdirnati">
-        <property name="geometry">
-         <rect>
-          <x>0</x>
-          <y>200</y>
-          <width>781</width>
-          <height>353</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QComboBox" name="ConferenzeBox_2">
-        <property name="geometry">
-         <rect>
-          <x>60</x>
-          <y>120</y>
-          <width>221</width>
-          <height>25</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QComboBox" name="KeywordBox">
-        <property name="geometry">
-         <rect>
-          <x>530</x>
-          <y>120</y>
-          <width>221</width>
-          <height>25</height>
-         </rect>
-        </property>
-       </widget>
-       <widget class="QLabel" name="Rivista_3">
-        <property name="geometry">
-         <rect>
-          <x>530</x>
-          <y>72</y>
-          <width>16</width>
-          <height>25</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>9</pointsize>
-         </font>
-        </property>
-        <property name="text">
-         <string>5)</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="label_17">
-        <property name="geometry">
-         <rect>
-          <x>560</x>
-          <y>56</y>
-          <width>151</width>
-          <height>65</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <pointsize>9</pointsize>
-         </font>
-        </property>
-        <property name="text">
-         <string>    Ordina gli articoli relativi
-            ad una keyword
-        secondo le modalità</string>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="OrdinaKeyword">
-        <property name="geometry">
-         <rect>
-          <x>560</x>
-          <y>160</y>
-          <width>141</width>
-          <height>25</height>
-         </rect>
-        </property>
-        <property name="font">
-         <font>
-          <weight>75</weight>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="styleSheet">
-         <string notr="true"/>
-        </property>
-        <property name="text">
-         <string>Ordina</string>
-        </property>
-       </widget>
-      </widget>
+   <widget class="QStackedWidget" name="stackedWidget">
+    <property name="geometry">
+     <rect>
+      <x>9</x>
+      <y>9</y>
+      <width>782</width>
+      <height>555</height>
+     </rect>
+    </property>
+    <widget class="QWidget" name="PaginaPrincipale">
+     <widget class="QPushButton" name="VaiPaginaAutori">
+      <property name="geometry">
+       <rect>
+        <x>290</x>
+        <y>56</y>
+        <width>88</width>
+        <height>27</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Autori</string>
+      </property>
      </widget>
-    </item>
-    <item>
-     <widget class="QPushButton" name="Home">
+     <widget class="QPushButton" name="VaiPaginaConferenze">
+      <property name="geometry">
+       <rect>
+        <x>410</x>
+        <y>56</y>
+        <width>88</width>
+        <height>27</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>11</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Conferenza</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="VaiPaginaRiviste">
+      <property name="geometry">
+       <rect>
+        <x>530</x>
+        <y>56</y>
+        <width>88</width>
+        <height>27</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Rivista</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="VaiPaginaArticoli">
+      <property name="geometry">
+       <rect>
+        <x>650</x>
+        <y>56</y>
+        <width>88</width>
+        <height>27</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Articoli</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_10">
+      <property name="geometry">
+       <rect>
+        <x>70</x>
+        <y>64</y>
+        <width>101</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>Sezione A</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_11">
+      <property name="geometry">
+       <rect>
+        <x>650</x>
+        <y>128</y>
+        <width>71</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>Sezione B</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="VaiPaginaVisualizzaArticoli">
+      <property name="geometry">
+       <rect>
+        <x>337</x>
+        <y>120</y>
+        <width>161</width>
+        <height>27</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Visualizza articoli di</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_12">
+      <property name="geometry">
+       <rect>
+        <x>60</x>
+        <y>176</y>
+        <width>81</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>Sezione C</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="PrezziGuadagni">
+      <property name="geometry">
+       <rect>
+        <x>160</x>
+        <y>176</y>
+        <width>221</width>
+        <height>27</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Visualizza prezzi/guadagni...</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_15">
+      <property name="geometry">
+       <rect>
+        <x>650</x>
+        <y>240</y>
+        <width>71</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>Sezione D</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="VisualizzaArticoliOridnati">
+      <property name="geometry">
+       <rect>
+        <x>290</x>
+        <y>232</y>
+        <width>211</width>
+        <height>27</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Visualizza articoli ordinati</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="PaginaAutori">
+     <widget class="QLabel" name="ID">
+      <property name="geometry">
+       <rect>
+        <x>16</x>
+        <y>96</y>
+        <width>91</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Identificativo</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="Nome">
+      <property name="geometry">
+       <rect>
+        <x>16</x>
+        <y>128</y>
+        <width>91</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Nome</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="Cognome">
+      <property name="geometry">
+       <rect>
+        <x>16</x>
+        <y>160</y>
+        <width>91</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Cognome</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="TITLE">
+      <property name="geometry">
+       <rect>
+        <x>170</x>
+        <y>32</y>
+        <width>184</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>15</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>AGGIUNGI AUTORE</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="Afferenze">
+      <property name="geometry">
+       <rect>
+        <x>270</x>
+        <y>80</y>
+        <width>71</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Afferenze</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="AggiungiAutore">
+      <property name="geometry">
+       <rect>
+        <x>70</x>
+        <y>200</y>
+        <width>91</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(46, 52, 54);
+color: rgb(255, 255, 255);</string>
+      </property>
+      <property name="text">
+       <string>Aggiungi</string>
+      </property>
+     </widget>
+     <widget class="QPlainTextEdit" name="StampaAutori">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>256</y>
+        <width>781</width>
+        <height>305</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="VisualizzaAutori">
+      <property name="geometry">
+       <rect>
+        <x>290</x>
+        <y>208</y>
+        <width>201</width>
+        <height>33</height>
+       </rect>
+      </property>
       <property name="font">
        <font>
         <weight>75</weight>
@@ -2297,17 +368,2072 @@ conferenza in base al prezzo
        </font>
       </property>
       <property name="styleSheet">
-       <string notr="true">background-color: rgb(255, 255, 255);
-color: rgb(0, 0, 0);</string>
+       <string notr="true">background-color: rgb(46, 52, 54);
+color: rgb(255, 255, 255);</string>
       </property>
       <property name="text">
-       <string>Home</string>
+       <string>Visualizza Autori</string>
       </property>
      </widget>
-    </item>
-   </layout>
-   <zorder>stackedWidget</zorder>
-   <zorder>Home</zorder>
+     <widget class="QLineEdit" name="NomeInput">
+      <property name="geometry">
+       <rect>
+        <x>121</x>
+        <y>123</y>
+        <width>125</width>
+        <height>27</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="IDinput">
+      <property name="geometry">
+       <rect>
+        <x>122</x>
+        <y>89</y>
+        <width>125</width>
+        <height>27</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="CognomeInput">
+      <property name="geometry">
+       <rect>
+        <x>121</x>
+        <y>156</y>
+        <width>125</width>
+        <height>27</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="AfferenzaInput">
+      <property name="geometry">
+       <rect>
+        <x>540</x>
+        <y>192</y>
+        <width>211</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+     <widget class="QLabel" name="TITLE_2">
+      <property name="geometry">
+       <rect>
+        <x>560</x>
+        <y>48</y>
+        <width>191</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>15</pointsize>
+        <weight>50</weight>
+        <italic>true</italic>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>CREA AFFERENZA</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="SpiegazioneAfferenze">
+      <property name="geometry">
+       <rect>
+        <x>580</x>
+        <y>64</y>
+        <width>261</width>
+        <height>121</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+        <italic>true</italic>
+        <underline>false</underline>
+        <strikeout>false</strikeout>
+        <stylestrategy>NoAntialias</stylestrategy>
+       </font>
+      </property>
+      <property name="text">
+       <string>L'afferenza che creerai
+dev'essere unica.
+Essa sarà aggiunta
+nel riquadro &quot;Afferenze&quot;
+dove potrai associarla
+ad un autore.</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="CreaAfferenza">
+      <property name="geometry">
+       <rect>
+        <x>580</x>
+        <y>224</y>
+        <width>141</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>11</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Crea afferenza</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label">
+      <property name="geometry">
+       <rect>
+        <x>270</x>
+        <y>104</y>
+        <width>61</width>
+        <height>73</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>8</pointsize>
+        <italic>true</italic>
+        <stylestrategy>PreferDefault</stylestrategy>
+       </font>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::NoFrame</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Plain</enum>
+      </property>
+      <property name="text">
+       <string>Seleziona le
+afferenze da
+ aggiungere
+all'autore</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="SvuotaAutori">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>235</y>
+        <width>201</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Svuota Autori</string>
+      </property>
+     </widget>
+     <widget class="QListWidget" name="ListaAfferenze">
+      <property name="geometry">
+       <rect>
+        <x>350</x>
+        <y>72</y>
+        <width>191</width>
+        <height>105</height>
+       </rect>
+      </property>
+      <property name="selectionMode">
+       <enum>QAbstractItemView::MultiSelection</enum>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="PaginaConferenze">
+     <widget class="QLineEdit" name="NomeInput_2">
+      <property name="geometry">
+       <rect>
+        <x>121</x>
+        <y>121</y>
+        <width>125</width>
+        <height>27</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="AcronimoInput">
+      <property name="geometry">
+       <rect>
+        <x>121</x>
+        <y>154</y>
+        <width>125</width>
+        <height>27</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="LuogoInput">
+      <property name="geometry">
+       <rect>
+        <x>121</x>
+        <y>187</y>
+        <width>125</width>
+        <height>27</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QCalendarWidget" name="CalendarioConferenza">
+      <property name="geometry">
+       <rect>
+        <x>240</x>
+        <y>256</y>
+        <width>231</width>
+        <height>145</height>
+       </rect>
+      </property>
+      <property name="palette">
+       <palette>
+        <active>
+         <colorrole role="Highlight">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>46</red>
+            <green>52</green>
+            <blue>54</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="AlternateBase">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>46</red>
+            <green>52</green>
+            <blue>54</blue>
+           </color>
+          </brush>
+         </colorrole>
+        </active>
+        <inactive>
+         <colorrole role="Highlight">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>46</red>
+            <green>52</green>
+            <blue>54</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="AlternateBase">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>46</red>
+            <green>52</green>
+            <blue>54</blue>
+           </color>
+          </brush>
+         </colorrole>
+        </inactive>
+        <disabled>
+         <colorrole role="Highlight">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>145</red>
+            <green>145</green>
+            <blue>145</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="AlternateBase">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>46</red>
+            <green>52</green>
+            <blue>54</blue>
+           </color>
+          </brush>
+         </colorrole>
+        </disabled>
+       </palette>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">alternate-background-color: rgb(46, 52, 54);</string>
+      </property>
+      <property name="gridVisible">
+       <bool>true</bool>
+      </property>
+      <property name="horizontalHeaderFormat">
+       <enum>QCalendarWidget::NoHorizontalHeader</enum>
+      </property>
+      <property name="verticalHeaderFormat">
+       <enum>QCalendarWidget::NoVerticalHeader</enum>
+      </property>
+      <property name="navigationBarVisible">
+       <bool>true</bool>
+      </property>
+      <property name="dateEditEnabled">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QSpinBox" name="numPartecipanti">
+      <property name="geometry">
+       <rect>
+        <x>430</x>
+        <y>120</y>
+        <width>45</width>
+        <height>28</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="Nome_2">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>128</y>
+        <width>42</width>
+        <height>19</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Nome</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="Acronimo">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>160</y>
+        <width>66</width>
+        <height>19</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Acronimo</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="Luogo">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>192</y>
+        <width>42</width>
+        <height>19</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Luogo</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="Partecipanti">
+      <property name="geometry">
+       <rect>
+        <x>260</x>
+        <y>128</y>
+        <width>91</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Partecipanti</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="Organizzatori">
+      <property name="geometry">
+       <rect>
+        <x>560</x>
+        <y>96</y>
+        <width>151</width>
+        <height>33</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <italic>false</italic>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>Inserisci organizzatori</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="AggiungiConferenza">
+      <property name="geometry">
+       <rect>
+        <x>190</x>
+        <y>512</y>
+        <width>181</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(46, 52, 54);
+color: rgb(255, 255, 255);</string>
+      </property>
+      <property name="text">
+       <string>Aggiungi Conferenza</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="NomePersona">
+      <property name="geometry">
+       <rect>
+        <x>500</x>
+        <y>224</y>
+        <width>111</width>
+        <height>25</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="CreaOrganizzatore">
+      <property name="geometry">
+       <rect>
+        <x>560</x>
+        <y>264</y>
+        <width>151</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Crea Organizzatore</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="CognomePersona">
+      <property name="geometry">
+       <rect>
+        <x>650</x>
+        <y>224</y>
+        <width>111</width>
+        <height>25</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_3">
+      <property name="geometry">
+       <rect>
+        <x>540</x>
+        <y>200</y>
+        <width>31</width>
+        <height>19</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>8</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Nome </string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_4">
+      <property name="geometry">
+       <rect>
+        <x>680</x>
+        <y>200</y>
+        <width>51</width>
+        <height>19</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>8</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Cognome</string>
+      </property>
+     </widget>
+     <widget class="QListWidget" name="ListaOrganizzatori">
+      <property name="geometry">
+       <rect>
+        <x>500</x>
+        <y>312</y>
+        <width>261</width>
+        <height>161</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="selectionMode">
+       <enum>QAbstractItemView::MultiSelection</enum>
+      </property>
+     </widget>
+     <widget class="QLabel" name="TITLE_3">
+      <property name="geometry">
+       <rect>
+        <x>120</x>
+        <y>8</y>
+        <width>271</width>
+        <height>81</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>16</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>AGGIUNGI CONFERENZA</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_5">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>328</y>
+        <width>191</width>
+        <height>153</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+        <italic>true</italic>
+       </font>
+      </property>
+      <property name="text">
+       <string>Per creare una conferenza:
+ - Inserire un nome;
+ - Inserire un acronimo;
+ -Inserire una data;
+ - Inserire un luogo;
+ - Inserire il numero di partecipanti;
+ - Inserire almeno un organizzatore.</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_2">
+      <property name="geometry">
+       <rect>
+        <x>550</x>
+        <y>128</y>
+        <width>221</width>
+        <height>73</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+        <italic>true</italic>
+       </font>
+      </property>
+      <property name="text">
+       <string>Crea prima un organizzatore
+e poi aggiungilo alla conferenza
+che stai creando.</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="VisualizzaConferenze">
+      <property name="geometry">
+       <rect>
+        <x>410</x>
+        <y>512</y>
+        <width>181</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Visualizza Conferenze</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_13">
+      <property name="geometry">
+       <rect>
+        <x>530</x>
+        <y>296</y>
+        <width>221</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>8</pointsize>
+        <italic>true</italic>
+        <stylestrategy>PreferDefault</stylestrategy>
+       </font>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::NoFrame</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Plain</enum>
+      </property>
+      <property name="text">
+       <string>Seleziona l'organizzatore o gli organizzatori</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="PaginaRiviste">
+     <widget class="QSpinBox" name="VolumeInput">
+      <property name="geometry">
+       <rect>
+        <x>270</x>
+        <y>280</y>
+        <width>45</width>
+        <height>28</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="AggiungiRivista">
+      <property name="geometry">
+       <rect>
+        <x>160</x>
+        <y>496</y>
+        <width>181</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(46, 52, 54);
+color: rgb(255, 255, 255);</string>
+      </property>
+      <property name="text">
+       <string>Aggiungi Rivista</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="EditoreInput">
+      <property name="geometry">
+       <rect>
+        <x>191</x>
+        <y>243</y>
+        <width>125</width>
+        <height>27</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="Volume">
+      <property name="geometry">
+       <rect>
+        <x>100</x>
+        <y>288</y>
+        <width>91</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Volume</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="Editore">
+      <property name="geometry">
+       <rect>
+        <x>100</x>
+        <y>248</y>
+        <width>51</width>
+        <height>19</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Editore</string>
+      </property>
+     </widget>
+     <widget class="QCalendarWidget" name="CalendarioRivista">
+      <property name="geometry">
+       <rect>
+        <x>490</x>
+        <y>112</y>
+        <width>231</width>
+        <height>145</height>
+       </rect>
+      </property>
+      <property name="palette">
+       <palette>
+        <active>
+         <colorrole role="Highlight">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>46</red>
+            <green>52</green>
+            <blue>54</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="AlternateBase">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>46</red>
+            <green>52</green>
+            <blue>54</blue>
+           </color>
+          </brush>
+         </colorrole>
+        </active>
+        <inactive>
+         <colorrole role="Highlight">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>46</red>
+            <green>52</green>
+            <blue>54</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="AlternateBase">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>46</red>
+            <green>52</green>
+            <blue>54</blue>
+           </color>
+          </brush>
+         </colorrole>
+        </inactive>
+        <disabled>
+         <colorrole role="Highlight">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>145</red>
+            <green>145</green>
+            <blue>145</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="AlternateBase">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>46</red>
+            <green>52</green>
+            <blue>54</blue>
+           </color>
+          </brush>
+         </colorrole>
+        </disabled>
+       </palette>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">alternate-background-color: rgb(46, 52, 54);</string>
+      </property>
+      <property name="gridVisible">
+       <bool>true</bool>
+      </property>
+      <property name="horizontalHeaderFormat">
+       <enum>QCalendarWidget::NoHorizontalHeader</enum>
+      </property>
+      <property name="verticalHeaderFormat">
+       <enum>QCalendarWidget::NoVerticalHeader</enum>
+      </property>
+      <property name="navigationBarVisible">
+       <bool>true</bool>
+      </property>
+      <property name="dateEditEnabled">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QLabel" name="Nome_3">
+      <property name="geometry">
+       <rect>
+        <x>100</x>
+        <y>152</y>
+        <width>42</width>
+        <height>19</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Nome</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="NomeInput_3">
+      <property name="geometry">
+       <rect>
+        <x>191</x>
+        <y>145</y>
+        <width>125</width>
+        <height>27</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="AcronimoInput_2">
+      <property name="geometry">
+       <rect>
+        <x>191</x>
+        <y>178</y>
+        <width>125</width>
+        <height>27</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="Acronimo_2">
+      <property name="geometry">
+       <rect>
+        <x>100</x>
+        <y>184</y>
+        <width>66</width>
+        <height>19</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Acronimo</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="TITLE_4">
+      <property name="geometry">
+       <rect>
+        <x>290</x>
+        <y>16</y>
+        <width>191</width>
+        <height>81</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>16</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>AGGIUNGI RIVISTA</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_6">
+      <property name="geometry">
+       <rect>
+        <x>140</x>
+        <y>336</y>
+        <width>181</width>
+        <height>137</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+        <italic>true</italic>
+       </font>
+      </property>
+      <property name="text">
+       <string>Per creare una rivista:
+ - Inserire un nome;
+ - Inserire un acronimo;
+ -Inserire una data;
+ - Inserire la casa editrice;
+ - Inserire il volume.
+</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="VisualizzaRiviste">
+      <property name="geometry">
+       <rect>
+        <x>430</x>
+        <y>496</y>
+        <width>181</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Visualizza Riviste</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="PaginaDivulgazioni">
+     <widget class="QPlainTextEdit" name="StampaDivulgazioni">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>136</y>
+        <width>731</width>
+        <height>409</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="SvuotaDivulgazioni">
+      <property name="geometry">
+       <rect>
+        <x>70</x>
+        <y>88</y>
+        <width>241</width>
+        <height>33</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Svuota Conferenze e Riviste</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="VisualizzaDivulgazioni">
+      <property name="geometry">
+       <rect>
+        <x>470</x>
+        <y>88</y>
+        <width>241</width>
+        <height>33</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(46, 52, 54);
+color: rgb(255, 255, 255);</string>
+      </property>
+      <property name="text">
+       <string>Visualizza Conferenze e Riviste</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="TITLE_5">
+      <property name="geometry">
+       <rect>
+        <x>220</x>
+        <y>40</y>
+        <width>351</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>15</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>VISUALIZZA CONFERENZE E RIVISTE</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="PaginaArticoli">
+     <widget class="QLineEdit" name="TitoloInput">
+      <property name="geometry">
+       <rect>
+        <x>111</x>
+        <y>81</y>
+        <width>125</width>
+        <height>27</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="IdentificativoInput">
+      <property name="geometry">
+       <rect>
+        <x>111</x>
+        <y>114</y>
+        <width>125</width>
+        <height>27</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="Identificativo">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>120</y>
+        <width>91</width>
+        <height>19</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Identificativo</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="Pagine">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>152</y>
+        <width>46</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Pagine</string>
+      </property>
+     </widget>
+     <widget class="QSpinBox" name="PagineInput">
+      <property name="geometry">
+       <rect>
+        <x>80</x>
+        <y>152</y>
+        <width>67</width>
+        <height>28</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="Titolo">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>88</y>
+        <width>42</width>
+        <height>19</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Titolo</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="Prezzo">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>186</y>
+        <width>46</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Prezzo</string>
+      </property>
+     </widget>
+     <widget class="QDoubleSpinBox" name="PrezzoInput">
+      <property name="geometry">
+       <rect>
+        <x>80</x>
+        <y>186</y>
+        <width>67</width>
+        <height>28</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="TITLE_6">
+      <property name="geometry">
+       <rect>
+        <x>300</x>
+        <y>24</y>
+        <width>201</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>15</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>AGGIUNGI ARTICOLI</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="Autori">
+      <property name="geometry">
+       <rect>
+        <x>500</x>
+        <y>56</y>
+        <width>51</width>
+        <height>19</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Autori</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="Articoli">
+      <property name="geometry">
+       <rect>
+        <x>500</x>
+        <y>160</y>
+        <width>51</width>
+        <height>19</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Articoli</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="ConferenzeRiviste">
+      <property name="geometry">
+       <rect>
+        <x>500</x>
+        <y>232</y>
+        <width>81</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Conferenze
+Riviste</string>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="ConferenzeRivisteBox">
+      <property name="geometry">
+       <rect>
+        <x>580</x>
+        <y>240</y>
+        <width>201</width>
+        <height>27</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="VisualizzaArticoli">
+      <property name="geometry">
+       <rect>
+        <x>270</x>
+        <y>280</y>
+        <width>201</width>
+        <height>33</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(46, 52, 54);
+color: rgb(255, 255, 255);</string>
+      </property>
+      <property name="text">
+       <string>Visualizza Articoli</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="SvuotaArticoli">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>299</y>
+        <width>201</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Svuota Articoli</string>
+      </property>
+     </widget>
+     <widget class="QPlainTextEdit" name="StampaArticoli">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>320</y>
+        <width>781</width>
+        <height>241</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="keyword">
+      <property name="geometry">
+       <rect>
+        <x>260</x>
+        <y>80</y>
+        <width>71</width>
+        <height>19</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Keywords</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="KeywordInput">
+      <property name="geometry">
+       <rect>
+        <x>350</x>
+        <y>80</y>
+        <width>111</width>
+        <height>27</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="CreaKeyword">
+      <property name="geometry">
+       <rect>
+        <x>300</x>
+        <y>112</y>
+        <width>121</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Crea keyword</string>
+      </property>
+     </widget>
+     <widget class="QListWidget" name="ListaKeyword">
+      <property name="geometry">
+       <rect>
+        <x>260</x>
+        <y>160</y>
+        <width>201</width>
+        <height>97</height>
+       </rect>
+      </property>
+      <property name="selectionMode">
+       <enum>QAbstractItemView::MultiSelection</enum>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="AggiungiArticolo">
+      <property name="geometry">
+       <rect>
+        <x>60</x>
+        <y>240</y>
+        <width>91</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(46, 52, 54);
+color: rgb(255, 255, 255);</string>
+      </property>
+      <property name="text">
+       <string>Aggiungi</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_7">
+      <property name="geometry">
+       <rect>
+        <x>490</x>
+        <y>184</y>
+        <width>101</width>
+        <height>33</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>7</pointsize>
+        <italic>true</italic>
+       </font>
+      </property>
+      <property name="text">
+       <string>Seleziona gli articoli
+da aggiungere
+all'articolo . . .</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_8">
+      <property name="geometry">
+       <rect>
+        <x>490</x>
+        <y>80</y>
+        <width>121</width>
+        <height>33</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>7</pointsize>
+        <italic>true</italic>
+       </font>
+      </property>
+      <property name="text">
+       <string>Seleziona gli autori
+da aggiungere
+all'articolo . . .</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_9">
+      <property name="geometry">
+       <rect>
+        <x>540</x>
+        <y>272</y>
+        <width>241</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>7</pointsize>
+        <italic>true</italic>
+       </font>
+      </property>
+      <property name="text">
+       <string>Seleziona la conferenza oppure la rivista
+da aggiungere all'articolo.</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_14">
+      <property name="geometry">
+       <rect>
+        <x>280</x>
+        <y>144</y>
+        <width>171</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>8</pointsize>
+        <italic>true</italic>
+        <stylestrategy>PreferDefault</stylestrategy>
+       </font>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::NoFrame</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Plain</enum>
+      </property>
+      <property name="text">
+       <string>Seleziona la keyword o le keywords</string>
+      </property>
+     </widget>
+     <widget class="QListWidget" name="ListaAutori">
+      <property name="geometry">
+       <rect>
+        <x>590</x>
+        <y>48</y>
+        <width>191</width>
+        <height>81</height>
+       </rect>
+      </property>
+      <property name="selectionMode">
+       <enum>QAbstractItemView::MultiSelection</enum>
+      </property>
+     </widget>
+     <widget class="QListWidget" name="ListaArticoli">
+      <property name="geometry">
+       <rect>
+        <x>590</x>
+        <y>144</y>
+        <width>191</width>
+        <height>81</height>
+       </rect>
+      </property>
+      <property name="selectionMode">
+       <enum>QAbstractItemView::MultiSelection</enum>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="PaginaVisualizzaArticoli">
+     <widget class="QLabel" name="TITLE_7">
+      <property name="geometry">
+       <rect>
+        <x>260</x>
+        <y>32</y>
+        <width>271</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>15</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>VISUALIZZA ARTICOLI DI...</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="VisualizzaArticoliAutore">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>128</y>
+        <width>151</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
+      <property name="text">
+       <string>Articoli autore</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="SvuotaFinestra">
+      <property name="geometry">
+       <rect>
+        <x>320</x>
+        <y>184</y>
+        <width>131</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Svuota Finestra</string>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="StrutturaBox">
+      <property name="geometry">
+       <rect>
+        <x>350</x>
+        <y>80</y>
+        <width>141</width>
+        <height>25</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="Struttura">
+      <property name="geometry">
+       <rect>
+        <x>260</x>
+        <y>80</y>
+        <width>81</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>3) Struttura</string>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="ConferenzeBox">
+      <property name="geometry">
+       <rect>
+        <x>620</x>
+        <y>80</y>
+        <width>141</width>
+        <height>25</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="Conferenza">
+      <property name="geometry">
+       <rect>
+        <x>510</x>
+        <y>80</y>
+        <width>101</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>4) Conferenza</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="VisualizzaArticoliStruttura">
+      <property name="geometry">
+       <rect>
+        <x>290</x>
+        <y>128</y>
+        <width>151</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(46, 52, 54);
+color: rgb(255, 255, 255);</string>
+      </property>
+      <property name="text">
+       <string>Articoli struttura</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="VisualizzaArticoliConferenza">
+      <property name="geometry">
+       <rect>
+        <x>550</x>
+        <y>128</y>
+        <width>151</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
+      <property name="text">
+       <string>Articoli conferenza</string>
+      </property>
+     </widget>
+     <widget class="QPlainTextEdit" name="VisualizzaArticoliDi">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>200</y>
+        <width>781</width>
+        <height>353</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="SEZIONEB">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>24</y>
+        <width>81</width>
+        <height>19</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+        <italic>true</italic>
+       </font>
+      </property>
+      <property name="text">
+       <string>SEZIONE B</string>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="AutoreBox">
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>80</y>
+        <width>141</width>
+        <height>25</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="Struttura_2">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>80</y>
+        <width>61</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>1) Autore</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="PaginaPrezzi">
+     <widget class="QLabel" name="TITLE_8">
+      <property name="geometry">
+       <rect>
+        <x>280</x>
+        <y>24</y>
+        <width>221</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>15</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>PREZZI &lt;-&gt; GUADAGNI</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="SvuotaFinestra_2">
+      <property name="geometry">
+       <rect>
+        <x>320</x>
+        <y>184</y>
+        <width>131</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Svuota Finestra</string>
+      </property>
+     </widget>
+     <widget class="QPlainTextEdit" name="VisualizzaArticoliPrezzi">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>200</y>
+        <width>781</width>
+        <height>353</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="SEZIONEC">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>24</y>
+        <width>81</width>
+        <height>19</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+        <italic>true</italic>
+       </font>
+      </property>
+      <property name="text">
+       <string>SEZIONE C</string>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="AutoreBox_2">
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>80</y>
+        <width>141</width>
+        <height>25</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="Rivista">
+      <property name="geometry">
+       <rect>
+        <x>530</x>
+        <y>48</y>
+        <width>71</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>5) Rivista</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="ArticoliCostosiAutore">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>128</y>
+        <width>161</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(46, 52, 54);
+color: rgb(255, 255, 255);</string>
+      </property>
+      <property name="text">
+       <string>Articoli costosi autore</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="KeywordMaggiorGuadagno">
+      <property name="geometry">
+       <rect>
+        <x>310</x>
+        <y>80</y>
+        <width>151</width>
+        <height>73</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
+      <property name="text">
+       <string>Keyword
+associata
+alla maggior
+ entrata</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="EntrateRivista">
+      <property name="geometry">
+       <rect>
+        <x>570</x>
+        <y>128</y>
+        <width>161</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(46, 52, 54);
+color: rgb(255, 255, 255);</string>
+      </property>
+      <property name="text">
+       <string>Entrata annuale rivista</string>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="RivistaBox">
+      <property name="geometry">
+       <rect>
+        <x>620</x>
+        <y>48</y>
+        <width>141</width>
+        <height>25</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="Autore">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>80</y>
+        <width>61</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>2) Autore</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="Anno">
+      <property name="geometry">
+       <rect>
+        <x>550</x>
+        <y>88</y>
+        <width>51</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Anno</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="AnnoInput">
+      <property name="geometry">
+       <rect>
+        <x>660</x>
+        <y>88</y>
+        <width>101</width>
+        <height>27</height>
+       </rect>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="PaginaArticoliOrdinati">
+     <widget class="QLabel" name="TITLE_9">
+      <property name="geometry">
+       <rect>
+        <x>290</x>
+        <y>32</y>
+        <width>191</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>15</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>ARTICOLI ORDINATI</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="Rivista_2">
+      <property name="geometry">
+       <rect>
+        <x>60</x>
+        <y>72</y>
+        <width>16</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>3) </string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="OrdinaConferenze">
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>160</y>
+        <width>141</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(46, 52, 54);
+color: rgb(255, 255, 255);</string>
+      </property>
+      <property name="text">
+       <string>Ordina</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="SEZIONED">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>32</y>
+        <width>81</width>
+        <height>19</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+        <italic>true</italic>
+       </font>
+      </property>
+      <property name="text">
+       <string>SEZIONE D</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_16">
+      <property name="geometry">
+       <rect>
+        <x>90</x>
+        <y>56</y>
+        <width>151</width>
+        <height>65</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>    Ordina gli ariticoli di una
+conferenza in base al prezzo
+                 crescente</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="SvuotaFinestra_3">
+      <property name="geometry">
+       <rect>
+        <x>310</x>
+        <y>184</y>
+        <width>131</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Svuota Finestra</string>
+      </property>
+     </widget>
+     <widget class="QPlainTextEdit" name="VisualizzaArticoliOdirnati">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>200</y>
+        <width>781</width>
+        <height>353</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="ConferenzeBox_2">
+      <property name="geometry">
+       <rect>
+        <x>60</x>
+        <y>120</y>
+        <width>221</width>
+        <height>25</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="KeywordBox">
+      <property name="geometry">
+       <rect>
+        <x>530</x>
+        <y>120</y>
+        <width>221</width>
+        <height>25</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="Rivista_3">
+      <property name="geometry">
+       <rect>
+        <x>530</x>
+        <y>72</y>
+        <width>16</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>5)</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_17">
+      <property name="geometry">
+       <rect>
+        <x>560</x>
+        <y>56</y>
+        <width>151</width>
+        <height>65</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>    Ordina gli articoli relativi
+            ad una keyword
+        secondo le modalità</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="OrdinaKeyword">
+      <property name="geometry">
+       <rect>
+        <x>560</x>
+        <y>160</y>
+        <width>141</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(46, 52, 54);
+color: rgb(255, 255, 255);</string>
+      </property>
+      <property name="text">
+       <string>Ordina</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="PaginaRivisteSpecialistiche">
+     <widget class="QLabel" name="TITLE_10">
+      <property name="geometry">
+       <rect>
+        <x>270</x>
+        <y>32</y>
+        <width>231</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>15</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>RIVISTE SPECIALISTICHE</string>
+      </property>
+     </widget>
+     <widget class="QPlainTextEdit" name="VisualizzaRivisteSpecialistiche">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>200</y>
+        <width>781</width>
+        <height>353</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="RivisteBox">
+      <property name="geometry">
+       <rect>
+        <x>310</x>
+        <y>96</y>
+        <width>191</width>
+        <height>25</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="Rivista_4">
+      <property name="geometry">
+       <rect>
+        <x>220</x>
+        <y>96</y>
+        <width>71</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>11</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>6) Riviste</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="TastoRivisteSpecilistiche">
+      <property name="geometry">
+       <rect>
+        <x>300</x>
+        <y>144</y>
+        <width>141</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(46, 52, 54);
+color: rgb(255, 255, 255);</string>
+      </property>
+      <property name="text">
+       <string>Visualizza</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="SEZIONEE">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>32</y>
+        <width>81</width>
+        <height>19</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+        <italic>true</italic>
+       </font>
+      </property>
+      <property name="text">
+       <string>SEZIONE E</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="SvuotaFinestra_4">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>184</y>
+        <width>131</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Svuota Finestra</string>
+      </property>
+     </widget>
+    </widget>
+   </widget>
+   <widget class="QPushButton" name="Home">
+    <property name="geometry">
+     <rect>
+      <x>9</x>
+      <y>570</y>
+      <width>80</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(0, 0, 0);</string>
+    </property>
+    <property name="text">
+     <string>Home</string>
+    </property>
+   </widget>
   </widget>
  </widget>
  <resources/>
