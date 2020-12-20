@@ -42,10 +42,33 @@ private:
     Gestore* gestore;
 
 private slots:
+                               //PULSANTI PER ANDARE AD UNA DETERMINATA PAGINA
 
     void on_Home_clicked();
 
     void on_VaiPaginaAutori_clicked();
+
+    void on_VaiPaginaRiviste_clicked();
+
+    void on_VaiPaginaConferenze_clicked();
+
+    void on_VaiPaginaDivulgazioni();
+
+    void on_VaiPaginaArticoli_clicked();
+
+    void on_VaiPaginaVisualizzaArticoli_clicked();
+
+    void on_VaiPaginaPrezziGuadagni_clicked();
+
+    void on_VaiPaginaArticoliOridnati_clicked();
+
+    void on_VaiPaginaRivisteSpecialistche_clicked();
+
+    void on_VaiPaginaOperazioniAvanzate_clicked();
+
+
+
+                               //GESTIONE AUTORE
 
     void on_AggiungiAutore_clicked();
 
@@ -55,7 +78,9 @@ private slots:
 
     void on_SvuotaAutori_clicked();
 
-    void on_VaiPaginaConferenze_clicked();
+
+
+                               //GESTIONE DIVULGAZIONE
 
     void on_AggiungiConferenza_clicked();
 
@@ -63,15 +88,13 @@ private slots:
 
     void on_AggiungiRivista_clicked();
 
-    void on_VaiPaginaRiviste_clicked();
-
     void on_VisualizzaDivulgazioni_clicked();
 
     void on_SvuotaDivulgazioni_clicked();
 
-    void on_VaiPaginaDivulgazioni();
 
-    void on_VaiPaginaArticoli_clicked();
+
+                               //GESTIONE ARTICOLI
 
     void on_VisualizzaArticoli_clicked();
 
@@ -81,17 +104,21 @@ private slots:
 
     void on_AggiungiArticolo_clicked();
 
+
+
+                                //SEZIONE B
+
     void on_VisualizzaArticoliAutore_clicked();
 
     void on_VisualizzaArticoliConferenza_clicked();
 
     void on_VisualizzaArticoliStruttura_clicked();
 
-    void on_VaiPaginaVisualizzaArticoli_clicked();
-
     void on_SvuotaFinestra_clicked();
 
-    void on_PrezziGuadagni_clicked();
+
+
+                                //SEZIONE C
 
     void on_SvuotaFinestra_2_clicked();
 
@@ -101,17 +128,34 @@ private slots:
 
     void on_KeywordMaggiorGuadagno_clicked();
 
-    void on_VisualizzaArticoliOridnati_clicked();
+
+
+                               //SEZIONE D
 
     void on_OrdinaConferenze_clicked();
 
     void on_OrdinaKeyword_clicked();
 
-    void on_SvuotaFinestra_3_clicked();
-
     void on_SvuotaFinestra_4_clicked();
 
+
+
+                               //SEZIONE E
+
+    void on_SvuotaFinestra_3_clicked();
+
     void on_TastoRivisteSpecilistiche_clicked();
+
+
+
+                               //SEZIONE F
+
+    void on_SvuotaFinestra_5_clicked();
+
+    void on_TastoOrdinaCorrelati_clicked();
+
+
+    void on_TastoConferenzeSimili_clicked();
 
 private:
 

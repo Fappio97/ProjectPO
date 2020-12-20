@@ -19,6 +19,18 @@ along with Progetto.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "persona.h"
 
+Persona::Persona()
+{
+
+}
+
+Persona::Persona(const QString & _nome, const QString & _cognome): nome(_nome), cognome(_cognome) {
+}
+
+
+
+
+
 QString Persona::getNome() const
 {
     return nome;
@@ -39,18 +51,21 @@ void Persona::setCognome(const QString &value)
     cognome = value;
 }
 
-Persona::Persona()
-{
-    
-}
 
-Persona::Persona(const QString & _nome, const QString & _cognome): nome(_nome), cognome(_cognome) {
-}
+
+
+
+
 
 bool Persona::operator==(const Persona& a) const
 {
     return (nome == a.nome && cognome == a.cognome);
 }
+
+
+
+
+
 
 std::ostream& operator<<(std::ostream& out, const Persona& a) {
    return out << a.nome.toStdString() << " " << a.cognome.toStdString();

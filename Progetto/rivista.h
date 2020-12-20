@@ -23,7 +23,7 @@ along with Progetto.  If not, see <http://www.gnu.org/licenses/>.
 #include "divulgazione.h"
 
 class Rivista : public Divulgazione
-{
+{ 
 
 private:
 
@@ -44,14 +44,19 @@ public:
     void setData(const QString &value);
     int getVolume() const;
     void setVolume(int value);
-
-    bool operator==(const Rivista&) const;
-    void svuota();
-
-    friend std::ostream& operator<<(std::ostream&, const Rivista&);
-
     QString getEditore() const;
     void setEditore(const QString &value);
+
+    void svuota();
+
+    Rivista* clone();
+
+protected:
+
+    std::ostream& stampa(std::ostream&) const;
+
+    QString classeRiferimento() const;
+
 };
 
 #endif // RIVISTA_H

@@ -31,19 +31,22 @@ class Autore : public Persona
 private:
 
     QString identificativo;
-    QList<Afferenza> afferenze;
+    QList<Afferenza *> afferenze;
 
 public:
 
     Autore();
     Autore(const QString &, const QString &, const QString &, QList<Afferenza *>);
-
-    bool autoreConnessoStruttura(const Afferenza&) const;
+    Autore(const Autore&);
+    ~Autore();
+    Autore& operator=(const Autore&);
 
     QString getIdentificativo() const;
     void setIdentificativo(const QString &value);
 
-    bool operator==(const Autore&) const;
+    bool operator==(const Autore&) const;   //mi serve?
+
+    bool autoreConnessoStruttura(const Afferenza&) const;
 
     friend std::ostream& operator<<(std::ostream&, const Autore&);
 

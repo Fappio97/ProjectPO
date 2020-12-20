@@ -202,7 +202,7 @@ void Gestore::svuotaPersone() {
 
                            //GESTIONE AUTORI
 
-Autore* Gestore::restituisciAutore(const QString& _identificativo) const {  //non faccio il controllo se esiste l'autore perché sono sicuro che c'è in quanto nel box autori ci finiscono solo autori creati
+Autore* Gestore::restituisciAutore(const QString& _identificativo) const {
     for(auto i = autori.begin(); i != autori.end(); i++) {
         if( (*i)->getIdentificativo() == _identificativo  )
             return (*i);
@@ -260,7 +260,11 @@ Divulgazione* Gestore::restituisciDivulgazione(const QString& nome, const QStrin
     return nullptr;
 }
 
-void Gestore::aggiungiConferenza(const QString & _nome, const QString & _acronimo, const QString & _luogo, const QString & _data, QList<Persona> _organizzatori, int _partecipanti) {
+bool Gestore::articoliVuoti() const {
+    return articoli.empty();
+}
+
+void Gestore::aggiungiConferenza(const QString & _nome, const QString & _acronimo, const QString & _luogo, const QString & _data, QList<Persona *> _organizzatori, int _partecipanti) {
     divulgazioni.push_back(new Conferenza(_nome, _acronimo, _luogo, _data, _organizzatori, _partecipanti));
 }
 
@@ -290,10 +294,10 @@ void Gestore::svuotaDivulgazioni() {
     divulgazioni.clear();
 }
 
-QString Gestore::stampaDivulgazioni() const {       //MODIFICARE
+QString Gestore::stampaDivulgazioni() const {
     std::stringstream s;
     for(auto i = divulgazioni.begin(); i != divulgazioni.end(); i++) {
-//          s << (**i) << std::endl;
+          s << (**i) << std::endl;
     }
     return QString::fromStdString(s.str());
 }
@@ -320,7 +324,7 @@ bool Gestore::articoloPresente(const QString& _identificativo) const {
     return false;
 }
 
-void Gestore::aggiungiArticolo(const QString& _identificativo, const QString& _titolo, int _pagine, QList<Autore> _autori, QList<QString> _keyword, double _prezzo, QList<Articolo> _correlati, Divulgazione _pubblicazione) {
+void Gestore::aggiungiArticolo(const QString& _identificativo, const QString& _titolo, int _pagine, QList<Autore *> _autori, QList<QString *> _keyword, double _prezzo, QList<Articolo *> _correlati, Divulgazione * _pubblicazione) {
         articoli.push_back(new Articolo(_identificativo, _titolo, _pagine, _autori, _keyword, _prezzo, _correlati, _pubblicazione));
 }
 
@@ -415,7 +419,7 @@ QString Gestore::stampaArticoliAutoreCostosi(const Autore& autore) const {
 int Gestore::guadagnoDivulgazione(const Divulgazione& a, const QString& data) const {  //facilmente fattibile anche il numero 4 della sezione C con questo metodo
     int somma = -1;
     for(auto i = articoli.begin(); i < articoli.end(); i++) {
-        if(  (**i).getPubblicazione().getNome() == a.getNome() && (**i).getPubblicazione().getAcronimo() == a.getAcronimo() && data == (**i).getPubblicazione().getAnno()) {     //qui praticamente
+        if(  (**i).getPubblicazione()->getNome() == a.getNome() && (**i).getPubblicazione()->getAcronimo() == a.getAcronimo() && data == (**i).getPubblicazione()->getAnno()) {     //qui praticamente
             somma += (*i)->getPrezzo();
         }
     }
@@ -477,7 +481,7 @@ QString Gestore::stampaArticoliDivulgazioneOrdinatiPrezzo(const Divulgazione& co
     QList<Articolo *> art;
     std::stringstream s;
     for(auto i = articoli.begin(); i != articoli.end(); i++) {
-        if( (*i)->getPubblicazione() == conferenza ) {
+        if( ( *(**i).getPubblicazione() ) == conferenza ) {
             art.push_back( (*i) );
         }
     }
@@ -490,23 +494,23 @@ QString Gestore::stampaArticoliDivulgazioneOrdinatiPrezzo(const Divulgazione& co
     return QString::fromStdString(s.str());
 }
 
-bool comparaKeyword(const Articolo& a, const Articolo& b) {
-    if( a.getPubblicazione().getAnno() > b.getPubblicazione().getAnno() )
+bool comparaKeyword(const Articolo* a, const Articolo* b) {
+    if( a->getPubblicazione()->getAnno() > b->getPubblicazione()->getAnno() )
         return true;
-    if( a.getPubblicazione().getAnno() < b.getPubblicazione().getAnno() )
+    if( a->getPubblicazione()->getAnno() < b->getPubblicazione()->getAnno() )
         return false;
-    if( a.getPrezzo() < b.getPrezzo() )
+    if( a->getPrezzo() < b->getPrezzo() )
         return true;
-    if( a.getPrezzo() > b.getPrezzo() )
+    if( a->getPrezzo() > b->getPrezzo() )
         return false;
-    return a.cognomePrimoAutore() < b.cognomePrimoAutore();
+    return a->cognomePrimoAutore() < b->cognomePrimoAutore();
 }
 
 QString Gestore::stampaArticoliKeywordOrdinati(const QString& keyword) const {
     QList<Articolo *> art;
     std::stringstream s;
     for(auto i = articoli.begin(); i != articoli.end(); i++) {
-        QList<QString> a = (*i)->getKeyword();
+        QList<QString *> a = (*i)->getKeyword();
         for(auto j = a.begin(); j != a.end(); i++) {
             if( (*j) == keyword ) {
                 art.push_back( (*i) );
@@ -526,20 +530,109 @@ QString Gestore::stampaArticoliKeywordOrdinati(const QString& keyword) const {
 
                            //SEZIONE E
 
+void pushaKeywords(QVector<int>& num, QList<QString *> lista, const Articolo& articolo) {
+    for(auto i = articolo.getKeyword().begin(); i != articolo.getKeyword().end(); i++) {
 
+    }
+}
+
+QString Gestore::prime5KeywordsPiuDiffuse() const {
+    QVector<int> numero;
+    for(auto i = keywords.begin(); i != keywords.end(); i++) {
+        numero.push_back(0);
+    }
+
+    for(auto i = articoli.begin(); i != articoli.end(); i++) {
+        pushaKeywords(numero, keywords, (**i));
+    }
+}
+
+/*void listaDivulgazioneCercata(const QList<Articolo* >& art, QList<Divulgazione *>& divulgazione, const QString& cercare ) {
+    for(auto i = art.begin(); i != art.end(); i++) {
+        if( (**i).getPubblicazione()->classeRifermento() == cercare )
+                divulgazione.push_back( (*i)->getPubblicazione() );
+    }
+}
+
+void restituisciKeywordsDivulgazione(const QList<Articolo* >& art, QList<QString>& a, const Divulgazione& divulg) {
+     for(auto i = art.begin(); i != art.end(); i++) {
+         if( *(**i).getPubblicazione() == divulg ) {
+             for( auto j =  (**i).getKeyword().begin(); j != (**i).getKeyword().end(); j++ ) {
+                 if(  )
+             }
+         }
+     }
+}
+
+
+QString Gestore::stampaRivisteSpecialistiche() const {
+    QList<Divulgazione *> riviste;
+    listaDivulgazioneCercata(articoli, riviste, "Rivista");
+
+    if(riviste.size() <= 1)
+        return "Nessuna rivista specialistica presente";
+
+    QList<QString *> a;
+    QList<QString *> b;
+    for(auto i = riviste.begin(); i != riviste.end(); i++ ) {
+        restituisciKeywordsDivulgazione(articoli, a, (**i));
+    }
+
+    std::stringstream s;
+    s << "Riviste specialistiche ";
+
+    if(s.str().empty())
+        return "Nessuna rivista specialistica presente";
+
+    QString c = "Lista di riviste specialistiche ";
+    c += '\n';
+    return  c += QString::fromStdString(s.str());
+}*/
 
 
                            //SEZIONE F
 
-bool comparaCorrelati(const Articolo& a, const Articolo& b) {
-    if( a.getAutori().size() < b.getAutori().size() )
+bool comparaCorrelati(const Articolo* a, const Articolo* b) {
+    if( a->getCorrelati().size() < b->getCorrelati().size() )
         return false;
-    if( a.getAutori().size() > b.getAutori().size() )
+    if( a->getCorrelati().size() > b->getCorrelati().size() )
         return true;
-    return a.getTitolo() < b.getTitolo();
+    return a->getTitolo().toStdString() < b->getTitolo().toStdString();
 }
 
 
-void Gestore::ordinaArticoliDagliArticoliCorrelati() const {
-    std::sort(articoli.begin(), articoli.end(), comparaCorrelati);
+QString Gestore::ordinaArticoliDagliArticoliCorrelati() const {
+    QList<Articolo *> art;
+    art = articoli;
+    std::sort(art.begin(), art.end(), comparaCorrelati);
+
+    std::stringstream s;
+
+    for(auto i = art.begin(); i != art.end(); i++) {
+        s << (**i);     //non delete art perché essendo costruito con l'operatore= deletandolo elimino la lista di articoli a cui esso punta
+    }
+    art.clear();
+    return QString::fromStdString(s.str());
 }
+
+
+/*QString Gestore::stampaConferenzeSimili(const Divulgazione& conferenza) const {
+    QList<Articolo *> art;
+    calcolaArticoliConDivulgazioni(art, "Conferenza");
+
+    std::stringstream s;
+
+    for(auto i = art.begin(); i != art.end(); i++) {
+        if( keywords80Percento((**i), conferenza) ) {
+            s << (**i).getPubblicazione();
+        }
+    }
+    art.clear();
+
+    if(s.str().empty())
+        return "Non sono presenti conferenze simili alla conferenza " + conferenza.getNome() + " svolta in data " + conferenza.getData();
+
+    QString a = "Lista conferenze simili ";
+    a += '\n';
+    return  a += QString::fromStdString(s.str());
+}*/

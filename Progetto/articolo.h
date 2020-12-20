@@ -33,21 +33,21 @@ private:
     QString identificativo;
     QString titolo;
     int pagine;
-    QList<Autore> autori;
-    QList<QString> keyword;
+    QList<Autore *> autori;
+    QList<QString *> keyword;
     double prezzo;
-    QList<Articolo> correlati;
-    Divulgazione pubblicazione;
+    QList<Articolo *> correlati;
+    Divulgazione * pubblicazione;
 
 public:
 
     Articolo();
-    Articolo(const QString&, const QString&, int, QList<Autore>, QList<QString>, double, QList<Articolo>, Divulgazione);
+    Articolo(const QString&, const QString&, int, QList<Autore *>, QList<QString *>, double, QList<Articolo *>, Divulgazione *);
     Articolo(const Articolo&);
-
     Articolo& operator=(const Articolo&);
+    ~Articolo();
 
-    ~Articolo();        //controllare ma serve per la memoria dinamica
+    void eliminaArticolo();
 
     QString getIdentificativo() const;
     void setIdentificativo(const QString &value);
@@ -57,19 +57,20 @@ public:
     void setPagine(int value);
     double getPrezzo() const;
     void setPrezzo(double value);
+    QList<QString *> getKeyword() const;
+    Divulgazione * getPubblicazione() const;
+    QList<Articolo *> getCorrelati() const;
+
 
     bool autoreHaScrittoArticolo(const Autore&) const;
     bool pubblicataInQuestoArticolo (const Divulgazione& ) const;
 
-    void eliminaArticolo(); //controllare
 
     friend std::ostream& operator<<(std::ostream&, const Articolo&);
 
+
     QString cognomePrimoAutore() const;
 
-    QList<Autore> getAutori() const;
-    QList<QString> getKeyword() const;
-    Divulgazione getPubblicazione() const;
 };
 
 #endif // ARTICOLO_H

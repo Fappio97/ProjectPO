@@ -19,25 +19,12 @@ along with Progetto.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "articolo.h"
 
-QList<Autore> Articolo::getAutori() const
-{
-    return autori;
-}
-
-QList<QString> Articolo::getKeyword() const
-{
-    return keyword;
-}
-
-Divulgazione Articolo::getPubblicazione() const
-{
-    return pubblicazione;
-}
+                            //COSTRUTTORI, DISTRUTTORE ED OPERATOR=
 
 Articolo::Articolo() {
 }
 
-Articolo::Articolo(const QString& _identificativo, const QString& _titolo, int _pagine, QList<Autore > _autori, QList<QString> _keyword,  double _prezzo, QList<Articolo> _correlati, Divulgazione _pubblicazione): identificativo(_identificativo), titolo(_titolo), pagine(_pagine), prezzo(_prezzo) {
+Articolo::Articolo(const QString& _identificativo, const QString& _titolo, int _pagine, QList<Autore *> _autori, QList<QString *> _keyword,  double _prezzo, QList<Articolo *> _correlati, Divulgazione * _pubblicazione): identificativo(_identificativo), titolo(_titolo), pagine(_pagine), prezzo(_prezzo) {
     pubblicazione = _pubblicazione;
     for(auto i = _autori.begin(); i != _autori.end(); i++) {
         autori.push_back( (*i) );
@@ -63,8 +50,56 @@ Articolo::Articolo(const Articolo& a): identificativo(a.identificativo), titolo(
     }
 }
 
+Articolo& Articolo::operator=(const Articolo& a) {
+    if(this != &a) {
+        eliminaArticolo();
+        identificativo = a.identificativo;
+        titolo = a.titolo;
+        pagine = a.pagine;
+        prezzo = a.prezzo;
+        pubblicazione = a.pubblicazione;
+        for(auto i = a.autori.begin(); i != a.autori.end(); i++) {
+            autori.push_back( (*i) );
+        }
+        for(auto i = a.keyword.begin(); i != a.keyword.end(); i++) {
+            keyword.push_back( (*i) );
+        }
+        for(auto i = a.correlati.begin(); i != a.correlati.end(); i++) {
+            correlati.push_back( (*i) );
+        }
+    }
+    return *this;
+}
+
 Articolo::~Articolo() {
     eliminaArticolo();
+}
+
+void Articolo::eliminaArticolo() {
+    autori.clear();
+    keyword.clear();
+    correlati.clear();
+}
+
+
+
+
+
+                            //GETTER & SETTER
+
+QList<QString *> Articolo::getKeyword() const
+{
+    return keyword;
+}
+
+Divulgazione * Articolo::getPubblicazione() const
+{
+    return pubblicazione;
+}
+
+QList<Articolo *> Articolo::getCorrelati() const
+{
+    return correlati;
 }
 
 QString Articolo::getIdentificativo() const
@@ -107,72 +142,56 @@ void Articolo::setPrezzo(double value)
     prezzo = value;
 }
 
-void Articolo::eliminaArticolo() {
-    autori.clear();
-    keyword.clear();
-    correlati.clear();
-}
+
+
+
+                            //OPERATOR <<
 
 std::ostream& operator<<(std::ostream& out, const Articolo& a) {
     out << "-ARTICOLO-" << std::endl << "      IDENTIFICATIVO: " << a.identificativo.toStdString() << ", TITOLO: " << a.titolo.toStdString() << ", PAGINE: " << a.pagine << ", PREZZO: " << a.prezzo << std::endl;
     if(!a.autori.empty()) {
         out << "      LISTA AUTORI CHE HANNO REALIZZATO L'ARTICOLO:";
         for(auto i = a.autori.begin(); i != a.autori.end(); i++) {
-            out << " [" << (*i).getNome().toStdString() << " " << (*i).getCognome().toStdString() << "]";
+            out << " [" << (**i).getNome().toStdString() << " " << (**i).getCognome().toStdString() << "]";
         }
         out << std::endl;
     }
     if(!a.keyword.empty()) {
         out << "      LISTA KEYWORDS:";
         for(auto i = a.keyword.begin(); i != a.keyword.end(); i++) {
-            out << " '" << (*i).toStdString() << "'";
+            out << " '" << (**i).toStdString() << "'";
         }
         out << std::endl;
     }
     if(!a.correlati.empty()) {
         out << "      LISTA TITOLI CORRELATI: ";
         for(auto i = a.correlati.begin(); i != a.correlati.end(); i++) {
-            out << " [" << (*i).getTitolo().toStdString() << "]";
+            out << " [" << (**i).getTitolo().toStdString() << "]";
         }
         out << std::endl;
     }
-    return out << "      PUBBLICATO IN: " << a.pubblicazione.getNome().toStdString() << " " << a.pubblicazione.getAcronimo().toStdString() << std::endl << std::endl;
+    return out << "      PUBBLICATO IN: " << a.pubblicazione->getNome().toStdString() << " " << a.pubblicazione->getAcronimo().toStdString() << std::endl << std::endl;
 }
 
-Articolo& Articolo::operator=(const Articolo& a) {
-    if(this != &a) {
-        eliminaArticolo();
-        identificativo = a.identificativo;
-        titolo = a.titolo;
-        pagine = a.pagine;
-        prezzo = a.prezzo;
-        pubblicazione = a.pubblicazione;
-        for(auto i = a.autori.begin(); i != a.autori.end(); i++) {
-            autori.push_back( (*i) );
-        }
-        for(auto i = a.keyword.begin(); i != a.keyword.end(); i++) {
-            keyword.push_back( (*i) );
-        }
-        for(auto i = a.correlati.begin(); i != a.correlati.end(); i++) {
-            correlati.push_back( (*i) );
-        }
-    }
-    return *this;
-}
+
+
+
+
+                            //ALTRE FUNZIONI
 
 bool Articolo::autoreHaScrittoArticolo(const Autore& autore) const {
     for(auto i = autori.begin(); i != autori.end(); i++) {
-        if( autore == (*i) )
+        if( autore == (**i) )
             return true;
     }
     return false;
 }
 
 bool Articolo::pubblicataInQuestoArticolo (const Divulgazione& divulgazione) const {
-   return pubblicazione == divulgazione;
+   return *pubblicazione == divulgazione;
 }
 
 
 QString Articolo::cognomePrimoAutore() const {
-    return autori.front().getCognome();
+    return autori.front()->getCognome();
 }

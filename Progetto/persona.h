@@ -36,14 +36,14 @@ public:
     Persona();
     Persona(const QString &, const QString &);
 
-    bool operator==(const Persona&) const;
-
-    friend std::ostream& operator<<(std::ostream&, const Persona&);
-
     QString getNome() const;
     void setNome(const QString &value);
     QString getCognome() const;
     void setCognome(const QString &value);
+
+    bool operator==(const Persona&) const;
+
+    friend std::ostream& operator<<(std::ostream&, const Persona&);
 
 };
 

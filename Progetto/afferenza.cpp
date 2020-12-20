@@ -28,15 +28,23 @@ Afferenza::Afferenza(const QString& _nome): nome(_nome) {
 
 }
 
+
+
+
+
 QString Afferenza::getNome() const
 {
     return nome;
 }
 
-/*void Afferenza::setNome(const QString &value)
+void Afferenza::setNome(const QString &value)
 {
     nome = value;
-}*/
+}
+
+
+
+
 
 bool Afferenza::operator==(const Afferenza& a) const {
     return nome == a.nome;

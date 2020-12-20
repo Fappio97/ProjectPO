@@ -31,12 +31,28 @@ protected:
     QString acronimo;
     QString data;
 
+    virtual std::ostream& stampa(std::ostream& out) const {
+        return out;
+    }
+
 public:
 
     Divulgazione();     // altrimenti non posso chiamarli in articoli
     Divulgazione(const QString&, const QString&, const QString&);
 
     bool operator==(const Divulgazione&) const;
+
+    friend std::ostream& operator<<(std::ostream& out, const Divulgazione& a) {
+        return a.stampa(out);
+    }
+
+    virtual Divulgazione* clone() {     //mi serve nel costruttore di gestore
+        return new Divulgazione(*this);
+    }
+
+    virtual QString classeRifermento() const {
+        return nullptr;
+    }
 
     virtual ~Divulgazione() {}
 

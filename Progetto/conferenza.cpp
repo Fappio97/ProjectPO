@@ -24,7 +24,7 @@ Conferenza::Conferenza()
 
 }
 
-Conferenza::Conferenza(const QString & _nome, const QString & _acronimo, const QString & _luogo, const QString & _data, QList<Persona> _organizzatori, int _partecipanti): Divulgazione(_nome, _acronimo, _data), luogo(_luogo), partecipanti(_partecipanti) {
+Conferenza::Conferenza(const QString & _nome, const QString & _acronimo, const QString & _luogo, const QString & _data, QList<Persona *> _organizzatori, int _partecipanti): Divulgazione(_nome, _acronimo, _data), luogo(_luogo), partecipanti(_partecipanti) {
     for(auto i = _organizzatori.begin(); i != _organizzatori.end(); i++) {
         organizzatori.push_back( (*i) );
     }
@@ -36,9 +36,26 @@ Conferenza::Conferenza(const Conferenza& a): Divulgazione(a.nome, a.acronimo, a.
     }
 }
 
+Conferenza& Conferenza::operator=(const Conferenza& a) {
+    if(this != &a) {
+        svuota();
+        luogo = a.luogo;
+        partecipanti = a.partecipanti;
+        for(auto i = a.organizzatori.begin(); i != a.organizzatori.end(); i++) {
+            organizzatori.push_back( (*i) );
+        }
+    }
+    return (*this);
+}
+
+
 Conferenza::~Conferenza() {
     svuota();
 }
+
+
+
+
 
 QString Conferenza::getNome() const
 {
@@ -91,34 +108,37 @@ void Conferenza::setPartecipanti(int value)
 }
 
 
-bool Conferenza::operator==(const Conferenza& a) const {
-    return nome == a.nome && acronimo == a.acronimo && luogo == a.luogo && data == a.data && partecipanti == a.partecipanti;
-}
 
-Conferenza& Conferenza::operator=(const Conferenza& a) {
-    if(this != &a) {
-        svuota();
-        luogo = a.luogo;
-        partecipanti = a.partecipanti;
-        for(auto i = a.organizzatori.begin(); i != a.organizzatori.end(); i++) {
-            organizzatori.push_back( (*i) );
-        }
-    }
-    return (*this);
-}
+
+
 
 void Conferenza::svuota() {
     organizzatori.clear();
 }
 
 
-std::ostream& operator<<(std::ostream& out, const Conferenza& a){
-    out << "-CONFERENZA-" << std::endl << "       NOME: " << a.nome.toStdString() << ", ACRONIMO: " << a.acronimo.toStdString() << ", DATA: " << a.data.toStdString() << ", LUOGO: " << a.luogo.toStdString() << ", PARTECIPANTI: " << a.partecipanti << std::endl << "        ORGANIZZATORI:";
-    for(auto i = a.organizzatori.begin(); i != a.organizzatori.end(); i++ ) {
-        if( (*i) == a.organizzatori.front() )
-            out << " " << (*i).getNome().toStdString() << " " << (*i).getCognome().toStdString() ;
+
+Conferenza* Conferenza::clone() {
+    return new Conferenza(*this);
+}
+
+QString Conferenza::classeRiferimento() const {
+    return "Conferenza";
+}
+
+
+
+
+
+
+std::ostream& Conferenza::stampa(std::ostream& out) const {
+    out << "-CONFERENZA-" << std::endl << "       NOME: " << nome.toStdString() << ", ACRONIMO: " << acronimo.toStdString() << ", DATA: " << data.toStdString() << ", LUOGO: " << luogo.toStdString() << ", PARTECIPANTI: " << partecipanti << std::endl << "        ORGANIZZATORI:";
+    for(auto i = organizzatori.begin(); i != organizzatori.end(); i++ ) {
+        if( (*i) == organizzatori.front() )
+            out << " " << (**i).getNome().toStdString() << " " << (**i).getCognome().toStdString() ;
         else
-            out << ", " << (*i).getNome().toStdString() + " " << (*i).getCognome().toStdString() ;
+            out << ", " << (**i).getNome().toStdString() + " " << (**i).getCognome().toStdString() ;
     }
-    return out << std::endl;
+    out << std::endl;
+    return out;
 }

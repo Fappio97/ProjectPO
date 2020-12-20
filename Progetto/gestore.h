@@ -57,6 +57,7 @@ public:
 
 
 
+
                            //GESTIONE KEYWORDS
 
     QString* restituisciKeywords(const QString&) const;
@@ -68,6 +69,7 @@ public:
     void svuotaKeywords();
 
     bool keywordsVuota() const;
+
 
 
 
@@ -87,6 +89,7 @@ public:
 
 
 
+
                            //GESTIONE PERSONA
 
     Persona* restituisciPersona(const QString&) const;
@@ -101,11 +104,12 @@ public:
 
 
 
+
                            //GESTIONE AUTORI
 
     Autore* restituisciAutore(const QString&) const;
 
-    void restituisciAutoreConnessoStruttura(const Afferenza&, QVector<Autore*>&);
+    void restituisciAutoreConnessoStruttura(const Afferenza&, QVector<Autore *>&);
 
     void aggiungiAutore(const QString&, const QString&, const QString&, QList<Afferenza *>);
 
@@ -117,13 +121,15 @@ public:
 
 
 
+
+
                            //GESTIONE DIVULGAZIONE (CONFERENZE E RIVISTE)
 
     Divulgazione* restituisciDivulgazione(const QString&, const QString&) const;
 
     bool divulgazioneEsistente(const QString &, const QString &) const;
 
-    void aggiungiConferenza(const QString &, const QString &, const QString &, const QString &, QList<Persona> _organizzatori, int);
+    void aggiungiConferenza(const QString &, const QString &, const QString &, const QString &, QList<Persona *> _organizzatori, int);
 
     void aggiungiRivista(const QString&, const QString&, const QString&, const QString&, int);
 
@@ -141,9 +147,11 @@ public:
 
     Articolo* restituisciArticolo(const QString&) const;
 
+    bool articoliVuoti() const;
+
     bool articoloPresente(const QString&) const;
 
-    void aggiungiArticolo(const QString&, const QString&, int, QList<Autore>, QList<QString>, double, QList<Articolo>, Divulgazione);
+    void aggiungiArticolo(const QString&, const QString&, int, QList<Autore *>, QList<QString *>, double, QList<Articolo *>, Divulgazione *);
 
     void svuotaArticoli();
 
@@ -155,9 +163,9 @@ public:
 
                            //SEZIONE B
 
-    QString stampaArticoliAutore(const Autore&) const;
+    QString  stampaArticoliAutore(const Autore&) const;
 
-    QString stampaArticoliConferenza(const Divulgazione& divulgazione) const;
+    QString  stampaArticoliConferenza(const Divulgazione& divulgazione) const;
 
     QString stampaArticoliStruttura(QVector<Autore *>) const;
 
@@ -165,13 +173,15 @@ public:
 
 
 
+
                            //SEZIONE C
 
-    QString stampaArticoliAutoreCostosi(const Autore&) const;
+    QString  stampaArticoliAutoreCostosi(const Autore&) const;
 
     int guadagnoDivulgazione(const Divulgazione&, const QString&) const;
 
     QStringList keywordMigliorIncasso(const QStringList& keywords) const;
+
 
 
 
@@ -187,7 +197,13 @@ public:
 
 
 
+
                            //SEZIONE E
+
+      QString prime5KeywordsPiuDiffuse() const;
+
+//    QString stampaRivisteSpecialistiche() const;
+
 
 
 
@@ -195,7 +211,9 @@ public:
 
                            //SEZIONE F
 
-    void ordinaArticoliDagliArticoliCorrelati() const;
+    QString ordinaArticoliDagliArticoliCorrelati() const;
+
+//    QString stampaConferenzeSimili(const Divulgazione& conferenza) const;
 
 };
 

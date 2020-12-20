@@ -55,7 +55,7 @@ QString Divulgazione::getAnno() const {
 
 Divulgazione::Divulgazione()
 {
-    
+
 }
 
 Divulgazione::Divulgazione(const QString& _nome, const QString& _acronimo, const QString& _data): nome(_nome), acronimo(_acronimo), data(_data) {

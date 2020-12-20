@@ -19,15 +19,6 @@ along with Progetto.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "rivista.h"
 
-QString Rivista::getEditore() const
-{
-    return editore;
-}
-
-void Rivista::setEditore(const QString &value)
-{
-    editore = value;
-}
 
 Rivista::Rivista() {
 }
@@ -38,6 +29,11 @@ Rivista::Rivista(const QString& _nome, const QString& _acronimo, const QString& 
 Rivista::~Rivista() {
 
 }
+
+
+
+
+
 
 void Rivista::setNome(const QString &value)
 {
@@ -74,10 +70,34 @@ void Rivista::setVolume(int value)
     volume = value;
 }
 
-bool Rivista::operator==(const Rivista& a) const {
-    return nome == a.nome && acronimo == a.acronimo && data == a.data && volume == a.volume;
+QString Rivista::getEditore() const
+{
+    return editore;
 }
 
-std::ostream& operator<<(std::ostream& out, const Rivista& a) {
-    return out << "-RIVISTA-" << std::endl << "      NOME: " << a.nome.toStdString() << ", ACRONIMO: " << a.acronimo.toStdString() << ", DATA: " << a.data.toStdString() << " EDITORE: " << a.editore.toStdString() << " VOLUME: " << a.volume << std::endl;
+void Rivista::setEditore(const QString &value)
+{
+    editore = value;
+}
+
+
+
+
+
+
+Rivista* Rivista::clone() {
+    return new Rivista(*this);
+}
+
+QString Rivista::classeRiferimento() const {
+    return "Rivista";
+}
+
+
+
+
+
+std::ostream& Rivista::stampa(std::ostream& out) const {
+    out << "-RIVISTA-" << std::endl << "      NOME: " << nome.toStdString() << ", ACRONIMO: " << acronimo.toStdString() << ", DATA: " << data.toStdString() << " EDITORE: " << editore.toStdString() << " VOLUME: " << volume << std::endl;
+    return out;
 }

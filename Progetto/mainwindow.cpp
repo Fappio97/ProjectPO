@@ -19,8 +19,7 @@ along with Progetto.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-
-#include <QMessageBox>
+#include "QMessageBox"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -28,7 +27,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     gestore = new Gestore();
     ui->setupUi(this);
-    ui->Home->setToolTip("Vai alla pagina principale");
+ /*   ui->Home->setToolTip("Vai alla pagina principale");     //eliminare quelli stupidi
     ui->VaiPaginaAutori->setToolTip("Inserisci oppure visualizza gli autori");
     ui->AggiungiAutore->setToolTip("Inserisci un autore");
     ui->VisualizzaAutori->setToolTip("Visualizza tutti gli autori");
@@ -39,10 +38,10 @@ MainWindow::MainWindow(QWidget *parent)
     ui->AggiungiRivista->setToolTip("Inserisci una rivista");
     ui->VaiPaginaRiviste->setToolTip("Inserisci una rivista");
     ui->SvuotaDivulgazioni->setToolTip("Elimina tutte le conferenze e le riviste");
-    ui->VisualizzaDivulgazioni->setToolTip("Visualizza tutte le conferenze e le riviste");
+    ui->VisualizzaDivulgazioni->setToolTip("Visualizza tutte le conferenze e le riviste");*/
     connect(ui->VisualizzaConferenze, &QPushButton::clicked, this, &MainWindow::on_VaiPaginaDivulgazioni);
     connect(ui->VisualizzaRiviste, &QPushButton::clicked, this, &MainWindow::on_VaiPaginaDivulgazioni);
-    ui->VaiPaginaArticoli->setToolTip("Inserisci oppure visualizza gli articoli");
+/*    ui->VaiPaginaArticoli->setToolTip("Inserisci oppure visualizza gli articoli");
     ui->VisualizzaArticoli->setToolTip("Visualizza tutti gli articoli");
     ui->SvuotaArticoli->setToolTip("Elimina tutti gli articoli");
     ui->VisualizzaArticoliAutore->setToolTip("Visualizza tutti gli articoli scritti da un autore");
@@ -50,8 +49,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->VisualizzaArticoliConferenza->setToolTip("Visualizza tutti gli articoli pubblicati in una conferenza");
     ui->VaiPaginaVisualizzaArticoli->setToolTip("Vai alla pagina dove puoi visualizzare gli articoli scritti da ... ");
     ui->SvuotaFinestra->setToolTip("Cancella il contenuto nella finestra sottostante");
-    ui->PrezziGuadagni->setToolTip("Visualizza i prezzi ed i guadagni relativi a ... ");
-    ui->SvuotaArticoli->setToolTip("Svuota la pagina");
+    ui->SvuotaArticoli->setToolTip("Svuota la pagina");*/
     QPalette pal = palette();
     pal.setColor(QPalette::Background, QColor(245,245,245, 255));
     this->setAutoFillBackground(true);
@@ -104,14 +102,24 @@ void MainWindow::on_VaiPaginaVisualizzaArticoli_clicked()
     ui->stackedWidget->setCurrentWidget(ui->PaginaVisualizzaArticoli);
 }
 
-void MainWindow::on_PrezziGuadagni_clicked()
+void MainWindow::on_VaiPaginaPrezziGuadagni_clicked()
 {
     ui->stackedWidget->setCurrentWidget(ui->PaginaPrezzi);
 }
 
-void MainWindow::on_VisualizzaArticoliOridnati_clicked()
+void MainWindow::on_VaiPaginaArticoliOridnati_clicked()
 {
     ui->stackedWidget->setCurrentWidget(ui->PaginaArticoliOrdinati);
+}
+
+void MainWindow::on_VaiPaginaRivisteSpecialistche_clicked()
+{
+    ui->stackedWidget->setCurrentWidget(ui->PaginaRivisteSpecialistiche);
+}
+
+void MainWindow::on_VaiPaginaOperazioniAvanzate_clicked()
+{
+    ui->stackedWidget->setCurrentWidget(ui->PaginaOperazioniAvanzate);
 }
 
 
@@ -120,18 +128,8 @@ void MainWindow::on_VisualizzaArticoliOridnati_clicked()
 
                            //FUNZIONI AUSILIARIE CHE MI SERVONO PER GESTIRE ALCUNI METODI
 
-void messaggioErrore(const QString& errore, QWidget * parents) {                    //funzione che richiama un messaggio di errore, se ne potrebbe fare una unica, insieme a quella informativa e quella di attenzione. Riprovare a passare l'icona.
-    QMessageBox mess (QMessageBox::Critical,"Errore", errore ,QMessageBox::Ok, parents);
-    mess.exec();
-}
-
-void messaggioAttenzione(const QString& attenzione, QWidget * parents) {
-    QMessageBox mess (QMessageBox::Warning,"Attenzione", attenzione ,QMessageBox::Ok, parents);
-    mess.exec();
-}
-
-void messaggioInformativo(const QString& informazione, QWidget * parents) {
-    QMessageBox mess (QMessageBox::Information,"Informazione", informazione ,QMessageBox::Ok, parents);
+void messaggio(QMessageBox::Icon icona, const QString& titolo, const QString& errore, QWidget *centrare) {                    //funzione che richiama un messaggio di errore, se ne potrebbe fare una unica, insieme a quella informativa e quella di attenzione. Riprovare a passare l'icona.
+    QMessageBox mess (icona, titolo, errore ,QMessageBox::Ok, centrare);
     mess.exec();
 }
 
@@ -150,21 +148,21 @@ void MainWindow::on_AggiungiAutore_clicked()
 {
     QString ID = ui->IDinput->text();
     if(ID.isEmpty()) {
-        messaggioAttenzione("Inserire un id", this);
+        messaggio(QMessageBox::Warning, "Attenzione", "Inserire un id", this);
         return;
     }
     QString nome = ui->NomeInput->text();
     if(nome.isEmpty()) {
-        messaggioAttenzione("Inserire un nome", this);
+        messaggio(QMessageBox::Warning, "Attenzione", "Inserire un nome", this);
         return;
     }
     QString cognome = ui->CognomeInput->text();
     if(cognome.isEmpty()) {
-        messaggioAttenzione("Inserire un cognome", this);
+        messaggio(QMessageBox::Warning, "Attenzione", "Inserire un cognome", this);
         return;
     }
     if(gestore->autoreEsistente(ID)) {
-        messaggioErrore("Autore con stesso codice identificativo già presente", this);
+        messaggio(QMessageBox::Critical, "Errore", "Autore con stesso codice identificativo già presente", this);
         return;
     }
 
@@ -196,11 +194,11 @@ void MainWindow::on_CreaAfferenza_clicked()
 {
     QString afferenza = ui->AfferenzaInput->text();
     if(afferenza.isEmpty()) {
-        messaggioAttenzione("Inserire un'afferenza", this);
+        messaggio(QMessageBox::Warning, "Attenzione", "Inserire un'afferenza", this);
         return;
     }
     if(gestore->afferenzaEsistente(afferenza)) {
-           messaggioErrore("Afferenza già esistente", this);
+           messaggio(QMessageBox::Critical, "Errore", "Afferenza già esistente", this);
            return;
     }
     gestore->aggiungiAfferenza(afferenza);
@@ -229,29 +227,29 @@ void MainWindow::on_AggiungiConferenza_clicked()
 {
     QString nome = ui->NomeInput_2->text();
     if(nome.isEmpty()) {
-        messaggioAttenzione("Non puoi lasciare il campo 'Nome' vuoto", this);
+        messaggio(QMessageBox::Warning, "Attenzione", "Non puoi lasciare il campo 'Nome' vuoto", this);
         return;
     }
     QString acronimo = ui->AcronimoInput->text();
     if(acronimo.isEmpty()) {
-        messaggioAttenzione("Non puoi lasciare il campo 'Acronimo' vuoto", this);
+        messaggio(QMessageBox::Warning, "Attenzione", "Non puoi lasciare il campo 'Acronimo' vuoto", this);
         return;
     }
     QString luogo = ui->LuogoInput->text();
     if(luogo.isEmpty()) {
-        messaggioAttenzione("Non puoi lasciare il campo 'Luogo' vuoto", this);
+        messaggio(QMessageBox::Warning, "Attenzione", "Non puoi lasciare il campo 'Luogo' vuoto", this);
         return;
     }
 
     QStringList a;
     leggiLista( ui->ListaOrganizzatori->selectedItems(), a );
-    QList<Persona> organizzatori;
+    QList<Persona *> organizzatori;
     for(auto i = a.begin(); i < a.end(); i++) {
-        organizzatori.push_back( *gestore->restituisciPersona( (*i) ) );
+        organizzatori.push_back( gestore->restituisciPersona( (*i) ) );
     }
 
     if(organizzatori.size() == 0) {
-        messaggioAttenzione("Non puoi creare una conferenza senza organizzatori", this);
+        messaggio(QMessageBox::Warning, "Attenzione", "Non puoi creare una conferenza senza organizzatori", this);
         return;
     }
 
@@ -259,8 +257,7 @@ void MainWindow::on_AggiungiConferenza_clicked()
     QString data = QString::number(date.year()) + "-" + QString::number(date.month()) + "-" + QString::number(date.day());
 
     if(gestore->divulgazioneEsistente(nome, data)) {
-        QMessageBox mess (QMessageBox::Critical,"Errore","Conferenza già presente",QMessageBox::Ok,this);
-        mess.exec();
+        messaggio(QMessageBox::Critical, "Errore", "Conferenza già presente", this);
         return;
     }
 
@@ -274,25 +271,25 @@ void MainWindow::on_AggiungiConferenza_clicked()
     ui->ConferenzeBox->addItem("Conferenza: " + nome + ", " + data);
     ui->RivistaBox->addItem("Conferenza: " + nome + ", " + data);
     ui->ConferenzeBox_2->addItem("Conferenza: " + nome + ", " + data);
+    ui->ConferenzeBox_3->addItem("Conferenza: " + nome + ", " + data);
 }
 
 void MainWindow::on_CreaOrganizzatore_clicked()     //CREO UNA PERSONA ORGANIZZATRICE
 {
     QString nome = ui->NomePersona->text();
     if(nome.isEmpty()) {
-        messaggioAttenzione("Inserire il nome della persona organizzatrice", this);
+        messaggio(QMessageBox::Warning, "Attenzione", "Inserire il nome della persona organizzatrice", this);
         return;
     }
 
     QString cognome = ui->CognomePersona->text();
     if(cognome.isEmpty()) {
-        messaggioAttenzione("Inserire il cognome della persona organizzatrice", this);
+        messaggio(QMessageBox::Warning, "Attenzione", "Inserire il cognome della persona organizzatrice", this);
         return;
     }
 
     if(gestore->personaEsistente(nome, cognome)) {
-        messaggioErrore("Persona già esistente", this);
-
+        messaggio(QMessageBox::Critical, "Errore", "Persona già esistente", this);
         return;
     }
 
@@ -306,26 +303,26 @@ void MainWindow::on_AggiungiRivista_clicked()
 {
     QString nome = ui->NomeInput_3->text();
     if(nome.isEmpty()) {
-        messaggioAttenzione("Non puoi lasciare il campo 'Nome' vuoto", this);
+        messaggio(QMessageBox::Warning, "Attenzione", "Non puoi lasciare il campo 'Nome' vuoto", this);
         return;
     }
 
     QString acronimo = ui->AcronimoInput_2->text();
     if(acronimo.isEmpty()) {
-        messaggioAttenzione("Non puoi lasciare il campo 'Acronimo' vuoto", this);
+        messaggio(QMessageBox::Warning, "Attenzione", "Non puoi lasciare il campo 'Acronimo' vuoto", this);
         return;
     }
 
     QString editore = ui->EditoreInput->text();
     if(editore.isEmpty()) {
-         messaggioAttenzione("Non puoi lasciare il campo 'Editore' vuoto", this);
+        messaggio(QMessageBox::Warning, "Attenzione", "Non puoi lasciare il campo 'Editore' vuoto", this);
         return;
     }
 
     QDate date = ui->CalendarioRivista->selectedDate();
     QString data = QString::number(date.year()) + "-" + QString::number(date.month()) + "-" + QString::number(date.day());
     if(gestore->divulgazioneEsistente(nome, data)) {
-        messaggioErrore("Rivista già presente", this);
+        messaggio(QMessageBox::Critical, "Errore", "Rivista già esistente", this);
         return;
     }
     gestore->aggiungiRivista(nome, acronimo, editore, data, ui->VolumeInput->value());
@@ -336,7 +333,6 @@ void MainWindow::on_AggiungiRivista_clicked()
 
     ui->ConferenzeRivisteBox->addItem("Rivista: " + nome + ", " + data);
     ui->RivistaBox->addItem("Rivista: " + nome + ", " + data);
-    ui->RivisteBox->addItem("Rivista: " + nome + ", " + data);
 }
 
 void MainWindow::on_VisualizzaDivulgazioni_clicked()
@@ -383,12 +379,12 @@ void MainWindow::on_CreaKeyword_clicked()
 {
     QString keyword = ui->KeywordInput->text();
     if(keyword.isEmpty()) {
-        messaggioAttenzione("Inserire un keyword", this);
+        messaggio(QMessageBox::Warning, "Attenzione", "Inserire un keyword", this);
         return;
     }
     if( gestore->keywordEsistente( keyword ) ) {
-            messaggioErrore("Keyword già inserita", this);
-            return;
+        messaggio(QMessageBox::Critical, "Errore", "Keyword già inserita", this);
+        return;
     }
     ui->KeywordInput->clear();
     ui->ListaKeyword->addItem(keyword);
@@ -401,13 +397,13 @@ void MainWindow::on_AggiungiArticolo_clicked()
 {
     QString titolo = ui->TitoloInput->text();
     if(titolo.isEmpty()) {
-        messaggioAttenzione("Non hai inserito il titolo dell'articolo", this);
+        messaggio(QMessageBox::Warning, "Attenzione", "Non hai inserito il titolo dell'articolo", this);
         return;
     }
 
     QString identificativo = ui->IdentificativoInput->text();
     if(identificativo.isEmpty()) {
-        messaggioAttenzione("Non hai inserito il codice identificativo dell'articolo", this);
+        messaggio(QMessageBox::Warning, "Attenzione", "Non hai inserito il codice identificativo dell'articolo", this);
         return;
     }
 
@@ -422,50 +418,50 @@ void MainWindow::on_AggiungiArticolo_clicked()
 
     QString pubblicazione = ui->ConferenzeRivisteBox->currentText();
     if(pubblicazione.isEmpty()) {
-        messaggioAttenzione("Non hai inserito alcuna pubblicazione", this);
+        messaggio(QMessageBox::Warning, "Attenzione", "Non hai inserito alcuna pubblicazione", this);
         return;
     }
 
     if(ui->ListaAutori->selectedItems().isEmpty()) {
-        messaggioAttenzione("Non hai selezionato alcun autore", this);
+        messaggio(QMessageBox::Warning, "Attenzione", "Non hai selezionato alcun autore", this);
         return;
     }
 
     QStringList c = pubblicazione.split(": ");      //divido prima la lista quando trovo la string ": "
     c = c[1].split(", ");   //divido la seconda parte della stringa, quella priva della stringa Conferenza oppure Rivista, quando trovo la string ", "
 
-    Divulgazione a = *gestore->restituisciDivulgazione(c[0], c[1]);
+    Divulgazione* a = gestore->restituisciDivulgazione(c[0], c[1]);
 
     if(gestore->articoloPresente(identificativo)) {
-        messaggioAttenzione("Articolo con questo codice identificativo già presente", this);
+        messaggio(QMessageBox::Warning, "Attenzione", "Articolo con questo codice identificativo già presente", this);
         return;
     }
 
     QStringList b;
     leggiLista( ui->ListaKeyword->selectedItems(), b );     //prendo le keyword che soo state selezionate
-    QList<QString> keywords;
+    QList<QString *> keywords;
     for(auto i = b.begin(); i < b.end(); i++) {
-        keywords.push_back( *gestore->restituisciKeywords( (*i) ) );     //le trovo nelle keyword create e le punto per poi creare l'articolo
+        keywords.push_back( gestore->restituisciKeywords( (*i) ) );     //le trovo nelle keyword create e le punto per poi creare l'articolo
     }
     b.clear();
 
     leggiLista( ui->ListaAutori->selectedItems(), b );
-    QList<Autore> autori;
+    QList<Autore *> autori;
     QStringList d;
     for(auto i = b.begin(); i < b.end(); i++) {     // non posso fare una funzione anche se i pezzi di codice sono identici, ma dovrei passare una QList<Autore *> e poi una QList<Articoli *>
         QString f = (*i);
         d = f.split(" ");
-        autori.push_back( *gestore->restituisciAutore (d[0]));
+        autori.push_back( gestore->restituisciAutore (d[0]));
         d.clear();
     }
     b.clear();
 
     leggiLista( ui->ListaArticoli->selectedItems(), b );
-    QList<Articolo> articoli;
+    QList<Articolo *> articoli;
     for(auto i = b.begin(); i < b.end(); i++) {
         QString f = (*i);
         d = f.split(" ");
-        articoli.push_back( *gestore->restituisciArticolo(d[1]));
+        articoli.push_back( gestore->restituisciArticolo(d[1]));
         d.clear();
     }
     b.clear();
@@ -506,7 +502,7 @@ void leggiDivulgazioniComboBox(QStringList& lista, const QString& stringa) {
 void MainWindow::on_VisualizzaArticoliConferenza_clicked()
 {
     if( ui->ConferenzeBox->currentText().isEmpty() ) {
-        messaggioErrore("Non hai selezionato alcuna conferenza", this);
+        messaggio(QMessageBox::Critical, "Errore", "Non hai selezionato alcuna conferenza", this);
         return;
     }
 
@@ -521,7 +517,7 @@ void MainWindow::on_VisualizzaArticoliConferenza_clicked()
 void MainWindow::on_VisualizzaArticoliStruttura_clicked()
 {
     if( ui->StrutturaBox->currentText().isEmpty() ) {
-        messaggioErrore("Non hai selezionato alcuna struttura", this);
+        messaggio(QMessageBox::Critical, "Errore", "Non hai selezionato alcuna struttura", this);
         return;
     }
     QVector<Autore*> autore;
@@ -551,7 +547,7 @@ void MainWindow::on_SvuotaFinestra_2_clicked()
 void MainWindow::on_ArticoliCostosiAutore_clicked()
 {
     if(ui->AutoreBox_2->currentText().isEmpty()) {
-        messaggioErrore("Non hai selezionato alcun autore", this);
+        messaggio(QMessageBox::Critical, "Errore", "Non hai selezionato alcun autore", this);
         return;
     }
     QStringList input = ui->AutoreBox_2->currentText().split(" ");      //PRENDO L'IDENTIFICATIVO DELL'AUTORE
@@ -574,11 +570,11 @@ bool isNumber(const QString& data) {        //FUNZIONE CHE MI DICE SE QUELLA STR
 void MainWindow::on_EntrateRivista_clicked()
 {
     if( ui->RivistaBox->currentText().isEmpty() ) {
-        messaggioErrore("Non hai selezionato alcuna rivista", this);
+        messaggio(QMessageBox::Critical, "Errore", "Non hai selezionato alcuna rivista", this);
         return;
     }
     if( !isNumber(ui->AnnoInput->text()) || ui->AnnoInput->text().isEmpty() ) {
-        messaggioErrore("Data non valida", this);
+        messaggio(QMessageBox::Critical, "Errore", "Data non valida", this);
         return;
     }
 
@@ -656,8 +652,34 @@ void MainWindow::on_SvuotaFinestra_4_clicked()
 
 void MainWindow::on_TastoRivisteSpecilistiche_clicked()
 {
-    QStringList lista;
-    leggiDivulgazioniComboBox(lista, ui->RivisteBox->currentText());
+//    ui->VisualizzaRivisteSpecialistiche->setPlainText( gestore->stampaRivisteSpecialistiche() );
+}
 
 
+
+
+
+                           //SEZIONE F
+
+void MainWindow::on_SvuotaFinestra_5_clicked()
+{
+     ui->VisualizzaOperazioniAvanzate->clear();
+}
+
+void MainWindow::on_TastoOrdinaCorrelati_clicked()
+{
+    if(gestore->articoliVuoti()) {
+        messaggio(QMessageBox::Critical, "Errore", "Non sono presenti articoli", this);
+        return;
+    }
+    ui->VisualizzaOperazioniAvanzate->setPlainText( gestore->ordinaArticoliDagliArticoliCorrelati() );
+}
+
+void MainWindow::on_TastoConferenzeSimili_clicked()
+{
+/*    if(ui->ConferenzeBox_3->currentText().isEmpty()) {
+        messaggio(QMessageBox::Warning, "Attenzione", "Non hai selezionato alcuna conferenza", this);
+        return;
+    }
+    ui->VisualizzaOperazioniAvanzate->setPlainText( //gestore->ordinaArticoliDagliArticoliCorrelati() );*/
 }

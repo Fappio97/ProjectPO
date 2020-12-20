@@ -19,6 +19,7 @@ along with Progetto.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "autore.h"
 
+
 Autore::Autore()
 {
 
@@ -26,9 +27,35 @@ Autore::Autore()
 
 Autore::Autore(const QString & _identificativo, const QString & _nome, const QString & _cognome, QList<Afferenza *> _afferenze): Persona(_nome, _cognome), identificativo(_identificativo) {
     for(auto i = _afferenze.begin(); i != _afferenze.end(); i++) {
-        afferenze.push_back( (**i) );
+        afferenze.push_back( (*i) );
     }
 }
+
+Autore::Autore(const Autore& a): Persona(a.nome, a.cognome), identificativo(a.identificativo) {
+    for(auto i = a.afferenze.begin(); i != a.afferenze.end(); i++) {
+        afferenze.push_back( (*i) );
+    }
+}
+
+Autore::~Autore() {
+    afferenze.clear();
+}
+
+Autore& Autore::operator=(const Autore& a) {
+    if(this != &a) {
+        nome = a.nome;
+        cognome = a.cognome;
+        identificativo = a.identificativo;
+        for(auto i = a.afferenze.begin(); i != a.afferenze.end(); i++) {
+            afferenze.push_back( (*i) );
+        }
+    }
+    return (*this);
+}
+
+
+
+
 
 QString Autore::getIdentificativo() const
 {
@@ -40,13 +67,22 @@ void Autore::setIdentificativo(const QString &value)
     identificativo = value;
 }
 
+
+
+
+
 bool Autore::autoreConnessoStruttura(const Afferenza& afferenza) const {
     for(auto i = afferenze.begin(); i != afferenze.end(); i++) {
-        if( (*i) == afferenza )
+        if( (**i) == afferenza )
             return true;
     }
     return false;
 }
+
+
+
+
+
 
 bool Autore::operator==(const Autore& a) const {
     if(identificativo != a.identificativo && Persona::nome != a.Persona::nome && Persona::cognome != a.Persona::cognome)
@@ -55,11 +91,15 @@ bool Autore::operator==(const Autore& a) const {
         return false;
     auto j = a.afferenze.begin();
     for(auto i = afferenze.begin(); i != afferenze.end(); i++, j++) {
-        if( (*i).Afferenza::getNome() != (*j).Afferenza::getNome() )
+        if( (**i).Afferenza::getNome() != (**j).Afferenza::getNome() )
                return false;
     }
     return true;
 }
+
+
+
+
 
 std::ostream& operator<<(std::ostream& out, const Autore& a) {
     out << "- ID: " << a.identificativo.toStdString() << ", NOME: " << a.nome.toStdString() << ", COGNOME: " << a.cognome.toStdString() << std::endl;
@@ -67,9 +107,9 @@ std::ostream& operator<<(std::ostream& out, const Autore& a) {
         out << "      LISTA AFFERENZE:";
         for(auto i = a.afferenze.begin(); i != a.afferenze.end(); i++) {
             if(i == a.afferenze.begin())
-                out << (" " + (*i).getNome()).toStdString();
+                out << (" " + (**i).getNome()).toStdString();
             else
-                out << (", " + (*i).getNome()).toStdString();
+                out << (", " + (**i).getNome()).toStdString();
         }
         out << std::endl;
     }
