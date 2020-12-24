@@ -22,6 +22,8 @@ along with Progetto.  If not, see <http://www.gnu.org/licenses/>.
 
 #include<QString>
 
+#include "articolo.h"
+
 class Divulgazione
 {
 
@@ -30,15 +32,20 @@ protected:
     QString nome;
     QString acronimo;
     QString data;
+    QList<Articolo *> articoli;
 
     virtual std::ostream& stampa(std::ostream& out) const {
         return out;
     }
 
+    void svuotaDivulgazione();
+
 public:
 
-    Divulgazione();     // altrimenti non posso chiamarli in articoli
+    Divulgazione();
     Divulgazione(const QString&, const QString&, const QString&);
+    Divulgazione(const Divulgazione& a);
+    Divulgazione& operator=(const Divulgazione& a);
 
     bool operator==(const Divulgazione&) const;
 
@@ -46,15 +53,16 @@ public:
         return a.stampa(out);
     }
 
-    virtual Divulgazione* clone() {     //mi serve nel costruttore di gestore
-        return new Divulgazione(*this);
+    virtual Divulgazione* clone() = 0;
+
+    virtual QString classeRifermento() = 0;
+
+    virtual int influenza()  {
+        return 0;
     }
 
-    virtual QString classeRifermento() const {
-        return nullptr;
+    virtual ~Divulgazione() {
     }
-
-    virtual ~Divulgazione() {}
 
     QString getNome() const;
     void setNome(const QString &value);
@@ -62,8 +70,14 @@ public:
     void setAcronimo(const QString &value);
     QString getData() const;
     void setData(const QString &value);
+    QList<Articolo *> getArticoli() const;
+    void inserisciArticolo(Articolo*);
 
     QString getAnno() const;
+
+    int sommaGuadagnoArticoliDivulgazione() const;
+
+    void keywordsDivulgazione(QList<QString *>&) const;
 };
 
 #endif // DIVULGAZIONE_H

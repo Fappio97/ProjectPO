@@ -30,32 +30,28 @@ private:
     QString editore;
     int volume;
 
+    void svuota();
+
 public:
 
     Rivista();
     Rivista(const QString&, const QString&, const QString&, const QString&, int);
+    Rivista(const Rivista&);
     ~Rivista();
 
-    QString getNome() const;
-    void setNome(const QString &value);
-    QString getAcronimo() const;
-    void setAcronimo(const QString &value);
-    QString getData() const;
-    void setData(const QString &value);
+
     int getVolume() const;
     void setVolume(int value);
     QString getEditore() const;
     void setEditore(const QString &value);
 
-    void svuota();
-
     Rivista* clone();
+
+    QString classeRifermento();
 
 protected:
 
     std::ostream& stampa(std::ostream&) const;
-
-    QString classeRiferimento() const;
 
 };
 

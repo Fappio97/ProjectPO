@@ -44,24 +44,20 @@ public:
     Conferenza& operator=(const Conferenza&);
     ~Conferenza();
 
-    QString getNome() const;
-    void setNome(const QString &value);
-    QString getAcronimo() const;
-    void setAcronimo(const QString &value);
     QString getLuogo() const;
     void setLuogo(const QString &value);
-    QString getData() const;
-    void setData(const QString &value);
     int getPartecipanti() const;
     void setPartecipanti(int value);
 
+    int influenza();
+
     Conferenza* clone();
+
+    QString classeRifermento();
 
 protected:
 
     std::ostream& stampa(std::ostream&) const;
-
-    QString classeRiferimento() const;
 
 };
 

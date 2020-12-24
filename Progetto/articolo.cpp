@@ -24,8 +24,7 @@ along with Progetto.  If not, see <http://www.gnu.org/licenses/>.
 Articolo::Articolo() {
 }
 
-Articolo::Articolo(const QString& _identificativo, const QString& _titolo, int _pagine, QList<Autore *> _autori, QList<QString *> _keyword,  double _prezzo, QList<Articolo *> _correlati, Divulgazione * _pubblicazione): identificativo(_identificativo), titolo(_titolo), pagine(_pagine), prezzo(_prezzo) {
-    pubblicazione = _pubblicazione;
+Articolo::Articolo(const QString& _identificativo, const QString& _titolo, int _pagine, QList<Autore *> _autori, QList<QString *> _keyword,  double _prezzo, QList<Articolo *> _correlati, const QString& _anno): identificativo(_identificativo), titolo(_titolo), pagine(_pagine), prezzo(_prezzo), anno(_anno) {
     for(auto i = _autori.begin(); i != _autori.end(); i++) {
         autori.push_back( (*i) );
     }
@@ -37,8 +36,7 @@ Articolo::Articolo(const QString& _identificativo, const QString& _titolo, int _
     }
 }
 
-
-Articolo::Articolo(const Articolo& a): identificativo(a.identificativo), titolo(a.titolo), pagine(a.pagine), prezzo(a.prezzo), pubblicazione(a.pubblicazione) {
+Articolo::Articolo(const Articolo& a): identificativo(a.identificativo), titolo(a.titolo), pagine(a.pagine), prezzo(a.prezzo), anno(a.anno) {
     for(auto i = a.autori.begin(); i != a.autori.end(); i++) {
         autori.push_back( (*i) );
     }
@@ -57,7 +55,7 @@ Articolo& Articolo::operator=(const Articolo& a) {
         titolo = a.titolo;
         pagine = a.pagine;
         prezzo = a.prezzo;
-        pubblicazione = a.pubblicazione;
+        anno = a.anno;
         for(auto i = a.autori.begin(); i != a.autori.end(); i++) {
             autori.push_back( (*i) );
         }
@@ -90,11 +88,6 @@ void Articolo::eliminaArticolo() {
 QList<QString *> Articolo::getKeyword() const
 {
     return keyword;
-}
-
-Divulgazione * Articolo::getPubblicazione() const
-{
-    return pubblicazione;
 }
 
 QList<Articolo *> Articolo::getCorrelati() const
@@ -142,17 +135,30 @@ void Articolo::setPrezzo(double value)
     prezzo = value;
 }
 
+QString Articolo::getAnno() const
+{
+    return anno;
+}
+
+void Articolo::setAnno(const QString &value)
+{
+    anno = value;
+}
+
 
 
 
                             //OPERATOR <<
 
 std::ostream& operator<<(std::ostream& out, const Articolo& a) {
-    out << "-ARTICOLO-" << std::endl << "      IDENTIFICATIVO: " << a.identificativo.toStdString() << ", TITOLO: " << a.titolo.toStdString() << ", PAGINE: " << a.pagine << ", PREZZO: " << a.prezzo << std::endl;
+    out << "-ARTICOLO-" << std::endl << "      IDENTIFICATIVO: " << a.identificativo.toStdString() << ", TITOLO: " << a.titolo.toStdString() << ", PAGINE: " << a.pagine << ", PREZZO: €" << a.prezzo << ", PUBBLICATO NEL: " << a.anno.toStdString() << std::endl;
     if(!a.autori.empty()) {
         out << "      LISTA AUTORI CHE HANNO REALIZZATO L'ARTICOLO:";
         for(auto i = a.autori.begin(); i != a.autori.end(); i++) {
-            out << " [" << (**i).getNome().toStdString() << " " << (**i).getCognome().toStdString() << "]";
+            if( i == a.autori.begin() )
+                out << " " << (**i).getNome().toStdString() << " " << (**i).getCognome().toStdString();
+            else
+                out << ", " << (**i).getNome().toStdString() << " " << (**i).getCognome().toStdString();
         }
         out << std::endl;
     }
@@ -170,7 +176,7 @@ std::ostream& operator<<(std::ostream& out, const Articolo& a) {
         }
         out << std::endl;
     }
-    return out << "      PUBBLICATO IN: " << a.pubblicazione->getNome().toStdString() << " " << a.pubblicazione->getAcronimo().toStdString() << std::endl << std::endl;
+    return out << std::endl;
 }
 
 
@@ -185,10 +191,6 @@ bool Articolo::autoreHaScrittoArticolo(const Autore& autore) const {
             return true;
     }
     return false;
-}
-
-bool Articolo::pubblicataInQuestoArticolo (const Divulgazione& divulgazione) const {
-   return *pubblicazione == divulgazione;
 }
 
 

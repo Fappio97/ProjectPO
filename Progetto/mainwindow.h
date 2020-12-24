@@ -34,6 +34,7 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
+
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
@@ -68,6 +69,12 @@ private slots:
 
 
 
+                                   //ALTRO
+
+    void on_EliminaTutto_clicked();
+
+
+
                                //GESTIONE AUTORE
 
     void on_AggiungiAutore_clicked();
@@ -75,8 +82,6 @@ private slots:
     void on_VisualizzaAutori_clicked();
 
     void on_CreaAfferenza_clicked();
-
-    void on_SvuotaAutori_clicked();
 
 
 
@@ -90,15 +95,11 @@ private slots:
 
     void on_VisualizzaDivulgazioni_clicked();
 
-    void on_SvuotaDivulgazioni_clicked();
-
 
 
                                //GESTIONE ARTICOLI
 
     void on_VisualizzaArticoli_clicked();
-
-    void on_SvuotaArticoli_clicked();
 
     void on_CreaKeyword_clicked();
 
@@ -114,13 +115,9 @@ private slots:
 
     void on_VisualizzaArticoliStruttura_clicked();
 
-    void on_SvuotaFinestra_clicked();
-
 
 
                                 //SEZIONE C
-
-    void on_SvuotaFinestra_2_clicked();
 
     void on_ArticoliCostosiAutore_clicked();
 
@@ -136,13 +133,9 @@ private slots:
 
     void on_OrdinaKeyword_clicked();
 
-    void on_SvuotaFinestra_4_clicked();
-
 
 
                                //SEZIONE E
-
-    void on_SvuotaFinestra_3_clicked();
 
     void on_TastoRivisteSpecilistiche_clicked();
 
@@ -150,12 +143,12 @@ private slots:
 
                                //SEZIONE F
 
-    void on_SvuotaFinestra_5_clicked();
-
     void on_TastoOrdinaCorrelati_clicked();
 
-
     void on_TastoConferenzeSimili_clicked();
+
+    void on_TastoConferenzeElitarie_clicked();
+
 
 private:
 

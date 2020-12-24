@@ -20,6 +20,9 @@ along with Progetto.  If not, see <http://www.gnu.org/licenses/>.
 #include "autore.h"
 
 
+
+                            //COSTRUTTORI, DISTRUTTORE ED OPERATOR=
+
 Autore::Autore()
 {
 
@@ -37,10 +40,6 @@ Autore::Autore(const Autore& a): Persona(a.nome, a.cognome), identificativo(a.id
     }
 }
 
-Autore::~Autore() {
-    afferenze.clear();
-}
-
 Autore& Autore::operator=(const Autore& a) {
     if(this != &a) {
         nome = a.nome;
@@ -53,9 +52,15 @@ Autore& Autore::operator=(const Autore& a) {
     return (*this);
 }
 
+Autore::~Autore() {
+    afferenze.clear();
+}
 
 
 
+
+
+                            //GETTER & SETTER
 
 QString Autore::getIdentificativo() const
 {
@@ -71,35 +76,7 @@ void Autore::setIdentificativo(const QString &value)
 
 
 
-bool Autore::autoreConnessoStruttura(const Afferenza& afferenza) const {
-    for(auto i = afferenze.begin(); i != afferenze.end(); i++) {
-        if( (**i) == afferenza )
-            return true;
-    }
-    return false;
-}
-
-
-
-
-
-
-bool Autore::operator==(const Autore& a) const {
-    if(identificativo != a.identificativo && Persona::nome != a.Persona::nome && Persona::cognome != a.Persona::cognome)
-        return false;
-    if(afferenze.size() != a.afferenze.size())
-        return false;
-    auto j = a.afferenze.begin();
-    for(auto i = afferenze.begin(); i != afferenze.end(); i++, j++) {
-        if( (**i).Afferenza::getNome() != (**j).Afferenza::getNome() )
-               return false;
-    }
-    return true;
-}
-
-
-
-
+                            //OPERATOR <<
 
 std::ostream& operator<<(std::ostream& out, const Autore& a) {
     out << "- ID: " << a.identificativo.toStdString() << ", NOME: " << a.nome.toStdString() << ", COGNOME: " << a.cognome.toStdString() << std::endl;
@@ -114,4 +91,22 @@ std::ostream& operator<<(std::ostream& out, const Autore& a) {
         out << std::endl;
     }
     return out << std::endl;
+}
+
+
+
+
+
+                            //ALTRE FUNZIONI
+
+bool Autore::autoreConnessoStruttura(const Afferenza& afferenza) const {
+    for(auto i = afferenze.begin(); i != afferenze.end(); i++) {
+        if( (**i) == afferenza )
+            return true;
+    }
+    return false;
+}
+
+bool Autore::operator==(const Autore& a) const {
+    return nome == a.nome && cognome == a.cognome && identificativo == a.identificativo;
 }

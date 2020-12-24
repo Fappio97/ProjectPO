@@ -68,7 +68,7 @@ public:
 
     void svuotaKeywords();
 
-    bool keywordsVuota() const;
+    bool keywordsVuote() const;
 
 
 
@@ -92,7 +92,7 @@ public:
 
                            //GESTIONE PERSONA
 
-    Persona* restituisciPersona(const QString&) const;
+    Persona* restituisciPersona(const QString&, const QString&) const;
 
     void aggiungiPersona(const QString&, const QString&);
 
@@ -109,11 +109,13 @@ public:
 
     Autore* restituisciAutore(const QString&) const;
 
-    void restituisciAutoreConnessoStruttura(const Afferenza&, QVector<Autore *>&);
+    void inserisciAutoriConnessoStruttura(const Afferenza&, QVector<Autore *>&);
 
     void aggiungiAutore(const QString&, const QString&, const QString&, QList<Afferenza *>);
 
-    bool autoreEsistente(const QString&) const;
+    bool autoreEsistente(const QString&, const QString&) const;
+
+    bool autoreIdOccupato(const QString&) const;
 
     void svuotaAutori();
 
@@ -127,13 +129,15 @@ public:
 
     Divulgazione* restituisciDivulgazione(const QString&, const QString&) const;
 
-    bool divulgazioneEsistente(const QString &, const QString &) const;
+    bool articoliVuoti() const;
 
     void aggiungiConferenza(const QString &, const QString &, const QString &, const QString &, QList<Persona *> _organizzatori, int);
 
+    bool divulgazioneEsistente(const QString &, const QString &) const;
+
     void aggiungiRivista(const QString&, const QString&, const QString&, const QString&, int);
 
-    bool divulgazioniVuote() const;
+//    bool divulgazioniVuote() const;   //serve?
 
     void svuotaDivulgazioni();
 
@@ -146,8 +150,6 @@ public:
                            //GESTIONE ARTICOLO
 
     Articolo* restituisciArticolo(const QString&) const;
-
-    bool articoliVuoti() const;
 
     bool articoloPresente(const QString&) const;
 
@@ -165,9 +167,9 @@ public:
 
     QString  stampaArticoliAutore(const Autore&) const;
 
-    QString  stampaArticoliConferenza(const Divulgazione& divulgazione) const;
+    QString  stampaArticoliConferenza(const QString&) const;
 
-    QString stampaArticoliStruttura(QVector<Autore *>) const;
+    QString stampaArticoliStruttura(const QVector<Autore *>&) const;
 
 
 
@@ -178,9 +180,9 @@ public:
 
     QString  stampaArticoliAutoreCostosi(const Autore&) const;
 
-    int guadagnoDivulgazione(const Divulgazione&, const QString&) const;
+    int guadagnoDivulgazione(const QString&, const QString&) const;
 
-    QStringList keywordMigliorIncasso(const QStringList& keywords) const;
+    QStringList keywordMigliorIncasso(const QStringList&) const;
 
 
 
@@ -189,7 +191,7 @@ public:
 
                            //SEZIONE D
 
-    QString stampaArticoliDivulgazioneOrdinatiPrezzo(const Divulgazione&) const;
+    QString stampaArticoliDivulgazioneOrdinatiPrezzo(const QString&) const;
 
     QString stampaArticoliKeywordOrdinati(const QString&) const;
 
@@ -200,9 +202,7 @@ public:
 
                            //SEZIONE E
 
-      QString prime5KeywordsPiuDiffuse() const;
-
-//    QString stampaRivisteSpecialistiche() const;
+    QString stampaRivisteSpecialistiche() const;
 
 
 
@@ -210,11 +210,14 @@ public:
 
 
                            //SEZIONE F
+    void trovaDivulgazioni(const QString&, QList<Divulgazione *>&) const;
 
     QString ordinaArticoliDagliArticoliCorrelati() const;
 
-//    QString stampaConferenzeSimili(const Divulgazione& conferenza) const;
+    QString stampaConferenzeSimili(const Divulgazione* ) const;
+
+    QString stampaRivisteElitarieInfluenti() const;
 
 };
 
-#endif
+#endif  // GESTORE_H

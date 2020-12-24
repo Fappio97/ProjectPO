@@ -20,45 +20,29 @@ along with Progetto.  If not, see <http://www.gnu.org/licenses/>.
 #include "rivista.h"
 
 
+                            //COSTRUTTORI E DISTRUTTORE
+
 Rivista::Rivista() {
 }
 
 Rivista::Rivista(const QString& _nome, const QString& _acronimo, const QString& _editore, const QString& _data, int _volume): Divulgazione(_nome, _acronimo, _data), editore(_editore), volume(_volume)  {
 }
 
+Rivista::Rivista(const Rivista& a): Divulgazione(a), editore(a.editore), volume(a.volume) {
+}
+
 Rivista::~Rivista() {
+    svuota();
+}
 
+void Rivista::svuota() {
+    svuotaDivulgazione();
 }
 
 
 
 
-
-
-void Rivista::setNome(const QString &value)
-{
-    nome = value;
-}
-
-QString Rivista::getAcronimo() const
-{
-    return acronimo;
-}
-
-void Rivista::setAcronimo(const QString &value)
-{
-    acronimo = value;
-}
-
-QString Rivista::getData() const
-{
-    return data;
-}
-
-void Rivista::setData(const QString &value)
-{
-    data = value;
-}
+                            //GETTER & SETTER
 
 int Rivista::getVolume() const
 {
@@ -84,12 +68,13 @@ void Rivista::setEditore(const QString &value)
 
 
 
+                            //METODI VIRTUAL
 
 Rivista* Rivista::clone() {
     return new Rivista(*this);
 }
 
-QString Rivista::classeRiferimento() const {
+QString Rivista::classeRifermento() {
     return "Rivista";
 }
 
@@ -97,7 +82,15 @@ QString Rivista::classeRiferimento() const {
 
 
 
+                            //STAMPA
+
 std::ostream& Rivista::stampa(std::ostream& out) const {
-    out << "-RIVISTA-" << std::endl << "      NOME: " << nome.toStdString() << ", ACRONIMO: " << acronimo.toStdString() << ", DATA: " << data.toStdString() << " EDITORE: " << editore.toStdString() << " VOLUME: " << volume << std::endl;
-    return out;
+    out << "-RIVISTA-" << std::endl << "      NOME: " << nome.toStdString() << ", ACRONIMO: " << acronimo.toStdString() << ", DATA: " << data.toStdString() << ", EDITORE: " << editore.toStdString() << ", VOLUME: " << volume << std::endl;
+    if(articoli.empty())
+        return out << "      NESSUN ARTICOLO PUBBLICATO" << std::endl;
+    out << "       LISTA TITOLI ARTICOLI CORRELATI:";
+    for(auto i = articoli.begin(); i != articoli.end(); i++) {
+        out << " [" << (**i).getTitolo().toStdString() << "]";
+    }
+    return out << std::endl;
 }

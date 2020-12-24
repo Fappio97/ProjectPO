@@ -23,7 +23,6 @@ along with Progetto.  If not, see <http://www.gnu.org/licenses/>.
 #include<QString>
 
 #include "autore.h"
-#include "divulgazione.h"
 
 class Articolo
 {
@@ -37,12 +36,12 @@ private:
     QList<QString *> keyword;
     double prezzo;
     QList<Articolo *> correlati;
-    Divulgazione * pubblicazione;
+    QString anno;
 
 public:
 
     Articolo();
-    Articolo(const QString&, const QString&, int, QList<Autore *>, QList<QString *>, double, QList<Articolo *>, Divulgazione *);
+    Articolo(const QString&, const QString&, int, QList<Autore *>, QList<QString *>, double, QList<Articolo *>, const QString& anno);
     Articolo(const Articolo&);
     Articolo& operator=(const Articolo&);
     ~Articolo();
@@ -58,12 +57,10 @@ public:
     double getPrezzo() const;
     void setPrezzo(double value);
     QList<QString *> getKeyword() const;
-    Divulgazione * getPubblicazione() const;
     QList<Articolo *> getCorrelati() const;
 
 
     bool autoreHaScrittoArticolo(const Autore&) const;
-    bool pubblicataInQuestoArticolo (const Divulgazione& ) const;
 
 
     friend std::ostream& operator<<(std::ostream&, const Articolo&);
@@ -71,6 +68,8 @@ public:
 
     QString cognomePrimoAutore() const;
 
+    QString getAnno() const;
+    void setAnno(const QString &value);
 };
 
 #endif // ARTICOLO_H

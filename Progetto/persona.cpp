@@ -55,18 +55,6 @@ void Persona::setCognome(const QString &value)
 
 
 
-
-
-bool Persona::operator==(const Persona& a) const
-{
-    return (nome == a.nome && cognome == a.cognome);
-}
-
-
-
-
-
-
 std::ostream& operator<<(std::ostream& out, const Persona& a) {
    return out << a.nome.toStdString() << " " << a.cognome.toStdString();
 }

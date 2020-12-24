@@ -21,15 +21,8 @@ along with Progetto.  If not, see <http://www.gnu.org/licenses/>.
 
 #include<sstream>
 
-/*#include <QVariant>               //interessante
 
-QString stampa(QList<QVariant> a) {
-    QString stampa;
-    for(auto i = a.begin(); i != a.end(); i++) {
-        stampa += a;
-    }
-}*/
-
+                            //COSTRUTTORI, DISTRUTTORE ED OPERATOR=
 
 Gestore::Gestore()
 {
@@ -41,7 +34,7 @@ Gestore::Gestore(const Gestore& a) {
         autori.push_back( (*i) );
     }
     for(auto i = a.divulgazioni.begin(); i != divulgazioni.end(); i++) {
-  //      divulgazioni.push_back( (*i).clone() );       // ho tolto il clone per trattarlo nell'altro modo
+        divulgazioni.push_back( (**i).clone() );
     }
     for(auto i = a.articoli.begin(); i != a.articoli.end(); i++) {
         articoli.push_back( (*i) );
@@ -78,7 +71,7 @@ Gestore& Gestore::operator=(const Gestore& a) {
             autori.push_back( (*i) );
         }
         for(auto i = a.divulgazioni.begin(); i != divulgazioni.end(); i++) {
-//            divulgazioni.push_back( (**i).clone() );      //tolto il clone, leggi sopra
+            divulgazioni.push_back( (**i).clone() );
         }
         for(auto i = a.articoli.begin(); i != a.articoli.end(); i++) {
             articoli.push_back( (*i) );
@@ -129,6 +122,10 @@ void Gestore::svuotaKeywords() {
     keywords.clear();
 }
 
+bool Gestore::keywordsVuote() const {
+    return keywords.empty();
+}
+
 
 
 
@@ -149,7 +146,7 @@ void Gestore::aggiungiAfferenza(const QString& _afferenza) {
 
 bool Gestore::afferenzaEsistente(const QString& _afferenza) const {
     for(auto i = afferenze.begin(); i != afferenze.end(); i++) {
-        if( (**i) == _afferenza )
+        if( (**i).getNome() == _afferenza )
             return true;
     }
     return false;
@@ -168,10 +165,9 @@ void Gestore::svuotaAfferenze() {
 
                            //GESTIONE PERSONE
 
-Persona* Gestore::restituisciPersona(const QString& a) const {
+Persona* Gestore::restituisciPersona(const QString& nome, const QString& cognome) const {
     for(auto i = persone.begin(); i != persone.end(); i++) {
-        QString b = (**i).getNome() + " " + (**i).getCognome();
-        if( b == a )
+        if( (*i)->getNome() == nome && (**i).getCognome() == cognome )
             return (*i);
     }
     return nullptr;
@@ -210,7 +206,7 @@ Autore* Gestore::restituisciAutore(const QString& _identificativo) const {
     return nullptr;
 }
 
-void Gestore::restituisciAutoreConnessoStruttura(const Afferenza& _afferenza, QVector<Autore*>& autore ) {
+void Gestore::inserisciAutoriConnessoStruttura(const Afferenza& _afferenza, QVector<Autore*>& autore ) {      //AGGIUNGI AL VETTORE "autore" QUELLI CONESSI ALLA "_afferenza"
     for(auto i = autori.begin(); i != autori.end(); i++ ) {
         if( (*i)->autoreConnessoStruttura(_afferenza) )
             autore.push_back( (*i) );
@@ -222,7 +218,15 @@ void Gestore::aggiungiAutore(const QString& _identificativo, const QString& _nom
     autori.push_back(new Autore(_identificativo, _nome, _cognome, _afferenze));
 }
 
-bool Gestore::autoreEsistente(const QString& _identificativo) const {
+bool Gestore::autoreEsistente(const QString& nome, const QString& cognome) const {
+    for(auto i = autori.begin(); i != autori.end(); i++) {
+        if( (*i)->getNome() == nome && (*i)->getCognome() == cognome  )
+            return true;
+    }
+    return false;
+}
+
+bool Gestore::autoreIdOccupato(const QString& _identificativo) const {
     for(auto i = autori.begin(); i != autori.end(); i++) {
         if( (*i)->getIdentificativo() == _identificativo  )
             return true;
@@ -281,11 +285,9 @@ void Gestore::aggiungiRivista(const QString& _nome, const QString& _acronimo, co
         divulgazioni.push_back(new Rivista(_nome, _acronimo, _editore, _data, _volume));
 }
 
-bool Gestore::divulgazioniVuote() const {
-    if(divulgazioni.empty())
-        return true;
-    return false;
-}
+/*bool Gestore::divulgazioniVuote() const {
+    return divulgazioni.empty();
+}*/
 
 void Gestore::svuotaDivulgazioni() {
     for(auto i = divulgazioni.begin(); i != divulgazioni.end(); i++) {
@@ -299,6 +301,9 @@ QString Gestore::stampaDivulgazioni() const {
     for(auto i = divulgazioni.begin(); i != divulgazioni.end(); i++) {
           s << (**i) << std::endl;
     }
+
+    s << std::endl;
+
     return QString::fromStdString(s.str());
 }
 
@@ -325,7 +330,11 @@ bool Gestore::articoloPresente(const QString& _identificativo) const {
 }
 
 void Gestore::aggiungiArticolo(const QString& _identificativo, const QString& _titolo, int _pagine, QList<Autore *> _autori, QList<QString *> _keyword, double _prezzo, QList<Articolo *> _correlati, Divulgazione * _pubblicazione) {
-        articoli.push_back(new Articolo(_identificativo, _titolo, _pagine, _autori, _keyword, _prezzo, _correlati, _pubblicazione));
+        articoli.push_back(new Articolo(_identificativo, _titolo, _pagine, _autori, _keyword, _prezzo, _correlati, _pubblicazione->getAnno()));
+        for(auto i = divulgazioni.begin(); i != divulgazioni.end(); i++) {
+            if( (*i) == _pubblicazione )
+                (**i).inserisciArticolo( articoli.back() );
+        }
 }
 
 void Gestore::svuotaArticoli() {
@@ -359,38 +368,47 @@ QString Gestore::stampaArticoliAutore(const Autore& autore) const {
     return QString::fromStdString(s.str());
 }
 
-QString Gestore::stampaArticoliConferenza(const Divulgazione& divulgazione) const {
+QString Gestore::stampaArticoliConferenza(const QString& nome) const {     //funziona sia per riviste che per divulgazioni
     std::stringstream s;
-    for(auto i = articoli.begin(); i != articoli.end(); i++) {
-          if( (*i)->pubblicataInQuestoArticolo( divulgazione )  ) {
-                s << (**i);
+
+    for(auto i = divulgazioni.begin(); i != divulgazioni.end(); i++) {
+          if( (**i).getNome() == nome  ) {
+              if( (**i).getArticoli().size() != 0 )
+                    s << "                                                                          ARTICOLI PUBBLICATI NELL'ANNO: " << (**i).getAnno().toStdString() << std::endl;
+              for(auto j = (**i).getArticoli().begin(); j != (**i).getArticoli().end(); j++)
+                    s << (**j);
           }
     }
+
+    s << std::endl;
+
     return QString::fromStdString(s.str());
 }
 
-void azzeraVectorInt(QVector<int>& numero, int size) {
+void azzeraVectorInt(QVector<int>& numero, int size) {      //formo un vettore di interi pari ad una certa dimensione
     numero.clear();
     for(int i = 0; i < size; i++) {
         numero.push_back(0);
     }
 }
 
-QString Gestore::stampaArticoliStruttura(QVector<Autore *> autore) const {
-    QVector<int> numero;
+QString Gestore::stampaArticoliStruttura(const QVector<Autore *>& autore) const {
+    QVector<int> numero;                            //questo vettore mi serve perché, supponendo di avere più autori che hanno la stessa afferenza e che hanno scritto lo stesso articolo, impedisco di stampare lo stesso articolo più volte
     std::stringstream s;
-    azzeraVectorInt(numero, articoli.size());
+    azzeraVectorInt(numero, articoli.size());       //creo un vettore di dimensione pari alla size di tutti gli articoli presenti
     int cont;
+
     for(int j = 0; j < autore.size(); j++) {
-        cont = 0;
+        cont = 0;       //azzero il cont ogni volta che cambio autore e quindi mi appresto a leggere gli articoli
         for(auto i = articoli.begin(); i != articoli.end(); i++, cont++) {
-              if( (**i).autoreHaScrittoArticolo( (*autore[j])) && numero[cont] == 0 ) {
+              if( (**i).autoreHaScrittoArticolo( (*autore[j])) && numero[cont] == 0 ) {     //se il numero[cont] != 0, significa che quell'articolo è stato scritto già da un altro autore e quindi già stampato
                     numero[cont]++;
                     s << (**i);
               }
         }
     }
-    numero.clear();
+
+    numero.clear();     //necessario??????
     return QString::fromStdString(s.str());
 }
 
@@ -403,25 +421,33 @@ QString Gestore::stampaArticoliStruttura(QVector<Autore *> autore) const {
 QString Gestore::stampaArticoliAutoreCostosi(const Autore& autore) const {
     std::stringstream s;
     int max = INT_MIN;
+
+    QVector<Articolo *> art;
+
     for(auto i = articoli.begin(); i != articoli.end(); i++) {
-          if( (*i)->autoreHaScrittoArticolo( autore ) && (**i).getPrezzo() > max ) {
-                max = (**i).getPrezzo();
-          }
+        if( (*i)->autoreHaScrittoArticolo( autore ) && (**i).getPrezzo() == max ) { //se l'articolo è stato scritto dall'autore ed ha un prezzo uguale a quello massimo attualmente lo metto nel vettore che poi stamperò
+            art.push_back( (*i) );
+        }
+        if( (*i)->autoreHaScrittoArticolo( autore ) && (**i).getPrezzo() > max ) {    //se l'articolo è stato scritto dall'autore ed il prezzo dell'articolo è maggiore lo salvo, svuotando il vettore di articoli che avevo prima perché ho trovato un nuovo prezzo maggiore
+            art.clear();
+            max = (**i).getPrezzo();
+            art.push_back( (*i) );
+        }
     }
-    for(auto i = articoli.begin(); i != articoli.end(); i++) {
-          if( (*i)->autoreHaScrittoArticolo( autore ) && (**i).getPrezzo() == max ) {
-                    s << (**i);
-          }
+
+    for(int i = 0; i < art.size(); i++) {
+        s << (*art[i]);
     }
+
     return QString::fromStdString(s.str());
 }
 
-int Gestore::guadagnoDivulgazione(const Divulgazione& a, const QString& data) const {  //facilmente fattibile anche il numero 4 della sezione C con questo metodo
-    int somma = -1;
-    for(auto i = articoli.begin(); i < articoli.end(); i++) {
-        if(  (**i).getPubblicazione()->getNome() == a.getNome() && (**i).getPubblicazione()->getAcronimo() == a.getAcronimo() && data == (**i).getPubblicazione()->getAnno()) {     //qui praticamente
-            somma += (*i)->getPrezzo();
-        }
+int Gestore::guadagnoDivulgazione(const QString& nome, const QString& anno) const {  //facilmente fattibile anche il numero 4 della sezione C con questo metodo
+    int somma = -1;     // lo faccio partire da -1, poiché se non viene aggiornato significa che non sono stati pubblicati articoli
+    for(auto i = divulgazioni.begin(); i != divulgazioni.end(); i++) {
+          if( (**i).getAnno() == anno && (**i).getNome() == nome ) {     //cerco tra tutte le divulgazioni con quel nome, coloro che sono state create in un determinato anno di cui mi interessa stampare il guadagno degli articoli connessi
+                somma = (**i).sommaGuadagnoArticoliDivulgazione();
+          }
     }
     return somma;
 }
@@ -437,9 +463,9 @@ bool keywordPresente(const QString& key, const Articolo& a) {
 void calcolaMassimoVectorInt(QVector<int>& numero, QVector<int>& indici) {
     int max = INT_MIN;
     for(int i = 0; i < numero.size(); i++) {
-        if(numero[i] == max)
+        if(numero[i] == max)        //se l'incasso di quella keyword è uguale al massimo fin'ora trovato mi salvo l'indice
             indici.push_back(i);
-        if(numero[i] > max) {
+        if(numero[i] > max) {       //se trovo un incasso di una keyword maggiore del massimo, prima svuoto gli indici perché non sono più riferiti al massimo e poi salvo l'indice di quello trovato
             indici.clear();
             max = numero[i];
             indici.push_back(i);
@@ -451,19 +477,23 @@ QStringList Gestore::keywordMigliorIncasso(const QStringList& keywords) const {
     QVector<int> numero;
     QVector<int> indici;
     azzeraVectorInt(numero, keywords.size());   //pusho tanti zero nel vettore numero tante quante le keywords
+
     for(int i = 0; i < keywords.size(); i++) {
         for(auto j = articoli.begin(); j < articoli.end(); j++) {
-            if( keywordPresente(keywords[i], (**j)) ) {     //controllo se la keyword è presente in quell'articolo, dato che un articolo ha una lsita di keywords
+            if( keywordPresente(keywords[i], (**j)) ) {     //controllo se la keyword è presente in quell'articolo, dato che un articolo ha una lista di keywords
                 numero[i] += (**j).getPrezzo();
             }
         }
     }
+
     calcolaMassimoVectorInt(numero, indici);        //trovo il massimo oppure i massimi valori ottenuti dalle keywords
     numero.clear();
+
     QStringList keywordMaggiori;
-    for(int i = 0; i < indici.size(); i++) {
+    for(int i = 0; i < indici.size(); i++) {        //una volta che ho gli indici delle keyword con incasso maggiore li metto in una lista che restituirò
         keywordMaggiori.push_back( keywords[indici[i]] );
     }
+
     return keywordMaggiori;
 }
 
@@ -474,30 +504,44 @@ QStringList Gestore::keywordMigliorIncasso(const QStringList& keywords) const {
                            //SEZIONE D
 
 bool comparaDivulgazioni(const Articolo* a, const Articolo* b) {
-    return a->getPrezzo() < b->getPrezzo();
+    return a->getPrezzo() < b->getPrezzo();     //ordine crescente
 }
 
-QString Gestore::stampaArticoliDivulgazioneOrdinatiPrezzo(const Divulgazione& conferenza) const {
+QString Gestore::stampaArticoliDivulgazioneOrdinatiPrezzo(const QString& nome) const {
     QList<Articolo *> art;
     std::stringstream s;
-    for(auto i = articoli.begin(); i != articoli.end(); i++) {
-        if( ( *(**i).getPubblicazione() ) == conferenza ) {
-            art.push_back( (*i) );
+
+
+    for(auto i = divulgazioni.begin(); i != divulgazioni.end(); i++) {
+        if( (**i).getNome() == nome ) {
+            for(auto j = (**i).getArticoli().begin(); j != (**i).getArticoli().end(); j++) {
+                s << (**j);
+//              art.push_back( (*j) );      //crasha qui, segmentation fault
+            }
         }
     }
-    std::sort( art.begin(), art.end(), comparaDivulgazioni);
+
+/*    if(art.empty())
+        return "NESSUN ARTICOLO PUBBLICATO";*/
+
+
+    std::sort( art.begin(), art.end(), comparaDivulgazioni );   //sort funziona come il find fatto vedere a lezione
+
+    s << "                                                                          ARTICOLI ORDINATI IN SENSO CRESCENTE" << std::endl;
 
     QString stampa;
     for(auto i = art.begin(); i != art.end(); i++) {
         s << (**i);
     }
+
+    art.clear();
     return QString::fromStdString(s.str());
 }
 
 bool comparaKeyword(const Articolo* a, const Articolo* b) {
-    if( a->getPubblicazione()->getAnno() > b->getPubblicazione()->getAnno() )
+    if( a->getAnno() > b->getAnno() )
         return true;
-    if( a->getPubblicazione()->getAnno() < b->getPubblicazione()->getAnno() )
+    if( a->getAnno() < b->getAnno() )
         return false;
     if( a->getPrezzo() < b->getPrezzo() )
         return true;
@@ -507,87 +551,147 @@ bool comparaKeyword(const Articolo* a, const Articolo* b) {
 }
 
 QString Gestore::stampaArticoliKeywordOrdinati(const QString& keyword) const {
-    QList<Articolo *> art;
+    QList<Articolo *> art;      //creo una lista di articoli
     std::stringstream s;
+
     for(auto i = articoli.begin(); i != articoli.end(); i++) {
         QList<QString *> a = (*i)->getKeyword();
-        for(auto j = a.begin(); j != a.end(); i++) {
-            if( (*j) == keyword ) {
+        for(auto j = a.begin(); j != a.end(); j++) {        //scorro le keyword di ogni articolo presente
+            if( (*j) == keyword ) {     //se in questo articolo è presente la keyword che sto cercando la metto nella lsita di articoli "art"
                 art.push_back( (*i) );
                 break;
             }
         }
     }
+
+    if(art.empty())
+        return "NESSUN ARTICOLO PUBBLICATO";
+
     std::sort(art.begin(), art.end(), comparaKeyword);
 
     for(auto i = art.begin(); i != art.end(); i++) {
         s << (**i);
     }
+
+    art.clear();
     return QString::fromStdString(s.str());
 }
 
 
 
+
+
                            //SEZIONE E
 
-void pushaKeywords(QVector<int>& num, QList<QString *> lista, const Articolo& articolo) {
-    for(auto i = articolo.getKeyword().begin(); i != articolo.getKeyword().end(); i++) {
+bool sottoinsieme(const QList<QString *>& a, const QList<QString *>& b ) {
+    if(a.size() >= b.size() || a.size() == 0 )        //SE LA DIMENSIONE DELLE KEYWORDS DI UNA DIVULGAZIONE SONO MAGGIORI OPPURE UGUALI DI UN'ALTRA È INUTILE PROSEGUIRE, NON È UN SOTTOINSIEME
+        return false;
 
+    int cont = 0;
+    for(auto i = a.begin(); i != a.end(); i++) {
+        for(auto j = b.begin(); j != b.end(); j++) {
+            if( (**i) == (**j) ) {      //OGNI VOLTA CHE TROVO UNA KEYWORD UGUALE NEGLI ARTICOLI DELLA 2° RIVISTA AUMENTO UN CONTATORE
+                cont++;
+                break;
+            }
+        }
+    }
+
+    if(cont == a.size())    //SE IL CONTATORE È UGUALE ALLE KEYWORDS DELLA 1° RIVISTA ALLORA HO LA CONDIZIONE FAVOREVOLE
+        return true;
+    return false;   //NON CONTROLLO SE NELLA 2°RIVISTA C'È UNA KEYWORDS IN PIÙ RISPETTO ALLA 1°, MA QUESTO È IMPLICITO, PERCHÉ SE LA 1° E LA 2° RIVISTA AVESSERO DIMENSIONE UGUALE MI FERMEREI AL RPIMO IF, ED INOLTRE LE KEYWORDS SONO TUTTE DIVERSE TRA LORO, CON IL METODO CON CUI LE PRENDO NELLA CLASSE "DIVULGAZIONE"
+}
+
+void Gestore::trovaDivulgazioni(const QString& derivata, QList<Divulgazione *>& lista) const {  //METODO GENERICO CON CUI TROVARE UNA CLASSE DERIVATA DALLA CLASSE BASE "DIVULGAZIONE" GRAZIE AL METODO "CLASSERIFERIMENTO" CHE NON INFRANGE LA CONDIZIONE PER CUI NON DOVREI OPTARE PER NON UTILIZZARE IL POLIMORFISMO IN QUANTO MI SERVIREBBE RICONOSCERE A QUALE CLASSE FACCIO RIFERIMENTO. MANTENGO LA FLESSIBILITÀ CON IL POLIMORFISMO, VISIBILE IN ALCUNI METODI SOPRA CHE VALGONO PER ENTRAMBI LE CLASSI BASE ED INOLTRE IL METODO VIRTUAL NON CREDO INFRANGA LA REGOLA PER CUI NNO DOVREI USARE IL POLIMORFISMO VISTO DALLA LIST<CLASSE BASE>
+    lista.clear();
+    for(auto i = divulgazioni.begin(); i != divulgazioni.end(); i++) {
+        if( (**i).classeRifermento() == derivata)
+            lista.push_back( (**i).clone() );
     }
 }
 
-QString Gestore::prime5KeywordsPiuDiffuse() const {
-    QVector<int> numero;
-    for(auto i = keywords.begin(); i != keywords.end(); i++) {
-        numero.push_back(0);
+void stampaKeywords(const QList<QString *>& a, std::stringstream& s) {      //faccio una stampa più leggibile
+    if( a.size() == 0 ) {
+        s << ", SENZA KEYWORD";
+        return;
     }
 
-    for(auto i = articoli.begin(); i != articoli.end(); i++) {
-        pushaKeywords(numero, keywords, (**i));
-    }
-}
+    s << ", CON KEYWORD";
 
-/*void listaDivulgazioneCercata(const QList<Articolo* >& art, QList<Divulgazione *>& divulgazione, const QString& cercare ) {
-    for(auto i = art.begin(); i != art.end(); i++) {
-        if( (**i).getPubblicazione()->classeRifermento() == cercare )
-                divulgazione.push_back( (*i)->getPubblicazione() );
+    if( a.size() > 1 )
+        s << "S";
+
+    for(auto i = a.begin(); i != a.end(); i++) {
+        s << " '" << (**i).toStdString() << "' ";
     }
 }
 
-void restituisciKeywordsDivulgazione(const QList<Articolo* >& art, QList<QString>& a, const Divulgazione& divulg) {
-     for(auto i = art.begin(); i != art.end(); i++) {
-         if( *(**i).getPubblicazione() == divulg ) {
-             for( auto j =  (**i).getKeyword().begin(); j != (**i).getKeyword().end(); j++ ) {
-                 if(  )
-             }
-         }
-     }
+void stampaKeywordsLista(const QList<QString *>& a, std::stringstream& s) {      //faccio una stampa più leggibile
+    if( a.size() == 0 ) {
+        s << "      SENZA KEYWORD";
+        return;
+    }
+
+    s << "      CON KEYWORD";
+
+    if( a.size() > 1 )
+        s << "S";
+
+    for(auto i = a.begin(); i != a.end(); i++) {
+        s << " '" << (**i).toStdString() << "' ";
+    }
 }
 
+void rivisteSpecialistiche(const QList<Divulgazione *>& riviste, const Divulgazione& rivista, std::stringstream& s) {
+    QList<QString *> a;
+    QList<QString *> b;
+
+    (rivista).keywordsDivulgazione(a);      //MI FACCIO RESTITUIRE LE KEYWORDS DI TUTTI GLI ARTICOLI DI QUELLA DIVULGAZIONE, INOLTRE NON SONO MAI PRESENTI DOPPIONI TRA LE VARIE KEYWORDS
+
+    stampaKeywords(a, s);
+    s << ", È LA RIVISTA SPECIALISTICA DI:" << std::endl;
+
+    bool trovato = false;
+
+    for(auto i = riviste.begin(); i != riviste.end(); i++) {        //SCORRO TUTTE LE RIVISTE
+        if( ! ( (**i) == rivista ) ) {      //SE LA RIVISTA È DIVERSA DA QUELLA DI RIFERIMENTO DETERMINATA DAL FOR ALL'INTERNO DEL METODO "PRINCIPALE"
+            (**i).keywordsDivulgazione(b);
+            if( sottoinsieme(a , b) ) {
+                trovato = true;         //SERVE PER UNA QUESTIONE DI STAMPA ESTETICA
+                s << (**i);
+                stampaKeywordsLista(b, s);
+                s << std::endl;
+            }
+        }
+    }
+
+    if(!trovato)
+        s << "-NESSUNA RIVISTA-" << std::endl;
+
+    s << std::endl;
+}
 
 QString Gestore::stampaRivisteSpecialistiche() const {
     QList<Divulgazione *> riviste;
-    listaDivulgazioneCercata(articoli, riviste, "Rivista");
+    trovaDivulgazioni("Rivista", riviste);      //trovo tutte le riviste tra le divulgazioni create
 
-    if(riviste.size() <= 1)
-        return "Nessuna rivista specialistica presente";
-
-    QList<QString *> a;
-    QList<QString *> b;
-    for(auto i = riviste.begin(); i != riviste.end(); i++ ) {
-        restituisciKeywordsDivulgazione(articoli, a, (**i));
-    }
+    if(riviste.size() <= 1)     //anche se fosse presente una rivista con chi la paragonerei?
+        return "NON CI SONO RIVISTE SPECIALISTICHE";
 
     std::stringstream s;
-    s << "Riviste specialistiche ";
 
-    if(s.str().empty())
-        return "Nessuna rivista specialistica presente";
 
-    QString c = "Lista di riviste specialistiche ";
-    c += '\n';
-    return  c += QString::fromStdString(s.str());
-}*/
+    for(auto i = riviste.begin(); i != riviste.end(); i++) {
+        s << "LA RIVISTA: " << (*i)->getNome().toStdString() << " "  << (**i).getData().toStdString() << " ";
+        rivisteSpecialistiche(riviste, (**i), s);
+    }
+
+    riviste.clear();
+    return QString::fromStdString(s.str());
+}
+
+
+
 
 
                            //SEZIONE F
@@ -600,39 +704,159 @@ bool comparaCorrelati(const Articolo* a, const Articolo* b) {
     return a->getTitolo().toStdString() < b->getTitolo().toStdString();
 }
 
-
 QString Gestore::ordinaArticoliDagliArticoliCorrelati() const {
     QList<Articolo *> art;
-    art = articoli;
+    art = articoli;     //MI DA UNO STRANO ERRORE SE NON CREO UNA LISTA IN CUI COPIO GLI ARTICOLI CREATI, VOLEVO FARLO DIRETTAMENTE SU ESSO
+
     std::sort(art.begin(), art.end(), comparaCorrelati);
 
     std::stringstream s;
 
     for(auto i = art.begin(); i != art.end(); i++) {
-        s << (**i);     //non delete art perché essendo costruito con l'operatore= deletandolo elimino la lista di articoli a cui esso punta
+        s << (**i);     //NON DELETO ART PERCHÉ ELIMINEREI GLI OGGETTI A CUI PUNTA ANCHE ARTICOLO, LI ELIMINO TUTTI ALLA FINE CON IL DISTRUTTORE
     }
+
     art.clear();
     return QString::fromStdString(s.str());
 }
 
+bool keywords80(const QList<QString *>& a, const QList<QString *>& b ) {
 
-/*QString Gestore::stampaConferenzeSimili(const Divulgazione& conferenza) const {
-    QList<Articolo *> art;
-    calcolaArticoliConDivulgazioni(art, "Conferenza");
+    int cont = 0;
+    for(auto i = a.begin(); i != a.end(); i++) {
+        for(auto j = b.begin(); j != b.end(); j++) {
+            if( (**i) == (**j) ) {      //anche qui se trovo delle keyword in comune fra due conferenze le conto
+                cont++;
+                break;
+            }
+        }
+    }
+
+    if( cont >=  ( b.size() * 0.8 ) )   //se le keyword in comune sono maggiori  o uguali dell'80% degli articoli della 2°conferenza ho trovato una conferenza simile
+        return true;        //non mi serve controllare se anche le keyword della 2°conferenza siano l'80% dell'altra, grazie al primo if che esclude tale possibilità e ricordando che le keywords non sono ripetute, quindi sono uniche per ogni divulgazione
+
+    return false;
+}
+
+void conferenzeSimili(const QList<Divulgazione *>& conferenze, const Divulgazione* conferenza, std::stringstream& s) {
+    QList<QString *> a;
+    QList<QString *> b;
+
+    conferenza->keywordsDivulgazione(a);      //MI FACCIO RESTITUIRE LE KEYWORDS DI TUTTI GLI ARTICOLI DI QUELLA DIVULGAZIONE, INOLTRE NON SONO MAI PRESENTI DOPPIONI TRA LE VARIE KEYWORDS
+
+    stampaKeywords(a, s);
+    s << ", È SIMILE:" << std::endl;
+
+    bool trovato = false;
+
+    for(auto i = conferenze.begin(); i != conferenze.end(); i++) {        //SCORRO TUTTE LE CONFERENZE
+        if( ! ( (**i) == (*conferenza) ) ) {      //SE LA CONFERENZA È DIVERSA DA QUELLA PASSATA DA INPUT
+            (**i).keywordsDivulgazione(b);
+            if( keywords80(a, b) ) {
+                trovato = true;         //SERVE PER UNA QUESTIONE DI STAMPA ESTETICA
+                s << (**i);
+                stampaKeywordsLista(b, s);
+                s << std::endl;
+            }
+        }
+    }
+
+    if(!trovato)
+        s << "-NESSUNA CONFERENZA-" << std::endl;
+
+    s << std::endl;
+}
+
+QString Gestore::stampaConferenzeSimili(const Divulgazione* conferenza) const {
+    QList<Divulgazione *> conferenze;
+    trovaDivulgazioni("Conferenza", conferenze);    //trovo tutte le conferenze tra le divulgazioni create
+
+    if(conferenze.size() == 1)      //se è prensente solo una conferenza, ovvero quella presa da input, non ci sono conferenze simili
+        return "NON CI SONO CONFERENZE SIMILI ALLA SELEZIONATA";
 
     std::stringstream s;
 
-    for(auto i = art.begin(); i != art.end(); i++) {
-        if( keywords80Percento((**i), conferenza) ) {
-            s << (**i).getPubblicazione();
+    s << "LA CONFERENZA " << conferenza->getNome().toStdString() << " "  << conferenza->getData().toStdString();
+    conferenzeSimili(conferenze, conferenza, s);
+
+    conferenze.clear();
+    return QString::fromStdString(s.str());
+}
+
+bool keywordsDiverse(const QList<QString *>& a, const QList<QString *>& b ) {       //vede se ciascuna keywords contenuta in ogni articolo pubblicato per quella conferenza sia diversa
+    int cont = 0;
+    for(auto i = a.begin(); i != a.end(); i++) {
+        for(auto j = b.begin(); j != b.end(); j++) {
+            if( (**i) == (**j) ) {
+                cont++;
+                break;
+            }
         }
     }
-    art.clear();
 
-    if(s.str().empty())
-        return "Non sono presenti conferenze simili alla conferenza " + conferenza.getNome() + " svolta in data " + conferenza.getData();
+    if( cont != 0 )
+        return false;
 
-    QString a = "Lista conferenze simili ";
-    a += '\n';
-    return  a += QString::fromStdString(s.str());
-}*/
+    return true;
+}
+
+void conferenzeElitarie(const QList<Divulgazione *>& conferenze, Divulgazione* conferenza, QVector<Divulgazione *>& elitarie) {
+    QList<QString *> a;     //ho deciso di dichiarare la funzione keywordsDivulgazione che ritorna una QList<QString *> altrimenti ogni volta dovevo richiamare la funzione e quindi ricalcolare le keywords della conferenza che mi veniva passata in alcuni metodi
+    QList<QString *> b;
+    QList<QString *> c;
+
+    (*conferenza).keywordsDivulgazione(a);      //prendo le keywords della conferenza del for nella funzione "principale"
+
+    QVector<Divulgazione *> conferenzeElitarie;
+
+    int max = INT_MIN;
+
+    for(auto i = conferenze.begin(); i != conferenze.end(); i++) {
+        if( ! ( (*i) == conferenza ) ) {
+            (**i).keywordsDivulgazione(b);
+            if( keywordsDiverse(a, b) ) {
+                conferenzeElitarie.push_back( (*i) );       // se le keywords sono diverse fra due conferenze allora ho trovato due conferenze elitarie fra loro, salvo quest'ultime in un vettore
+            }
+        }
+    }
+
+    for(int j = 0; j < conferenzeElitarie.size(); j++) {        //tra le conferenze elitarie per quella passata dal for della funzione principale, cerco una terza conferenza elitaria
+        conferenzeElitarie[j]->keywordsDivulgazione(b);
+        for(auto i = conferenze.begin(); i != conferenze.end(); i++) {
+            if( ! ( (*i) == conferenza ) && (*i) != conferenzeElitarie[j] ) {       // se la conferenza è diversa da quella passata dalla funzione "principale" (la chiamo prima) e quella del vettore che sto scorrendo (la chiamo seconda), verifico se essa è elitaria sia con la prima che con la seconda. Se è così, mi salvo la sua influenza e se è massima mi salvo le tre conferenze
+                (**i).keywordsDivulgazione(c);
+                if( keywordsDiverse(a, c) && keywordsDiverse(b, c) && ( conferenza->influenza() + conferenzeElitarie[j]->influenza() + (**i).influenza() ) > max ) {
+                    max = ( conferenza->influenza() + conferenzeElitarie[j]->influenza() + (**i).influenza() );
+                    elitarie.clear();
+                    elitarie.push_back(conferenza);
+                    elitarie.push_back(conferenzeElitarie[j]);
+                    elitarie.push_back( (*i) );
+                }
+            }
+        }
+    }
+}
+
+QString Gestore::stampaRivisteElitarieInfluenti() const {
+    QList<Divulgazione *> conferenze;
+    trovaDivulgazioni("Conferenza", conferenze);    //trovo tutte le conferenze tra le divulgazioni create
+
+    if(conferenze.size() <= 2 )      //se sono prensenti solo due conferenze non poso formare triple
+        return "NON CI SONO CONFERENZE ELITARIE";
+
+    std::stringstream s;
+
+    QVector<Divulgazione *> elitarie;
+
+    for(auto i = conferenze.begin(); i != conferenze.end(); i++) {
+        conferenzeElitarie(conferenze, (*i), elitarie);
+    }
+
+    for(int i = 0; i < elitarie.size(); i++) {
+        s << (*elitarie[i]);
+    }
+
+    conferenze.clear();
+    elitarie.clear();
+    return QString::fromStdString(s.str());
+}

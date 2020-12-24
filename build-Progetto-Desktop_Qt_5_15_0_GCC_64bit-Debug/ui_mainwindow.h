@@ -15,6 +15,8 @@
 #include <QtWidgets/QCalendarWidget>
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QDoubleSpinBox>
+#include <QtWidgets/QFrame>
+#include <QtWidgets/QGridLayout>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QListWidget>
@@ -31,6 +33,8 @@ class Ui_MainWindow
 {
 public:
     QWidget *centralwidget;
+    QGridLayout *gridLayout;
+    QPushButton *Home;
     QStackedWidget *stackedWidget;
     QWidget *PaginaPrincipale;
     QPushButton *VaiPaginaAutori;
@@ -46,8 +50,12 @@ public:
     QPushButton *VaiPaginaArticoliOridnati;
     QPushButton *VaiPaginaRivisteSpecialistche;
     QLabel *label_19;
-    QLabel *label_20;
     QPushButton *VaiPaginaOperazioniAvanzate;
+    QPushButton *EliminaTutto;
+    QLabel *label_24;
+    QLabel *TITLE_12;
+    QFrame *line;
+    QFrame *line_2;
     QWidget *PaginaAutori;
     QLabel *ID;
     QLabel *Nome;
@@ -65,7 +73,6 @@ public:
     QLabel *SpiegazioneAfferenze;
     QPushButton *CreaAfferenza;
     QLabel *label;
-    QPushButton *SvuotaAutori;
     QListWidget *ListaAfferenze;
     QWidget *PaginaConferenze;
     QLineEdit *NomeInput_2;
@@ -106,7 +113,6 @@ public:
     QPushButton *VisualizzaRiviste;
     QWidget *PaginaDivulgazioni;
     QPlainTextEdit *StampaDivulgazioni;
-    QPushButton *SvuotaDivulgazioni;
     QPushButton *VisualizzaDivulgazioni;
     QLabel *TITLE_5;
     QWidget *PaginaArticoli;
@@ -124,7 +130,6 @@ public:
     QLabel *ConferenzeRiviste;
     QComboBox *ConferenzeRivisteBox;
     QPushButton *VisualizzaArticoli;
-    QPushButton *SvuotaArticoli;
     QPlainTextEdit *StampaArticoli;
     QLabel *keyword;
     QLineEdit *KeywordInput;
@@ -140,7 +145,6 @@ public:
     QWidget *PaginaVisualizzaArticoli;
     QLabel *TITLE_7;
     QPushButton *VisualizzaArticoliAutore;
-    QPushButton *SvuotaFinestra;
     QComboBox *StrutturaBox;
     QLabel *Struttura;
     QComboBox *ConferenzeBox;
@@ -153,7 +157,6 @@ public:
     QLabel *Struttura_2;
     QWidget *PaginaPrezzi;
     QLabel *TITLE_8;
-    QPushButton *SvuotaFinestra_2;
     QPlainTextEdit *VisualizzaArticoliPrezzi;
     QLabel *SEZIONEC;
     QComboBox *AutoreBox_2;
@@ -171,7 +174,6 @@ public:
     QPushButton *OrdinaConferenze;
     QLabel *SEZIONED;
     QLabel *label_16;
-    QPushButton *SvuotaFinestra_3;
     QPlainTextEdit *VisualizzaArticoliOdirnati;
     QComboBox *ConferenzeBox_2;
     QComboBox *KeywordBox;
@@ -183,19 +185,18 @@ public:
     QPlainTextEdit *VisualizzaRivisteSpecialistiche;
     QPushButton *TastoRivisteSpecilistiche;
     QLabel *SEZIONEE;
-    QPushButton *SvuotaFinestra_4;
     QLabel *label_21;
     QWidget *PaginaOperazioniAvanzate;
     QLabel *SEZIONEE_2;
     QLabel *TITLE_11;
     QPlainTextEdit *VisualizzaOperazioniAvanzate;
-    QPushButton *SvuotaFinestra_5;
     QPushButton *TastoOrdinaCorrelati;
     QLabel *label_18;
     QComboBox *ConferenzeBox_3;
     QLabel *Conferenze;
     QPushButton *TastoConferenzeSimili;
-    QPushButton *Home;
+    QLabel *label_22;
+    QPushButton *TastoConferenzeElitarie;
 
     void setupUi(QMainWindow *MainWindow)
     {
@@ -224,68 +225,132 @@ public:
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         centralwidget->setStyleSheet(QString::fromUtf8(""));
+        gridLayout = new QGridLayout(centralwidget);
+        gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
+        Home = new QPushButton(centralwidget);
+        Home->setObjectName(QString::fromUtf8("Home"));
+        QFont font;
+        font.setBold(true);
+        font.setWeight(75);
+        Home->setFont(font);
+        Home->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);\n"
+"color: rgb(0, 0, 0);"));
+
+        gridLayout->addWidget(Home, 1, 0, 1, 1);
+
         stackedWidget = new QStackedWidget(centralwidget);
         stackedWidget->setObjectName(QString::fromUtf8("stackedWidget"));
-        stackedWidget->setGeometry(QRect(9, 9, 782, 555));
         PaginaPrincipale = new QWidget();
         PaginaPrincipale->setObjectName(QString::fromUtf8("PaginaPrincipale"));
         VaiPaginaAutori = new QPushButton(PaginaPrincipale);
         VaiPaginaAutori->setObjectName(QString::fromUtf8("VaiPaginaAutori"));
-        VaiPaginaAutori->setGeometry(QRect(290, 56, 88, 27));
+        VaiPaginaAutori->setGeometry(QRect(100, 136, 88, 27));
+        VaiPaginaAutori->setFont(font);
+        VaiPaginaAutori->setStyleSheet(QString::fromUtf8("background-color: rgb(136, 138, 133);\n"
+"color: rgb(255, 255, 255);"));
         VaiPaginaConferenze = new QPushButton(PaginaPrincipale);
         VaiPaginaConferenze->setObjectName(QString::fromUtf8("VaiPaginaConferenze"));
-        VaiPaginaConferenze->setGeometry(QRect(410, 56, 88, 27));
-        QFont font;
-        font.setPointSize(11);
-        VaiPaginaConferenze->setFont(font);
-        VaiPaginaRiviste = new QPushButton(PaginaPrincipale);
-        VaiPaginaRiviste->setObjectName(QString::fromUtf8("VaiPaginaRiviste"));
-        VaiPaginaRiviste->setGeometry(QRect(530, 56, 88, 27));
-        VaiPaginaArticoli = new QPushButton(PaginaPrincipale);
-        VaiPaginaArticoli->setObjectName(QString::fromUtf8("VaiPaginaArticoli"));
-        VaiPaginaArticoli->setGeometry(QRect(650, 56, 88, 27));
-        label_10 = new QLabel(PaginaPrincipale);
-        label_10->setObjectName(QString::fromUtf8("label_10"));
-        label_10->setGeometry(QRect(70, 64, 101, 16));
+        VaiPaginaConferenze->setGeometry(QRect(260, 136, 88, 27));
         QFont font1;
+        font1.setPointSize(11);
         font1.setBold(true);
         font1.setWeight(75);
-        label_10->setFont(font1);
+        VaiPaginaConferenze->setFont(font1);
+        VaiPaginaConferenze->setStyleSheet(QString::fromUtf8("background-color: rgb(85, 87, 83);\n"
+"color: rgb(255, 255, 255);"));
+        VaiPaginaRiviste = new QPushButton(PaginaPrincipale);
+        VaiPaginaRiviste->setObjectName(QString::fromUtf8("VaiPaginaRiviste"));
+        VaiPaginaRiviste->setGeometry(QRect(420, 136, 88, 27));
+        VaiPaginaRiviste->setFont(font);
+        VaiPaginaRiviste->setStyleSheet(QString::fromUtf8("background-color: rgb(136, 138, 133);\n"
+"color: rgb(255, 255, 255);"));
+        VaiPaginaArticoli = new QPushButton(PaginaPrincipale);
+        VaiPaginaArticoli->setObjectName(QString::fromUtf8("VaiPaginaArticoli"));
+        VaiPaginaArticoli->setGeometry(QRect(570, 136, 88, 27));
+        VaiPaginaArticoli->setFont(font);
+        VaiPaginaArticoli->setStyleSheet(QString::fromUtf8("background-color: rgb(85, 87, 83);\n"
+"color: rgb(255, 255, 255);"));
+        label_10 = new QLabel(PaginaPrincipale);
+        label_10->setObjectName(QString::fromUtf8("label_10"));
+        label_10->setGeometry(QRect(350, 88, 71, 16));
+        QFont font2;
+        font2.setBold(false);
+        font2.setItalic(true);
+        font2.setWeight(50);
+        label_10->setFont(font2);
         label_11 = new QLabel(PaginaPrincipale);
         label_11->setObjectName(QString::fromUtf8("label_11"));
-        label_11->setGeometry(QRect(650, 128, 71, 16));
-        label_11->setFont(font1);
+        label_11->setGeometry(QRect(10, 248, 71, 16));
+        QFont font3;
+        font3.setPointSize(10);
+        font3.setBold(false);
+        font3.setItalic(true);
+        font3.setWeight(50);
+        label_11->setFont(font3);
         VaiPaginaVisualizzaArticoli = new QPushButton(PaginaPrincipale);
         VaiPaginaVisualizzaArticoli->setObjectName(QString::fromUtf8("VaiPaginaVisualizzaArticoli"));
-        VaiPaginaVisualizzaArticoli->setGeometry(QRect(337, 120, 161, 27));
+        VaiPaginaVisualizzaArticoli->setGeometry(QRect(90, 240, 241, 25));
+        VaiPaginaVisualizzaArticoli->setFont(font);
         label_12 = new QLabel(PaginaPrincipale);
         label_12->setObjectName(QString::fromUtf8("label_12"));
-        label_12->setGeometry(QRect(60, 176, 81, 16));
-        label_12->setFont(font1);
+        label_12->setGeometry(QRect(10, 320, 71, 16));
+        label_12->setFont(font3);
         VaiPaginaPrezziGuadagni = new QPushButton(PaginaPrincipale);
         VaiPaginaPrezziGuadagni->setObjectName(QString::fromUtf8("VaiPaginaPrezziGuadagni"));
-        VaiPaginaPrezziGuadagni->setGeometry(QRect(160, 176, 221, 27));
+        VaiPaginaPrezziGuadagni->setGeometry(QRect(90, 312, 241, 25));
+        VaiPaginaPrezziGuadagni->setFont(font);
         label_15 = new QLabel(PaginaPrincipale);
         label_15->setObjectName(QString::fromUtf8("label_15"));
-        label_15->setGeometry(QRect(650, 240, 71, 16));
-        label_15->setFont(font1);
+        label_15->setGeometry(QRect(690, 248, 71, 16));
+        label_15->setFont(font3);
         VaiPaginaArticoliOridnati = new QPushButton(PaginaPrincipale);
         VaiPaginaArticoliOridnati->setObjectName(QString::fromUtf8("VaiPaginaArticoliOridnati"));
-        VaiPaginaArticoliOridnati->setGeometry(QRect(290, 232, 211, 27));
+        VaiPaginaArticoliOridnati->setGeometry(QRect(430, 240, 241, 25));
+        VaiPaginaArticoliOridnati->setFont(font);
+        VaiPaginaArticoliOridnati->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);\n"
+"color: rgb(0, 0, 0);"));
         VaiPaginaRivisteSpecialistche = new QPushButton(PaginaPrincipale);
         VaiPaginaRivisteSpecialistche->setObjectName(QString::fromUtf8("VaiPaginaRivisteSpecialistche"));
-        VaiPaginaRivisteSpecialistche->setGeometry(QRect(160, 288, 221, 27));
+        VaiPaginaRivisteSpecialistche->setGeometry(QRect(430, 312, 241, 25));
+        VaiPaginaRivisteSpecialistche->setFont(font);
         label_19 = new QLabel(PaginaPrincipale);
         label_19->setObjectName(QString::fromUtf8("label_19"));
-        label_19->setGeometry(QRect(60, 288, 81, 16));
-        label_19->setFont(font1);
-        label_20 = new QLabel(PaginaPrincipale);
-        label_20->setObjectName(QString::fromUtf8("label_20"));
-        label_20->setGeometry(QRect(650, 352, 71, 16));
-        label_20->setFont(font1);
+        label_19->setGeometry(QRect(690, 320, 71, 16));
+        label_19->setFont(font3);
         VaiPaginaOperazioniAvanzate = new QPushButton(PaginaPrincipale);
         VaiPaginaOperazioniAvanzate->setObjectName(QString::fromUtf8("VaiPaginaOperazioniAvanzate"));
-        VaiPaginaOperazioniAvanzate->setGeometry(QRect(290, 344, 241, 27));
+        VaiPaginaOperazioniAvanzate->setGeometry(QRect(270, 392, 241, 27));
+        VaiPaginaOperazioniAvanzate->setFont(font);
+        VaiPaginaOperazioniAvanzate->setStyleSheet(QString::fromUtf8("background-color: rgb(85, 87, 83);\n"
+"color: rgb(255, 255, 255);"));
+        EliminaTutto = new QPushButton(PaginaPrincipale);
+        EliminaTutto->setObjectName(QString::fromUtf8("EliminaTutto"));
+        EliminaTutto->setGeometry(QRect(300, 496, 181, 41));
+        EliminaTutto->setFont(font);
+        EliminaTutto->setStyleSheet(QString::fromUtf8("background-color: rgb(46, 52, 54);\n"
+"color: rgb(255, 255, 255);"));
+        label_24 = new QLabel(PaginaPrincipale);
+        label_24->setObjectName(QString::fromUtf8("label_24"));
+        label_24->setGeometry(QRect(360, 424, 61, 16));
+        label_24->setFont(font3);
+        TITLE_12 = new QLabel(PaginaPrincipale);
+        TITLE_12->setObjectName(QString::fromUtf8("TITLE_12"));
+        TITLE_12->setGeometry(QRect(300, 24, 181, 25));
+        QFont font4;
+        font4.setPointSize(15);
+        font4.setBold(true);
+        font4.setWeight(75);
+        TITLE_12->setFont(font4);
+        line = new QFrame(PaginaPrincipale);
+        line->setObjectName(QString::fromUtf8("line"));
+        line->setGeometry(QRect(140, 112, 481, 16));
+        line->setFrameShape(QFrame::HLine);
+        line->setFrameShadow(QFrame::Sunken);
+        line_2 = new QFrame(PaginaPrincipale);
+        line_2->setObjectName(QString::fromUtf8("line_2"));
+        line_2->setGeometry(QRect(370, 224, 20, 137));
+        line_2->setFrameShape(QFrame::VLine);
+        line_2->setFrameShadow(QFrame::Sunken);
         stackedWidget->addWidget(PaginaPrincipale);
         PaginaAutori = new QWidget();
         PaginaAutori->setObjectName(QString::fromUtf8("PaginaAutori"));
@@ -301,26 +366,24 @@ public:
         TITLE = new QLabel(PaginaAutori);
         TITLE->setObjectName(QString::fromUtf8("TITLE"));
         TITLE->setGeometry(QRect(170, 32, 184, 25));
-        QFont font2;
-        font2.setPointSize(15);
-        font2.setBold(true);
-        font2.setWeight(75);
-        TITLE->setFont(font2);
+        TITLE->setFont(font4);
         Afferenze = new QLabel(PaginaAutori);
         Afferenze->setObjectName(QString::fromUtf8("Afferenze"));
         Afferenze->setGeometry(QRect(270, 80, 71, 25));
         AggiungiAutore = new QPushButton(PaginaAutori);
         AggiungiAutore->setObjectName(QString::fromUtf8("AggiungiAutore"));
         AggiungiAutore->setGeometry(QRect(70, 200, 91, 25));
-        AggiungiAutore->setStyleSheet(QString::fromUtf8("background-color: rgb(46, 52, 54);\n"
-"color: rgb(255, 255, 255);"));
+        AggiungiAutore->setFont(font);
+        AggiungiAutore->setStyleSheet(QString::fromUtf8("background-color: rgb(85, 87, 83);\n"
+"color: rgb(255, 255, 255);\n"
+""));
         StampaAutori = new QPlainTextEdit(PaginaAutori);
         StampaAutori->setObjectName(QString::fromUtf8("StampaAutori"));
-        StampaAutori->setGeometry(QRect(0, 248, 781, 305));
+        StampaAutori->setGeometry(QRect(0, 256, 781, 297));
         VisualizzaAutori = new QPushButton(PaginaAutori);
         VisualizzaAutori->setObjectName(QString::fromUtf8("VisualizzaAutori"));
         VisualizzaAutori->setGeometry(QRect(290, 208, 201, 33));
-        VisualizzaAutori->setFont(font1);
+        VisualizzaAutori->setFont(font);
         VisualizzaAutori->setStyleSheet(QString::fromUtf8("background-color: rgb(46, 52, 54);\n"
 "color: rgb(255, 255, 255);"));
         NomeInput = new QLineEdit(PaginaAutori);
@@ -338,44 +401,58 @@ public:
         TITLE_2 = new QLabel(PaginaAutori);
         TITLE_2->setObjectName(QString::fromUtf8("TITLE_2"));
         TITLE_2->setGeometry(QRect(560, 48, 191, 25));
-        QFont font3;
-        font3.setPointSize(15);
-        font3.setBold(false);
-        font3.setItalic(true);
-        font3.setWeight(50);
-        TITLE_2->setFont(font3);
+        QFont font5;
+        font5.setPointSize(15);
+        font5.setBold(false);
+        font5.setItalic(true);
+        font5.setWeight(50);
+        TITLE_2->setFont(font5);
         SpiegazioneAfferenze = new QLabel(PaginaAutori);
         SpiegazioneAfferenze->setObjectName(QString::fromUtf8("SpiegazioneAfferenze"));
         SpiegazioneAfferenze->setGeometry(QRect(580, 64, 261, 121));
-        QFont font4;
-        font4.setPointSize(10);
-        font4.setItalic(true);
-        font4.setUnderline(false);
-        font4.setStrikeOut(false);
-        font4.setStyleStrategy(QFont::NoAntialias);
-        SpiegazioneAfferenze->setFont(font4);
+        QFont font6;
+        font6.setPointSize(10);
+        font6.setItalic(true);
+        font6.setUnderline(false);
+        font6.setStrikeOut(false);
+        font6.setStyleStrategy(QFont::NoAntialias);
+        SpiegazioneAfferenze->setFont(font6);
         CreaAfferenza = new QPushButton(PaginaAutori);
         CreaAfferenza->setObjectName(QString::fromUtf8("CreaAfferenza"));
         CreaAfferenza->setGeometry(QRect(580, 224, 141, 17));
-        CreaAfferenza->setFont(font);
+        CreaAfferenza->setFont(font1);
         label = new QLabel(PaginaAutori);
         label->setObjectName(QString::fromUtf8("label"));
         label->setGeometry(QRect(270, 104, 61, 73));
-        QFont font5;
-        font5.setPointSize(8);
-        font5.setItalic(true);
-        font5.setStyleStrategy(QFont::PreferDefault);
-        label->setFont(font5);
+        QFont font7;
+        font7.setPointSize(8);
+        font7.setItalic(true);
+        font7.setStyleStrategy(QFont::PreferDefault);
+        label->setFont(font7);
         label->setFrameShape(QFrame::NoFrame);
         label->setFrameShadow(QFrame::Plain);
-        SvuotaAutori = new QPushButton(PaginaAutori);
-        SvuotaAutori->setObjectName(QString::fromUtf8("SvuotaAutori"));
-        SvuotaAutori->setGeometry(QRect(20, 232, 201, 16));
         ListaAfferenze = new QListWidget(PaginaAutori);
         ListaAfferenze->setObjectName(QString::fromUtf8("ListaAfferenze"));
         ListaAfferenze->setGeometry(QRect(350, 72, 191, 105));
         ListaAfferenze->setSelectionMode(QAbstractItemView::MultiSelection);
         stackedWidget->addWidget(PaginaAutori);
+        ID->raise();
+        Nome->raise();
+        Cognome->raise();
+        TITLE->raise();
+        Afferenze->raise();
+        AggiungiAutore->raise();
+        StampaAutori->raise();
+        VisualizzaAutori->raise();
+        AfferenzaInput->raise();
+        TITLE_2->raise();
+        SpiegazioneAfferenze->raise();
+        CreaAfferenza->raise();
+        label->raise();
+        ListaAfferenze->raise();
+        IDinput->raise();
+        CognomeInput->raise();
+        NomeInput->raise();
         PaginaConferenze = new QWidget();
         PaginaConferenze->setObjectName(QString::fromUtf8("PaginaConferenze"));
         NomeInput_2 = new QLineEdit(PaginaConferenze);
@@ -389,7 +466,7 @@ public:
         LuogoInput->setGeometry(QRect(121, 187, 125, 27));
         CalendarioConferenza = new QCalendarWidget(PaginaConferenze);
         CalendarioConferenza->setObjectName(QString::fromUtf8("CalendarioConferenza"));
-        CalendarioConferenza->setGeometry(QRect(240, 256, 231, 145));
+        CalendarioConferenza->setGeometry(QRect(230, 248, 231, 145));
         QPalette palette1;
         QBrush brush2(QColor(46, 52, 54, 255));
         brush2.setStyle(Qt::SolidPattern);
@@ -410,7 +487,7 @@ public:
         CalendarioConferenza->setDateEditEnabled(true);
         numPartecipanti = new QSpinBox(PaginaConferenze);
         numPartecipanti->setObjectName(QString::fromUtf8("numPartecipanti"));
-        numPartecipanti->setGeometry(QRect(430, 120, 45, 28));
+        numPartecipanti->setGeometry(QRect(430, 152, 45, 28));
         Nome_2 = new QLabel(PaginaConferenze);
         Nome_2->setObjectName(QString::fromUtf8("Nome_2"));
         Nome_2->setGeometry(QRect(30, 128, 42, 19));
@@ -422,18 +499,19 @@ public:
         Luogo->setGeometry(QRect(30, 192, 42, 19));
         Partecipanti = new QLabel(PaginaConferenze);
         Partecipanti->setObjectName(QString::fromUtf8("Partecipanti"));
-        Partecipanti->setGeometry(QRect(260, 128, 91, 17));
+        Partecipanti->setGeometry(QRect(260, 160, 91, 17));
         Organizzatori = new QLabel(PaginaConferenze);
         Organizzatori->setObjectName(QString::fromUtf8("Organizzatori"));
         Organizzatori->setGeometry(QRect(560, 96, 151, 33));
-        QFont font6;
-        font6.setBold(true);
-        font6.setItalic(false);
-        font6.setWeight(75);
-        Organizzatori->setFont(font6);
+        QFont font8;
+        font8.setBold(true);
+        font8.setItalic(false);
+        font8.setWeight(75);
+        Organizzatori->setFont(font8);
         AggiungiConferenza = new QPushButton(PaginaConferenze);
         AggiungiConferenza->setObjectName(QString::fromUtf8("AggiungiConferenza"));
         AggiungiConferenza->setGeometry(QRect(190, 512, 181, 41));
+        AggiungiConferenza->setFont(font);
         AggiungiConferenza->setStyleSheet(QString::fromUtf8("background-color: rgb(46, 52, 54);\n"
 "color: rgb(255, 255, 255);"));
         NomePersona = new QLineEdit(PaginaConferenze);
@@ -441,53 +519,57 @@ public:
         NomePersona->setGeometry(QRect(500, 224, 111, 25));
         CreaOrganizzatore = new QPushButton(PaginaConferenze);
         CreaOrganizzatore->setObjectName(QString::fromUtf8("CreaOrganizzatore"));
-        CreaOrganizzatore->setGeometry(QRect(560, 264, 151, 16));
+        CreaOrganizzatore->setGeometry(QRect(560, 264, 151, 17));
+        CreaOrganizzatore->setFont(font);
+        CreaOrganizzatore->setStyleSheet(QString::fromUtf8("background-color: rgb(85, 87, 83);\n"
+"color: rgb(255, 255, 255);"));
         CognomePersona = new QLineEdit(PaginaConferenze);
         CognomePersona->setObjectName(QString::fromUtf8("CognomePersona"));
         CognomePersona->setGeometry(QRect(650, 224, 111, 25));
         label_3 = new QLabel(PaginaConferenze);
         label_3->setObjectName(QString::fromUtf8("label_3"));
         label_3->setGeometry(QRect(540, 200, 31, 19));
-        QFont font7;
-        font7.setPointSize(8);
-        label_3->setFont(font7);
+        QFont font9;
+        font9.setPointSize(8);
+        label_3->setFont(font9);
         label_4 = new QLabel(PaginaConferenze);
         label_4->setObjectName(QString::fromUtf8("label_4"));
         label_4->setGeometry(QRect(680, 200, 51, 19));
-        label_4->setFont(font7);
+        label_4->setFont(font9);
         ListaOrganizzatori = new QListWidget(PaginaConferenze);
         ListaOrganizzatori->setObjectName(QString::fromUtf8("ListaOrganizzatori"));
         ListaOrganizzatori->setGeometry(QRect(500, 312, 261, 161));
-        QFont font8;
-        font8.setPointSize(10);
-        ListaOrganizzatori->setFont(font8);
+        QFont font10;
+        font10.setPointSize(10);
+        ListaOrganizzatori->setFont(font10);
         ListaOrganizzatori->setSelectionMode(QAbstractItemView::MultiSelection);
         TITLE_3 = new QLabel(PaginaConferenze);
         TITLE_3->setObjectName(QString::fromUtf8("TITLE_3"));
         TITLE_3->setGeometry(QRect(120, 8, 271, 81));
-        QFont font9;
-        font9.setPointSize(16);
-        font9.setBold(true);
-        font9.setWeight(75);
-        TITLE_3->setFont(font9);
+        QFont font11;
+        font11.setPointSize(16);
+        font11.setBold(true);
+        font11.setWeight(75);
+        TITLE_3->setFont(font11);
         label_5 = new QLabel(PaginaConferenze);
         label_5->setObjectName(QString::fromUtf8("label_5"));
         label_5->setGeometry(QRect(10, 328, 191, 153));
-        QFont font10;
-        font10.setPointSize(9);
-        font10.setItalic(true);
-        label_5->setFont(font10);
+        QFont font12;
+        font12.setPointSize(9);
+        font12.setItalic(true);
+        label_5->setFont(font12);
         label_2 = new QLabel(PaginaConferenze);
         label_2->setObjectName(QString::fromUtf8("label_2"));
         label_2->setGeometry(QRect(550, 128, 221, 73));
-        label_2->setFont(font10);
+        label_2->setFont(font12);
         VisualizzaConferenze = new QPushButton(PaginaConferenze);
         VisualizzaConferenze->setObjectName(QString::fromUtf8("VisualizzaConferenze"));
         VisualizzaConferenze->setGeometry(QRect(410, 512, 181, 41));
+        VisualizzaConferenze->setFont(font);
         label_13 = new QLabel(PaginaConferenze);
         label_13->setObjectName(QString::fromUtf8("label_13"));
         label_13->setGeometry(QRect(530, 296, 221, 16));
-        label_13->setFont(font5);
+        label_13->setFont(font7);
         label_13->setFrameShape(QFrame::NoFrame);
         label_13->setFrameShadow(QFrame::Plain);
         stackedWidget->addWidget(PaginaConferenze);
@@ -499,6 +581,7 @@ public:
         AggiungiRivista = new QPushButton(PaginaRiviste);
         AggiungiRivista->setObjectName(QString::fromUtf8("AggiungiRivista"));
         AggiungiRivista->setGeometry(QRect(160, 496, 181, 41));
+        AggiungiRivista->setFont(font);
         AggiungiRivista->setStyleSheet(QString::fromUtf8("background-color: rgb(46, 52, 54);\n"
 "color: rgb(255, 255, 255);"));
         EditoreInput = new QLineEdit(PaginaRiviste);
@@ -512,7 +595,7 @@ public:
         Editore->setGeometry(QRect(100, 248, 51, 19));
         CalendarioRivista = new QCalendarWidget(PaginaRiviste);
         CalendarioRivista->setObjectName(QString::fromUtf8("CalendarioRivista"));
-        CalendarioRivista->setGeometry(QRect(490, 112, 231, 145));
+        CalendarioRivista->setGeometry(QRect(470, 192, 231, 145));
         QPalette palette2;
         palette2.setBrush(QPalette::Active, QPalette::Highlight, brush2);
         palette2.setBrush(QPalette::Active, QPalette::AlternateBase, brush2);
@@ -542,33 +625,31 @@ public:
         TITLE_4 = new QLabel(PaginaRiviste);
         TITLE_4->setObjectName(QString::fromUtf8("TITLE_4"));
         TITLE_4->setGeometry(QRect(290, 16, 191, 81));
-        TITLE_4->setFont(font9);
+        TITLE_4->setFont(font11);
         label_6 = new QLabel(PaginaRiviste);
         label_6->setObjectName(QString::fromUtf8("label_6"));
         label_6->setGeometry(QRect(140, 336, 181, 137));
-        label_6->setFont(font10);
+        label_6->setFont(font12);
         VisualizzaRiviste = new QPushButton(PaginaRiviste);
         VisualizzaRiviste->setObjectName(QString::fromUtf8("VisualizzaRiviste"));
         VisualizzaRiviste->setGeometry(QRect(430, 496, 181, 41));
+        VisualizzaRiviste->setFont(font);
         stackedWidget->addWidget(PaginaRiviste);
         PaginaDivulgazioni = new QWidget();
         PaginaDivulgazioni->setObjectName(QString::fromUtf8("PaginaDivulgazioni"));
         StampaDivulgazioni = new QPlainTextEdit(PaginaDivulgazioni);
         StampaDivulgazioni->setObjectName(QString::fromUtf8("StampaDivulgazioni"));
         StampaDivulgazioni->setGeometry(QRect(30, 136, 731, 409));
-        SvuotaDivulgazioni = new QPushButton(PaginaDivulgazioni);
-        SvuotaDivulgazioni->setObjectName(QString::fromUtf8("SvuotaDivulgazioni"));
-        SvuotaDivulgazioni->setGeometry(QRect(70, 88, 241, 33));
         VisualizzaDivulgazioni = new QPushButton(PaginaDivulgazioni);
         VisualizzaDivulgazioni->setObjectName(QString::fromUtf8("VisualizzaDivulgazioni"));
-        VisualizzaDivulgazioni->setGeometry(QRect(470, 88, 241, 33));
-        VisualizzaDivulgazioni->setFont(font1);
+        VisualizzaDivulgazioni->setGeometry(QRect(280, 88, 241, 33));
+        VisualizzaDivulgazioni->setFont(font);
         VisualizzaDivulgazioni->setStyleSheet(QString::fromUtf8("background-color: rgb(46, 52, 54);\n"
 "color: rgb(255, 255, 255);"));
         TITLE_5 = new QLabel(PaginaDivulgazioni);
         TITLE_5->setObjectName(QString::fromUtf8("TITLE_5"));
         TITLE_5->setGeometry(QRect(220, 40, 351, 25));
-        TITLE_5->setFont(font2);
+        TITLE_5->setFont(font4);
         stackedWidget->addWidget(PaginaDivulgazioni);
         PaginaArticoli = new QWidget();
         PaginaArticoli->setObjectName(QString::fromUtf8("PaginaArticoli"));
@@ -599,7 +680,7 @@ public:
         TITLE_6 = new QLabel(PaginaArticoli);
         TITLE_6->setObjectName(QString::fromUtf8("TITLE_6"));
         TITLE_6->setGeometry(QRect(300, 24, 201, 25));
-        TITLE_6->setFont(font2);
+        TITLE_6->setFont(font4);
         Autori = new QLabel(PaginaArticoli);
         Autori->setObjectName(QString::fromUtf8("Autori"));
         Autori->setGeometry(QRect(500, 56, 51, 19));
@@ -609,19 +690,16 @@ public:
         ConferenzeRiviste = new QLabel(PaginaArticoli);
         ConferenzeRiviste->setObjectName(QString::fromUtf8("ConferenzeRiviste"));
         ConferenzeRiviste->setGeometry(QRect(500, 232, 81, 41));
-        ConferenzeRiviste->setFont(font8);
+        ConferenzeRiviste->setFont(font10);
         ConferenzeRivisteBox = new QComboBox(PaginaArticoli);
         ConferenzeRivisteBox->setObjectName(QString::fromUtf8("ConferenzeRivisteBox"));
         ConferenzeRivisteBox->setGeometry(QRect(580, 240, 201, 27));
         VisualizzaArticoli = new QPushButton(PaginaArticoli);
         VisualizzaArticoli->setObjectName(QString::fromUtf8("VisualizzaArticoli"));
         VisualizzaArticoli->setGeometry(QRect(270, 280, 201, 33));
-        VisualizzaArticoli->setFont(font1);
+        VisualizzaArticoli->setFont(font);
         VisualizzaArticoli->setStyleSheet(QString::fromUtf8("background-color: rgb(46, 52, 54);\n"
 "color: rgb(255, 255, 255);"));
-        SvuotaArticoli = new QPushButton(PaginaArticoli);
-        SvuotaArticoli->setObjectName(QString::fromUtf8("SvuotaArticoli"));
-        SvuotaArticoli->setGeometry(QRect(20, 299, 201, 16));
         StampaArticoli = new QPlainTextEdit(PaginaArticoli);
         StampaArticoli->setObjectName(QString::fromUtf8("StampaArticoli"));
         StampaArticoli->setGeometry(QRect(10, 320, 771, 233));
@@ -634,6 +712,7 @@ public:
         CreaKeyword = new QPushButton(PaginaArticoli);
         CreaKeyword->setObjectName(QString::fromUtf8("CreaKeyword"));
         CreaKeyword->setGeometry(QRect(300, 112, 121, 16));
+        CreaKeyword->setFont(font);
         ListaKeyword = new QListWidget(PaginaArticoli);
         ListaKeyword->setObjectName(QString::fromUtf8("ListaKeyword"));
         ListaKeyword->setGeometry(QRect(260, 160, 201, 97));
@@ -641,27 +720,28 @@ public:
         AggiungiArticolo = new QPushButton(PaginaArticoli);
         AggiungiArticolo->setObjectName(QString::fromUtf8("AggiungiArticolo"));
         AggiungiArticolo->setGeometry(QRect(60, 240, 91, 25));
-        AggiungiArticolo->setStyleSheet(QString::fromUtf8("background-color: rgb(46, 52, 54);\n"
+        AggiungiArticolo->setFont(font);
+        AggiungiArticolo->setStyleSheet(QString::fromUtf8("background-color: rgb(85, 87, 83);\n"
 "color: rgb(255, 255, 255);"));
         label_7 = new QLabel(PaginaArticoli);
         label_7->setObjectName(QString::fromUtf8("label_7"));
         label_7->setGeometry(QRect(490, 184, 101, 33));
-        QFont font11;
-        font11.setPointSize(7);
-        font11.setItalic(true);
-        label_7->setFont(font11);
+        QFont font13;
+        font13.setPointSize(7);
+        font13.setItalic(true);
+        label_7->setFont(font13);
         label_8 = new QLabel(PaginaArticoli);
         label_8->setObjectName(QString::fromUtf8("label_8"));
         label_8->setGeometry(QRect(490, 80, 121, 33));
-        label_8->setFont(font11);
+        label_8->setFont(font13);
         label_9 = new QLabel(PaginaArticoli);
         label_9->setObjectName(QString::fromUtf8("label_9"));
         label_9->setGeometry(QRect(540, 272, 241, 41));
-        label_9->setFont(font11);
+        label_9->setFont(font13);
         label_14 = new QLabel(PaginaArticoli);
         label_14->setObjectName(QString::fromUtf8("label_14"));
         label_14->setGeometry(QRect(280, 144, 171, 16));
-        label_14->setFont(font5);
+        label_14->setFont(font7);
         label_14->setFrameShape(QFrame::NoFrame);
         label_14->setFrameShadow(QFrame::Plain);
         ListaAutori = new QListWidget(PaginaArticoli);
@@ -678,37 +758,34 @@ public:
         TITLE_7 = new QLabel(PaginaVisualizzaArticoli);
         TITLE_7->setObjectName(QString::fromUtf8("TITLE_7"));
         TITLE_7->setGeometry(QRect(260, 32, 271, 25));
-        TITLE_7->setFont(font2);
+        TITLE_7->setFont(font4);
         VisualizzaArticoliAutore = new QPushButton(PaginaVisualizzaArticoli);
         VisualizzaArticoliAutore->setObjectName(QString::fromUtf8("VisualizzaArticoliAutore"));
-        VisualizzaArticoliAutore->setGeometry(QRect(50, 128, 151, 25));
-        VisualizzaArticoliAutore->setFont(font1);
+        VisualizzaArticoliAutore->setGeometry(QRect(40, 120, 151, 25));
+        VisualizzaArticoliAutore->setFont(font);
         VisualizzaArticoliAutore->setStyleSheet(QString::fromUtf8(""));
-        SvuotaFinestra = new QPushButton(PaginaVisualizzaArticoli);
-        SvuotaFinestra->setObjectName(QString::fromUtf8("SvuotaFinestra"));
-        SvuotaFinestra->setGeometry(QRect(320, 184, 131, 16));
         StrutturaBox = new QComboBox(PaginaVisualizzaArticoli);
         StrutturaBox->setObjectName(QString::fromUtf8("StrutturaBox"));
-        StrutturaBox->setGeometry(QRect(350, 80, 141, 25));
+        StrutturaBox->setGeometry(QRect(350, 104, 141, 25));
         Struttura = new QLabel(PaginaVisualizzaArticoli);
         Struttura->setObjectName(QString::fromUtf8("Struttura"));
-        Struttura->setGeometry(QRect(260, 80, 81, 25));
+        Struttura->setGeometry(QRect(260, 104, 81, 25));
         ConferenzeBox = new QComboBox(PaginaVisualizzaArticoli);
         ConferenzeBox->setObjectName(QString::fromUtf8("ConferenzeBox"));
-        ConferenzeBox->setGeometry(QRect(620, 80, 141, 25));
+        ConferenzeBox->setGeometry(QRect(630, 72, 141, 25));
         Conferenza = new QLabel(PaginaVisualizzaArticoli);
         Conferenza->setObjectName(QString::fromUtf8("Conferenza"));
-        Conferenza->setGeometry(QRect(510, 80, 101, 25));
+        Conferenza->setGeometry(QRect(520, 72, 101, 25));
         VisualizzaArticoliStruttura = new QPushButton(PaginaVisualizzaArticoli);
         VisualizzaArticoliStruttura->setObjectName(QString::fromUtf8("VisualizzaArticoliStruttura"));
-        VisualizzaArticoliStruttura->setGeometry(QRect(290, 128, 151, 25));
-        VisualizzaArticoliStruttura->setFont(font1);
+        VisualizzaArticoliStruttura->setGeometry(QRect(290, 152, 151, 25));
+        VisualizzaArticoliStruttura->setFont(font);
         VisualizzaArticoliStruttura->setStyleSheet(QString::fromUtf8("background-color: rgb(46, 52, 54);\n"
 "color: rgb(255, 255, 255);"));
         VisualizzaArticoliConferenza = new QPushButton(PaginaVisualizzaArticoli);
         VisualizzaArticoliConferenza->setObjectName(QString::fromUtf8("VisualizzaArticoliConferenza"));
-        VisualizzaArticoliConferenza->setGeometry(QRect(550, 128, 151, 25));
-        VisualizzaArticoliConferenza->setFont(font1);
+        VisualizzaArticoliConferenza->setGeometry(QRect(560, 120, 151, 25));
+        VisualizzaArticoliConferenza->setFont(font);
         VisualizzaArticoliConferenza->setStyleSheet(QString::fromUtf8(""));
         VisualizzaArticoliDi = new QPlainTextEdit(PaginaVisualizzaArticoli);
         VisualizzaArticoliDi->setObjectName(QString::fromUtf8("VisualizzaArticoliDi"));
@@ -716,30 +793,27 @@ public:
         SEZIONEB = new QLabel(PaginaVisualizzaArticoli);
         SEZIONEB->setObjectName(QString::fromUtf8("SEZIONEB"));
         SEZIONEB->setGeometry(QRect(40, 24, 81, 19));
-        SEZIONEB->setFont(font10);
+        SEZIONEB->setFont(font12);
         AutoreBox = new QComboBox(PaginaVisualizzaArticoli);
         AutoreBox->setObjectName(QString::fromUtf8("AutoreBox"));
-        AutoreBox->setGeometry(QRect(90, 80, 141, 25));
+        AutoreBox->setGeometry(QRect(80, 72, 141, 25));
         Struttura_2 = new QLabel(PaginaVisualizzaArticoli);
         Struttura_2->setObjectName(QString::fromUtf8("Struttura_2"));
-        Struttura_2->setGeometry(QRect(20, 80, 61, 25));
+        Struttura_2->setGeometry(QRect(10, 72, 61, 25));
         stackedWidget->addWidget(PaginaVisualizzaArticoli);
         PaginaPrezzi = new QWidget();
         PaginaPrezzi->setObjectName(QString::fromUtf8("PaginaPrezzi"));
         TITLE_8 = new QLabel(PaginaPrezzi);
         TITLE_8->setObjectName(QString::fromUtf8("TITLE_8"));
         TITLE_8->setGeometry(QRect(280, 24, 221, 25));
-        TITLE_8->setFont(font2);
-        SvuotaFinestra_2 = new QPushButton(PaginaPrezzi);
-        SvuotaFinestra_2->setObjectName(QString::fromUtf8("SvuotaFinestra_2"));
-        SvuotaFinestra_2->setGeometry(QRect(320, 184, 131, 16));
+        TITLE_8->setFont(font4);
         VisualizzaArticoliPrezzi = new QPlainTextEdit(PaginaPrezzi);
         VisualizzaArticoliPrezzi->setObjectName(QString::fromUtf8("VisualizzaArticoliPrezzi"));
         VisualizzaArticoliPrezzi->setGeometry(QRect(10, 200, 771, 353));
         SEZIONEC = new QLabel(PaginaPrezzi);
         SEZIONEC->setObjectName(QString::fromUtf8("SEZIONEC"));
         SEZIONEC->setGeometry(QRect(40, 24, 81, 19));
-        SEZIONEC->setFont(font10);
+        SEZIONEC->setFont(font12);
         AutoreBox_2 = new QComboBox(PaginaPrezzi);
         AutoreBox_2->setObjectName(QString::fromUtf8("AutoreBox_2"));
         AutoreBox_2->setGeometry(QRect(90, 80, 141, 25));
@@ -749,18 +823,19 @@ public:
         ArticoliCostosiAutore = new QPushButton(PaginaPrezzi);
         ArticoliCostosiAutore->setObjectName(QString::fromUtf8("ArticoliCostosiAutore"));
         ArticoliCostosiAutore->setGeometry(QRect(40, 128, 161, 25));
-        ArticoliCostosiAutore->setFont(font1);
+        ArticoliCostosiAutore->setFont(font);
         ArticoliCostosiAutore->setStyleSheet(QString::fromUtf8("background-color: rgb(46, 52, 54);\n"
 "color: rgb(255, 255, 255);"));
         KeywordMaggiorGuadagno = new QPushButton(PaginaPrezzi);
         KeywordMaggiorGuadagno->setObjectName(QString::fromUtf8("KeywordMaggiorGuadagno"));
-        KeywordMaggiorGuadagno->setGeometry(QRect(310, 80, 151, 73));
-        KeywordMaggiorGuadagno->setFont(font1);
-        KeywordMaggiorGuadagno->setStyleSheet(QString::fromUtf8(""));
+        KeywordMaggiorGuadagno->setGeometry(QRect(310, 96, 151, 73));
+        KeywordMaggiorGuadagno->setFont(font);
+        KeywordMaggiorGuadagno->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);\n"
+"color: rgb(0, 0, 0);"));
         EntrateRivista = new QPushButton(PaginaPrezzi);
         EntrateRivista->setObjectName(QString::fromUtf8("EntrateRivista"));
         EntrateRivista->setGeometry(QRect(570, 128, 161, 25));
-        EntrateRivista->setFont(font1);
+        EntrateRivista->setFont(font);
         EntrateRivista->setStyleSheet(QString::fromUtf8("background-color: rgb(46, 52, 54);\n"
 "color: rgb(255, 255, 255);"));
         RivistaBox = new QComboBox(PaginaPrezzi);
@@ -781,30 +856,27 @@ public:
         TITLE_9 = new QLabel(PaginaArticoliOrdinati);
         TITLE_9->setObjectName(QString::fromUtf8("TITLE_9"));
         TITLE_9->setGeometry(QRect(290, 32, 191, 25));
-        TITLE_9->setFont(font2);
+        TITLE_9->setFont(font4);
         Rivista_2 = new QLabel(PaginaArticoliOrdinati);
         Rivista_2->setObjectName(QString::fromUtf8("Rivista_2"));
         Rivista_2->setGeometry(QRect(60, 72, 16, 25));
-        QFont font12;
-        font12.setPointSize(9);
-        Rivista_2->setFont(font12);
+        QFont font14;
+        font14.setPointSize(9);
+        Rivista_2->setFont(font14);
         OrdinaConferenze = new QPushButton(PaginaArticoliOrdinati);
         OrdinaConferenze->setObjectName(QString::fromUtf8("OrdinaConferenze"));
         OrdinaConferenze->setGeometry(QRect(90, 160, 141, 25));
-        OrdinaConferenze->setFont(font1);
-        OrdinaConferenze->setStyleSheet(QString::fromUtf8("background-color: rgb(46, 52, 54);\n"
+        OrdinaConferenze->setFont(font);
+        OrdinaConferenze->setStyleSheet(QString::fromUtf8("background-color: rgb(85, 87, 83);\n"
 "color: rgb(255, 255, 255);"));
         SEZIONED = new QLabel(PaginaArticoliOrdinati);
         SEZIONED->setObjectName(QString::fromUtf8("SEZIONED"));
         SEZIONED->setGeometry(QRect(40, 32, 81, 19));
-        SEZIONED->setFont(font10);
+        SEZIONED->setFont(font12);
         label_16 = new QLabel(PaginaArticoliOrdinati);
         label_16->setObjectName(QString::fromUtf8("label_16"));
         label_16->setGeometry(QRect(90, 56, 151, 65));
-        label_16->setFont(font12);
-        SvuotaFinestra_3 = new QPushButton(PaginaArticoliOrdinati);
-        SvuotaFinestra_3->setObjectName(QString::fromUtf8("SvuotaFinestra_3"));
-        SvuotaFinestra_3->setGeometry(QRect(310, 184, 131, 16));
+        label_16->setFont(font14);
         VisualizzaArticoliOdirnati = new QPlainTextEdit(PaginaArticoliOrdinati);
         VisualizzaArticoliOdirnati->setObjectName(QString::fromUtf8("VisualizzaArticoliOdirnati"));
         VisualizzaArticoliOdirnati->setGeometry(QRect(0, 200, 781, 353));
@@ -817,16 +889,16 @@ public:
         Rivista_3 = new QLabel(PaginaArticoliOrdinati);
         Rivista_3->setObjectName(QString::fromUtf8("Rivista_3"));
         Rivista_3->setGeometry(QRect(530, 72, 16, 25));
-        Rivista_3->setFont(font12);
+        Rivista_3->setFont(font14);
         label_17 = new QLabel(PaginaArticoliOrdinati);
         label_17->setObjectName(QString::fromUtf8("label_17"));
         label_17->setGeometry(QRect(560, 56, 151, 65));
-        label_17->setFont(font12);
+        label_17->setFont(font14);
         OrdinaKeyword = new QPushButton(PaginaArticoliOrdinati);
         OrdinaKeyword->setObjectName(QString::fromUtf8("OrdinaKeyword"));
         OrdinaKeyword->setGeometry(QRect(560, 160, 141, 25));
-        OrdinaKeyword->setFont(font1);
-        OrdinaKeyword->setStyleSheet(QString::fromUtf8("background-color: rgb(46, 52, 54);\n"
+        OrdinaKeyword->setFont(font);
+        OrdinaKeyword->setStyleSheet(QString::fromUtf8("background-color: rgb(85, 87, 83);\n"
 "color: rgb(255, 255, 255);"));
         stackedWidget->addWidget(PaginaArticoliOrdinati);
         PaginaRivisteSpecialistiche = new QWidget();
@@ -834,23 +906,20 @@ public:
         TITLE_10 = new QLabel(PaginaRivisteSpecialistiche);
         TITLE_10->setObjectName(QString::fromUtf8("TITLE_10"));
         TITLE_10->setGeometry(QRect(270, 32, 231, 25));
-        TITLE_10->setFont(font2);
+        TITLE_10->setFont(font4);
         VisualizzaRivisteSpecialistiche = new QPlainTextEdit(PaginaRivisteSpecialistiche);
         VisualizzaRivisteSpecialistiche->setObjectName(QString::fromUtf8("VisualizzaRivisteSpecialistiche"));
         VisualizzaRivisteSpecialistiche->setGeometry(QRect(0, 200, 781, 353));
         TastoRivisteSpecilistiche = new QPushButton(PaginaRivisteSpecialistiche);
         TastoRivisteSpecilistiche->setObjectName(QString::fromUtf8("TastoRivisteSpecilistiche"));
         TastoRivisteSpecilistiche->setGeometry(QRect(270, 128, 231, 25));
-        TastoRivisteSpecilistiche->setFont(font1);
+        TastoRivisteSpecilistiche->setFont(font);
         TastoRivisteSpecilistiche->setStyleSheet(QString::fromUtf8("background-color: rgb(46, 52, 54);\n"
 "color: rgb(255, 255, 255);"));
         SEZIONEE = new QLabel(PaginaRivisteSpecialistiche);
         SEZIONEE->setObjectName(QString::fromUtf8("SEZIONEE"));
         SEZIONEE->setGeometry(QRect(40, 32, 81, 19));
-        SEZIONEE->setFont(font10);
-        SvuotaFinestra_4 = new QPushButton(PaginaRivisteSpecialistiche);
-        SvuotaFinestra_4->setObjectName(QString::fromUtf8("SvuotaFinestra_4"));
-        SvuotaFinestra_4->setGeometry(QRect(320, 184, 131, 16));
+        SEZIONEE->setFont(font12);
         label_21 = new QLabel(PaginaRivisteSpecialistiche);
         label_21->setObjectName(QString::fromUtf8("label_21"));
         label_21->setGeometry(QRect(240, 88, 281, 25));
@@ -860,21 +929,18 @@ public:
         SEZIONEE_2 = new QLabel(PaginaOperazioniAvanzate);
         SEZIONEE_2->setObjectName(QString::fromUtf8("SEZIONEE_2"));
         SEZIONEE_2->setGeometry(QRect(40, 32, 81, 19));
-        SEZIONEE_2->setFont(font10);
+        SEZIONEE_2->setFont(font12);
         TITLE_11 = new QLabel(PaginaOperazioniAvanzate);
         TITLE_11->setObjectName(QString::fromUtf8("TITLE_11"));
         TITLE_11->setGeometry(QRect(270, 32, 231, 25));
-        TITLE_11->setFont(font2);
+        TITLE_11->setFont(font4);
         VisualizzaOperazioniAvanzate = new QPlainTextEdit(PaginaOperazioniAvanzate);
         VisualizzaOperazioniAvanzate->setObjectName(QString::fromUtf8("VisualizzaOperazioniAvanzate"));
         VisualizzaOperazioniAvanzate->setGeometry(QRect(0, 200, 781, 353));
-        SvuotaFinestra_5 = new QPushButton(PaginaOperazioniAvanzate);
-        SvuotaFinestra_5->setObjectName(QString::fromUtf8("SvuotaFinestra_5"));
-        SvuotaFinestra_5->setGeometry(QRect(320, 184, 131, 16));
         TastoOrdinaCorrelati = new QPushButton(PaginaOperazioniAvanzate);
         TastoOrdinaCorrelati->setObjectName(QString::fromUtf8("TastoOrdinaCorrelati"));
         TastoOrdinaCorrelati->setGeometry(QRect(50, 144, 141, 25));
-        TastoOrdinaCorrelati->setFont(font1);
+        TastoOrdinaCorrelati->setFont(font);
         TastoOrdinaCorrelati->setStyleSheet(QString::fromUtf8("background-color: rgb(46, 52, 54);\n"
 "color: rgb(255, 255, 255);"));
         label_18 = new QLabel(PaginaOperazioniAvanzate);
@@ -882,23 +948,29 @@ public:
         label_18->setGeometry(QRect(30, 64, 181, 73));
         ConferenzeBox_3 = new QComboBox(PaginaOperazioniAvanzate);
         ConferenzeBox_3->setObjectName(QString::fromUtf8("ConferenzeBox_3"));
-        ConferenzeBox_3->setGeometry(QRect(330, 80, 161, 27));
+        ConferenzeBox_3->setGeometry(QRect(340, 96, 161, 27));
         Conferenze = new QLabel(PaginaOperazioniAvanzate);
         Conferenze->setObjectName(QString::fromUtf8("Conferenze"));
-        Conferenze->setGeometry(QRect(240, 80, 81, 25));
-        Conferenze->setFont(font8);
+        Conferenze->setGeometry(QRect(250, 96, 81, 25));
+        Conferenze->setFont(font10);
         TastoConferenzeSimili = new QPushButton(PaginaOperazioniAvanzate);
         TastoConferenzeSimili->setObjectName(QString::fromUtf8("TastoConferenzeSimili"));
-        TastoConferenzeSimili->setGeometry(QRect(300, 128, 141, 25));
-        TastoConferenzeSimili->setFont(font1);
+        TastoConferenzeSimili->setGeometry(QRect(300, 136, 151, 25));
+        TastoConferenzeSimili->setFont(font);
         TastoConferenzeSimili->setStyleSheet(QString::fromUtf8(""));
+        label_22 = new QLabel(PaginaOperazioniAvanzate);
+        label_22->setObjectName(QString::fromUtf8("label_22"));
+        label_22->setGeometry(QRect(560, 64, 191, 73));
+        TastoConferenzeElitarie = new QPushButton(PaginaOperazioniAvanzate);
+        TastoConferenzeElitarie->setObjectName(QString::fromUtf8("TastoConferenzeElitarie"));
+        TastoConferenzeElitarie->setGeometry(QRect(580, 144, 141, 25));
+        TastoConferenzeElitarie->setFont(font);
+        TastoConferenzeElitarie->setStyleSheet(QString::fromUtf8("background-color: rgb(46, 52, 54);\n"
+"color: rgb(255, 255, 255);"));
         stackedWidget->addWidget(PaginaOperazioniAvanzate);
-        Home = new QPushButton(centralwidget);
-        Home->setObjectName(QString::fromUtf8("Home"));
-        Home->setGeometry(QRect(9, 570, 80, 27));
-        Home->setFont(font1);
-        Home->setStyleSheet(QString::fromUtf8("background-color: rgb(255, 255, 255);\n"
-"color: rgb(0, 0, 0);"));
+
+        gridLayout->addWidget(stackedWidget, 0, 0, 1, 1);
+
         MainWindow->setCentralWidget(centralwidget);
 
         retranslateUi(MainWindow);
@@ -909,6 +981,7 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "Progetto", nullptr));
+        Home->setText(QCoreApplication::translate("MainWindow", "Home", nullptr));
         VaiPaginaAutori->setText(QCoreApplication::translate("MainWindow", "Autori", nullptr));
         VaiPaginaConferenze->setText(QCoreApplication::translate("MainWindow", "Conferenza", nullptr));
         VaiPaginaRiviste->setText(QCoreApplication::translate("MainWindow", "Rivista", nullptr));
@@ -922,8 +995,10 @@ public:
         VaiPaginaArticoliOridnati->setText(QCoreApplication::translate("MainWindow", "Visualizza articoli ordinati", nullptr));
         VaiPaginaRivisteSpecialistche->setText(QCoreApplication::translate("MainWindow", "Visualizza Riviste Specialistiche", nullptr));
         label_19->setText(QCoreApplication::translate("MainWindow", "Sezione E", nullptr));
-        label_20->setText(QCoreApplication::translate("MainWindow", "Sezione F", nullptr));
         VaiPaginaOperazioniAvanzate->setText(QCoreApplication::translate("MainWindow", "Vai Pagina Operazioni Avanzate", nullptr));
+        EliminaTutto->setText(QCoreApplication::translate("MainWindow", "Elimina Tutto", nullptr));
+        label_24->setText(QCoreApplication::translate("MainWindow", "Sezione F", nullptr));
+        TITLE_12->setText(QCoreApplication::translate("MainWindow", "il CATALOGATORE", nullptr));
         ID->setText(QCoreApplication::translate("MainWindow", "Identificativo", nullptr));
         Nome->setText(QCoreApplication::translate("MainWindow", "Nome", nullptr));
         Cognome->setText(QCoreApplication::translate("MainWindow", "Cognome", nullptr));
@@ -946,7 +1021,6 @@ public:
 "afferenze da\n"
 " aggiungere\n"
 "all'autore", nullptr));
-        SvuotaAutori->setText(QCoreApplication::translate("MainWindow", "Svuota Autori", nullptr));
         Nome_2->setText(QCoreApplication::translate("MainWindow", "Nome", nullptr));
         Acronimo->setText(QCoreApplication::translate("MainWindow", "Acronimo", nullptr));
         Luogo->setText(QCoreApplication::translate("MainWindow", "Luogo", nullptr));
@@ -983,7 +1057,6 @@ public:
 " - Inserire il volume.\n"
 "", nullptr));
         VisualizzaRiviste->setText(QCoreApplication::translate("MainWindow", "Visualizza Riviste", nullptr));
-        SvuotaDivulgazioni->setText(QCoreApplication::translate("MainWindow", "Svuota Conferenze e Riviste", nullptr));
         VisualizzaDivulgazioni->setText(QCoreApplication::translate("MainWindow", "Visualizza Conferenze e Riviste", nullptr));
         TITLE_5->setText(QCoreApplication::translate("MainWindow", "VISUALIZZA CONFERENZE E RIVISTE", nullptr));
         Identificativo->setText(QCoreApplication::translate("MainWindow", "Identificativo", nullptr));
@@ -996,7 +1069,6 @@ public:
         ConferenzeRiviste->setText(QCoreApplication::translate("MainWindow", "Conferenze\n"
 "Riviste", nullptr));
         VisualizzaArticoli->setText(QCoreApplication::translate("MainWindow", "Visualizza Articoli", nullptr));
-        SvuotaArticoli->setText(QCoreApplication::translate("MainWindow", "Svuota Articoli", nullptr));
         keyword->setText(QCoreApplication::translate("MainWindow", "Keywords", nullptr));
         CreaKeyword->setText(QCoreApplication::translate("MainWindow", "Crea keyword", nullptr));
         AggiungiArticolo->setText(QCoreApplication::translate("MainWindow", "Aggiungi", nullptr));
@@ -1011,7 +1083,6 @@ public:
         label_14->setText(QCoreApplication::translate("MainWindow", "Seleziona la keyword o le keywords", nullptr));
         TITLE_7->setText(QCoreApplication::translate("MainWindow", "VISUALIZZA ARTICOLI DI...", nullptr));
         VisualizzaArticoliAutore->setText(QCoreApplication::translate("MainWindow", "Articoli autore", nullptr));
-        SvuotaFinestra->setText(QCoreApplication::translate("MainWindow", "Svuota Finestra", nullptr));
         Struttura->setText(QCoreApplication::translate("MainWindow", "3) Struttura", nullptr));
         Conferenza->setText(QCoreApplication::translate("MainWindow", "4) Conferenza", nullptr));
         VisualizzaArticoliStruttura->setText(QCoreApplication::translate("MainWindow", "Articoli struttura", nullptr));
@@ -1019,7 +1090,6 @@ public:
         SEZIONEB->setText(QCoreApplication::translate("MainWindow", "SEZIONE B", nullptr));
         Struttura_2->setText(QCoreApplication::translate("MainWindow", "1) Autore", nullptr));
         TITLE_8->setText(QCoreApplication::translate("MainWindow", "PREZZI <-> GUADAGNI", nullptr));
-        SvuotaFinestra_2->setText(QCoreApplication::translate("MainWindow", "Svuota Finestra", nullptr));
         SEZIONEC->setText(QCoreApplication::translate("MainWindow", "SEZIONE C", nullptr));
         Rivista->setText(QCoreApplication::translate("MainWindow", "5) Rivista", nullptr));
         ArticoliCostosiAutore->setText(QCoreApplication::translate("MainWindow", "Articoli costosi autore", nullptr));
@@ -1037,7 +1107,6 @@ public:
         label_16->setText(QCoreApplication::translate("MainWindow", "    Ordina gli ariticoli di una\n"
 "conferenza in base al prezzo\n"
 "                 crescente", nullptr));
-        SvuotaFinestra_3->setText(QCoreApplication::translate("MainWindow", "Svuota Finestra", nullptr));
         Rivista_3->setText(QCoreApplication::translate("MainWindow", "5)", nullptr));
         label_17->setText(QCoreApplication::translate("MainWindow", "    Ordina gli articoli relativi\n"
 "            ad una keyword\n"
@@ -1046,18 +1115,19 @@ public:
         TITLE_10->setText(QCoreApplication::translate("MainWindow", "RIVISTE SPECIALISTICHE", nullptr));
         TastoRivisteSpecilistiche->setText(QCoreApplication::translate("MainWindow", "Visualizza Riviste Specialistiche", nullptr));
         SEZIONEE->setText(QCoreApplication::translate("MainWindow", "SEZIONE E", nullptr));
-        SvuotaFinestra_4->setText(QCoreApplication::translate("MainWindow", "Svuota Finestra", nullptr));
         label_21->setText(QCoreApplication::translate("MainWindow", "6) Stampa le riviste che sono specialistiche", nullptr));
         SEZIONEE_2->setText(QCoreApplication::translate("MainWindow", "SEZIONE F", nullptr));
         TITLE_11->setText(QCoreApplication::translate("MainWindow", "OPERAZIONI AVANZATE", nullptr));
-        SvuotaFinestra_5->setText(QCoreApplication::translate("MainWindow", "Svuota Finestra", nullptr));
         TastoOrdinaCorrelati->setText(QCoreApplication::translate("MainWindow", "Visualizza", nullptr));
         label_18->setText(QCoreApplication::translate("MainWindow", "2) Visualizza gli articoli\n"
 "in ordine decrescente dal\n"
 "numero di articoli correlati", nullptr));
         Conferenze->setText(QCoreApplication::translate("MainWindow", "5) Conferenze", nullptr));
         TastoConferenzeSimili->setText(QCoreApplication::translate("MainWindow", "Visualizza", nullptr));
-        Home->setText(QCoreApplication::translate("MainWindow", "Home", nullptr));
+        label_22->setText(QCoreApplication::translate("MainWindow", "6) Visualizza le triple di\n"
+"conferenze elitarie che\n"
+"hanno la massima influenza", nullptr));
+        TastoConferenzeElitarie->setText(QCoreApplication::translate("MainWindow", "Visualizza", nullptr));
     } // retranslateUi
 
 };

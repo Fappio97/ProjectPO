@@ -19,6 +19,9 @@ along with Progetto.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "conferenza.h"
 
+
+                            //COSTRUTTORI, DISTRUTTORE ED OPERATOR=
+
 Conferenza::Conferenza()
 {
 
@@ -30,7 +33,7 @@ Conferenza::Conferenza(const QString & _nome, const QString & _acronimo, const Q
     }
 }
 
-Conferenza::Conferenza(const Conferenza& a): Divulgazione(a.nome, a.acronimo, a.data), luogo(a.luogo), partecipanti(a.partecipanti) {
+Conferenza::Conferenza(const Conferenza& a):Divulgazione(a), luogo(a.luogo), partecipanti(a.partecipanti) {
     for(auto i = a.organizzatori.begin(); i != a.organizzatori.end(); i++) {
         organizzatori.push_back( (*i) );
     }
@@ -39,6 +42,7 @@ Conferenza::Conferenza(const Conferenza& a): Divulgazione(a.nome, a.acronimo, a.
 Conferenza& Conferenza::operator=(const Conferenza& a) {
     if(this != &a) {
         svuota();
+   //     (*this) = a;
         luogo = a.luogo;
         partecipanti = a.partecipanti;
         for(auto i = a.organizzatori.begin(); i != a.organizzatori.end(); i++) {
@@ -48,35 +52,20 @@ Conferenza& Conferenza::operator=(const Conferenza& a) {
     return (*this);
 }
 
-
 Conferenza::~Conferenza() {
     svuota();
 }
 
-
-
-
-
-QString Conferenza::getNome() const
-{
-    return Divulgazione::nome;
+void Conferenza::svuota() {
+    organizzatori.clear();
+    svuotaDivulgazione();
 }
 
-void Conferenza::setNome(const QString &value)
-{
-    nome = value;
-}
 
-QString Conferenza::getAcronimo() const
-{
-    return acronimo;
-}
 
-void Conferenza::setAcronimo(const QString &value)
-{
-    acronimo = value;
-}
 
+
+                            //GETTER & SETTER
 QString Conferenza::getLuogo() const
 {
     return luogo;
@@ -85,16 +74,6 @@ QString Conferenza::getLuogo() const
 void Conferenza::setLuogo(const QString &value)
 {
     luogo = value;
-}
-
-QString Conferenza::getData() const
-{
-    return data;
-}
-
-void Conferenza::setData(const QString &value)
-{
-    data = value;
 }
 
 int Conferenza::getPartecipanti() const
@@ -111,34 +90,39 @@ void Conferenza::setPartecipanti(int value)
 
 
 
+                            //METODI VIRTUAL
 
-void Conferenza::svuota() {
-    organizzatori.clear();
+int Conferenza::influenza() {
+    return partecipanti;
 }
-
-
 
 Conferenza* Conferenza::clone() {
     return new Conferenza(*this);
 }
 
-QString Conferenza::classeRiferimento() const {
+QString Conferenza::classeRifermento() {
     return "Conferenza";
 }
 
 
 
 
+                            //STAMPA
 
-
-std::ostream& Conferenza::stampa(std::ostream& out) const {
-    out << "-CONFERENZA-" << std::endl << "       NOME: " << nome.toStdString() << ", ACRONIMO: " << acronimo.toStdString() << ", DATA: " << data.toStdString() << ", LUOGO: " << luogo.toStdString() << ", PARTECIPANTI: " << partecipanti << std::endl << "        ORGANIZZATORI:";
+std::ostream& Conferenza::stampa(std::ostream& out) const {     //PROTECTED
+    out << "-CONFERENZA-" << std::endl << "       NOME: " << nome.toStdString() << ", ACRONIMO: " << acronimo.toStdString() << ", DATA: " << data.toStdString() << ", LUOGO: " << luogo.toStdString() << ", PARTECIPANTI: " << partecipanti << std::endl << "       ORGANIZZATORI:";
     for(auto i = organizzatori.begin(); i != organizzatori.end(); i++ ) {
         if( (*i) == organizzatori.front() )
             out << " " << (**i).getNome().toStdString() << " " << (**i).getCognome().toStdString() ;
         else
             out << ", " << (**i).getNome().toStdString() + " " << (**i).getCognome().toStdString() ;
     }
-    out << std::endl;
-    return out;
+    out << std::endl;           //puoi cacciare la lista di articoli qui e metterela in divulgazione per rendere il codice più flessibile possibile
+    if(articoli.empty())        //LI STAMPO QUI GLI ARTICOLI, ANCHE SE POTEVO FARLI IN DIVULGAZIONE, MA PER UNA QUESTIONE ESTETICA DI STAMPA HO DECISO DI IMPLEMENTARLI NELLE CLASSE FIGLIE ANCHE SE CIÒ RENDE IL CODICE MENO FLESSIBILE
+        return out << "       NESSUN ARTICOLO PUBBLICATO" << std::endl;
+    out << "       LISTA TITOLI ARTICOLI PUBBLICATI:";
+    for(auto i = articoli.begin(); i != articoli.end(); i++) {
+        out << " [" << (**i).getTitolo().toStdString() << "]";
+    }
+    return out << std::endl;
 }

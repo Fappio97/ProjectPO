@@ -19,6 +19,9 @@ along with Progetto.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "afferenza.h"
 
+
+
+
 Afferenza::Afferenza()
 {
 
@@ -27,7 +30,6 @@ Afferenza::Afferenza()
 Afferenza::Afferenza(const QString& _nome): nome(_nome) {
 
 }
-
 
 
 
@@ -41,10 +43,6 @@ void Afferenza::setNome(const QString &value)
 {
     nome = value;
 }
-
-
-
-
 
 bool Afferenza::operator==(const Afferenza& a) const {
     return nome == a.nome;

@@ -41,8 +41,6 @@ public:
     QString getCognome() const;
     void setCognome(const QString &value);
 
-    bool operator==(const Persona&) const;
-
     friend std::ostream& operator<<(std::ostream&, const Persona&);
 
 };

@@ -44,11 +44,10 @@ public:
     QString getIdentificativo() const;
     void setIdentificativo(const QString &value);
 
-    bool operator==(const Autore&) const;   //mi serve?
+    friend std::ostream& operator<<(std::ostream&, const Autore&);
 
     bool autoreConnessoStruttura(const Afferenza&) const;
-
-    friend std::ostream& operator<<(std::ostream&, const Autore&);
+    bool operator==(const Autore&) const;
 
 };
 
