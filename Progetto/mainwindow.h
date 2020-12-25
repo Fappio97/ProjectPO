@@ -43,6 +43,7 @@ private:
     Gestore* gestore;
 
 private slots:
+
                                //PULSANTI PER ANDARE AD UNA DETERMINATA PAGINA
 
     void on_Home_clicked();

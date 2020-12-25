@@ -129,8 +129,6 @@ public:
 
     Divulgazione* restituisciDivulgazione(const QString&, const QString&) const;
 
-    bool articoliVuoti() const;
-
     void aggiungiConferenza(const QString &, const QString &, const QString &, const QString &, QList<Persona *> _organizzatori, int);
 
     bool divulgazioneEsistente(const QString &, const QString &) const;
@@ -212,7 +210,7 @@ public:
                            //SEZIONE F
     void trovaDivulgazioni(const QString&, QList<Divulgazione *>&) const;
 
-    QString ordinaArticoliDagliArticoliCorrelati() const;
+    QString articoliInfluenzati(const Articolo*) const;
 
     QString stampaConferenzeSimili(const Divulgazione* ) const;
 

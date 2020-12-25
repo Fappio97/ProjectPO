@@ -264,10 +264,6 @@ Divulgazione* Gestore::restituisciDivulgazione(const QString& nome, const QStrin
     return nullptr;
 }
 
-bool Gestore::articoliVuoti() const {
-    return articoli.empty();
-}
-
 void Gestore::aggiungiConferenza(const QString & _nome, const QString & _acronimo, const QString & _luogo, const QString & _data, QList<Persona *> _organizzatori, int _partecipanti) {
     divulgazioni.push_back(new Conferenza(_nome, _acronimo, _luogo, _data, _organizzatori, _partecipanti));
 }
@@ -513,16 +509,15 @@ QString Gestore::stampaArticoliDivulgazioneOrdinatiPrezzo(const QString& nome) c
 
 
     for(auto i = divulgazioni.begin(); i != divulgazioni.end(); i++) {
-        if( (**i).getNome() == nome ) {
-            for(auto j = (**i).getArticoli().begin(); j != (**i).getArticoli().end(); j++) {
-                s << (**j);
-//              art.push_back( (*j) );      //crasha qui, segmentation fault
-            }
-        }
+          if( (**i).getNome() == nome  ) {
+              QList<Articolo *> a = (**i).getArticoli();
+              for(auto j = a.begin(); j != a.end(); j++)
+                    art.push_back( (*j) );
+          }
     }
 
-/*    if(art.empty())
-        return "NESSUN ARTICOLO PUBBLICATO";*/
+    if(art.empty())
+        return "NESSUN ARTICOLO PUBBLICATO";
 
 
     std::sort( art.begin(), art.end(), comparaDivulgazioni );   //sort funziona come il find fatto vedere a lezione
@@ -696,27 +691,52 @@ QString Gestore::stampaRivisteSpecialistiche() const {
 
                            //SEZIONE F
 
-bool comparaCorrelati(const Articolo* a, const Articolo* b) {
-    if( a->getCorrelati().size() < b->getCorrelati().size() )
+bool influenzato(const Articolo* a, const Articolo* b ) {
+    if(a->getAnno() >= b->getAnno())
         return false;
-    if( a->getCorrelati().size() > b->getCorrelati().size() )
-        return true;
-    return a->getTitolo().toStdString() < b->getTitolo().toStdString();
+
+    for(auto i = b->getCorrelati().begin(); i != b->getCorrelati().end(); i++) {
+        if( (*a) == (**i))
+            return true;
+    }
+    return false;
 }
 
-QString Gestore::ordinaArticoliDagliArticoliCorrelati() const {
-    QList<Articolo *> art;
-    art = articoli;     //MI DA UNO STRANO ERRORE SE NON CREO UNA LISTA IN CUI COPIO GLI ARTICOLI CREATI, VOLEVO FARLO DIRETTAMENTE SU ESSO
+bool nonPresente( const QVector<Articolo *> a, const Articolo* b ) {
+    for(auto i = a.begin(); i != a.end(); i++) {
+        if( (*i) == b )
+            return false;
+    }
+    return true;
+}
 
-    std::sort(art.begin(), art.end(), comparaCorrelati);
-
+QString Gestore::articoliInfluenzati(const Articolo* a) const {
     std::stringstream s;
 
-    for(auto i = art.begin(); i != art.end(); i++) {
-        s << (**i);     //NON DELETO ART PERCHÉ ELIMINEREI GLI OGGETTI A CUI PUNTA ANCHE ARTICOLO, LI ELIMINO TUTTI ALLA FINE CON IL DISTRUTTORE
+    QVector<Articolo *> art;
+
+    for(auto i = articoli.begin(); i != articoli.end(); i++) {
+        if(influenzato(a, (*i))) {
+            art.push_back(*i);
+        }
     }
 
-    art.clear();
+    for(auto i = art.begin(); i != art.end(); i++) {
+        for(auto j = articoli.begin(); j != articoli.end(); j++) {
+            if( influenzato( (*i), (*j) ) ) {
+                if( nonPresente( art, (*j) ) )
+                    art.push_back(*j);
+            }
+        }
+    }
+
+    if(art.size() == 0)
+        s << "NESSUN ARTICOLO INFLUENZATO";
+
+    for(auto i = art.begin(); i != art.end(); i++) {
+        s << (**i);
+    }
+
     return QString::fromStdString(s.str());
 }
 

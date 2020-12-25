@@ -42,7 +42,6 @@ Conferenza::Conferenza(const Conferenza& a):Divulgazione(a), luogo(a.luogo), par
 Conferenza& Conferenza::operator=(const Conferenza& a) {
     if(this != &a) {
         svuota();
-   //     (*this) = a;
         luogo = a.luogo;
         partecipanti = a.partecipanti;
         for(auto i = a.organizzatori.begin(); i != a.organizzatori.end(); i++) {

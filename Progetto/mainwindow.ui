@@ -578,7 +578,7 @@ color: rgb(255, 255, 255);
          <string>Aggiungi</string>
         </property>
        </widget>
-       <widget class="QPlainTextEdit" name="StampaAutori">
+       <widget class="QTextBrowser" name="StampaAutori">
         <property name="geometry">
          <rect>
           <x>0</x>
@@ -1499,7 +1499,7 @@ color: rgb(255, 255, 255);</string>
        </widget>
       </widget>
       <widget class="QWidget" name="PaginaDivulgazioni">
-       <widget class="QPlainTextEdit" name="StampaDivulgazioni">
+       <widget class="QTextBrowser" name="StampaDivulgazioni">
         <property name="geometry">
          <rect>
           <x>30</x>
@@ -1744,7 +1744,7 @@ color: rgb(255, 255, 255);</string>
          <string>Visualizza Articoli</string>
         </property>
        </widget>
-       <widget class="QPlainTextEdit" name="StampaArticoli">
+       <widget class="QTextBrowser" name="StampaArticoli">
         <property name="geometry">
          <rect>
           <x>10</x>
@@ -2081,7 +2081,7 @@ color: rgb(255, 255, 255);</string>
          <string>Articoli conferenza</string>
         </property>
        </widget>
-       <widget class="QPlainTextEdit" name="VisualizzaArticoliDi">
+       <widget class="QTextBrowser" name="VisualizzaArticoliDi">
         <property name="geometry">
          <rect>
           <x>0</x>
@@ -2155,7 +2155,7 @@ color: rgb(255, 255, 255);</string>
          <string>PREZZI &lt;-&gt; GUADAGNI</string>
         </property>
        </widget>
-       <widget class="QPlainTextEdit" name="VisualizzaArticoliPrezzi">
+       <widget class="QTextBrowser" name="VisualizzaArticoliPrezzi">
         <property name="geometry">
          <rect>
           <x>10</x>
@@ -2427,7 +2427,7 @@ conferenza in base al prezzo
                  crescente</string>
         </property>
        </widget>
-       <widget class="QPlainTextEdit" name="VisualizzaArticoliOdirnati">
+       <widget class="QTextBrowser" name="VisualizzaArticoliOdirnati">
         <property name="geometry">
          <rect>
           <x>0</x>
@@ -2540,7 +2540,7 @@ color: rgb(255, 255, 255);</string>
          <string>RIVISTE SPECIALISTICHE</string>
         </property>
        </widget>
-       <widget class="QPlainTextEdit" name="VisualizzaRivisteSpecialistiche">
+       <widget class="QTextBrowser" name="VisualizzaRivisteSpecialistiche">
         <property name="geometry">
          <rect>
           <x>0</x>
@@ -2646,7 +2646,7 @@ color: rgb(255, 255, 255);</string>
          <string>OPERAZIONI AVANZATE</string>
         </property>
        </widget>
-       <widget class="QPlainTextEdit" name="VisualizzaOperazioniAvanzate">
+       <widget class="QTextBrowser" name="VisualizzaOperazioniAvanzate">
         <property name="geometry">
          <rect>
           <x>0</x>
@@ -2679,25 +2679,10 @@ color: rgb(255, 255, 255);</string>
          <string>Visualizza</string>
         </property>
        </widget>
-       <widget class="QLabel" name="label_18">
-        <property name="geometry">
-         <rect>
-          <x>30</x>
-          <y>64</y>
-          <width>181</width>
-          <height>73</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>2) Visualizza gli articoli
-in ordine decrescente dal
-numero di articoli correlati</string>
-        </property>
-       </widget>
        <widget class="QComboBox" name="ConferenzeBox_3">
         <property name="geometry">
          <rect>
-          <x>340</x>
+          <x>360</x>
           <y>96</y>
           <width>161</width>
           <height>27</height>
@@ -2707,7 +2692,7 @@ numero di articoli correlati</string>
        <widget class="QLabel" name="Conferenze">
         <property name="geometry">
          <rect>
-          <x>250</x>
+          <x>270</x>
           <y>96</y>
           <width>81</width>
           <height>25</height>
@@ -2725,7 +2710,7 @@ numero di articoli correlati</string>
        <widget class="QPushButton" name="TastoConferenzeSimili">
         <property name="geometry">
          <rect>
-          <x>300</x>
+          <x>330</x>
           <y>136</y>
           <width>151</width>
           <height>25</height>
@@ -2780,6 +2765,34 @@ color: rgb(255, 255, 255);</string>
         </property>
         <property name="text">
          <string>Visualizza</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="Conferenze_2">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>96</y>
+          <width>61</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>1) Articoli</string>
+        </property>
+       </widget>
+       <widget class="QComboBox" name="ArticoliBox">
+        <property name="geometry">
+         <rect>
+          <x>80</x>
+          <y>96</y>
+          <width>161</width>
+          <height>27</height>
+         </rect>
         </property>
        </widget>
       </widget>

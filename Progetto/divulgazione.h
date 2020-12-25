@@ -44,14 +44,12 @@ public:
 
     Divulgazione();
     Divulgazione(const QString&, const QString&, const QString&);
-    Divulgazione(const Divulgazione& a);
-    Divulgazione& operator=(const Divulgazione& a);
+    Divulgazione(const Divulgazione&);
+    Divulgazione& operator=(const Divulgazione&);
 
     bool operator==(const Divulgazione&) const;
 
-    friend std::ostream& operator<<(std::ostream& out, const Divulgazione& a) {
-        return a.stampa(out);
-    }
+    friend std::ostream& operator<<(std::ostream&, const Divulgazione&);
 
     virtual Divulgazione* clone() = 0;
 
@@ -61,8 +59,7 @@ public:
         return 0;
     }
 
-    virtual ~Divulgazione() {
-    }
+    virtual ~Divulgazione() {}
 
     QString getNome() const;
     void setNome(const QString &value);

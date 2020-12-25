@@ -58,18 +58,17 @@ public:
     void setPrezzo(double value);
     QList<QString *> getKeyword() const;
     QList<Articolo *> getCorrelati() const;
+    QString getAnno() const;
+    void setAnno(const QString &value);
 
+    bool operator==(const Articolo&) const;
 
     bool autoreHaScrittoArticolo(const Autore&) const;
 
-
     friend std::ostream& operator<<(std::ostream&, const Articolo&);
-
 
     QString cognomePrimoAutore() const;
 
-    QString getAnno() const;
-    void setAnno(const QString &value);
 };
 
 #endif // ARTICOLO_H

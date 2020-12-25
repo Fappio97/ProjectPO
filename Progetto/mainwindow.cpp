@@ -463,9 +463,13 @@ void MainWindow::on_AggiungiArticolo_clicked()
     b.clear();
 
     gestore->aggiungiArticolo(identificativo, titolo, ui->PagineInput->value(), autori, keywords, ui->PrezzoInput->value(), articoli, a);
+
     ui->TitoloInput->clear();
     ui->IdentificativoInput->clear();
+
     ui->ListaArticoli->addItem(titolo + " " + identificativo);
+    ui->ArticoliBox->addItem(titolo + " " + identificativo);
+
     autori.clear();     //sono essenziali?
     articoli.clear();
     pubblicazione.clear();
@@ -651,11 +655,16 @@ void MainWindow::on_TastoRivisteSpecilistiche_clicked()
 
 void MainWindow::on_TastoOrdinaCorrelati_clicked()
 {
-    if(gestore->articoliVuoti()) {
-        messaggio(QMessageBox::Critical, "Errore", "Non sono presenti articoli", this);
+    if(ui->ArticoliBox->currentText().isEmpty()) {
+        messaggio(QMessageBox::Critical, "Errore", "Non hai selezionato articoli", this);
         return;
     }
-    ui->VisualizzaOperazioniAvanzate->setPlainText( gestore->ordinaArticoliDagliArticoliCorrelati() );
+
+    QStringList input = ui->ArticoliBox->currentText().split(" ");
+
+    Articolo* a = gestore->restituisciArticolo(input[1]);
+
+    ui->VisualizzaOperazioniAvanzate->setPlainText( "ARTICOLI INFLUENZATI DALL'ARTICOLO " + input[1] + '\n' + gestore->articoliInfluenzati( a ) );
 }
 
 void MainWindow::on_TastoConferenzeSimili_clicked()

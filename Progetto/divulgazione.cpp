@@ -19,6 +19,7 @@ along with Progetto.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "divulgazione.h"
 
+
                             //COSTRUTTORI
 
 Divulgazione::Divulgazione()
@@ -35,6 +36,7 @@ Divulgazione::Divulgazione(const Divulgazione& a): nome(a.nome), acronimo(a.acro
         articoli.push_back( (*i) );
     }
 }
+
 Divulgazione& Divulgazione::operator=(const Divulgazione& a) {
     if(this != &a) {
         svuotaDivulgazione();
@@ -54,13 +56,14 @@ void Divulgazione::svuotaDivulgazione() {
 
 
 
+
+
                             //GETTER & SETTER
 
 QString Divulgazione::getNome() const
 {
     return nome;
 }
-
 
 void Divulgazione::setNome(const QString &value)
 {
@@ -106,6 +109,10 @@ void Divulgazione::inserisciArticolo(Articolo* a)
 
 
                             //ALTRE FUNZIONI
+
+std::ostream& operator<<(std::ostream& out, const Divulgazione& a) {
+    return a.stampa(out);
+}
 
 bool Divulgazione::operator==(const Divulgazione & a) const {
     return nome == a.nome && acronimo == a.acronimo && data == a.data;

@@ -25,6 +25,7 @@
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSpinBox>
 #include <QtWidgets/QStackedWidget>
+#include <QtWidgets/QTextBrowser>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -63,7 +64,7 @@ public:
     QLabel *TITLE;
     QLabel *Afferenze;
     QPushButton *AggiungiAutore;
-    QPlainTextEdit *StampaAutori;
+    QTextBrowser *StampaAutori;
     QPushButton *VisualizzaAutori;
     QLineEdit *NomeInput;
     QLineEdit *IDinput;
@@ -130,7 +131,7 @@ public:
     QLabel *ConferenzeRiviste;
     QComboBox *ConferenzeRivisteBox;
     QPushButton *VisualizzaArticoli;
-    QPlainTextEdit *StampaArticoli;
+    QTextBrowser *StampaArticoli;
     QLabel *keyword;
     QLineEdit *KeywordInput;
     QPushButton *CreaKeyword;
@@ -151,13 +152,13 @@ public:
     QLabel *Conferenza;
     QPushButton *VisualizzaArticoliStruttura;
     QPushButton *VisualizzaArticoliConferenza;
-    QPlainTextEdit *VisualizzaArticoliDi;
+    QTextBrowser *VisualizzaArticoliDi;
     QLabel *SEZIONEB;
     QComboBox *AutoreBox;
     QLabel *Struttura_2;
     QWidget *PaginaPrezzi;
     QLabel *TITLE_8;
-    QPlainTextEdit *VisualizzaArticoliPrezzi;
+    QTextBrowser *VisualizzaArticoliPrezzi;
     QLabel *SEZIONEC;
     QComboBox *AutoreBox_2;
     QLabel *Rivista;
@@ -174,7 +175,7 @@ public:
     QPushButton *OrdinaConferenze;
     QLabel *SEZIONED;
     QLabel *label_16;
-    QPlainTextEdit *VisualizzaArticoliOdirnati;
+    QTextBrowser *VisualizzaArticoliOdirnati;
     QComboBox *ConferenzeBox_2;
     QComboBox *KeywordBox;
     QLabel *Rivista_3;
@@ -189,14 +190,15 @@ public:
     QWidget *PaginaOperazioniAvanzate;
     QLabel *SEZIONEE_2;
     QLabel *TITLE_11;
-    QPlainTextEdit *VisualizzaOperazioniAvanzate;
+    QTextBrowser *VisualizzaOperazioniAvanzate;
     QPushButton *TastoOrdinaCorrelati;
-    QLabel *label_18;
     QComboBox *ConferenzeBox_3;
     QLabel *Conferenze;
     QPushButton *TastoConferenzeSimili;
     QLabel *label_22;
     QPushButton *TastoConferenzeElitarie;
+    QLabel *Conferenze_2;
+    QComboBox *ArticoliBox;
 
     void setupUi(QMainWindow *MainWindow)
     {
@@ -377,7 +379,7 @@ public:
         AggiungiAutore->setStyleSheet(QString::fromUtf8("background-color: rgb(85, 87, 83);\n"
 "color: rgb(255, 255, 255);\n"
 ""));
-        StampaAutori = new QPlainTextEdit(PaginaAutori);
+        StampaAutori = new QTextBrowser(PaginaAutori);
         StampaAutori->setObjectName(QString::fromUtf8("StampaAutori"));
         StampaAutori->setGeometry(QRect(0, 256, 781, 297));
         VisualizzaAutori = new QPushButton(PaginaAutori);
@@ -700,7 +702,7 @@ public:
         VisualizzaArticoli->setFont(font);
         VisualizzaArticoli->setStyleSheet(QString::fromUtf8("background-color: rgb(46, 52, 54);\n"
 "color: rgb(255, 255, 255);"));
-        StampaArticoli = new QPlainTextEdit(PaginaArticoli);
+        StampaArticoli = new QTextBrowser(PaginaArticoli);
         StampaArticoli->setObjectName(QString::fromUtf8("StampaArticoli"));
         StampaArticoli->setGeometry(QRect(10, 320, 771, 233));
         keyword = new QLabel(PaginaArticoli);
@@ -787,7 +789,7 @@ public:
         VisualizzaArticoliConferenza->setGeometry(QRect(560, 120, 151, 25));
         VisualizzaArticoliConferenza->setFont(font);
         VisualizzaArticoliConferenza->setStyleSheet(QString::fromUtf8(""));
-        VisualizzaArticoliDi = new QPlainTextEdit(PaginaVisualizzaArticoli);
+        VisualizzaArticoliDi = new QTextBrowser(PaginaVisualizzaArticoli);
         VisualizzaArticoliDi->setObjectName(QString::fromUtf8("VisualizzaArticoliDi"));
         VisualizzaArticoliDi->setGeometry(QRect(0, 200, 781, 353));
         SEZIONEB = new QLabel(PaginaVisualizzaArticoli);
@@ -807,7 +809,7 @@ public:
         TITLE_8->setObjectName(QString::fromUtf8("TITLE_8"));
         TITLE_8->setGeometry(QRect(280, 24, 221, 25));
         TITLE_8->setFont(font4);
-        VisualizzaArticoliPrezzi = new QPlainTextEdit(PaginaPrezzi);
+        VisualizzaArticoliPrezzi = new QTextBrowser(PaginaPrezzi);
         VisualizzaArticoliPrezzi->setObjectName(QString::fromUtf8("VisualizzaArticoliPrezzi"));
         VisualizzaArticoliPrezzi->setGeometry(QRect(10, 200, 771, 353));
         SEZIONEC = new QLabel(PaginaPrezzi);
@@ -877,7 +879,7 @@ public:
         label_16->setObjectName(QString::fromUtf8("label_16"));
         label_16->setGeometry(QRect(90, 56, 151, 65));
         label_16->setFont(font14);
-        VisualizzaArticoliOdirnati = new QPlainTextEdit(PaginaArticoliOrdinati);
+        VisualizzaArticoliOdirnati = new QTextBrowser(PaginaArticoliOrdinati);
         VisualizzaArticoliOdirnati->setObjectName(QString::fromUtf8("VisualizzaArticoliOdirnati"));
         VisualizzaArticoliOdirnati->setGeometry(QRect(0, 200, 781, 353));
         ConferenzeBox_2 = new QComboBox(PaginaArticoliOrdinati);
@@ -934,7 +936,7 @@ public:
         TITLE_11->setObjectName(QString::fromUtf8("TITLE_11"));
         TITLE_11->setGeometry(QRect(270, 32, 231, 25));
         TITLE_11->setFont(font4);
-        VisualizzaOperazioniAvanzate = new QPlainTextEdit(PaginaOperazioniAvanzate);
+        VisualizzaOperazioniAvanzate = new QTextBrowser(PaginaOperazioniAvanzate);
         VisualizzaOperazioniAvanzate->setObjectName(QString::fromUtf8("VisualizzaOperazioniAvanzate"));
         VisualizzaOperazioniAvanzate->setGeometry(QRect(0, 200, 781, 353));
         TastoOrdinaCorrelati = new QPushButton(PaginaOperazioniAvanzate);
@@ -943,19 +945,16 @@ public:
         TastoOrdinaCorrelati->setFont(font);
         TastoOrdinaCorrelati->setStyleSheet(QString::fromUtf8("background-color: rgb(46, 52, 54);\n"
 "color: rgb(255, 255, 255);"));
-        label_18 = new QLabel(PaginaOperazioniAvanzate);
-        label_18->setObjectName(QString::fromUtf8("label_18"));
-        label_18->setGeometry(QRect(30, 64, 181, 73));
         ConferenzeBox_3 = new QComboBox(PaginaOperazioniAvanzate);
         ConferenzeBox_3->setObjectName(QString::fromUtf8("ConferenzeBox_3"));
-        ConferenzeBox_3->setGeometry(QRect(340, 96, 161, 27));
+        ConferenzeBox_3->setGeometry(QRect(360, 96, 161, 27));
         Conferenze = new QLabel(PaginaOperazioniAvanzate);
         Conferenze->setObjectName(QString::fromUtf8("Conferenze"));
-        Conferenze->setGeometry(QRect(250, 96, 81, 25));
+        Conferenze->setGeometry(QRect(270, 96, 81, 25));
         Conferenze->setFont(font10);
         TastoConferenzeSimili = new QPushButton(PaginaOperazioniAvanzate);
         TastoConferenzeSimili->setObjectName(QString::fromUtf8("TastoConferenzeSimili"));
-        TastoConferenzeSimili->setGeometry(QRect(300, 136, 151, 25));
+        TastoConferenzeSimili->setGeometry(QRect(330, 136, 151, 25));
         TastoConferenzeSimili->setFont(font);
         TastoConferenzeSimili->setStyleSheet(QString::fromUtf8(""));
         label_22 = new QLabel(PaginaOperazioniAvanzate);
@@ -967,6 +966,13 @@ public:
         TastoConferenzeElitarie->setFont(font);
         TastoConferenzeElitarie->setStyleSheet(QString::fromUtf8("background-color: rgb(46, 52, 54);\n"
 "color: rgb(255, 255, 255);"));
+        Conferenze_2 = new QLabel(PaginaOperazioniAvanzate);
+        Conferenze_2->setObjectName(QString::fromUtf8("Conferenze_2"));
+        Conferenze_2->setGeometry(QRect(10, 96, 61, 25));
+        Conferenze_2->setFont(font10);
+        ArticoliBox = new QComboBox(PaginaOperazioniAvanzate);
+        ArticoliBox->setObjectName(QString::fromUtf8("ArticoliBox"));
+        ArticoliBox->setGeometry(QRect(80, 96, 161, 27));
         stackedWidget->addWidget(PaginaOperazioniAvanzate);
 
         gridLayout->addWidget(stackedWidget, 0, 0, 1, 1);
@@ -1119,15 +1125,13 @@ public:
         SEZIONEE_2->setText(QCoreApplication::translate("MainWindow", "SEZIONE F", nullptr));
         TITLE_11->setText(QCoreApplication::translate("MainWindow", "OPERAZIONI AVANZATE", nullptr));
         TastoOrdinaCorrelati->setText(QCoreApplication::translate("MainWindow", "Visualizza", nullptr));
-        label_18->setText(QCoreApplication::translate("MainWindow", "2) Visualizza gli articoli\n"
-"in ordine decrescente dal\n"
-"numero di articoli correlati", nullptr));
         Conferenze->setText(QCoreApplication::translate("MainWindow", "5) Conferenze", nullptr));
         TastoConferenzeSimili->setText(QCoreApplication::translate("MainWindow", "Visualizza", nullptr));
         label_22->setText(QCoreApplication::translate("MainWindow", "6) Visualizza le triple di\n"
 "conferenze elitarie che\n"
 "hanno la massima influenza", nullptr));
         TastoConferenzeElitarie->setText(QCoreApplication::translate("MainWindow", "Visualizza", nullptr));
+        Conferenze_2->setText(QCoreApplication::translate("MainWindow", "1) Articoli", nullptr));
     } // retranslateUi
 
 };

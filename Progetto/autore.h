@@ -47,6 +47,7 @@ public:
     friend std::ostream& operator<<(std::ostream&, const Autore&);
 
     bool autoreConnessoStruttura(const Afferenza&) const;
+
     bool operator==(const Autore&) const;
 
 };

@@ -19,6 +19,7 @@ along with Progetto.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "persona.h"
 
+
 Persona::Persona()
 {
 

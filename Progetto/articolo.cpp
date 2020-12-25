@@ -185,6 +185,27 @@ std::ostream& operator<<(std::ostream& out, const Articolo& a) {
 
                             //ALTRE FUNZIONI
 
+bool Articolo::operator==(const Articolo& a) const {
+    if(identificativo != a.identificativo || titolo != a.titolo || pagine != a.pagine || prezzo != a.prezzo)
+        return false;
+
+    if( autori.size() != a.autori.size() || keyword.size() != a.keyword.size() )
+        return false;
+
+    auto j = autori.begin();
+    for(auto i = a.autori.begin(); i != a.autori.end(); i++, j++) {
+        if( !( (**i) == (**j) ) )
+            return false;
+    }
+
+    auto k = keyword.begin();
+    for(auto i = a.keyword.begin(); i != a.keyword.end(); i++, j++) {
+        if( (**i) != (**k) )
+            return false;
+    }
+    return true;
+}
+
 bool Articolo::autoreHaScrittoArticolo(const Autore& autore) const {
     for(auto i = autori.begin(); i != autori.end(); i++) {
         if( autore == (**i) )
