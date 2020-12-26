@@ -21,7 +21,6 @@
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QListWidget>
 #include <QtWidgets/QMainWindow>
-#include <QtWidgets/QPlainTextEdit>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSpinBox>
 #include <QtWidgets/QStackedWidget>
@@ -113,7 +112,7 @@ public:
     QLabel *label_6;
     QPushButton *VisualizzaRiviste;
     QWidget *PaginaDivulgazioni;
-    QPlainTextEdit *StampaDivulgazioni;
+    QTextBrowser *StampaDivulgazioni;
     QPushButton *VisualizzaDivulgazioni;
     QLabel *TITLE_5;
     QWidget *PaginaArticoli;
@@ -183,7 +182,7 @@ public:
     QPushButton *OrdinaKeyword;
     QWidget *PaginaRivisteSpecialistiche;
     QLabel *TITLE_10;
-    QPlainTextEdit *VisualizzaRivisteSpecialistiche;
+    QTextBrowser *VisualizzaRivisteSpecialistiche;
     QPushButton *TastoRivisteSpecilistiche;
     QLabel *SEZIONEE;
     QLabel *label_21;
@@ -639,7 +638,7 @@ public:
         stackedWidget->addWidget(PaginaRiviste);
         PaginaDivulgazioni = new QWidget();
         PaginaDivulgazioni->setObjectName(QString::fromUtf8("PaginaDivulgazioni"));
-        StampaDivulgazioni = new QPlainTextEdit(PaginaDivulgazioni);
+        StampaDivulgazioni = new QTextBrowser(PaginaDivulgazioni);
         StampaDivulgazioni->setObjectName(QString::fromUtf8("StampaDivulgazioni"));
         StampaDivulgazioni->setGeometry(QRect(30, 136, 731, 409));
         VisualizzaDivulgazioni = new QPushButton(PaginaDivulgazioni);
@@ -909,7 +908,7 @@ public:
         TITLE_10->setObjectName(QString::fromUtf8("TITLE_10"));
         TITLE_10->setGeometry(QRect(270, 32, 231, 25));
         TITLE_10->setFont(font4);
-        VisualizzaRivisteSpecialistiche = new QPlainTextEdit(PaginaRivisteSpecialistiche);
+        VisualizzaRivisteSpecialistiche = new QTextBrowser(PaginaRivisteSpecialistiche);
         VisualizzaRivisteSpecialistiche->setObjectName(QString::fromUtf8("VisualizzaRivisteSpecialistiche"));
         VisualizzaRivisteSpecialistiche->setGeometry(QRect(0, 200, 781, 353));
         TastoRivisteSpecilistiche = new QPushButton(PaginaRivisteSpecialistiche);

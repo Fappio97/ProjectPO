@@ -129,6 +129,8 @@ public:
 
     Divulgazione* restituisciDivulgazione(const QString&, const QString&) const;
 
+    Divulgazione* restituisciDivulgazioneNonSpecifica(const QString& nome) const;
+
     void aggiungiConferenza(const QString &, const QString &, const QString &, const QString &, QList<Persona *> _organizzatori, int);
 
     bool divulgazioneEsistente(const QString &, const QString &) const;
@@ -208,13 +210,14 @@ public:
 
 
                            //SEZIONE F
-    void trovaDivulgazioni(const QString&, QList<Divulgazione *>&) const;
+
+    void conferenzeSimili(const QList<Divulgazione *>& divulgazioni, const QList<Divulgazione *>& conferenze, const QString& nome, std::stringstream& s) const;
 
     QString articoliInfluenzati(const Articolo*) const;
 
-    QString stampaConferenzeSimili(const Divulgazione* ) const;
+    QString stampaConferenzeSimili(const QString& nome ) const;
 
-    QString stampaRivisteElitarieInfluenti() const;
+    QString stampaConferenzeElitarieInfluenti() const;
 
 };
 

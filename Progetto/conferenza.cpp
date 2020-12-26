@@ -44,6 +44,12 @@ Conferenza& Conferenza::operator=(const Conferenza& a) {
         svuota();
         luogo = a.luogo;
         partecipanti = a.partecipanti;
+        nome = a.nome;
+        data = a.data;
+        acronimo = a.acronimo;
+        for(auto i = a.articoli.begin(); i != a.articoli.end(); i++) {
+            articoli.push_back( (*i) );
+        }
         for(auto i = a.organizzatori.begin(); i != a.organizzatori.end(); i++) {
             organizzatori.push_back( (*i) );
         }

@@ -47,9 +47,24 @@ public:
     Divulgazione(const Divulgazione&);
     Divulgazione& operator=(const Divulgazione&);
 
-    bool operator==(const Divulgazione&) const;
+    QString getNome() const;
+    void setNome(const QString &value);
+    QString getAcronimo() const;
+    void setAcronimo(const QString &value);
+    QString getData() const;
+    void setData(const QString &value);
+    QList<Articolo *> getArticoli() const;
+    void inserisciArticolo(Articolo*);
+    QString getAnno() const;
 
     friend std::ostream& operator<<(std::ostream&, const Divulgazione&);
+
+    int sommaGuadagnoArticoliDivulgazione() const;
+
+    void keywordsDivulgazione(QList<QString *>&) const;
+
+    bool operator==(const Divulgazione&) const;
+
 
     virtual Divulgazione* clone() = 0;
 
@@ -60,21 +75,6 @@ public:
     }
 
     virtual ~Divulgazione() {}
-
-    QString getNome() const;
-    void setNome(const QString &value);
-    QString getAcronimo() const;
-    void setAcronimo(const QString &value);
-    QString getData() const;
-    void setData(const QString &value);
-    QList<Articolo *> getArticoli() const;
-    void inserisciArticolo(Articolo*);
-
-    QString getAnno() const;
-
-    int sommaGuadagnoArticoliDivulgazione() const;
-
-    void keywordsDivulgazione(QList<QString *>&) const;
 };
 
 #endif // DIVULGAZIONE_H

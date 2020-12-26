@@ -199,7 +199,7 @@ bool Articolo::operator==(const Articolo& a) const {
     }
 
     auto k = keyword.begin();
-    for(auto i = a.keyword.begin(); i != a.keyword.end(); i++, j++) {
+    for(auto i = a.keyword.begin(); i != a.keyword.end(); i++, k++) {
         if( (**i) != (**k) )
             return false;
     }

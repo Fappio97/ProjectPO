@@ -150,6 +150,9 @@ void MainWindow::on_EliminaTutto_clicked()      //TASTO CHE SVUOTA TUTTO
 
     ui->KeywordBox->clear();
 
+    ui->ArticoliBox->clear();
+    ui->ConferenzeBox_3->clear();
+
     gestore->svuotaKeywords();
     gestore->svuotaArticoli();
 }
@@ -290,7 +293,8 @@ void MainWindow::on_AggiungiConferenza_clicked()
     if( ui->ConferenzeBox_2->findText("Conferenza: " + nome) == -1)
         ui->ConferenzeBox_2->addItem("Conferenza: " + nome);
 
-    ui->ConferenzeBox_3->addItem("Conferenza: " + nome + ", " + data );
+    if( ui->ConferenzeBox_3->findText("Conferenza: " + nome) == -1)
+        ui->ConferenzeBox_3->addItem("Conferenza: " + nome);
 }
 
 void MainWindow::on_CreaOrganizzatore_clicked()     //CREO UNA PERSONA ORGANIZZATRICE
@@ -527,6 +531,7 @@ void MainWindow::on_VisualizzaArticoliStruttura_clicked()
 
 
 
+
                            //SEZIONE C
 
 void MainWindow::on_ArticoliCostosiAutore_clicked()
@@ -662,9 +667,9 @@ void MainWindow::on_TastoOrdinaCorrelati_clicked()
 
     QStringList input = ui->ArticoliBox->currentText().split(" ");
 
-    Articolo* a = gestore->restituisciArticolo(input[1]);
+    Articolo * a = gestore->restituisciArticolo(input[1]);
 
-    ui->VisualizzaOperazioniAvanzate->setPlainText( "ARTICOLI INFLUENZATI DALL'ARTICOLO " + input[1] + '\n' + gestore->articoliInfluenzati( a ) );
+    ui->VisualizzaOperazioniAvanzate->setPlainText( "ARTICOLI INFLUENZATI DALL'ARTICOLO " + input[0] + '\n' + gestore->articoliInfluenzati( a ) );
 }
 
 void MainWindow::on_TastoConferenzeSimili_clicked()
@@ -674,15 +679,12 @@ void MainWindow::on_TastoConferenzeSimili_clicked()
         return;
     }
 
-    QStringList a;
-    leggiDivulgazioniComboBox(a, ui->ConferenzeBox_3->currentText());
+    QStringList input = ui->ConferenzeBox_3->currentText().split(": ");
 
-    Divulgazione* conferenza = gestore->restituisciDivulgazione(a[0], a[1]);
-
-    ui->VisualizzaOperazioniAvanzate->setPlainText( gestore->stampaConferenzeSimili( conferenza ) );
+    ui->VisualizzaOperazioniAvanzate->setPlainText( gestore->stampaConferenzeSimili( input[1] ) );
 }
 
 void MainWindow::on_TastoConferenzeElitarie_clicked()
 {
-    ui->VisualizzaOperazioniAvanzate->setPlainText( gestore->stampaRivisteElitarieInfluenti() );
+    ui->VisualizzaOperazioniAvanzate->setPlainText( gestore->stampaConferenzeElitarieInfluenti() );
 }
