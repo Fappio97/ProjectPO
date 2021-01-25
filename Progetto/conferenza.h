@@ -23,8 +23,6 @@ along with Progetto.  If not, see <http://www.gnu.org/licenses/>.
 #include "persona.h"
 #include "divulgazione.h"
 
-#include<QList>
-
 class Conferenza : public Divulgazione
 {
 

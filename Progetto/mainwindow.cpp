@@ -52,7 +52,7 @@ void messaggio(QMessageBox::Icon icona, const QString& titolo, const QString& er
     mess.exec();
 }
 
-void leggiLista(const QList<QListWidgetItem*>& a, QStringList& lista){                 //leggo il contenuto all'interno della ListaWidget che mi viene passata
+void leggiLista(const QList<QListWidgetItem*>& a, QStringList& lista){                 //leggo il contenuto all'interno della ListaWidget che mi viene passata e metto il contenuto di ogni riga in una lista
     for(auto i = a.begin(); i != a.end(); i++)
     lista.push_back( (*i)->text() );
 }
@@ -492,7 +492,7 @@ void MainWindow::on_VisualizzaArticoliAutore_clicked()
         mess.exec();
         return;
     }
-    QStringList input = ui->AutoreBox->currentText().split(" ");
+    QStringList input = ui->AutoreBox->currentText().split(" ");        //input[0] = id, input[1] = nome e input[2] = cognome
     Autore* autore = gestore->restituisciAutore( input[0] );
     ui->VisualizzaArticoliDi->setPlainText( "ARTICOLI PUBBLICATI DALL'AUTORE: " + input[1] + " " + input[2]  + '\n' + gestore->stampaArticoliAutore( (*autore) ) );
 }
@@ -522,7 +522,7 @@ void MainWindow::on_VisualizzaArticoliStruttura_clicked()
     gestore->inserisciAutoriConnessoStruttura( (*a) , autore);  //prendo tutti gli autori che hanno quella afferenza
 
     ui->VisualizzaArticoliDi->setPlainText( "ARTICOLI PUBBLICATI DAI MEMBRI DELLA STRUTTURA: " + ui->StrutturaBox->currentText() + '\n' + gestore->stampaArticoliStruttura( autore ) );
-    delete a;
+    delete a;       //deleto l'oggetto puntato da a peché ho creato un nuovo oggetto tramite il new Afferenze e quindi perderei memoria se non lo deletassi. Potevo non deletarlo se il puntatore a di afferenze puntava ad un' oggetto'afferenza già esistente
     autore.clear();
 }
 

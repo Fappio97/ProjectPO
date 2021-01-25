@@ -33,7 +33,7 @@ Conferenza::Conferenza(const QString & _nome, const QString & _acronimo, const Q
     }
 }
 
-Conferenza::Conferenza(const Conferenza& a):Divulgazione(a), luogo(a.luogo), partecipanti(a.partecipanti) {
+Conferenza::Conferenza(const Conferenza& a): Divulgazione(a), luogo(a.luogo), partecipanti(a.partecipanti) {
     for(auto i = a.organizzatori.begin(); i != a.organizzatori.end(); i++) {
         organizzatori.push_back( (*i) );
     }
@@ -122,8 +122,8 @@ std::ostream& Conferenza::stampa(std::ostream& out) const {     //PROTECTED
         else
             out << ", " << (**i).getNome().toStdString() + " " << (**i).getCognome().toStdString() ;
     }
-    out << std::endl;           //puoi cacciare la lista di articoli qui e metterela in divulgazione per rendere il codice più flessibile possibile
-    if(articoli.empty())        //LI STAMPO QUI GLI ARTICOLI, ANCHE SE POTEVO FARLI IN DIVULGAZIONE, MA PER UNA QUESTIONE ESTETICA DI STAMPA HO DECISO DI IMPLEMENTARLI NELLE CLASSE FIGLIE ANCHE SE CIÒ RENDE IL CODICE MENO FLESSIBILE
+    out << std::endl;
+    if(articoli.empty())        //LI STAMPO QUI GLI ARTICOLI, ANCHE SE POTEVO FARLI IN DIVULGAZIONE, MA PER UNA QUESTIONE ESTETICA DI STAMPA HO DECISO DI IMPLEMENTARLI NELLE CLASSE FIGLIE ANCHE SE CIÒ RENDE IL CODICE RIPETITIVO
         return out << "       NESSUN ARTICOLO PUBBLICATO" << std::endl;
     out << "       LISTA TITOLI ARTICOLI PUBBLICATI:";
     for(auto i = articoli.begin(); i != articoli.end(); i++) {

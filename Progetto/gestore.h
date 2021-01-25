@@ -137,8 +137,6 @@ public:
 
     void aggiungiRivista(const QString&, const QString&, const QString&, const QString&, int);
 
-//    bool divulgazioniVuote() const;   //serve?
-
     void svuotaDivulgazioni();
 
     QString stampaDivulgazioni() const;

@@ -66,7 +66,7 @@ Articolo& Articolo::operator=(const Articolo& a) {
             correlati.push_back( (*i) );
         }
     }
-    return *this;
+    return (*this);
 }
 
 Articolo::~Articolo() {

@@ -21,7 +21,6 @@ along with Progetto.  If not, see <http://www.gnu.org/licenses/>.
 #define AFFERENZA_H
 
 #include<QString>
-#include<iostream>
 
 class Afferenza
 {

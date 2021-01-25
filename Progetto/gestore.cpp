@@ -258,7 +258,7 @@ QString Gestore::stampaAutori() const {
 Divulgazione* Gestore::restituisciDivulgazione(const QString& nome, const QString& data) const {
     for(auto i = divulgazioni.begin(); i != divulgazioni.end(); i++) {
         if( (*i)->getData() == data && (*i)->getNome() == nome) {
-            return (*i);
+            return (*i)->clone();
         }
     }
     return nullptr;
@@ -267,7 +267,7 @@ Divulgazione* Gestore::restituisciDivulgazione(const QString& nome, const QStrin
 Divulgazione* Gestore::restituisciDivulgazioneNonSpecifica(const QString& nome) const {
     for(auto i = divulgazioni.begin(); i != divulgazioni.end(); i++) {
         if( (*i)->getNome() == nome) {
-            return (*i);
+            return (*i)->clone();
         }
     }
     return nullptr;
@@ -289,10 +289,6 @@ bool Gestore::divulgazioneEsistente(const QString& nome, const QString& data) co
 void Gestore::aggiungiRivista(const QString& _nome, const QString& _acronimo, const QString& _editore, const QString& _data, int _volume) {
         divulgazioni.push_back(new Rivista(_nome, _acronimo, _editore, _data, _volume));
 }
-
-/*bool Gestore::divulgazioniVuote() const {
-    return divulgazioni.empty();
-}*/
 
 void Gestore::svuotaDivulgazioni() {
     for(auto i = divulgazioni.begin(); i != divulgazioni.end(); i++) {
@@ -413,7 +409,7 @@ QString Gestore::stampaArticoliStruttura(const QVector<Autore *>& autore) const 
         }
     }
 
-    numero.clear();     //necessario??????
+    numero.clear();
     return QString::fromStdString(s.str());
 }
 
@@ -451,7 +447,7 @@ int Gestore::guadagnoDivulgazione(const QString& nome, const QString& anno) cons
     int somma = -1;     // lo faccio partire da -1, poiché se non viene aggiornato significa che non sono stati pubblicati articoli
     for(auto i = divulgazioni.begin(); i != divulgazioni.end(); i++) {
           if( (**i).getAnno() == anno && (**i).getNome() == nome ) {     //cerco tra tutte le divulgazioni con quel nome, coloro che sono state create in un determinato anno di cui mi interessa stampare il guadagno degli articoli connessi
-                somma = (**i).sommaGuadagnoArticoliDivulgazione();
+                somma += (**i).sommaGuadagnoArticoliDivulgazione();
           }
     }
     return somma;
@@ -560,7 +556,7 @@ QString Gestore::stampaArticoliKeywordOrdinati(const QString& keyword) const {
     for(auto i = articoli.begin(); i != articoli.end(); i++) {
         QList<QString *> a = (*i)->getKeyword();
         for(auto j = a.begin(); j != a.end(); j++) {        //scorro le keyword di ogni articolo presente
-            if( (*j) == keyword ) {     //se in questo articolo è presente la keyword che sto cercando la metto nella lsita di articoli "art"
+            if( (*j) == keyword ) {     //se in questo articolo è presente la keyword che sto cercando la metto nella lista di articoli "art"
                 art.push_back( (*i) );
                 break;
             }

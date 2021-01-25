@@ -20,8 +20,6 @@ along with Progetto.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef DIVULGAZIONE_H
 #define DIVULGAZIONE_H
 
-#include<QString>
-
 #include "articolo.h"
 
 class Divulgazione
@@ -34,9 +32,7 @@ protected:
     QString data;
     QList<Articolo *> articoli;
 
-    virtual std::ostream& stampa(std::ostream& out) const {
-        return out;
-    }
+    virtual std::ostream& stampa(std::ostream& out) const = 0;
 
     void svuotaDivulgazione();
 
@@ -74,7 +70,9 @@ public:
         return 0;
     }
 
-    virtual ~Divulgazione() {}
+    virtual ~Divulgazione() {
+        articoli.clear();
+    }
 };
 
 #endif // DIVULGAZIONE_H

@@ -20,8 +20,6 @@ along with Progetto.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef ARTICOLO_H
 #define ARTICOLO_H
 
-#include<QString>
-
 #include "autore.h"
 
 class Articolo
