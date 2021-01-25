@@ -258,7 +258,7 @@ QString Gestore::stampaAutori() const {
 Divulgazione* Gestore::restituisciDivulgazione(const QString& nome, const QString& data) const {
     for(auto i = divulgazioni.begin(); i != divulgazioni.end(); i++) {
         if( (*i)->getData() == data && (*i)->getNome() == nome) {
-            return (*i)->clone();
+            return (*i);
         }
     }
     return nullptr;
@@ -267,7 +267,7 @@ Divulgazione* Gestore::restituisciDivulgazione(const QString& nome, const QStrin
 Divulgazione* Gestore::restituisciDivulgazioneNonSpecifica(const QString& nome) const {
     for(auto i = divulgazioni.begin(); i != divulgazioni.end(); i++) {
         if( (*i)->getNome() == nome) {
-            return (*i)->clone();
+            return (*i);
         }
     }
     return nullptr;

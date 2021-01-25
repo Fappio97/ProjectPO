@@ -32,7 +32,9 @@ protected:
     QString data;
     QList<Articolo *> articoli;
 
-    virtual std::ostream& stampa(std::ostream& out) const = 0;
+    virtual std::ostream& stampa(std::ostream& out) const {
+        return out;
+    }
 
     void svuotaDivulgazione();
 
@@ -70,9 +72,7 @@ public:
         return 0;
     }
 
-    virtual ~Divulgazione() {
-        articoli.clear();
-    }
+    virtual ~Divulgazione() {}
 };
 
-#endif // DIVULGAZIONE_H
+#endif
