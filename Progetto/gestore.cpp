@@ -31,22 +31,22 @@ Gestore::Gestore()
 
 Gestore::Gestore(const Gestore& a) {
     for(auto i = a.autori.begin(); i != a.autori.end(); i++) {
-        autori.push_back( (*i) );
+        autori.push_back( new Autore (**i) );
     }
-    for(auto i = a.divulgazioni.begin(); i != divulgazioni.end(); i++) {
+    for(auto i = a.divulgazioni.begin(); i != a.divulgazioni.end(); i++) {
         divulgazioni.push_back( (**i).clone() );
     }
     for(auto i = a.articoli.begin(); i != a.articoli.end(); i++) {
-        articoli.push_back( (*i) );
+        articoli.push_back( new Articolo (**i) );
     }
     for(auto i = a.afferenze.begin(); i != a.afferenze.end(); i++) {
-        afferenze.push_back( (*i) );
+        afferenze.push_back( new Afferenza (**i) );
     }
     for(auto i = a.persone.begin(); i != a.persone.end(); i++) {
-        persone.push_back( (*i) );
+        persone.push_back( new Persona (**i) );
     }
     for(auto i = a.keywords.begin(); i != a.keywords.end(); i++) {
-        keywords.push_back( (*i) );
+        keywords.push_back( new QString (**i) );
     }
 }
 
@@ -68,22 +68,22 @@ Gestore& Gestore::operator=(const Gestore& a) {
         svuotaPersone();
         svuotaKeywords();
         for(auto i = a.autori.begin(); i != a.autori.end(); i++) {
-            autori.push_back( (*i) );
+            autori.push_back( new Autore (**i) );
         }
-        for(auto i = a.divulgazioni.begin(); i != divulgazioni.end(); i++) {
+        for(auto i = a.divulgazioni.begin(); i != a.divulgazioni.end(); i++) {
             divulgazioni.push_back( (**i).clone() );
         }
         for(auto i = a.articoli.begin(); i != a.articoli.end(); i++) {
-            articoli.push_back( (*i) );
+            articoli.push_back( new Articolo (**i) );
         }
         for(auto i = a.afferenze.begin(); i != a.afferenze.end(); i++) {
-            afferenze.push_back( (*i) );
+            afferenze.push_back( new Afferenza (**i) );
         }
         for(auto i = a.persone.begin(); i != a.persone.end(); i++) {
-            persone.push_back( (*i) );
+            persone.push_back( new Persona (**i) );
         }
         for(auto i = a.keywords.begin(); i != a.keywords.end(); i++) {
-            keywords.push_back( (*i) );
+            keywords.push_back( new QString (**i) );
         }
     }
     return (*this);
